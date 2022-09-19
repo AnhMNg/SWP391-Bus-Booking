@@ -168,8 +168,10 @@ nav .fa {
     color: #6180CD;
 }
 
-.container {
+.container-fluid {
     background: #a39f9f;
-    width: 1000px;
+    width: 80%;
     height: 500px;
+    display: relative;
 }
+
