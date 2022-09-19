@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700&display=swap" rel="stylesheet">
     <title>Here We Go</title>
 </head>
 <body>
@@ -60,13 +60,36 @@
     <!-- Booking -->
     <section class="bus-booking">
         <h1>Bus Booking</h1>
-        <div class="container">
-            <div>
-                <img src="images/Bus3.png" alt="">
+        <div class="container-fluid">
+            <div class="bus-img">
+                <img src="images/Bus3.png" alt="bus">
             </div>
+            <div class="d-flex mb-3 label-selection">
+                <div>From</div>
+                <div>To</div>
+                <div>Departure Date</div>
+            </div>
+            <div class="route-selection">
+                <form action="">
+                    <div class="input-group mb-3">
+                        <select class="form-select">
+                            <option value="" disabled selected>Select Departure</option>
+                            <option>#</option>
+                        </select>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select Destination</option>
+                            <option>#</option>
+                        </select>
+                        <input class="form-control" type="date" placeholder="Departure Date">
+                    </div>
+                </form>
+            </div>         
         </div>
     </section>
 
     <script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </body>
 </html>
