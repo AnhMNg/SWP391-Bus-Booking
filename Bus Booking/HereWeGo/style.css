@@ -169,9 +169,22 @@ nav .fa {
 }
 
 .container-fluid {
-    background: #a39f9f;
+    /* background: #a39f9f; */
     width: 80%;
     height: 500px;
     display: relative;
 }
 
+
+
+.input-route {
+    display: flex;
+}
+
+.element {
+    text-align: start;
+}
+
+.element span {
+    color: #a39f9f;
+}
