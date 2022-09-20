@@ -126,7 +126,10 @@ nav .fa {
 
 @media(max-width:700px) {
     .text-box h1 {
-        font-size: 50px;
+        font-size: 60px;
+    }
+    .text-box p {
+        font-size: 13px;
     }
     .nav-links ul li {
         display: block;
@@ -162,10 +165,11 @@ nav .fa {
 }
 
 .bus-booking h1 {
+    font-size: 48px;
     font-family: 'Bebas Neue', cursive;
     font-family: 'Roboto', sans-serif;  
     margin-bottom: 100px;
-    color: #6180CD;
+    color: #475f9b;
 }
 
 .container-fluid {
@@ -208,4 +212,44 @@ nav .fa {
 
 .search-btn {
     margin-top: 10px;
+}
+
+@media(max-width:700px) {
+    .input-route {
+        display: inline-block;
+    }
+    .bus-booking h1 {
+        font-size: 30px;
+    }
+}
+
+.popular-routes {
+    background: #b9b9b9;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.content-pr {
+    background: linear-gradient(105.22deg, #9DC5D1 14.71%, #FFFFFF 195.49%);
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.48);
+    border-radius: 20px;
+    width: 80%;
+    height: 500px;
+    display: relative;
+}
+
+.content-pr-tt {
+    display: flex;
+    padding-left: 10%;
+}
+
+.content-pr-tt h1 {
+    margin-top: 37px;
+    padding-right: 8px;
+    font-size: 48px;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto', sans-serif;  
+    color: #475f9b;
 }
