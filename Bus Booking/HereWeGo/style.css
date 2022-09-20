@@ -176,7 +176,6 @@ nav .fa {
 }
 
 
-
 .input-route {
     display: flex;
 }
@@ -186,5 +185,27 @@ nav .fa {
 }
 
 .element span {
-    color: #a39f9f;
+    color: #505050;
+    font-weight: 500;
+}
+
+.route-selection {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px;
+    border-radius: 10px;
+    background: linear-gradient(105.22deg, #9DC5D1 14.71%, #FFFFFF 195.49%);
+}
+
+.btn-secondary {
+    font-weight: bold;
+    background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
+    border-radius: 60px;
+    border-color: #9DC5D1;
+}
+
+.search-btn {
+    margin-top: 10px;
 }
