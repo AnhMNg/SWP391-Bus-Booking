@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sample.dto;
+package config;
 
 /**
  *
- * @author baolo
+ * @author Admin
  */
-public class RouteDetail {
-    
+public class Config {
+    public static final String LAYOUT = "WEB-INF/layouts/main.jsp";
 }

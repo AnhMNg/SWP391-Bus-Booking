@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package com.busbooking.herewego.controller;
+package controller;
 
-import com.busbooking.herewego.config.Config;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "FrontController", urlPatterns = {"*.do"})
+public class FrontController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +30,14 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = (String) request.getAttribute("action");
-        String controller = (String) request.getAttribute("controller");
-        request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        String url = request.getServletPath();
+        String controller = url.substring(0, url.lastIndexOf("/"));
+        String action = url.substring(url.lastIndexOf("/") + 1, url.lastIndexOf("."));
+        
+        request.setAttribute("controller", controller);
+        request.setAttribute("action", action);
+        request.getRequestDispatcher(controller).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
