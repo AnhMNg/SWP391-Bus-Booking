@@ -299,16 +299,17 @@ nav .fa {
     position: relative;
 }
 
-/* .content-tc {
-    background: linear-gradient(258.64deg, #B89DEF -0.05%, #FFFFFF 124.1%);
+.content-tc {
+    background: linear-gradient(264.49deg, #4191CC -1.96%, #FFFFFF 138.3%);
     box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.48);
     border-radius: 20px;
     width: 80%;
-    height: 400px;
-} */
+    height: 120px;
+}
 
 .content-tc-tt {
     width: 100%;
+    display: flex;
 }
 
 .content-tc-tt h1 {
@@ -318,5 +319,236 @@ nav .fa {
     font-size: 48px;
     font-family: 'Bebas Neue', cursive;
     font-family: 'Roboto', sans-serif;  
-    color: #475f9b;
+    color: rgb(0, 63, 82);
 }
+
+.list-group a {
+    font-weight: 500;
+}
+
+@media(max-width:700px) {
+    .content-tc-tt h1 {
+        font-size: 30px;
+    }
+}
+
+.impression {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.imp-tt {
+    margin-top: 100px;
+    text-align: center;
+    position: relative;
+    font-size: 48px;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto', sans-serif;  
+    padding-top: 50px;
+    color: #6180CD;
+}
+
+.why1 {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+
+.price {
+    /* width: auto; */
+    margin-right: 20px;
+}
+
+.description {
+    /* width: 100%; */
+    margin-left: 200px;
+}
+
+.price .img {
+    float: right;
+
+}
+
+.why2 {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+
+.az {
+    float: right;
+}
+
+.package {
+    margin-left: 180px;
+}
+
+.az h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto', sans-serif;  
+    font-weight: bold;
+}
+
+.az p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
+}
+
+.description h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto', sans-serif;  
+    font-weight: bold;
+}
+
+.description p {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;  
+}
+
+@media(max-width:700px) {
+    .description {
+        /* width: 100%; */
+        margin-left: 0px;
+    }
+    .price .img {
+        width: 300px;
+        height: 300px;
+    }
+    .imp-tt {
+        font-size: 30px;
+    }
+    .description h2 {
+        font-family: 'Bebas Neue', cursive;
+        font-family: 'Roboto', sans-serif;  
+        font-weight: bold;
+        font-size: 25px;
+    }
+    .package {
+        margin-left: 0px;
+    }
+    .package .img {
+        width: 300px;
+        height: 300px;
+    }
+    .az h2 {
+        font-family: 'Bebas Neue', cursive;
+        font-family: 'Roboto', sans-serif;  
+        font-weight: bold;
+        font-size: 25px;
+    }
+}
+
+body {
+    font-family: acumin-pro, system-ui, sans-serif;
+    margin: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-size: 14px;
+    background-color: #f4f4f4;
+    align-items: start;
+    min-height: 100vh;
+}
+  
+.footer {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 30px 30px 20px 30px;
+    color: #2f2f2f;
+    background-color: black;
+    border-top: 1px solid #e5e5e5;
+}
+  
+.footer > * {
+    flex:  1 100%;
+}
+  
+.footer__logo {
+    width: 150px;
+    height: 150px;    
+}
+  
+.nav__title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #fff;
+}
+  
+.footer ul {
+    list-style: none;
+    padding-left: 0;
+}
+  
+.footer li {
+    line-height: 2em;
+}
+  
+.footer a {
+    text-decoration: none;
+}
+  
+.footer__nav {
+    display: flex;
+      flex-flow: row wrap;
+}
+  
+.footer__nav > * {
+    flex: 1 50%;
+    margin-right: 1.25em;
+}
+  
+.nav__ul a {
+    color: #999;
+}
+  
+.nav__ul--extra {
+    column-count: 2;
+    column-gap: 1.25em;
+}
+  
+.legal {
+    display: flex;
+    flex-wrap: wrap;
+    color: #999;
+}
+
+.legal p {
+    margin: auto;
+    align-items: center;
+    font-weight: bold;
+}
+    
+.legal__links {
+    display: flex;
+    align-items: center;
+}
+  
+.heart {
+    color: #2f2f2f;
+}
+  
+@media screen and (max-width: 24.375em) {
+    .legal .legal__links {
+      margin-left: auto;
+    }
+}
+  
+ @media screen and (min-width: 40.375em) {
+    .footer__nav > * {
+      flex: 1;
+    }
+    
+    .nav__item--extra {
+      flex-grow: 2;
+    }
+    
+    .footer__addr {
+      flex: 1 0px;
+    }
+    
+    .footer__nav {
+      flex: 2 0px;
+    }
+}
+
+
