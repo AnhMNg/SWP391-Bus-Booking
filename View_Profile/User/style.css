@@ -76,6 +76,7 @@ nav .fa {
 }
 
 .button1 {
+    text-align: center;
     background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
     color: #FFFFFF;
 }
@@ -159,7 +160,7 @@ line-height: 19px;
 color: #5F6368;
 margin-top: 10px;
 }
-.profile-detail h4, .profile-detail-2 h4{
+.profile-detail h4, .profile-detail-2 h4,.information-detail{
     margin-bottom: 0px;
     font-weight: 600;
     font-size: 24px;
@@ -168,7 +169,7 @@ margin-top: 10px;
     color: #000000;
     margin-top: 10px;
 }
-.profile-detail .detail-header{
+.profile-detail .detail-header,.information-name{
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
@@ -199,8 +200,27 @@ line-height: 25px;
 text-transform: capitalize;
 color: #000000;
 }
-.logout-img, .profile-img{
-    padding: 10px;
+.information-list{
+    margin: 35px -30px 0;
+    border-radius: 0 0 10px 10px;
+    list-style: none;
+}
+.information-content{
+    display: flex;
+    align-items: center;
+    padding: 18px 0;
+    border-top: 1px solid #e3e3e3;
+    height: 55px
+}
+.information-content-first{
+    display: flex;
+    align-items: center;
+    padding: 18px 0;
+    height: 55px
+}
+.information-name{
+    width: 160px;
+    margin-right: 20px;
 }
 
 .footer {
