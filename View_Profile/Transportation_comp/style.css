@@ -208,43 +208,104 @@ nav .fa {
     text-align: left;
 }
 
-.footer-box-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.footer {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 30px 30px 20px 30px;
+    color: #2f2f2f;
+    background-color: black;
+    border-top: 1px solid #e5e5e5;
+}
+  
+.footer > * {
+    flex:  1 100%;
+}
+  
+.footer__logo {
+    width: 150px;
+    height: 150px;    
 }
 
-.footer-box-content-detail {
-    display: block;
-    margin: 0 0 10px 0;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 42px;
-    color: #8A8888;
-    list-style-type: none;
+.footer ul {
+    list-style: none;
+    padding-left: 0;
+}
+  
+.footer li {
+    line-height: 2em;
+}
+  
+.footer a {
+    text-decoration: none;
+}
+  
+.footer__nav {
+    display: flex;
+      flex-flow: row wrap;
+}
+  
+.footer__nav > * {
+    flex: 1 50%;
+    margin-right: 1.25em;
+}
+  
+.nav__ul a {
+    color: #999;
+}
+  
+.nav__ul--extra {
+    column-count: 2;
+    column-gap: 1.25em;
+}
+  
+.legal {
+    display: flex;
+    flex-wrap: wrap;
+    color: #999;
 }
 
-.fb-icon,
-.twitter-icon {
-    padding: 30px 15px;
+.legal p {
+    margin: auto;
+    align-items: center;
+    font-weight: bold;
 }
-
-.footer-box-content h4 {
-    display: block;
-    margin: 0 0 10px 0;
-    list-style-type: none;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 30px;
-    color: #FFFFFF;
+    
+.legal__links {
+    display: flex;
+    align-items: center;
 }
-
-.footer-box-copyright-inner {
-    color: #ffff;
-    border-top: 1px solid rgba(168, 164, 164, 0.69);
-    text-align: center;
-    background: #000000;
-    padding: 20px;
+  
+.heart {
+    color: #2f2f2f;
+}
+  
+@media screen and (max-width: 24.375em) {
+    .legal .legal__links {
+      margin-left: auto;
+    }
+}
+  
+ @media screen and (min-width: 40.375em) {
+    .footer__nav > * {
+      flex: 1;
+    }
+    
+    .nav__item--extra {
+      flex-grow: 2;
+    }
+    
+    .footer__addr {
+      flex: 1 0px;
+    }
+    
+    .footer__nav {
+      flex: 2 0px;
+    }
+}
+.nav__title {
+    font-weight: bold;
+    font-size: 15px;
+    color: #fff;
 }
 .bus-content h4{
     padding: 25px;
