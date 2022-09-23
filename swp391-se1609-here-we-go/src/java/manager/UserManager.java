@@ -16,6 +16,10 @@ import utils.DBUtils;
  * @author baolo
  */
 public class UserManager {
+    
+    private static final String LOGIN = "SELECT * FROM User WHERE userId = ? AND password = ?";
+    private static final String INSERT = "INSERT INTO tblUsers(name, phone, roleId, password) VALUES(?,?,2,?)";
+    
     public static User getUserById(long id) throws SQLException{
         Connection cn = null;
         User us = null;
@@ -39,5 +43,62 @@ public class UserManager {
             if (cn!= null) cn.close();
         }
         return us;
+    }
+    public static User checkLogin(String phone, String password) throws SQLException {
+        User user = null;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try {
+            cn = DBUtils.getConnection();
+            if(cn != null){
+                pst = cn.prepareStatement(LOGIN);
+                pst.setString(1, phone);
+                pst.setString(2, password);
+                rs = pst.executeQuery();
+                if(rs.next()){
+                    user = new User(rs.getLong(1), rs.getString(2), phone, rs.getString(4), rs.getInt(5), "***");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            if (rs != null) {
+                rs.close();
+            }
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+        return user;
+    }
+    
+    public boolean insert(String name, String phone, String password) throws SQLException{
+        boolean check = false;
+        Connection cn = null;
+        PreparedStatement pst = null;
+        try{
+            cn = DBUtils.getConnection();
+            if (cn!=null){
+                pst = cn.prepareStatement(INSERT);
+                pst.setString(1, name);
+                pst.setString(2, phone);
+                pst.setString(3, password);
+                check = pst.executeUpdate()>0?true:false;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+        return check;
     }
 }
