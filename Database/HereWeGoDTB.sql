@@ -8,6 +8,7 @@ Create table Company(
 	email varchar(100) not null,
 	phone varchar(12) not null,
 	imgLink varchar(300),
+	description nvarchar(2000),
 	Password nvarchar(30)
 )
 
@@ -83,13 +84,13 @@ create table Feedback(
 )
 
 USE HereWeGo
-INSERT INTO Company VALUES(N'Phương Trang','phuongtrangstation@gmail.com','0929828338','','phuongtrang123')
-INSERT INTO Company VALUES(N'Thành Bưởi','thanhbuoi@gmail.com','0928763562','','thanhbuoi123')
-INSERT INTO Company VALUES(N'Cúc Phương','cucphuong@gmail.com','0989876537','','cucphuong123')
-INSERT INTO Company VALUES(N'Hải Duyên','haiduyen@gmail.com','0987875625','','haiduyen123')
-INSERT INTO Company VALUES(N'Anh Minh','anhminhbus@gmailcom','0989877862','','anhminh123')
-INSERT INTO Company VALUES(N'Đại Ngân','dainganbus@gmail.com','0981452653','','daingan123')
-INSERT INTO Company VALUES(N'Phước Sang','phuocsang@gmail.com','1231233243','','phuocsang123')
+INSERT INTO Company VALUES(N'Phương Trang','phuongtrangstation@gmail.com','0929828338','','Nha xe Phuong Trang Description............................','phuongtrang123')
+INSERT INTO Company VALUES(N'Thành Bưởi','thanhbuoi@gmail.com','0928763562','','','thanhbuoi123')
+INSERT INTO Company VALUES(N'Cúc Phương','cucphuong@gmail.com','0989876537','','','cucphuong123')
+INSERT INTO Company VALUES(N'Hải Duyên','haiduyen@gmail.com','0987875625','','','haiduyen123')
+INSERT INTO Company VALUES(N'Anh Minh','anhminhbus@gmailcom','0989877862','','','anhminh123')
+INSERT INTO Company VALUES(N'Đại Ngân','dainganbus@gmail.com','0981452653','','','daingan123')
+INSERT INTO Company VALUES(N'Phước Sang','phuocsang@gmail.com','1231233243','','','phuocsang123')
 
 INSERT INTO [Role] VALUES('ADMIN')
 INSERT INTO [Role] VALUES('CUSTOMER')
