@@ -155,8 +155,6 @@
     margin-right: 20px;
 }
 
-@media(min-width: 1280) and (max-width: 800px) {}
-
 @media screen and (min-width: 800px) {
     .profile {
         padding-left: 64px;
