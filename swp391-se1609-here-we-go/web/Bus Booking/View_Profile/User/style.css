@@ -172,7 +172,7 @@
 
 @media screen and (max-width: 800px) {
     .profile {
-        padding-left: 32px;
+        padding-left: 64px;
         padding-right: 64px;
     }
 
@@ -184,5 +184,11 @@
 
     .profile-detail-2 {
         width: 100%
+    }
+    .d1{
+        margin-bottom: 8px;
+    }
+    .d2{
+        margin-top: 8px;
     }
 }

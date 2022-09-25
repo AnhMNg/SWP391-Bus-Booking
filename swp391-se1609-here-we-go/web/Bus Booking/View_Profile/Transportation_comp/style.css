@@ -10,9 +10,7 @@
 }
 .thanhbuoi-content {
     padding-left: 25px;
-
 }
-
 .thanhbuoi-content h1 {
     color: #fff;
     font-weight: 700;
@@ -42,7 +40,6 @@
     line-height: 50px;
     text-transform: capitalize;
     color: #6180CD;
-    text-align: center;
     margin-top: 10px;
     margin-bottom: 0px;
 }
@@ -57,7 +54,6 @@
 
 .line-img {
     margin-bottom: 15px;
-    text-align: center;
 }
 
 .transportation-comp-content .content,
@@ -77,14 +73,7 @@
 
 .type {
     padding-top: 32px;
-    text-align: center;
-    margin: 0px;
 }
-
-.rout-list {
-    text-align: center;
-}
-
 .rout-list h1 {
     margin-bottom: 32px;
 }
