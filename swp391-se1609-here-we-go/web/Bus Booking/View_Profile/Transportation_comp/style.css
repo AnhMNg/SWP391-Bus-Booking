@@ -1,16 +1,16 @@
 
-.container {
-    justify-content: left;
-    background: linear-gradient(192.04deg, #9DC5D1 0.66%, #6180CD 119.66%);
+.container-fluid {
+    justify-content:center;
     display: flex;
     padding: 2% 6%;
     align-items: center;
+    border-bottom: 0.5px solid #616060 ;
 }
 .thanhbuoi-content {
     padding-left: 25px;
 }
 .thanhbuoi-content h1 {
-    color: #fff;
+    color:#475f9b;
     font-weight: 700;
     font-size: 64px;
     line-height: 81px;
@@ -39,10 +39,6 @@
 
 .transportation-comp-content .content {
     padding-top: 32px;
-}
-
-.transportation-comp-content .conti-content {
-    padding-bottom: 32px;
 }
 
 .line-img {
