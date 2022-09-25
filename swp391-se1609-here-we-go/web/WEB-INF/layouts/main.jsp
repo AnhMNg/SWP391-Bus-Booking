@@ -48,7 +48,7 @@
                                     <button class="button1">LOGIN OR CREATE ACCOUNT</button>
                                     <div class="dropdown-content">
                                         <a class="choose" href="<c:url value="/user/login.do"/>">Personal Account</a>
-                                        <a class="choose" href="/">Transportation Company</a>
+                                        <a class="choose" href="<c:url value="/company/login.do"/>">Transportation Company</a>
                                     </div>
                                 </div>
                             </li>
