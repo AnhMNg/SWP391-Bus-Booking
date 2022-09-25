@@ -17,262 +17,270 @@
     <title>Here We Go</title>
 </head>
 <body>
-    <main>
+    <div class="hd">
+        <section class="header">
+            <!-- Menu -->
+            <nav>
+                <!-- Logo -->
+                <a href="/">
+                    <img src="images/My project.png" class="logo">
+                </a>
+                <!-- NavBar -->
+                <div class="nav-links" id="navLinks">
+                    <i class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li class="mb">
+                            <a href="">MY BOOKING</a>
+                        </li>
+                        <li>
+                            <!-- <a href="">LOGIN OR CREATE ACCOUNT</a> -->   
+                            <div class="dropdown">
+                                <button class="button1">LOGIN OR CREATE ACCOUNT</button>
+                                    <div class="dropdown-content">
+                                        <a class="choose" href="#">Personal Account</a>
+                                        <a class="choose" href="#">Transportation Company</a>
+                                    </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <select class="form-select">
+                                    <option>Vietnamese</option>
+                                    <option>English</option>
+                                </select>
+                            </div>
+                        </li>
+                        </ul>
+                        
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+                <!-- Content -->
+        </section>
+    </div>
     <!-- Header -->
-    <section class="header">
-        <!-- Menu -->
-        <nav>
-            <!-- Logo -->
-            <a href="/">
-                <img src="images/My project.png" class="logo">
-            </a>
-            <!-- NavBar -->
-            <div class="nav-links" id="navLinks">
-                <i class="fa fa-times" onclick="hideMenu()"></i>
-                <ul>
-                    <li class="mb">
-                        <a href="">MY BOOKING</a>
-                    </li>
-                    <li>
-                        <!-- <a href="">LOGIN OR CREATE ACCOUNT</a> -->   
-                        <div class="dropdown">
-                            <button class="button1">LOGIN OR CREATE ACCOUNT</button>
-                            <div class="dropdown-content">
-                                <a class="choose" href="#">Personal Account</a>
-                                <a class="choose" href="#">Transportation Company</a>
+    
+    <div class="ct">
+        <section class="banner">
+            <div class="text-box">
+                <h1>Here We Go</h1>
+                <p>Accompany your trips and provide the cheapest services</p>
+                <a href="" class="book-btn">Booking Now</a>
+            </div>
+        </section>
+        
+    
+        <!-- Booking -->
+        <section class="bus-booking">
+            <!-- Title -->
+            <h1>Bus Booking</h1>
+            <!-- Route Selection -->
+            <div class="container-fluid">
+                <div class="bus-img">
+                    <img src="images/Bus3.png" alt="bus">
+                </div>
+                <div class="route-selection">
+                    <form action="">
+                        <div class="col-md-12 input-route">
+                            <div class="col-md-4 element">
+                                <span>From</sp>
+                                <select class="form-select">
+                                    <option value="" disabled selected>Select Departure</option>
+                                    <option>#</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 element">
+                                <span>To</span>
+                                <select class="form-select">
+                                    <option value="" disabled selected>Select Destination</option>
+                                    <option>#</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 element">
+                                <span>Departure Date</span>
+                                <input class="form-control" type="date" placeholder="Departure Date">
                             </div>
                         </div>
-                    </li>
-                    <li>
-                        <div>
-                            <select class="form-select">
-                                <option>Vietnamese</option>
-                                <option>English</option>
-                            </select>
+                        <div class="search-btn">
+                            <button class="btn btn-secondary">SEARCH</button>
                         </div>
-                    </li>
-                </ul>
-                
+                    </form>
+                </div>         
             </div>
-            <i class="fa fa-bars" onclick="showMenu()"></i>
-        </nav>
-        <!-- Content -->
-        <div class="text-box">
-            <h1>Here We Go</h1>
-            <p>Accompany your trips and provide the cheapest services</p>
-            <a href="" class="book-btn">Booking Now</a>
-        </div>
-    </section>
-
-    <!-- Booking -->
-    <section class="bus-booking">
-        <!-- Title -->
-        <h1>Bus Booking</h1>
-        <!-- Route Selection -->
-        <div class="container-fluid">
-            <div class="bus-img">
-                <img src="images/Bus3.png" alt="bus">
-            </div>
-            <div class="route-selection">
-                <form action="">
-                    <div class="col-md-12 input-route">
-                        <div class="col-md-4 element">
-                            <span>From</sp>
-                            <select class="form-select">
-                                <option value="" disabled selected>Select Departure</option>
-                                <option>#</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 element">
-                            <span>To</span>
-                            <select class="form-select">
-                                <option value="" disabled selected>Select Destination</option>
-                                <option>#</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 element">
-                            <span>Departure Date</span>
-                            <input class="form-control" type="date" placeholder="Departure Date">
+        </section>
+    
+        <!-- Popular Routes -->
+        <section class="popular-routes">
+            <div class="container-fluid content-pr">
+                <!-- Title -->
+                <div class="content-pr-tt">
+                    <h1>Popular Routes</h1>
+                    <img class="img-fluid" src="images/MAP.png" alt="map">
+                </div>
+                <!-- Popular Route -->
+                <div class="row content-pr-bd">
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <img class="img-fluid card-img-top" src="images/DaLat.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                                <a href="/"><h4 class="card-title">Ho Chi Minh City - Da Lat</h4></a>                   
+                                <p class="card-text">Residents and tourists have said that Da Lat 
+                                    has all four seasons in one day: spring in the morning, summer at noon, autumn in the afternoon and winter at night, from the sunset to the sunrise.</p>
+                            </div>   
                         </div>
                     </div>
-                    <div class="search-btn">
-                        <button class="btn btn-secondary">SEARCH</button>
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <img class="img-fluid card-img-top" src="images/DaNang.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                                <a href="/"><h4 class="card-title">Da Nang - Hue</h4></a>  
+                                <p class="card-text">Its status as transportation hub for central Vietnam and its proximity to several UNESCO World Heritage Sites, including the Imperial City of Hue, the Old Town of Hoi An, My Son.</p>
+                            </div>   
+                        </div>
                     </div>
-                </form>
-            </div>         
-        </div>
-    </section>
-
-    <!-- Popular Routes -->
-    <section class="popular-routes">
-        <div class="container-fluid content-pr">
-            <!-- Title -->
-            <div class="content-pr-tt">
-                <h1>Popular Routes</h1>
-                <img class="img-fluid" src="images/MAP.png" alt="map">
-            </div>
-            <!-- Popular Route -->
-            <div class="row content-pr-bd">
-                <div class="col-lg-3">
-                    <div class="card">
-                        <img class="img-fluid card-img-top" src="images/DaLat.jpg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <a href="/"><h4 class="card-title">Ho Chi Minh City - Da Lat</h4></a>                   
-                            <p class="card-text">Residents and tourists have said that Da Lat 
-                                has all four seasons in one day: spring in the morning, summer at noon, autumn in the afternoon and winter at night, from the sunset to the sunrise.</p>
-                        </div>   
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <img class="img-fluid card-img-top" src="images/Sapa.png" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                                <a href="/"><h4 class="card-title">Ha Noi - Sa Pa</h4></a>
+                                <p class="card-text">The landscape itself is reason enough to make the 7-hour trek from Hanoi, but this place is much more than just a beautiful landscape.
+                                    This mountainous town is home to five ethnic minority hill tribes.
+                                </p>
+                            </div>   
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card">
-                        <img class="img-fluid card-img-top" src="images/DaNang.jpg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <a href="/"><h4 class="card-title">Da Nang - Hue</h4></a>  
-                            <p class="card-text">Its status as transportation hub for central Vietnam and its proximity to several UNESCO World Heritage Sites, including the Imperial City of Hue, the Old Town of Hoi An, My Son.</p>
-                        </div>   
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card">
-                        <img class="img-fluid card-img-top" src="images/Sapa.png" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <a href="/"><h4 class="card-title">Ha Noi - Sa Pa</h4></a>
-                            <p class="card-text">The landscape itself is reason enough to make the 7-hour trek from Hanoi, but this place is much more than just a beautiful landscape.
-                                This mountainous town is home to five ethnic minority hill tribes.
-                            </p>
-                        </div>   
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="card">
-                        <img class="img-fluid card-img-top" src="images/CanTho.jpg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <a href="/"><h4 class="card-title">Ho Chi Minh City - Can Tho</h4></a>
-                            <p class="card-text">Cai Rang floating market. The largest floating marketing in Can Tho, and one of the most popular in the world. It is crowded and noisy (with many tourist boats), but still fascinating.</p>
-                        </div>   
-                    </div>
-                </div>       
-            </div>
-        </div>
-    </section>
-
-    <!-- Transportation Company Partners -->
-    <section class="trans-comp">
-        <div class="container-fluid content-tc">
-            <!-- Title -->
-            <div class="content-tc-tt">
-                <h1>Transportation Company</h1>
-                <img class="img-fluid" src="images/ID.png" alt="">
-            </div>  
-            <!-- Transportation Company List -->
-            <div class="container mt-3 content-tc-c">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">Thanh Buoi Bus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Phuong Trang Bus (Futa Bus)</a>
-                    <a href="#" class="list-group-item list-group-item-action">Ha Noi Rides On Time</a>
-                    <a href="#" class="list-group-item list-group-item-action">Sapa Dragon</a>
-                    <a href="#" class="list-group-item list-group-item-action">Hoang Long Bus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Hue Tourist Bus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Mai Linh Express Bus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Hai Van Bus</a>
-                    <a href="#" class="list-group-item list-group-item-action">Interbus Lines</a>
-                    <a href="#" class="list-group-item list-group-item-action">Sapa Bus Lines</a>
-                </div>          
-            </div>                 
-        </div>
-    </section>
-
-    <!-- Why book with Here We Go? -->
-    <section class="impression">
-            <h1 class="imp-tt">Why book with Here We Go?</h1>     \
-            <div class="container-fluid why1">
-                <div class="col-md-6 price">
-                    <img class="img" src="images/BUY.png" alt="">
-                </div>
-                <div class="col-md-6 description">
-                    <h2>All-In Everyday Low Prices</h2>
-                    <p>The low prices you see are what you pay!<br>No additional charges for easy<br>comparison across various options!</p>
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <img class="img-fluid card-img-top" src="images/CanTho.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                                <a href="/"><h4 class="card-title">Ho Chi Minh City - Can Tho</h4></a>
+                                <p class="card-text">Cai Rang floating market. The largest floating marketing in Can Tho, and one of the most popular in the world. It is crowded and noisy (with many tourist boats), but still fascinating.</p>
+                            </div>   
+                        </div>
+                    </div>       
                 </div>
             </div>
-            <div class="container-fluid why2">
-                <div class="col-md-6 description2">
-                    <div class="az">
-                        <h2>A To Z Is Easy Now</h2>
-                        <p>No bus route to where you want?<br>Don't worry, we have intermediate bus routes!</p>
-                    </div>                 
-                </div>
-                <div class="col-md-6 package">
-                    <img class="img" src="images/PACKAGE.png" alt="">
-                </div>
+        </section>
+    
+        <!-- Transportation Company Partners -->
+        <section class="trans-comp">
+            <div class="container-fluid content-tc">
+                <!-- Title -->
+                <div class="content-tc-tt">
+                    <h1>Transportation Company</h1>
+                    <img class="img-fluid" src="images/ID.png" alt="">
+                </div>  
+                <!-- Transportation Company List -->
+                <div class="container mt-3 content-tc-c">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">Thanh Buoi Bus</a>
+                        <a href="#" class="list-group-item list-group-item-action">Phuong Trang Bus (Futa Bus)</a>
+                        <a href="#" class="list-group-item list-group-item-action">Ha Noi Rides On Time</a>
+                        <a href="#" class="list-group-item list-group-item-action">Sapa Dragon</a>
+                        <a href="#" class="list-group-item list-group-item-action">Hoang Long Bus</a>
+                        <a href="#" class="list-group-item list-group-item-action">Hue Tourist Bus</a>
+                        <a href="#" class="list-group-item list-group-item-action">Mai Linh Express Bus</a>
+                        <a href="#" class="list-group-item list-group-item-action">Hai Van Bus</a>
+                        <a href="#" class="list-group-item list-group-item-action">Interbus Lines</a>
+                        <a href="#" class="list-group-item list-group-item-action">Sapa Bus Lines</a>
+                    </div>          
+                </div>                 
             </div>
-    </section>
+        </section>
+    
+        <!-- Why book with Here We Go? -->
+        <section class="impression">
+                <h1 class="imp-tt">Why book with Here We Go?</h1>     \
+                <div class="container-fluid why1">
+                    <div class="col-md-6 price">
+                        <img class="img" src="images/BUY.png" alt="">
+                    </div>
+                    <div class="col-md-6 description">
+                        <h2>All-In Everyday Low Prices</h2>
+                        <p>The low prices you see are what you pay!<br>No additional charges for easy<br>comparison across various options!</p>
+                    </div>
+                </div>
+                <div class="container-fluid why2">
+                    <div class="col-md-6 description2">
+                        <div class="az">
+                            <h2>A To Z Is Easy Now</h2>
+                            <p>No bus route to where you want?<br>Don't worry, we have intermediate bus routes!</p>
+                        </div>                 
+                    </div>
+                    <div class="col-md-6 package">
+                        <img class="img" src="images/PACKAGE.png" alt="">
+                    </div>
+                </div>
+        </section>
+    </div>
 
-    </main>
-
-    <footer class="footer">
-        <div class="footer__addr">
-          <img class="footer__logo" src="images/My project.png" alt="">
-        </div>
-        
-        <ul class="footer__nav">
-          <li class="nav__item">
-            <h2 class="nav__title">About Us</h2>
-      
-            <ul class="nav__ul">
-              <li>
-                <a href="#">Contact Us</a>
-              </li>
-      
-              <li>
-                <a href="#">Help Center</a>
-              </li>
-                  
-              <li>
-                <a href="#">Here We Go!</a>
-              </li>
-            </ul>
-          </li>
-          
-          <li class="nav__item">
-            <h2 class="nav__title">Products</h2>
+    <div class="ft">
+        <footer class="footer">
+            <div class="footer__addr">
+              <img class="footer__logo" src="images/My project.png" alt="">
+            </div>
             
-            <ul class="nav__ul">
-              <li>
-                <a href="#">Bus Tickets</a>
+            <ul class="footer__nav">
+              <li class="nav__item">
+                <h2 class="nav__title">About Us</h2>
+          
+                <ul class="nav__ul">
+                  <li>
+                    <a href="#">Contact Us</a>
+                  </li>
+          
+                  <li>
+                    <a href="#">Help Center</a>
+                  </li>
+                      
+                  <li>
+                    <a href="#">Here We Go!</a>
+                  </li>
+                </ul>
               </li>
               
-              <li>
-                <a href="#">Bus Operator</a>
+              <li class="nav__item">
+                <h2 class="nav__title">Products</h2>
+                
+                <ul class="nav__ul">
+                  <li>
+                    <a href="#">Bus Tickets</a>
+                  </li>
+                  
+                  <li>
+                    <a href="#">Bus Operator</a>
+                  </li>
+                </ul>
+              </li>
+              
+              <li class="nav__item">
+                <h2 class="nav__title">About Us</h2>
+                <div class="social">
+                    <ul class="nav__ul">
+                        <li>
+                          <a href="#">
+                              <img src="images/Facebook - Negative.png" alt="">
+                          </a>
+                        </li>
+                        
+                        <li>
+                          <a href="#">
+                              <img src="images/Twitter - Negative.png" alt="">
+                          </a>
+                        </li>
+          
+                      </ul>
+                </div>
+                
               </li>
             </ul>
-          </li>
-          
-          <li class="nav__item">
-            <h2 class="nav__title">About Us</h2>
-            <div class="social">
-                <ul class="nav__ul">
-                    <li>
-                      <a href="#">
-                          <img src="images/Facebook - Negative.png" alt="">
-                      </a>
-                    </li>
-                    
-                    <li>
-                      <a href="#">
-                          <img src="images/Twitter - Negative.png" alt="">
-                      </a>
-                    </li>
-      
-                  </ul>
-            </div>
             
-          </li>
-        </ul>
-        
-        <div class="legal">
-          <p>Copyright &copy; 2022 Here We Go Co.</p>
-        </div>
-      </footer>
+            <div class="legal">
+              <p>Copyright &copy; 2022 Here We Go Co.</p>
+            </div>
+        </footer>
+    </div>
+    
 
     <script src="script.js"></script>
 
