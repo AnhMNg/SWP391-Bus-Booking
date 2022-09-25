@@ -9,7 +9,7 @@ inputs.forEach((inp) => {
     inp.classList.add("active");
   });
   inp.addEventListener("blur", () => {
-    if (inp.value != "") return;
+    if (inp.value !== "") return;
     inp.classList.remove("active");
   });
 });
@@ -28,7 +28,7 @@ function moveSlider() {
   currentImage.classList.add("show");
 
   const textSlider = document.querySelector(".text-group");
-  textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
+  textSlider.style.transform = `translateY(${-(index - 1) * 2.6}rem)`;
 
   bullets.forEach((bull) => bull.classList.remove("active"));
   this.classList.add("active");

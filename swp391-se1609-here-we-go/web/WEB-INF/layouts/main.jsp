@@ -40,14 +40,14 @@
                         <i class="fa fa-times" onclick="hideMenu()"></i>
                         <ul>
                             <li class="mb">
-                                <a href="/">MY BOOKING</a>
+                                <a class="mb-text" href="/">MY BOOKING</a>
                             </li>
                             <li>
                                 <!-- <a href="">LOGIN OR CREATE ACCOUNT</a> -->   
                                 <div class="dropdown">
                                     <button class="button1">LOGIN OR CREATE ACCOUNT</button>
                                     <div class="dropdown-content">
-                                        <a class="choose" href="<c:url value="/user/login.jsp"/>">Personal Account</a>
+                                        <a class="choose" href="<c:url value="/user/login.do"/>">Personal Account</a>
                                         <a class="choose" href="/">Transportation Company</a>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
         <div class="ft">
             <footer class="footer">
                 <div class="footer__addr">
-                    <img class="footer__logo" src="images/My project.png" alt="">
+                    <img class="footer__logo" src="<c:url value="/images/My project.png"/>" alt="">
                 </div>
 
                 <ul class="footer__nav">
@@ -119,13 +119,13 @@
                             <ul class="nav__ul">
                                 <li>
                                     <a href="#">
-                                        <img src="images/Facebook - Negative.png" alt="">
+                                        <img src="<c:url value="/images/Facebook - Negative.png"/>" alt="">                                       
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="#">
-                                        <img src="images/Twitter - Negative.png" alt="">
+                                        <img src="<c:url value="/images/Twitter - Negative.png"/>" alt="">
                                     </a>
                                 </li>
 

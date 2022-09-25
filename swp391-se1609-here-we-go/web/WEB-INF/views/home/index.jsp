@@ -44,7 +44,7 @@
                 <!-- Route Selection -->
                 <div class="container-fluid">
                     <div class="bus-img">
-                        <img src="images/Bus3.png" alt="bus">
+                        <img src="<c:url value="/images/Bus3.png"/>" alt="bus">
                     </div>
                     <div class="route-selection">
                         <form action="">
@@ -82,13 +82,13 @@
                     <!-- Title -->
                     <div class="content-pr-tt">
                         <h1>Popular Routes</h1>
-                        <img class="img-fluid" src="images/MAP.png" alt="map">
+                        <img class="img-fluid" src="<c:url value="/images/MAP.png"/>" alt="map">
                     </div>
                     <!-- Popular Route -->
                     <div class="row content-pr-bd">
                         <div class="col-lg-3">
                             <div class="card">
-                                <img class="img-fluid card-img-top" src="images/DaLat.jpg" alt="Card image" style="width:100%">
+                                <img class="img-fluid card-img-top" src="<c:url value="/images/DaLat.jpg"/>" alt="Card image" style="width:100%">
                                 <div class="card-body">
                                     <a href="/"><h4 class="card-title">Ho Chi Minh City - Da Lat</h4></a>                   
                                     <p class="card-text">Residents and tourists have said that Da Lat 
@@ -98,7 +98,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="card">
-                                <img class="img-fluid card-img-top" src="images/DaNang.jpg" alt="Card image" style="width:100%">
+                                <img class="img-fluid card-img-top" src="<c:url value="/images/DaNang.jpg"/>" alt="Card image" style="width:100%">
                                 <div class="card-body">
                                     <a href="/"><h4 class="card-title">Da Nang - Hue</h4></a>  
                                     <p class="card-text">Its status as transportation hub for central Vietnam and its proximity to several UNESCO World Heritage Sites, including the Imperial City of Hue, the Old Town of Hoi An, My Son.</p>
@@ -107,7 +107,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="card">
-                                <img class="img-fluid card-img-top" src="images/Sapa.png" alt="Card image" style="width:100%">
+                                <img class="img-fluid card-img-top" src="<c:url value="/images/Sapa.png"/>" alt="Card image" style="width:100%">
                                 <div class="card-body">
                                     <a href="/"><h4 class="card-title">Ha Noi - Sa Pa</h4></a>
                                     <p class="card-text">The landscape itself is reason enough to make the 7-hour trek from Hanoi, but this place is much more than just a beautiful landscape.
@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="card">
-                                <img class="img-fluid card-img-top" src="images/CanTho.jpg" alt="Card image" style="width:100%">
+                                <img class="img-fluid card-img-top" src="<c:url value="/images/CanTho.jpg"/>" alt="Card image" style="width:100%">
                                 <div class="card-body">
                                     <a href="/"><h4 class="card-title">Ho Chi Minh City - Can Tho</h4></a>
                                     <p class="card-text">Cai Rang floating market. The largest floating marketing in Can Tho, and one of the most popular in the world. It is crowded and noisy (with many tourist boats), but still fascinating.</p>
@@ -135,7 +135,7 @@
                     <!-- Title -->
                     <div class="content-tc-tt">
                         <h1>Transportation Company</h1>
-                        <img class="img-fluid" src="images/ID.png" alt="">
+                        <img class="img-fluid" src="<c:url value="/images/ID.png"/>" alt="">
                     </div>  
                     <!-- Transportation Company List -->
                     <div class="container mt-3 content-tc-c">
@@ -160,7 +160,7 @@
                 <h1 class="imp-tt">Why book with Here We Go?</h1>     \
                 <div class="container-fluid why1">
                     <div class="col-md-6 price">
-                        <img class="img" src="images/BUY.png" alt="">
+                        <img class="img" src="<c:url value="/images/BUY.png"/>" alt="">
                     </div>
                     <div class="col-md-6 description">
                         <h2>All-In Everyday Low Prices</h2>
@@ -175,7 +175,7 @@
                         </div>                 
                     </div>
                     <div class="col-md-6 package">
-                        <img class="img" src="images/PACKAGE.png" alt="">
+                        <img class="img" src="<c:url value="/images/PACKAGE.png"/>" alt="">
                     </div>
                 </div>
             </section>
