@@ -1,0 +1,73 @@
+body{
+    height: 100vh;
+    background: #fff !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card{
+    overflow: hidden;
+    border: 1px solid #6180CD !important;
+    border-radius: 20px !important;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  }
+  .card-body{
+    padding: 2rem !important;
+  }
+  
+  .title{
+    font-weight: 600;
+font-size: 32px;
+line-height: 40px;
+color: #000000;
+  }
+  .form-box button[type="submit"]{
+    margin-top: 10px;
+    cursor: pointer;
+    background: #EA4335;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 700;
+font-size: 16px;
+line-height: 20px;
+  }
+.trip{
+  font-weight: 500;
+font-size: 20px;
+line-height: 25px;
+color: #D80027;
+}
+.time, .point{
+  font-weight: 700;
+font-size: 24px;
+line-height: 30px;
+}
+.date, .point-detail,.seat{
+  font-weight: 600;
+font-size: 18px;
+line-height: 25px;
+}
+.bus{
+  font-weight: 700;
+font-size: 30px;
+line-height: 38px;
+color: #000000;
+margin: 0;
+}
+.type{
+  font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+color: #8A8888;
+margin: 0;
+}
+.seat-info{
+  display: flex;
+}
+.seat-detail{
+  font-weight: 400;
+font-size: 18px;
+line-height: 25px;
+}
