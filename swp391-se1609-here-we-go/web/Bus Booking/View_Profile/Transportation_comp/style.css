@@ -2,8 +2,6 @@
 .container {
     justify-content: left;
     background: linear-gradient(192.04deg, #9DC5D1 0.66%, #6180CD 119.66%);
-}
-.container {
     display: flex;
     padding: 2% 6%;
     align-items: center;
@@ -17,11 +15,6 @@
     font-size: 64px;
     line-height: 81px;
 }
-
-.thanhbuoi-img {
-    margin-left: 100px;
-}
-
 .transportation-comp-content,
 .rout-list {
     text-align: left;
