@@ -55,8 +55,8 @@
                             <li>
                                 <div>
                                     <select class="form-select">
-                                        <option>Vietnamese</option>
                                         <option>English</option>
+                                        <option>Vietnamese</option>                                      
                                     </select>
                                 </div>
                             </li>
