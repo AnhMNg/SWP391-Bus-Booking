@@ -33,7 +33,7 @@
                 <nav>
                     <!-- Logo -->
                     <a href="<c:url value="/home/index.do"/>">
-                        <img src="<c:url value="/images/My project.png"/>" class="logo">
+                        <img src="<c:url value="/images/Logo1.png"/>" class="logo">
                     </a>
                     <!-- NavBar -->
                     <div class="nav-links" id="navLinks">

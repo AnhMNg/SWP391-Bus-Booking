@@ -32,13 +32,13 @@
                 <div class="text-box">
                     <h1>Here We Go</h1>
                     <p>Accompany your trips and provide the cheapest services</p>
-                    <a href="" class="book-btn">Booking Now</a>
+                    <a href="#bus-booking-st" class="book-btn">Booking Now</a>
                 </div>
             </section>
 
 
             <!-- Booking -->
-            <section class="bus-booking">
+            <section id="bus-booking-st" class="bus-booking">
                 <!-- Title -->
                 <h1>Bus Booking</h1>
                 <!-- Route Selection -->
@@ -101,7 +101,7 @@
                                 <img class="img-fluid card-img-top" src="<c:url value="/images/DaNang.jpg"/>" alt="Card image" style="width:100%">
                                 <div class="card-body">
                                     <a href="/"><h4 class="card-title">Da Nang - Hue</h4></a>  
-                                    <p class="card-text">Its status as transportation hub for central Vietnam and its proximity to several UNESCO World Heritage Sites, including the Imperial City of Hue, the Old Town of Hoi An, My Son.</p>
+                                    <p class="card-text">Its status as transportation hub for central Vietnam and its proximity to several UNESCO World Heritage Sites, including the Imperial City of Hue, the Old Town of Hoi An, My Son ruins fuels much of its tourist activity.</p>
                                 </div>   
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                                 <img class="img-fluid card-img-top" src="<c:url value="/images/CanTho.jpg"/>" alt="Card image" style="width:100%">
                                 <div class="card-body">
                                     <a href="/"><h4 class="card-title">Ho Chi Minh City - Can Tho</h4></a>
-                                    <p class="card-text">Cai Rang floating market. The largest floating marketing in Can Tho, and one of the most popular in the world. It is crowded and noisy (with many tourist boats), but still fascinating.</p>
+                                    <p class="card-text">Cai Rang floating market. The largest floating marketing in Can Tho, and one of the most popular in the world. Cai Rang floating market was recognized as a national intangible cultural heritage.</p>
                                 </div>   
                             </div>
                         </div>       
