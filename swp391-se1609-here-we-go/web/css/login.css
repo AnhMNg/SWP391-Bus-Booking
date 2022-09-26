@@ -27,7 +27,7 @@ main {
     position: relative;
     width: 100%;
     max-width: 1020px;
-    height: 640px;
+    height: 600px;
     background-color: #fff;
     border-radius: 3.3rem;
     box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
@@ -307,7 +307,7 @@ main.sign-up-mode .carousel {
 
 @media (max-width: 850px) {
     .box {
-        height: auto;
+        height: 640px;
         max-width: 550px;
         overflow: hidden;
     }

@@ -4,12 +4,14 @@
 }
 
 .header {
-    min-height: 200px;
+    height: 200px;
     width: 100%;
     background: #9DC5D2;
     background-position: center;
     background-size: cover;
-    position: relative;
+    position: fixed;
+    z-index: 1;
+    flex-wrap: wrap;
 }
 
 .banner {
@@ -114,7 +116,7 @@ nav {
 .text-box {
     width: 90%;
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -203,6 +205,9 @@ nav .fa {
     margin: auto;
     text-align: center;
     padding-top: 70px;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 .bus-booking h1 {
@@ -364,6 +369,7 @@ nav .fa {
 
 .list-group a {
     font-weight: 500;
+    font-size: 23px;
 }
 
 @media(max-width:700px) {
