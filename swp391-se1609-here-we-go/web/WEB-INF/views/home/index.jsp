@@ -24,6 +24,13 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>   
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <style>
+            .bus-booking {
+                background-image: url('<c:url value="/images/46f92a10193445.560e0e5589fda.jpg"/>');
+                background-position: center bottom;
+                background-repeat: no-repeat;
+            }
+        </style>
         <title>Here We Go</title>
     </head>
     <body>
