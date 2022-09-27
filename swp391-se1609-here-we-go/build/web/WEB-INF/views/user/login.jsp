@@ -70,7 +70,7 @@
                                 <div class="social-media">
                                     <p>Or Login With</p>
                                     <ul>
-                                        <li><img class="google-img" src="<c:url value="/images/Google - Original.png"/>"></li>
+                                        <img class="google-img" src="<c:url value="/images/Google - Original.png"/>">
                                     </ul>
                                 </div>
                             </div>
@@ -79,14 +79,12 @@
                         <form action="index.html" autocomplete="off" class="sign-up-form">
 
                             <div class="heading">
-                                <h2>Join As</h2>
-                                <h2>Here We Go</h2>
-                                <h2>Member</h2>
+                                <h2>Join  Here We Go Member</h2>
                                 <h6>Already have an account?</h6>
                                 <a href="#" class="toggle">Sign in</a>
                             </div>
 
-                            <div class="actual-form">
+                            <div class="actual-form2">
                                 <div class="input-wrap">
                                     <input
                                         type="text"
@@ -130,7 +128,7 @@
                                     <label>Confirm Password</label>
                                 </div>
 
-                                <input type="submit" value="Sign Up" class="sign-btn" />
+                                <input type="submit" value="Sign Up" class="sign-btn2" />
 
                                 <p class="text">
                                     By signing up, I agree to the
