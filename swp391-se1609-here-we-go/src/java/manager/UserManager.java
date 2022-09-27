@@ -44,7 +44,7 @@ public class UserManager {
         }
         return us;
     }
-    public static User checkLogin(String phone, String password) throws SQLException {
+    public User checkLogin(String phone, String password) throws SQLException {
         User user = null;
         Connection cn = null;
         PreparedStatement pst = null;

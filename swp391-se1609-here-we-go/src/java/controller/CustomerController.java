@@ -7,8 +7,6 @@ package controller;
 import config.Config;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,6 +49,7 @@ public class CustomerController extends HttpServlet {
                 break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
+
         
     }
     
@@ -85,6 +84,32 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("action", "index");
             request.setAttribute("message", ex.getMessage());
             log("Error at MainController: " + ex.toString());
+        switch(action){
+            case "submit":
+                login(request, response);
+                break;
+        }
+        
+        private void login(HttpServletRequest request, HttpServletResponse response){
+            try {
+                String phone = request.getParameter("phone");
+                String password = request.getParameter("password");
+                UserManager userManager = new UserManager();
+                User user = null;
+                user = userManager.checkLogin(phone, password);
+                if (user != null){
+                    HttpSession session = request.getSession();
+                    session.setAttribute("LOGIN_USER", user);
+                    request.setAttribute("controller", "home");
+                    request.setAttribute("action", "index");
+                }else{
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "login");
+                    request.setAttribute("message", "phone or password is incorrect!");
+                }
+            } catch (SQLException ex) {
+                request.get
+            }
         }
     }
 
