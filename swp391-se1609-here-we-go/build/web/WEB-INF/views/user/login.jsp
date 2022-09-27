@@ -30,7 +30,7 @@
             <div class="box">
                 <div class="inner-box">
                     <div class="forms-wrap">
-                        <form action="index.html" autocomplete="off" class="sign-in-form">
+                        <form action="<c:url value="/user/submit.do"/>" autocomplete="off" class="sign-in-form" method="POST">
 
                             <div class="heading">
                                 <h2>Welcome Back</h2>
@@ -46,6 +46,7 @@
                                         class="input-field"
                                         autocomplete="off"
                                         required
+                                        name="phone"
                                         />
                                     <label>Phone Number</label>
                                 </div>
@@ -57,12 +58,13 @@
                                         class="input-field"
                                         autocomplete="off"
                                         required
+                                        name="password"
                                         />
                                     <label>Password</label>
                                 </div>
 
                                 <input type="submit" value="Booking Now" class="sign-btn" />
-
+                                <i>${message}</i>
                                 <p class="forgot-pass">Forgot Password ?</p>
 
                                 <div class="social-media">
