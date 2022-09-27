@@ -13,3 +13,7 @@ window.addEventListener("scroll", function() {
     var header = document.querySelector('#header');
     header.classList.toggle("sticky", window.scrollY > 0);
 })
+
+let width = screen.width;
+let height = screen.height;
+let depth = screen.pixelDepth;
