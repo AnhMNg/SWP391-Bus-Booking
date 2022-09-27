@@ -17,7 +17,7 @@ import utils.DBUtils;
  */
 public class UserManager {
     
-    private static final String LOGIN = "SELECT * FROM User WHERE userId = ? AND password = ?";
+    private static final String LOGIN = "SELECT * FROM [User] WHERE phone = ? AND password = ?";
     private static final String INSERT = "INSERT INTO tblUsers(name, phone, roleId, password) VALUES(?,?,2,?)";
     
     public static User getUserById(long id) throws SQLException{
