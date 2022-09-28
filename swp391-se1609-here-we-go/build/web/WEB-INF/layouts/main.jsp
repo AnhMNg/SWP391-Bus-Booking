@@ -56,7 +56,13 @@
                             </c:if>
                             <c:if test="${sessionScope.LOGIN_CUSTOMER != null}">
                                 <li>
-                                    <a href="<c:url value="/user/logout.do"/>">LOG OUT</a>
+                                    <div class="dropdown">
+                                        <button class="button1">Hello ${sessionScope.LOGIN_CUSTOMER_NAME}</button>
+                                        <div class="dropdown-content">
+                                            <a class="choose" href="<c:url value="/"/>">My Profile</a>
+                                            <a class="choose" href="<c:url value="/user/logout.do"/>">Log Out</a>
+                                        </div>
+                                    </div>
                                 </li>
                             </c:if>
 
