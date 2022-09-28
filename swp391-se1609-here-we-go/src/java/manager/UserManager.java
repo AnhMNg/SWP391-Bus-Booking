@@ -16,34 +16,42 @@ import utils.DBUtils;
  * @author baolo
  */
 public class UserManager {
-    
+
     private static final String LOGIN = "SELECT * FROM [User] WHERE phone = ? AND password = ?";
-    private static final String INSERT = "INSERT INTO tblUsers(name, phone, roleId, password) VALUES(?,?,2,?)";
-    
-    public static User getUserById(long id) throws SQLException{
+    private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,'',2,?)";
+    private static final String CHECK_DUPLICATE = "SELECT * FROM [User] WHERE phone = ?";
+
+    public static User getUserById(long id) throws SQLException {
         Connection cn = null;
         User us = null;
-        try{
+        try {
             cn = DBUtils.getConnection();
-            if (cn != null){
+            if (cn != null) {
                 String sql = "select * from [User] where userId = ?";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setLong(1, id);
                 ResultSet rs = pst.executeQuery();
-                if (rs!= null && rs.next()){
+                if (rs != null && rs.next()) {
                     us = new User(id, rs.getString(2), rs.getString(3), rs.getString(4),
                             rs.getInt(5), rs.getString(6));
                 }
-                if (rs!= null) rs.close();
-                if (pst!= null) pst.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
             }
-        } catch(Exception e){
-            
-        } finally{
-            if (cn!= null) cn.close();
+        } catch (Exception e) {
+
+        } finally {
+            if (cn != null) {
+                cn.close();
+            }
         }
         return us;
     }
+
     public User checkLogin(String phone, String password) throws SQLException {
         User user = null;
         Connection cn = null;
@@ -51,18 +59,18 @@ public class UserManager {
         ResultSet rs = null;
         try {
             cn = DBUtils.getConnection();
-            if(cn != null){
+            if (cn != null) {
                 pst = cn.prepareStatement(LOGIN);
                 pst.setString(1, phone);
                 pst.setString(2, password);
                 rs = pst.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     user = new User(rs.getLong(1), rs.getString(2), phone, rs.getString(4), rs.getInt(5), "***");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -75,30 +83,33 @@ public class UserManager {
         }
         return user;
     }
-    
-    public boolean insert(String name, String phone, String password) throws SQLException{
-        boolean check = false;
-        Connection cn = null;
-        PreparedStatement pst = null;
-        try{
-            cn = DBUtils.getConnection();
-            if (cn!=null){
-                pst = cn.prepareStatement(INSERT);
-                pst.setString(1, name);
-                pst.setString(2, phone);
-                pst.setString(3, password);
-                check = pst.executeUpdate()>0?true:false;
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        } finally {
-            if (pst != null) {
-                pst.close();
-            }
-            if (cn != null) {
-                cn.close();
+
+    public boolean register(User user) throws SQLException {
+        Connection con = DBUtils.getConnection();
+        if (con != null) {
+            PreparedStatement ps = con.prepareStatement(REGISTER);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getPhone());
+            ps.setString(3, user.getAvtLink());
+            ps.setInt(4, user.getRoleId());
+            ps.setString(5, user.getPassword());
+            if (ps.executeUpdate() > 0) {
+                return true;
             }
         }
-        return check;
+        return false;
+    }
+
+    public boolean checkDuplicate(String phone) throws SQLException {
+        Connection con = DBUtils.getConnection();
+        if (con != null) {
+            PreparedStatement ps = con.prepareStatement(CHECK_DUPLICATE);
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
