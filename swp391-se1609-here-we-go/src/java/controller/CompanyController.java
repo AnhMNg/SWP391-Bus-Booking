@@ -37,7 +37,7 @@ public class CompanyController extends HttpServlet {
         String action = (String) request.getAttribute("action");
         String controller = (String) request.getAttribute("controller");
         switch(action){
-            case "login": 
+            case "submit": 
                 Login(request, response);
                 break;
         }
@@ -51,8 +51,9 @@ public class CompanyController extends HttpServlet {
             com = CompanyManager.getCompanyAccount(phone, password);
             if (com != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("CompanyLogin", com);
-                request.setAttribute("controller", "home");
+                session.setAttribute("LOGIN_COMPANY", com);
+                session.setAttribute("LOGIN_COMPANY_NAME", com.getName());
+                request.setAttribute("controller", "company");
                 request.setAttribute("action", "index");
             } else {
                 request.setAttribute("controller", "company");
