@@ -74,6 +74,7 @@ public class CustomerController extends HttpServlet {
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_CUSTOMER", user);
+                session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 request.setAttribute("controller", "home");
                 request.setAttribute("action", "index");
             } else {
