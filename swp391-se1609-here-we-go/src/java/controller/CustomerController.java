@@ -75,6 +75,7 @@ public class CustomerController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_CUSTOMER", user);
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
+                session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
                 int roleID = user.getRoleId();
                 if (roleID == 1) {
                     request.setAttribute("controller", "user");

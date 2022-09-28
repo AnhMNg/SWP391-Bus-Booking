@@ -64,7 +64,7 @@
                                 </div>
 
                                 <input type="submit" value="Booking Now" class="sign-btn" />
-                                <i>${message}</i>
+                                <i style="color: red">${message}</i>
                                 <p class="forgot-pass">Forgot Password ?</p>
 
                                 <div class="social-media">
