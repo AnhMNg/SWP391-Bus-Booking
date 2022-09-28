@@ -6,12 +6,15 @@ package controller;
 
 import config.Config;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import manager.CompanyManager;
+import model.Company;
 
 /**
  *
@@ -33,7 +36,35 @@ public class CompanyController extends HttpServlet {
             throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
         String controller = (String) request.getAttribute("controller");
+        switch(action){
+            case "login": 
+                Login(request, response);
+                break;
+        }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
+    }
+    private void Login(HttpServletRequest request, HttpServletResponse response){
+          try {
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            Company com = null;
+            com = CompanyManager.getCompanyAccount(phone, password);
+            if (com != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("CompanyLogin", com);
+                request.setAttribute("controller", "home");
+                request.setAttribute("action", "index");
+            } else {
+                request.setAttribute("controller", "company");
+                request.setAttribute("action", "login");
+                request.setAttribute("message", "username or password is incorrect!");
+            }
+        } catch (Exception ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

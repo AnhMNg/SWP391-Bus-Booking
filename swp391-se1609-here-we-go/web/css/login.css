@@ -26,8 +26,8 @@ main {
 .box {
     position: relative;
     width: 100%;
-    max-width: 1020px;
-    height: 600px;
+    max-width: 850px;
+    height: 529.47px;
     background-color: #fff;
     border-radius: 3.3rem;
     box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
@@ -87,6 +87,15 @@ form.sign-up-form {
     margin-top: -9px;
     letter-spacing: -0.5px;
     color: #151111;
+}
+
+/*.heading {
+    height: 200px;
+}*/
+
+.actual-form {
+    height: 100%;
+    margin-top: 30px;
 }
 
 .heading h2 {
@@ -172,6 +181,24 @@ label {
 }
 
 .sign-btn:hover {
+    background-color: #82b3fc;
+}
+
+.sign-btn2 {
+    display: inline-block;
+    width: 100%;
+    height: 43px;
+    background-color: #8371fd;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.sign-btn2:hover {
     background-color: #82b3fc;
 }
 

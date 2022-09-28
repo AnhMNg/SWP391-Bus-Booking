@@ -3,16 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/web/WEB-INF/views/user/login.jsp</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/web/WEB-INF/layouts/main.jsp</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/src/java/controller/HomeController.java</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/src/java/controller/FrontController.java</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/src/java/model/User.java</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/src/java/controller/CustomerController.java</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/src/java/config/Config.java</file>
-            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391-Bus-Booking/swp391-se1609-here-we-go/web/js/login.js</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/layouts/main.jsp</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/company/login.jsp</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/home/index.jsp</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/CustomerController.java</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/manager/CompanyManager.java</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/FrontController.java</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/CompanyController.java</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/HomeController.java</file>
+            <file>file:/C:/Users/baolo/OneDrive/Documents/GitHub/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/manager/UserManager.java</file>
         </group>
     </open-files>
 </project-private>
