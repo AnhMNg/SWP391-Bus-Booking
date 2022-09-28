@@ -3,116 +3,10 @@
     padding: 0;
 }
 
-.header {
-    height: 170px;
-    width: 100%;
-    background: #9DC5D2;
-    background-position: center;
-    background-size: cover;
-    position: fixed;
-    z-index: 1;
-    flex-wrap: wrap;
-}
-
 .banner {
     min-height: 100vh;
     width: 100%;
-    background: url('images/Vietnam-sleeper-bus-seat.jpg');
-    background-position: center;
-    background-size: cover;
     position: relative;
-}
-
-
-.logo {
-    width: 183px;
-    height: 183px;
-    left: calc(50% - 183px/2 - 449.5px);
-    top: 0px;
-}
-
-nav {
-    display: flex;
-    padding: 2% 6%;
-    justify-content: space-between;
-    align-items: center;
-    height: 170px;
-}
-
-
-.nav-links ul li {
-    list-style: none;
-    display: inline-block;
-    padding: 8px 12px;
-    position: relative;
-}
-
-.form-select {
-    max-width: 83;
-    max-height: 24;
-}
-
-.nav-links ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 13;
-    font-weight: bold;
-}
-
-.button1 {
-    border: 0;
-    background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
-    border-radius: 15px;
-    padding: 15px 18px;
-    font-weight: bold;
-    font-size: 13px;
-    line-height: 16px;
-    color: #FFFFFF;
-    cursor: pointer;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    width: 212px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    margin-top: 1px;
-}
-
-.choose {
-    background-color: #617FCD;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #5695aa;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.mb::after {
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: #6180CD;
-    display: block;
-    margin: auto;
-    transition: 0.5s;
-}
-
-.mb:hover::after {
-    width: 100%;
 }
 
 .text-box {
@@ -165,42 +59,12 @@ nav {
     color: #fff;
 }
 
-nav .fa {
-    display: none;
-    color: #fff;
-}
-
-
 @media(max-width:700px) {
     .text-box h1 {
         font-size: 70px;
     }
     .text-box p {
         font-size: 13px;
-    }
-    .nav-links ul li {
-        display: block;
-    }
-    .nav-links {
-        position: absolute;
-        background: black;
-        height: 100vh;
-        width: 200px;
-        top: 0;
-        right: -200px;
-        text-align: left;
-        z-index: 2;
-        transition: 1s;
-    }
-    nav .fa {
-        display: block;
-        color: #fff;
-        margin: 10px;
-        font-size: 22px;
-        cursor: pointer;
-    }
-    .nav-links ul {
-        padding: 20px;
     }
 }
 
@@ -396,116 +260,5 @@ nav .fa {
     }
 }
 
-body {
-    font-family: acumin-pro, system-ui, sans-serif;
-    margin: 0;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    font-size: 14px;
-    background-color: #f4f4f4;
-    align-items: start;
-    min-height: 100vh;
-}
-  
-.footer {
-    display: flex;
-    flex-flow: row wrap;
-    padding: 30px 30px 20px 30px;
-    color: #2f2f2f;
-    background-color: black;
-    border-top: 1px solid #e5e5e5;
-}
-  
-.footer > * {
-    flex:  1 100%;
-}
-  
-.footer__logo {
-    width: 150px;
-    height: 150px;    
-}
-  
-.nav__title {
-    font-weight: bold;
-    font-size: 15px;
-    color: #fff;
-}
-  
-.footer ul {
-    list-style: none;
-    padding-left: 0;
-}
-  
-.footer li {
-    line-height: 2em;
-}
-  
-.footer a {
-    text-decoration: none;
-}
-  
-.footer__nav {
-    display: flex;
-      flex-flow: row wrap;
-}
-  
-.footer__nav > * {
-    flex: 1 50%;
-    margin-right: 1.25em;
-}
-  
-.nav__ul a {
-    color: #999;
-}
-  
-.nav__ul--extra {
-    column-count: 2;
-    column-gap: 1.25em;
-}
-  
-.legal {
-    display: flex;
-    flex-wrap: wrap;
-    color: #999;
-}
-
-.legal p {
-    margin: auto;
-    align-items: center;
-    font-weight: bold;
-}
-    
-.legal__links {
-    display: flex;
-    align-items: center;
-}
-  
-.heart {
-    color: #2f2f2f;
-}
-  
-@media screen and (max-width: 24.375em) {
-    .legal .legal__links {
-      margin-left: auto;
-    }
-}
-  
- @media screen and (min-width: 40.375em) {
-    .footer__nav > * {
-      flex: 1;
-    }
-    
-    .nav__item--extra {
-      flex-grow: 2;
-    }
-    
-    .footer__addr {
-      flex: 1 0px;
-    }
-    
-    .footer__nav {
-      flex: 2 0px;
-    }
-}
 
 
