@@ -18,7 +18,7 @@ import utils.DBUtils;
 public class UserManager {
 
     private static final String LOGIN = "SELECT * FROM [User] WHERE phone = ? AND password = ?";
-    private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,'',2,?)";
+    private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,?,?,?)";
     private static final String CHECK_DUPLICATE = "SELECT * FROM [User] WHERE phone = ?";
 
     public static User getUserById(long id) throws SQLException {
@@ -91,7 +91,7 @@ public class UserManager {
             ps.setString(1, user.getName());
             ps.setString(2, user.getPhone());
             ps.setString(3, user.getAvtLink());
-            ps.setInt(4, user.getRoleId());
+            ps.setInt(4, 2);
             ps.setString(5, user.getPassword());
             if (ps.executeUpdate() > 0) {
                 return true;
