@@ -46,15 +46,15 @@ public class CustomerController extends HttpServlet {
             case "logout":
                 logout(request, response);
                 break;
-            
+            case "save":
+                save(request, response);
             default:
                 break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
 
-        
     }
-    
+
     private void logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -74,8 +74,16 @@ public class CustomerController extends HttpServlet {
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_CUSTOMER", user);
-                request.setAttribute("controller", "home");
-                request.setAttribute("action", "index");
+                int roleID = user.getRoleId();
+                if (roleID == 1) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "admin");
+                } else if (roleID == 2) {
+                    request.setAttribute("controller", "home");
+                    request.setAttribute("action", "index");
+                } else {
+                    request.setAttribute("message", "Your role is not support!");
+                }
             } else {
                 request.setAttribute("controller", "user");
                 request.setAttribute("action", "login");
@@ -86,13 +94,68 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("action", "index");
             request.setAttribute("message", ex.getMessage());
             log("Error at MainController: " + ex.toString());
-        
+
         }
-        
-        
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    private void save(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            UserManager userManager = new UserManager();
+            String name = request.getParameter("name");
+            String phone = request.getParameter("phone");
+            String password = request.getParameter("password");
+            String confirmPassword = request.getParameter("confirmPassword");
+
+            //validation
+            if (userManager.checkDuplicate(phone)) {
+                request.setAttribute("name", name);
+                request.setAttribute("phone", phone);
+                request.setAttribute("password", password);
+                request.setAttribute("confirmPassword", confirmPassword);
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "register");
+                request.setAttribute("messageUN", "username has been used by another person!");
+                return;
+            }
+
+            //check if password and confirm password matched or not
+            if (password.equals(confirmPassword)) {
+                //check if password meet the condition or not (8 digit,one lower,upper, special digit)
+                String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+                if (password.matches(pattern)) {
+                    User user = new User(0, name, phone, "", 2, password);
+                    if (userManager.register(user)) {
+                        request.setAttribute("controller", "user");
+                        request.setAttribute("action", "login");
+                    }
+                } else {
+                    request.setAttribute("name", name);
+                    request.setAttribute("phone", phone);
+                    request.setAttribute("password", password);
+                    request.setAttribute("confirmPassword", confirmPassword);
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "register");
+                    request.setAttribute("messagePW", "password must contain at least 8 letters with lower,upper letter and a special digit!");
+                }
+            } else {
+                request.setAttribute("name", name);
+                request.setAttribute("phone", phone);
+                request.setAttribute("pw", password);
+                request.setAttribute("confirmPassword", confirmPassword);
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "register");
+                request.setAttribute("messagePW", "Confirm password doesn't match!");
+            }
+        } catch (SQLException ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
+    }
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -106,8 +169,10 @@ public class CustomerController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -124,8 +189,10 @@ public class CustomerController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CustomerController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
