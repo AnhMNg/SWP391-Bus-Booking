@@ -50,13 +50,12 @@
                             <form class="form-box px-3">
                                 <div class="form-input">
                                     <span><i class="fa fa-user-o"></i></span>
-                                    <input type="email" name="" placeholder="Login Name" tabindex="10" required>
+                                    <input type="text" name="phone" placeholder="Your phone" tabindex="10" required>
                                 </div>
                                 <div class="form-input">
                                     <span><i class="fa fa-key"></i></span>
-                                    <input type="password" name="" placeholder="Password" required>
+                                    <input type="password" name="password" placeholder="Password" required>
                                 </div>
-
                                 <input type="submit" value="Login" class="sign-btn" />
                             </form>
                         </div>
