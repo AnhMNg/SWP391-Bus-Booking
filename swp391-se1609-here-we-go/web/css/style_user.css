@@ -1,8 +1,9 @@
 
 .profile {
     text-align: left;
-   padding: 64px;
+    padding: 150px 64px 64px 64px;
     border-top: 1px solid rgba(168, 164, 164, 0.69);
+    position: relative;
 }
 
 .content {
@@ -70,9 +71,9 @@
     padding: 0px;
 }
 
-.profile-attribute:first-child {
+/* .profile-attribute:first-child {
     background: rgba(107, 216, 251, 0.57);
-}
+} */
 
 .profile-attribute {
     display: flex;
@@ -86,6 +87,10 @@
 
     color: #000000;
     margin-bottom: 20px;
+}
+
+.profile-attribute:hover {
+    background-color: rgba(107, 216, 251, 0.57);
 }
 
 .profile-detail-2 {
@@ -153,6 +158,17 @@
 .information-name {
     width: 160px;
     margin-right: 20px;
+}
+
+.de {
+    padding-top: 50px;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 400;
+}
+
+.de:hover {
+    color: #000000;
 }
 
 @media screen and (min-width: 800px) {
