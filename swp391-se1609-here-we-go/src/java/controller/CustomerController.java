@@ -128,7 +128,7 @@ public class CustomerController extends HttpServlet {
                 //check if password meet the condition or not (8 digit,one lower,upper, special digit)
                 String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
                 if (password.matches(pattern)) {
-                    User user = new User(0, name, phone, "", 2, password);
+                    User user = new User(0, name,null, phone, "", 2, password);
                     if (userManager.register(user)) {
                         request.setAttribute("controller", "user");
                         request.setAttribute("action", "login");
