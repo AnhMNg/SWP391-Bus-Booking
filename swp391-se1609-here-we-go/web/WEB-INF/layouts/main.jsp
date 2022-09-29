@@ -32,7 +32,12 @@
                 <!-- Menu -->
                 <nav>
                     <!-- Logo -->
-                    <c:if test="${sessionScope.LOGIN_COMPANY == null}">
+                    <c:if test="${sessionScope.LOGIN_CUSTOMER == null && sessionScope.LOGIN_COMPANY == null}">
+                        <a href="<c:url value="/home/index.do"/>">
+                            <img src="<c:url value="/images/Logo1.png"/>" class="logo">
+                        </a>
+                    </c:if>
+                    <c:if test="${sessionScope.LOGIN_COMPANY == null && sessionScope.LOGIN_ROLE == 2}">
                         <a href="<c:url value="/home/index.do"/>">
                             <img src="<c:url value="/images/Logo1.png"/>" class="logo">
                         </a>
@@ -42,11 +47,16 @@
                             <img src="<c:url value="/images/Logo1.png"/>" class="logo">
                         </a>
                     </c:if>
+                    <c:if test="${sessionScope.LOGIN_COMPANY == null && sessionScope.LOGIN_ROLE == 1}">
+                        <a href="<c:url value="/admin/index.do"/>">
+                            <img src="<c:url value="/images/Logo1.png"/>" class="logo">
+                        </a>
+                    </c:if>
                     <!-- NavBar -->
                     <div class="nav-links" id="navLinks">
                         <i class="fa fa-times" onclick="hideMenu()"></i>
                         <ul>
-                            <c:if test="${sessionScope.LOGIN_CUSTOMER != null}">
+                            <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_ROLE == 2}">
                                 <li class="mb">
                                     <a class="mb-text" href="/">MY BOOKING</a>
                                 </li>
@@ -68,7 +78,7 @@
                                     </div>
                                 </li>
                             </c:if>
-                            <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_COMPANY == null}">
+                            <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_COMPANY == null && sessionScope.LOGIN_ROLE == 2}">
                                 <li>
                                     <div class="dropdown">
                                         <button class="button1">Hello ${sessionScope.LOGIN_CUSTOMER_NAME}</button>
@@ -89,7 +99,17 @@
                                         </div>
                                     </div>
                                 </li>
-                            </c:if>    
+                            </c:if> 
+                            <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_COMPANY == null && sessionScope.LOGIN_ROLE == 1}">
+                                <li>
+                                    <div class="dropdown">
+                                        <button class="button1">USER MANAGEMENT</button>
+                                        <div class="dropdown-content">
+                                            <a class="choose" href="<c:url value="/user/logout.do"/>">Log Out</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </c:if>      
                             <li>
                                 <div>
                                     <select class="form-select">

@@ -72,14 +72,15 @@ public class CustomerController extends HttpServlet {
             User user = null;
             user = userManager.checkLogin(phone, password);
             if (user != null) {
+                int roleID = user.getRoleId();
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_CUSTOMER", user);
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
-                int roleID = user.getRoleId();
+                session.setAttribute("LOGIN_ROLE", roleID);
                 if (roleID == 1) {
-                    request.setAttribute("controller", "user");
-                    request.setAttribute("action", "admin");
+                    request.setAttribute("controller", "admin");
+                    request.setAttribute("action", "index");               
                 } else if (roleID == 2) {
                     request.setAttribute("controller", "home");
                     request.setAttribute("action", "index");
@@ -139,7 +140,7 @@ public class CustomerController extends HttpServlet {
                     request.setAttribute("confirmPassword", confirmPassword);
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "login");
-                    request.setAttribute("messagePW", "password must contain at least 8 letters with lower,upper letter and a special digit!");
+                    request.setAttribute("messagePW", "password must contain at least 8 letters with lower, upper letter and a special digit!");
                 }
             } else {
                 request.setAttribute("name", name);

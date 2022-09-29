@@ -1,0 +1,99 @@
+<%-- 
+    Document   : index
+    Created on : Sep 29, 2022, 6:49:01 PM
+    Author     : Admin
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="<c:url value="/css/style_ad.css"/>">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>   
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <title>Admin Page</title>
+    </head>
+    <body>
+        <div class="ad">
+            <section class="ad-header">
+<!--                <header class="header">
+                    <div class="container1">
+                        <div class="row1">
+                            <div class="hl-ad">
+                                <h1>Hello Administrator!</h1>
+                            </div>
+                            <div class="nav-toggle">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </header>-->
+                <!-- header end -->
+
+                <!-- nav start -->
+                <div class="nav-overlay"></div>
+                <nav class="nav1">
+                    <div class="head1">
+                        <strong>Notification</strong>
+                        <div class="close">&times;</div>
+                    </div>
+                    <ul>
+                        <li><a href="#">User 1 has changed password</a></li>
+                        <li><a href="#">User 22 has changed password</a></li>
+                        <li><a href="#">User 14 has changed password</a></li>
+                        <li><a href="#">User 8 has changed password</a></li>
+                    </ul>
+                </nav>
+            </section>
+
+            <div class="search-box">
+                <input class="search-txt" type="text" name="" placeholder="Type to search">
+                <a class="search-btn" href="#">
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+
+            <section class="cs-list">         
+                <div class="container cs-list-dt">
+                    <table class="table table-responsive-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer's Name</th>
+                                <th>Account Creation Date</th>
+                                <th>Number Of Tickets Purchased</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Do Hoang Huy</td>
+                                <td>24/09/2022</td>
+                                <td>2</td>
+                                <td><button class="btn btn-outline-primary">MANAGE</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+
+        </div>
+        <script src="<c:url value="/js/script_ad.js"/>"></script> 
+    </body>
+</html>
