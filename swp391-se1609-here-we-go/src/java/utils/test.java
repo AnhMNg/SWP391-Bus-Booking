@@ -14,5 +14,7 @@ import model.User;
  * @author Admin
  */
 public class test {
-    
+    public static void main(String[] args) {
+        
+    }
 }

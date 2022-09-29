@@ -7,6 +7,7 @@ package manager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import model.Company;
 import utils.DBUtils;
 
@@ -75,5 +76,48 @@ public class CompanyManager {
             }
         }
         return com;
+    }
+    // get top n Company have a most number of Route
+    public static ArrayList<Company> getTopCompany(int top) {
+        ArrayList<Company> list = new ArrayList<>();
+        Connection cn = null;
+        Company com = null;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                String sql = "SELECT TOP(?) * FROM Company,\n"
+                        + "(SELECT  Company.name,COUNT(routeId) AS numberofRoute FROM Company,Route \n"
+                        + "WHERE Company.companyId = Route.companyId \n"
+                        + "GROUP BY name) AS long\n"
+                        + "WHERE long.name = Company.name\n"
+                        + "ORDER BY numberofRoute DESC";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setLong(1, top);
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    com = new Company(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                            rs.getString(5), rs.getString(6), "*****");
+                    list.add(com);
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            }
+
+        } catch (Exception e) {
+                System.out.println(e.toString());
+        } finally {
+            if (cn != null) {
+                try {
+                    cn.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+
+        return list;
     }
 }
