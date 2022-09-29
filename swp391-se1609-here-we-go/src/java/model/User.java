@@ -11,6 +11,7 @@ package model;
 public class User {
     private long userId;
     private String name;
+    private String googleId;
     private String phone;
     private String avtLink;
     private int roleId;
@@ -19,13 +20,23 @@ public class User {
     public User() {
     }
 
-    public User(long userId, String name, String phone, String avtLink, int roleId, String password) {
+
+    public User(long userId, String name, String googleId, String phone, String avtLink, int roleId, String password) {
         this.userId = userId;
         this.name = name;
+        this.googleId = googleId;
         this.phone = phone;
         this.avtLink = avtLink;
         this.roleId = roleId;
         this.password = password;
+    }
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
     }
 
     public long getUserId() {

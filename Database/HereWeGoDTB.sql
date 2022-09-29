@@ -47,7 +47,8 @@ create table [Role](
 create table [User](
 	userId bigint primary key identity(1,1) not null,
 	name nvarchar(50) not null,
-	phone varchar(12) not null,
+	googleId varchar(200),
+	phone varchar(12),
 	avatarLink varchar(200),
 	roleId int foreign key references Role(roleId) not null,
 	password nvarchar(20) not null
@@ -96,13 +97,64 @@ INSERT INTO [Role] VALUES('ADMIN')
 INSERT INTO [Role] VALUES('CUSTOMER')
 
 
-INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu','01272825170','',2,'hoanghuy123')
-INSERT INTO [User] VALUES(N'Nguyễn Anh Minh','0987826546','',2,'anhminh123')
-INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm','0909887625','',2,'baotram123')
-INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh','0987527365','',2,'hoanganh123')
-INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long','09826716345','',2,'baolong123')
-INSERT INTO [User] VALUES(N'Võ Hoài Linh','0928618276','',2,'hoailinh123')
-INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng','0928717725','',1,'vinhhung123')
+INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170','',2,'hoanghuy123')
+INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546','',2,'anhminh123')
+INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625','',2,'baotram123')
+INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365','',2,'hoanganh123')
+INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345','',2,'baolong123')
+INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276','',2,'hoailinh123')
+INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725','',1,'vinhhung123')
 
+INSERT INTO Place VALUES(N'Thành Phố Hồ Chí Minh')
+INSERT INTO Place VALUES(N'Hà Nội')
+INSERT INTO Place VALUES(N'Tiền Giang')
+INSERT INTO Place VALUES(N'Quảng Ninh')
+INSERT INTO Place VALUES(N'Gia Lai')
+INSERT INTO Place VALUES(N'Kom Tum')
+INSERT INTO Place VALUES(N'Dark Luck')
+INSERT INTO Place VALUES(N'Cà Mau')
 
+INSERT INTO Route VALUES(1,2,3)
+INSERT INTO Route VALUES(1,1,2)
+INSERT INTO Route VALUES(1,2,4)
+INSERT INTO Route VALUES(1,5,2)
+INSERT INTO Route VALUES(2,3,4)
+INSERT INTO Route VALUES(3,4,5)
+INSERT INTO Route VALUES(4,2,1)
+INSERT INTO Route VALUES(3,2,1)
+INSERT INTO Route VALUES(4,2,1)
+INSERT INTO Route VALUES(3,2,1)
+INSERT INTO Route VALUES(4,2,3)
+INSERT INTO Route VALUES(5,2,1)
 
+INSERT INTO BusType VALUES(4, 'normal')
+INSERT INTO BusType VALUES(7, 'normal')
+INSERT INTO BusType VALUES(16, 'normal')
+INSERT INTO BusType VALUES(28, 'normal')
+INSERT INTO BusType VALUES(28, 'sleep')
+
+INSERT INTO RouteDetail VALUES(1,1,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00')
+INSERT INTO RouteDetail VALUES(2,2,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00')
+INSERT INTO RouteDetail VALUES(3,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:00:00')
+INSERT INTO RouteDetail VALUES(2,1,'2022-10-18 18:00:00',300000,'2022-10-18 20:00:00')
+INSERT INTO RouteDetail VALUES(4,2,'2022-10-18 18:00:00',300000,'2022-10-18 19:00:00')
+INSERT INTO RouteDetail VALUES(6,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:00:00')
+INSERT INTO RouteDetail VALUES(7,5,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00')
+INSERT INTO RouteDetail VALUES(8,2,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00')
+
+INSERT INTO [Order] VALUES('2022-09-28 19:23:11',1,600000)
+INSERT INTO [Order] VALUES('2022-09-25 20:23:11',2,300000)
+INSERT INTO [Order] VALUES('2022-09-25 19:23:11',3,300000)
+INSERT INTO [Order] VALUES('2022-09-28 18:23:11',4,300000)
+INSERT INTO [Order] VALUES('2022-09-28 20:23:11',1,300000)
+
+INSERT INTO Ticket VALUES(1,1,1)
+INSERT INTO Ticket VALUES(1,2,3)
+INSERT INTO Ticket VALUES(2,2,4)
+INSERT INTO Ticket VALUES(3,1,2)
+INSERT INTO Ticket VALUES(4,1,3)
+INSERT INTO Ticket VALUES(5,1,4)
+
+INSERT INTO [Order] VALUES('2022-09-12 19:23:11',1,300000)
+INSERT INTO RouteDetail VALUES(8,5,'2022-09-18 18:00:00',300000,'2022-10-18 22:00:00')
+INSERT INTO Ticket VALUES(1,9,1)

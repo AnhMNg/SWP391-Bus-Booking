@@ -6,7 +6,11 @@
 package utils;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import manager.TicketManager;
 import manager.UserManager;
+import model.Ticket;
+import model.TicketDetail;
 import model.User;
 
 /**
@@ -15,6 +19,7 @@ import model.User;
  */
 public class test {
     public static void main(String[] args) {
+        ArrayList<TicketDetail> list1 = TicketManager.getCompletedTickeDetailtByCustomerId(1);
         
     }
 }
