@@ -10,12 +10,8 @@
 }
 
 body{
-  background: #FFFFFF;
+  background: #dfecff;
   color: #7f8db0;
-}
-
-.ct {
-    padding-top: 130px;
 }
 
 a{
@@ -108,6 +104,32 @@ a{
     align-items: center;
 }
 
+.notification_dd li .notify_icon{
+  display: flex;
+}
+
+.notification_dd li .notify_icon .icon{
+  display: inline-block;
+  background: url('https://i.imgur.com/MVJNkqW.png') no-repeat 0 0;
+	width: 40px;
+	height: 42px;
+}
+
+.notification_dd li.baskin_robbins .notify_icon .icon{
+  background-position: 0 -43px;
+}
+
+.notification_dd li.mcd .notify_icon .icon{
+  background-position: 0 -86px;
+}
+
+.notification_dd li.pizzahut .notify_icon .icon{
+  background-position: 0 -129px;
+}
+
+.notification_dd li.kfc .notify_icon .icon{
+  background-position: 0 -178px;
+}
 
 .notification_dd li .notify_data{
   margin: 0 15px;
@@ -303,10 +325,10 @@ a{
   padding: 0 6px;
   top: 50px;
 }
-.search-box:hover > .search-btn1{
+.search-box:hover > .search-btn{
   background: white;
 }
-.search-btn1{
+.search-btn{
   color: #9DC5D1;
   float: right;
   width: 40px;
@@ -334,7 +356,7 @@ a{
 
 .cs-list {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   /* position: relative; */
 }
 
@@ -385,6 +407,6 @@ a{
   .btn-outline-primary {
       height: 34px;
       font-size: 10px;
-      padding-bottom: 6px;
+      padding-bottom: 20px;
   }
 }

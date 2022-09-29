@@ -16,52 +16,139 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="<c:url value="/css/style_ad.css"/>">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>   
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(".profile .icon_wrap").click(function () {
+                    $(this).parent().toggleClass("active");
+                    $(".notifications").removeClass("active");
+                });
+
+                $(".notifications .icon_wrap").click(function () {
+                    $(this).parent().toggleClass("active");
+                    $(".profile").removeClass("active");
+                });
+
+                $(".show_all .link").click(function () {
+                    $(".notifications").removeClass("active");
+                    $(".popup").show();
+                });
+
+                $(".close").click(function () {
+                    $(".popup").hide();
+                });
+            });
+        </script>
         <title>Admin Page</title>
     </head>
     <body>
         <div class="ad">
-            <section class="ad-header">
-<!--                <header class="header">
-                    <div class="container1">
-                        <div class="row1">
-                            <div class="hl-ad">
-                                <h1>Hello Administrator!</h1>
-                            </div>
-                            <div class="nav-toggle">
-                                <i class="fa fa-bell" aria-hidden="true"></i>
+            <div class="wrapper">
+                <div class="navbar">
+                    <div class="navbar_left">
+                        <div class="hl-ad">
+                            <h1>Hello Administrator</h1>
+                        </div>
+                    </div>
+
+                    <div class="navbar_right">
+                        <div class="notifications">
+                            <div class="icon_wrap"><i class="far fa-bell"></i></div>
+
+                            <div class="notification_dd">
+                                <ul class="notification_ul">
+                                    <li class="user success">
+                                        <div class="notify_icon">
+                                            <span class="icon"></span>  
+                                        </div>
+                                        <div class="notify_data">
+                                            <div class="title">
+                                                User ID 1 
+                                            </div>
+                                            <div class="sub_title">
+                                                has changed password
+                                            </div>
+                                        </div>
+                                        <div class="notify_status">
+                                            <p>Success</p>  
+                                        </div>
+                                    </li>  
+                                    <li class="user failed">
+                                        <div class="notify_icon">
+                                            <span class="icon"></span>  
+                                        </div>
+                                        <div class="notify_data">
+                                            <div class="title">
+                                                User ID 2 
+                                            </div>
+                                            <div class="sub_title">
+                                                has changed password
+                                            </div>
+                                        </div>
+                                        <div class="notify_status">
+                                            <p>Failed</p>  
+                                        </div>
+                                    </li> 
+                                    <li class="show_all">
+                                        <p class="link">Show All Activities</p>
+                                    </li> 
+                                </ul>
                             </div>
                         </div>
-                        <hr>
                     </div>
-                </header>-->
-                <!-- header end -->
+                </div>
 
-                <!-- nav start -->
-                <div class="nav-overlay"></div>
-                <nav class="nav1">
-                    <div class="head1">
-                        <strong>Notification</strong>
-                        <div class="close">&times;</div>
+                <div class="popup">
+                    <div class="shadow"></div>
+                    <div class="inner_popup">
+                        <div class="notification_dd">
+                            <ul class="notification_ul">
+                                <li class="title">
+                                    <p>All Notifications</p>
+                                    <p class="close"><i class="fas fa-times" aria-hidden="true"></i></p>
+                                </li> 
+                                <li class="user success">
+                                    <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div>
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            User ID 1 
+                                        </div>
+                                        <div class="sub_title">
+                                            has changed password
+                                        </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Success</p>  
+                                    </div>
+                                </li>  
+                                <li class="user failed">
+                                    <div class="notify_icon">
+                                        <span class="icon"></span>  
+                                    </div>
+                                    <div class="notify_data">
+                                        <div class="title">
+                                            User ID 2 
+                                        </div>
+                                        <div class="sub_title">
+                                            has changed password
+                                        </div>
+                                    </div>
+                                    <div class="notify_status">
+                                        <p>Failed</p>  
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <ul>
-                        <li><a href="#">User 1 has changed password</a></li>
-                        <li><a href="#">User 22 has changed password</a></li>
-                        <li><a href="#">User 14 has changed password</a></li>
-                        <li><a href="#">User 8 has changed password</a></li>
-                    </ul>
-                </nav>
-            </section>
+                </div>
 
-            <div class="search-box">
+            </div>
+            <div class="search-box" style="top: 250px; left: 160px;">
                 <input class="search-txt" type="text" name="" placeholder="Type to search">
-                <a class="search-btn" href="#">
+                <a class="search-btn1" href="#">
                     <i class="fa fa-search"></i>
                 </a>
             </div>
@@ -90,10 +177,6 @@
                     </table>
                 </div>
             </section>
-
-
-
         </div>
-        <script src="<c:url value="/js/script_ad.js"/>"></script> 
     </body>
 </html>
