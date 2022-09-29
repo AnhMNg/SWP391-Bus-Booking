@@ -117,7 +117,7 @@ public class CustomerController extends HttpServlet {
                 request.setAttribute("password", password);
                 request.setAttribute("confirmPassword", confirmPassword);
                 request.setAttribute("controller", "user");
-                request.setAttribute("action", "register");
+                request.setAttribute("action", "login");
                 request.setAttribute("messageUN", "username has been used by another person!");
                 return;
             }
@@ -138,7 +138,7 @@ public class CustomerController extends HttpServlet {
                     request.setAttribute("password", password);
                     request.setAttribute("confirmPassword", confirmPassword);
                     request.setAttribute("controller", "user");
-                    request.setAttribute("action", "register");
+                    request.setAttribute("action", "login");
                     request.setAttribute("messagePW", "password must contain at least 8 letters with lower,upper letter and a special digit!");
                 }
             } else {
@@ -147,7 +147,7 @@ public class CustomerController extends HttpServlet {
                 request.setAttribute("pw", password);
                 request.setAttribute("confirmPassword", confirmPassword);
                 request.setAttribute("controller", "user");
-                request.setAttribute("action", "register");
+                request.setAttribute("action", "login");
                 request.setAttribute("messagePW", "Confirm password doesn't match!");
             }
         } catch (Exception ex) {

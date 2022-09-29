@@ -133,7 +133,8 @@
                                 </div>
 
                                 <input type="submit" value="Sign Up" class="sign-btn2" />
-
+                                <i style="color: red">${messagePW}</i>
+                                <i style="color: red">${messageUN}</i>
                                 <p class="text">
                                     By signing up, I agree to the
                                     <a href="#">Terms of Services</a> and
