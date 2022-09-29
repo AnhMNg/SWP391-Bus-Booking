@@ -66,6 +66,7 @@ public class CompanyController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

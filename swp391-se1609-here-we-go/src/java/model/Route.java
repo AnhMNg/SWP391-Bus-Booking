@@ -55,5 +55,4 @@ public class Route {
     public void setDestinationId(long destinationId) {
         this.destinationId = destinationId;
     }
-    
 }
