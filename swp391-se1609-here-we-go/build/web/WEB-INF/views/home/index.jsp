@@ -4,6 +4,9 @@
     Author     : Admin
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="manager.CompanyManager"%>
+<%@page import="model.Company"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -156,16 +159,15 @@
                     <!-- Transportation Company List -->
                     <div class="container mt-3 content-tc-c">
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action">Thanh Buoi Bus</a>
-                            <a href="#" class="list-group-item list-group-item-action">Phuong Trang Bus (Futa Bus)</a>
-                            <a href="#" class="list-group-item list-group-item-action">Ha Noi Rides On Time</a>
-                            <a href="#" class="list-group-item list-group-item-action">Sapa Dragon</a>
-                            <a href="#" class="list-group-item list-group-item-action">Hoang Long Bus</a>
-                            <a href="#" class="list-group-item list-group-item-action">Hue Tourist Bus</a>
-                            <a href="#" class="list-group-item list-group-item-action">Mai Linh Express Bus</a>
-                            <a href="#" class="list-group-item list-group-item-action">Hai Van Bus</a>
-                            <a href="#" class="list-group-item list-group-item-action">Interbus Lines</a>
-                            <a href="#" class="list-group-item list-group-item-action">Sapa Bus Lines</a>
+                           
+                            <% ArrayList<Company> listcom = CompanyManager.getTopCompany(10);
+                                for (Company com : listcom) {
+                                        %>
+                                         <a href="#" class="list-group-item list-group-item-action"><%= com.getName() %></a>
+                                <%
+                                    }
+                                
+                            %>
                         </div>          
                     </div>                 
                 </div>
