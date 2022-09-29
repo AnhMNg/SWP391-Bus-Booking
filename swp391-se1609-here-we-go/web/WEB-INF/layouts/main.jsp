@@ -32,17 +32,31 @@
                 <!-- Menu -->
                 <nav>
                     <!-- Logo -->
-                    <a href="<c:url value="/home/index.do"/>">
-                        <img src="<c:url value="/images/Logo1.png"/>" class="logo">
-                    </a>
+                    <c:if test="${sessionScope.LOGIN_COMPANY == null}">
+                        <a href="<c:url value="/home/index.do"/>">
+                            <img src="<c:url value="/images/Logo1.png"/>" class="logo">
+                        </a>
+                    </c:if>
+                    <c:if test="${sessionScope.LOGIN_COMPANY != null}">
+                        <a href="<c:url value="/company/index.do"/>">
+                            <img src="<c:url value="/images/Logo1.png"/>" class="logo">
+                        </a>
+                    </c:if>
                     <!-- NavBar -->
                     <div class="nav-links" id="navLinks">
                         <i class="fa fa-times" onclick="hideMenu()"></i>
                         <ul>
-                            <li class="mb">
-                                <a class="mb-text" href="/">MY BOOKING</a>
-                            </li>
-                            <c:if test="${sessionScope.LOGIN_CUSTOMER == null}">
+                            <c:if test="${sessionScope.LOGIN_CUSTOMER != null}">
+                                <li class="mb">
+                                    <a class="mb-text" href="/">MY BOOKING</a>
+                                </li>
+                            </c:if>
+                            <c:if test="${sessionScope.LOGIN_COMPANY != null}">
+                                <li class="mb">
+                                    <a class="mb-text" href="/">MY ROUTES</a>
+                                </li>
+                            </c:if>
+                            <c:if test="${sessionScope.LOGIN_CUSTOMER == null && sessionScope.LOGIN_COMPANY == null}">
                                 <li>
                                     <!-- <a href="">LOGIN OR CREATE ACCOUNT</a> -->   
                                     <div class="dropdown">
@@ -54,12 +68,28 @@
                                     </div>
                                 </li>
                             </c:if>
-                            <c:if test="${sessionScope.LOGIN_CUSTOMER != null}">
+                            <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_COMPANY == null}">
                                 <li>
-                                    <a href="<c:url value="/user/logout.do"/>">LOG OUT</a>
+                                    <div class="dropdown">
+                                        <button class="button1">Hello ${sessionScope.LOGIN_CUSTOMER_NAME}</button>
+                                        <div class="dropdown-content">
+                                            <a class="choose" href="<c:url value="/user/profile.do"/>">My Profile</a>
+                                            <a class="choose" href="<c:url value="/user/logout.do"/>">Log Out</a>
+                                        </div>
+                                    </div>
                                 </li>
                             </c:if>
-
+                            <c:if test="${sessionScope.LOGIN_COMPANY != null && sessionScope.LOGIN_CUSTOMER == null}">
+                                <li>
+                                    <div class="dropdown">
+                                        <button class="button1">${sessionScope.LOGIN_COMPANY_NAME}</button>
+                                        <div class="dropdown-content">
+                                            <a class="choose" href="<c:url value="/"/>">My Profile</a>
+<!--                                            <a class="choose" href="<c:url value="/user/logout.do"/>">Log Out</a>-->
+                                        </div>
+                                    </div>
+                                </li>
+                            </c:if>    
                             <li>
                                 <div>
                                     <select class="form-select">

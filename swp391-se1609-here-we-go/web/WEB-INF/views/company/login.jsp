@@ -47,16 +47,16 @@
                             <h4 class="title text-center mt-4">
                                 Welcome Partner!
                             </h4>
-                            <form class="form-box px-3">
+                            <form action="<c:url value="/company/submit.do"/>" class="form-box px-3">
                                 <div class="form-input">
                                     <span><i class="fa fa-user-o"></i></span>
-                                    <input type="email" name="" placeholder="Login Name" tabindex="10" required>
+                                    <input type="phone" name="phone" placeholder="Your phone" tabindex="10" required>
                                 </div>
                                 <div class="form-input">
                                     <span><i class="fa fa-key"></i></span>
-                                    <input type="password" name="" placeholder="Password" required>
+                                    <input type="password" name="password" placeholder="Password" required>
                                 </div>
-
+                                <i style="color: red">${message}</i>
                                 <input type="submit" value="Login" class="sign-btn" />
                             </form>
                         </div>

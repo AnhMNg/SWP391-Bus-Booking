@@ -217,7 +217,7 @@ nav .fa {
 }
 
 .rt-mg h1 {
-    font-size: 48px;
+    font-size: 45px;
     font-family: 'Bebas Neue', cursive;
     font-family: 'Roboto', sans-serif;  
     margin-bottom: 90px;
@@ -264,10 +264,11 @@ nav .fa {
 }
 
 .popular-routes {
+    padding-top: 50px;
+    background: linear-gradient(180deg, #FFFFFF 19.28%, #9DC5D1 115.87%);
     width: 100%;
     text-align: center;
     min-height: 100vh;
-    background: linear-gradient(180deg, #FFFFFF 19.28%, #9DC5D1 115.87%);
 }
 
 .content-pr {
@@ -286,11 +287,11 @@ nav .fa {
 }
 
 .content-pr-tt h1 {
-    margin-top: 37px;
+    margin-top: 35px;
     padding-right: 8px;
-    font-size: 48px;
+    font-size: 45px;
     font-family: 'Bebas Neue', cursive;
-    font-family: 'Roboto', sans-serif;  
+    font-family: 'Roboto', sans-serif;
     color: #475f9b;
 }
 
@@ -299,8 +300,20 @@ nav .fa {
     margin: auto;
 }
 
+.content-pr-bd .col-lg-6 {
+    display: flex;
+}
+
 .card {
     margin-top: 40px;
+}
+
+.card-left {
+    margin-right: 10px;
+}
+
+.card-right {
+    margin-left: 10px;
 }
 
 .card-text {
@@ -318,18 +331,68 @@ nav .fa {
 
 .card-body a h4 {
     color: #000000;
+    font-size: 18px;
+}
+
+.image{
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: .5s;
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.image:after{
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-140%, -50%);
+    background-color: rgba(157, 197, 209, 0.8);
+    border-radius: 50%;
+    transition: .8s;
+}
+
+.image:hover:after{
+    transform: translate(-50%, -50%);
+}
+
+.image i{
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-2000px, -50%);
+    color: #fff;
+    transition: .8s;
+    transition-timing-function: ease-in;
+}
+
+.image:hover i{
+    transform: translate(-50%, -50%);
+    transition-timing-function: ease;
 }
 
 @media(max-width:700px) {
     .popular-routes {
         width: 100%;
-        height: 325vh;
+        height: 133vh;
     }
     .content-pr-tt h1 {
-        font-size: 30px;
+        font-size: 35px;
     }
     .card {
         display: block;
+    }
+    .card-body a h4 {
+        font-size: 15px;
+    }
+    .content-pr-tt h1 {
+        margin-top: 36px;
     }
 }
 

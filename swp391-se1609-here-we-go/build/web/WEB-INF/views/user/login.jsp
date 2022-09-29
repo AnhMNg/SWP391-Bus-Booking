@@ -64,7 +64,7 @@
                                 </div>
 
                                 <input type="submit" value="Booking Now" class="sign-btn" />
-                                <i>${message}</i>
+                                <i style="color: red">${message}</i>
                                 <p class="forgot-pass">Forgot Password ?</p>
 
                                 <div class="social-media">
@@ -76,7 +76,7 @@
                             </div>
                         </form>
 
-                        <form action="index.html" autocomplete="off" class="sign-up-form">
+                        <form action="<c:url value="/user/save.do"/>" autocomplete="off" class="sign-up-form" method="POST">
 
                             <div class="heading">
                                 <h2>Join  Here We Go Member</h2>
@@ -92,6 +92,7 @@
                                         class="input-field"
                                         autocomplete="off"
                                         required
+                                        name="name"
                                         />
                                     <label>Name</label>
                                 </div>
@@ -102,6 +103,7 @@
                                         class="input-field"
                                         autocomplete="off"
                                         required
+                                        name="phone"
                                         />
                                     <label>Phone Number</label>
                                 </div>
@@ -113,6 +115,7 @@
                                         class="input-field"
                                         autocomplete="off"
                                         required
+                                        name="password"
                                         />
                                     <label>Password</label>
                                 </div>
@@ -124,12 +127,14 @@
                                         class="input-field"
                                         autocomplete="off"
                                         required
+                                        name="confirmPassword"
                                         />
                                     <label>Confirm Password</label>
                                 </div>
 
                                 <input type="submit" value="Sign Up" class="sign-btn2" />
-
+                                <i style="color: red">${messagePW}</i>
+                                <i style="color: red">${messageUN}</i>
                                 <p class="text">
                                     By signing up, I agree to the
                                     <a href="#">Terms of Services</a> and

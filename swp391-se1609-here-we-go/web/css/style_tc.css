@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.banner {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.text-box {
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: #d3e3e9;
+    padding: 20px;
+}
+
+
+.text-box h1 {
+    font-size: 100px;
+    font-family: 'Bebas Neue', cursive;
+    background: linear-gradient(115.41deg, #617FCD -8.36%, #000000 112.29%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+}
+
+.text-box p {
+    margin: 10px 0 40px;
+    font-size: 18px;
+    color: #fff;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.book-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #394a75;
+    border: 1px solid #394a75;
+    padding: 12px 34px;
+    font-size: 20px;
+    font-weight: bold;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.book-btn:hover {
+    border: 1px solid linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
+    background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
+    transition: 0.5s;
+    color: #fff;
+}
+
+@media(max-width:700px) {
+    .text-box h1 {
+        font-size: 70px;
+    }
+    .text-box p {
+        font-size: 13px;
+    }
+}
+
+.rt-mg {
+    min-height: 100vh;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 230px;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background: #fff;
+}
+
+.rt-mg h1 {
+    font-size: 45px;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto', sans-serif;  
+    margin-bottom: 90px;
+    color: #475f9b;
+}
+
+.routes-mag {
+    display: flex;
+}
+
+.mag-btn {
+    margin-top: 20px;
+}
+
+.mag-btn-dt {
+    display: inline-block;
+    width: 60%;
+    height: 43px;
+    background-color: #3d58af;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    transition: 0.3s;
+  }
+
+.mag-btn-dt:hover {
+    background-color: #82b3fc;
+}
+
+@media(max-width:700px) {
+    .routes-mag {
+        display: inline-block;
+    }
+    .rt-mg h1 {
+        font-size: 35px;
+    }
+    .routes-mag-dt {
+        margin-bottom: 20px;
+    }
+}
+
+.popular-routes {
+    padding-top: 50px;
+    background: linear-gradient(180deg, #FFFFFF 19.28%, #9DC5D1 115.87%);
+    width: 100%;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.content-pr {
+    background: linear-gradient(105.22deg, #9DC5D1 14.71%, #FFFFFF 195.49%);
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.48);
+    border-radius: 20px;
+    width: 80%;
+    height: 120px;
+    display: relative;
+}
+
+.content-pr-tt {
+    display: flex;
+    padding-left: 30px;
+    margin-bottom: 30px;
+}
+
+.content-pr-tt h1 {
+    margin-top: 35px;
+    padding-right: 8px;
+    font-size: 45px;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto', sans-serif;
+    color: #475f9b;
+}
+
+.content-pr-bd {
+    display: flex;
+    margin: auto;
+}
+
+.content-pr-bd .col-lg-6 {
+    display: flex;
+}
+
+.card {
+    margin-top: 40px;
+}
+
+.card-left {
+    margin-right: 10px;
+}
+
+.card-right {
+    margin-left: 10px;
+}
+
+.card-text {
+    font-weight: 500;
+    text-align: left;
+}
+
+.card-title {
+    font-weight: 700;
+}
+
+.card-body a {
+    text-decoration: none;
+}
+
+.card-body a h4 {
+    color: #000000;
+    font-size: 18px;
+}
+
+.image{
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: .5s;
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.image:after{
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-140%, -50%);
+    background-color: rgba(157, 197, 209, 0.8);
+    border-radius: 50%;
+    transition: .8s;
+}
+
+.image:hover:after{
+    transform: translate(-50%, -50%);
+}
+
+.image i{
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-2000px, -50%);
+    color: #fff;
+    transition: .8s;
+    transition-timing-function: ease-in;
+}
+
+.image:hover i{
+    transform: translate(-50%, -50%);
+    transition-timing-function: ease;
+}
+
+@media(max-width:700px) {
+    .popular-routes {
+        width: 100%;
+        height: 133vh;
+    }
+    .content-pr-tt h1 {
+        font-size: 35px;
+    }
+    .card {
+        display: block;
+    }
+    .card-body a h4 {
+        font-size: 15px;
+    }
+    .content-pr-tt h1 {
+        margin-top: 36px;
+    }
+}
+
+
+
