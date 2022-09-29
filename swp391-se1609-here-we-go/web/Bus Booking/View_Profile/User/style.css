@@ -1,8 +1,14 @@
-
+body{
+    height: 100vh;
+    background: #fff !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 .profile {
     text-align: left;
    padding: 64px;
-    border-top: 1px solid rgba(168, 164, 164, 0.69);
 }
 
 .content {
@@ -32,7 +38,16 @@
     border-radius: 8px;
     position: relative;
 }
-
+.avatar{
+    width: 37px;
+    background-position: -4px -31px;
+    height: 37px;
+    position: absolute;
+    bottom: 5px;
+    left: 139px;
+    z-index: 1;
+    overflow: hidden;
+}
 .profile-avatar {
     width: 100%;
     height: 100%;
@@ -40,7 +55,17 @@
     align-items: center;
     justify-content: center;
 }
-
+.inputUpload {
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    outline: 0;
+    border: 0;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    bottom: 0;
+}
 .profile-img,
 .logout {
     margin: 15px;
@@ -61,8 +86,7 @@
 
 .upload-photo {
     position: absolute;
-    bottom: 5px;
-    left: 139px;
+    bottom: 0;
 }
 
 .sideBarNav {
@@ -171,10 +195,6 @@
 }
 
 @media screen and (max-width: 800px) {
-    .profile {
-        padding-left: 64px;
-        padding-right: 64px;
-    }
 
     .profile-detail {
         width: 100%;
