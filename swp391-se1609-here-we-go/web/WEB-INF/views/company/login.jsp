@@ -47,7 +47,7 @@
                             <h4 class="title text-center mt-4">
                                 Welcome Partner!
                             </h4>
-                            <form action="<c:url value="/company/submit.do"/>" class="form-box px-3">
+                            <form action="<c:url value="/company/submit.do"/>" class="form-box px-3" method="post">
                                 <div class="form-input">
                                     <span><i class="fa fa-user-o"></i></span>
                                     <input type="phone" name="phone" placeholder="Your phone" tabindex="10" required>
