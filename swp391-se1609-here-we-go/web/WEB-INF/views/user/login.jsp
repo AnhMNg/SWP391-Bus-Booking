@@ -70,7 +70,7 @@
                                 <div class="social-media">
                                     <p>Or Login With</p>
                                     <ul>
-                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:8080/swp391-se1609-here-we-go/LoginGoogleHandler&response_type=code
+                                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile&redirect_uri=http://localhost:17470/swp391-se1609-here-we-go/LoginGoogleHandler&response_type=code
            &client_id=147305659519-ajdg4jh5ct204s79040gkgab85386gtl.apps.googleusercontent.com&approval_prompt=force"><img class="google-img" src="<c:url value="/images/Google - Original.png"/>"><a/> 
                                     </ul>
                                 </div>

@@ -1,5 +1,7 @@
 ﻿drop database HereWeGo
+GO
 Create database HereWeGo
+GO
 
 use HereWeGo
 Create table Company(

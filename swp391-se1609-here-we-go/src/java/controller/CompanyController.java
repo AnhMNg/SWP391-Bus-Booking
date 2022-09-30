@@ -40,8 +40,18 @@ public class CompanyController extends HttpServlet {
             case "submit": 
                 Login(request, response);
                 break;
+            case "logout":
+                Logout(request, response);
+                break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
+    }
+    private void Logout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.setAttribute("controller", "home");
+        request.setAttribute("action", "index");
     }
     private void Login(HttpServletRequest request, HttpServletResponse response){
           try {
