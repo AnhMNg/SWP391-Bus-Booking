@@ -95,7 +95,7 @@
                                         <button class="button1">${sessionScope.LOGIN_COMPANY_NAME}</button>
                                         <div class="dropdown-content">
                                             <a class="choose" href="<c:url value="/"/>">My Profile</a>
-<!--                                            <a class="choose" href="<c:url value="/user/logout.do"/>">Log Out</a>-->
+                                            <a class="choose" href="<c:url value="/company/logout.do"/>">Log Out</a>
                                         </div>
                                     </div>
                                 </li>
