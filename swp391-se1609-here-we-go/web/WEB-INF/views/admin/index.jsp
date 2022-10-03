@@ -177,6 +177,7 @@
                     </table>
                 </div>
             </section>
+            <a href="<c:url value="/user/login.do"/>">test</a>
         </div>
     </body>
 </html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!----===== Iconscout CSS ===== -->
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+
+    <title>Admin Dashboard Panel</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo-name">
+        <div class="logo-image">
+          <img src="images/My project.png" alt="" />
+        </div>
+
+        <span class="logo_name">Here We Go</span>
+      </div>
+
+      <div class="menu-items">
+        <ul class="nav-links">
+          <li>
+            <a href="#">
+              <i class="uil uil-estate"></i>
+              <span class="link-name">Admin Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="uil uil-bell"></i>
+              <span class="link-name">Notification</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="uil uil-clipboard-notes"></i>
+              <span class="link-name">User Management</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="uil uil-bus-alt"></i>
+              <span class="link-name">My Partners</span>
+            </a>
+          </li>
+        </ul>
+
+        <ul class="logout-mode">
+          <li>
+            <a href="#">
+              <i class="uil uil-signout"></i>
+              <span class="link-name">Logout</span>
+            </a>
+          </li>
+
+          <!-- <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                    <span class="link-name">Dark Mode</span>
+                </a>
+
+                <div class="mode-toggle">
+                  <span class="switch"></span>
+                </div>
+            </li> -->
+        </ul>
+      </div>
+    </nav>
+
+    <section class="dashboard">
+      <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+
+        <div class="search-box">
+          <i class="uil uil-search"></i>
+          <input type="text" placeholder="Search here..." />
+        </div>
+
+        <img src="images/profile1.png" alt="" />
+      </div>
+
+      <div class="dash-content">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-bell"></i>
+            <span class="text">Notification</span>
+          </div>
+        </div>
+
+        <div class="activity">
+          <!-- Hoverable Table rows -->
+          <div class="card">
+            <form action="">
+              <div class="card-header">
+                <label for="sel1" class="form-label">Sorting by</label>
+                <select
+                  class="btn btn-outline-light text-dark"
+                  id="sel1"
+                  name="sellist1"
+                >
+                  <option>Day</option>
+                  <option>Week</option>
+                  <option>Month</option>
+                  <option>Year</option>
+                </select>
+                <select
+                  class="btn btn-outline-light text-dark"
+                  id="sel1"
+                  name="sellist1"
+                >
+                  <option>Latest</option>
+                  <option>Oldest</option>
+                </select>
+              </div>
+              <div class="list-group">
+                <div class="list-group-item list-group-item-action nt-ct-group">
+                    <div class="col-md-6">
+                        <ul class="d-flex list-unstyled nt-ct">
+                            <li class="logo-image">
+                              <img src="Images/profile1.png" alt="Avatar"/>
+                            </li>
+                            <li>User 23 has changed password</li>
+                          </ul>
+                    </div>
+                    <div class="col-md-6 nt-ct-time">
+                        <p>23:13 02/10/2022</p>
+                    </div>                
+                </div>
+                <div class="list-group-item list-group-item-action nt-ct-group">
+                    <div class="col-md-6">
+                        <ul class="d-flex list-unstyled nt-ct">
+                            <li class="logo-image">
+                              <img src="Images/profile1.png" alt="Avatar"/>
+                            </li>
+                            <li>User 200 has created a new account</li>
+                          </ul>
+                    </div>
+                    <div class="col-md-6 nt-ct-time">
+                        <p>23:13 02/10/2022</p>
+                    </div>                
+                </div>
+                <div class="list-group-item list-group-item-action nt-ct-group">
+                    <div class="col-md-6">
+                        <ul class="d-flex list-unstyled nt-ct">
+                            <li class="logo-image">
+                              <img src="Images/profile1.png" alt="Avatar"/>
+                            </li>
+                            <li>User 25 has changed password</li>
+                          </ul>
+                    </div>
+                    <div class="col-md-6 nt-ct-time">
+                        <p>23:13 02/10/2022</p>
+                    </div>                
+                </div>
+              </div>
+            </form>
+
+          </div>
+          <!--/ Hoverable Table rows -->
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
