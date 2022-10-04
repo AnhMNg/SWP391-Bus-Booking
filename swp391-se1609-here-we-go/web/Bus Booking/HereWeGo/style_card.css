@@ -1,22 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
-
-*{
+.add-payment {
+    width: 100%;
+    min-height: 100vh;
     font-family: 'Poppins', sans-serif;
-    margin:0; padding:0;
-    box-sizing: border-box;
-    outline: none; border: none;
-    text-decoration: none;
     text-transform: uppercase;
 }
 
 .container{
     min-height: 100vh;
-    background: #eee;
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: column;
     padding-bottom: 60px;
+    padding-top: 160px;
 }
 
 .container form{
@@ -67,6 +64,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: .2s linear;
+    border: 0px;
 }
 
 .container form .submit-btn:hover{
@@ -94,7 +92,7 @@
     transition:transform .4s ease-out;
 }
 
-.container .card-container .front .image{
+.container .card-container .front .card-image{
     display: flex;
     align-items:center;
     justify-content: space-between;
@@ -112,8 +110,7 @@
 .visa-img-bg {
     background: white;
     width: auto;
-    padding-top: 7px;
-    padding-right: 5px;
+    padding: 7px;
 }
 
 .container .card-container .front .card-number-box{
