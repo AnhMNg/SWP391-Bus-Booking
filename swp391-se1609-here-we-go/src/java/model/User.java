@@ -15,17 +15,19 @@ public class User {
     private String avtLink;
     private int roleId;
     private String password;
+    private String date;
 
     public User() {
     }
 
-    public User(long userId, String name, String phone, String avtLink, int roleId, String password) {
+    public User(long userId, String name, String phone, String avtLink, int roleId, String password, String date) {
         this.userId = userId;
         this.name = name;
         this.phone = phone;
         this.avtLink = avtLink;
         this.roleId = roleId;
         this.password = password;
+        this.date = date;
     }
 
     public long getUserId() {
@@ -74,6 +76,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
     
 }
