@@ -19,11 +19,11 @@ body{
   
   .title{
     font-weight: 600;
-font-size: 32px;
-line-height: 40px;
-color: #000000;
-
+    font-size: 32px;
+    line-height: 40px;
+    color: #000000;
   }
+
   .body-header{
     display: flex;
   }
@@ -34,18 +34,24 @@ color: #000000;
     color: #fff;
     border: 1px solid #9DC5D1;
     border-radius: 10px;
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: bold;
+    font-size: 20px;
     line-height: 30px;
     color: #000000;
     padding: 12px;
   }
+
   .mb-3{
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     margin-top: 48px;
   }
+
+  .text-left {
+    font-weight: bold;
+  }
+
   @media screen and (max-width: 423px) {
     .mb-3{
      margin-top: 16px;
