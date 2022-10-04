@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -1255,8 +1257,61 @@ body {
     }
 }
 
-.pay-banner {
+.pay-cf {
     width: 100%;
-    height: 1663px;
+    text-align: center;
 }
 
+.pay-modal {
+    background: #BBCDD2;
+}
+
+.pay-cf-btn {
+    padding: 3px 25px;
+    border-radius: 20px;
+    border: 2px white solid;
+    background-color: #BBCDD2;
+    font-weight: 700;
+    color: #4191CC;
+}
+
+.pay-cf-btn:nth-child(1) {
+    margin-right: 10px;
+}
+
+.pay-cf-btn:nth-child(1):hover {
+    background: #5695aa;
+    color: #fff;
+    border: 2px #5695aa solid;
+}
+
+.pay-cf-btn:nth-child(2) {
+    margin-left: 10px;
+}
+
+.pay-cf-btn:nth-child(2):hover {
+    background: #da4848;
+    color: #fff;
+    border: 2px #da4848 solid;
+}
+
+.pay-cf-msg {
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.pay-cf-btn-e {
+    padding: 3px 25px;
+    border-radius: 20px;
+    border: 0px;
+    background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
+    font-weight: 700;
+    color: white;
+}
+
+.pay-cf-msg2 {
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}

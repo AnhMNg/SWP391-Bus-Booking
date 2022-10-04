@@ -143,9 +143,71 @@
               <p class="pay-pr-ct2">270,000 VND</p>
             </div>
             <div class="pay-btn">
-              <button class="btn btn-secondary">BUY NOW</button> 
+              <button
+                class="btn btn-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal"
+              >
+                BUY NOW
+              </button>
             </div>
-          </div> 
+          </div>
+        </div>
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content pay-modal">
+              <!-- Modal Header -->
+
+              <!-- Modal body -->
+              <div class="modal-body pay-cf-msg">
+                Booking bus tickets on Here We Go?
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <div class="pay-cf">
+                  <button
+                    type="button"
+                    value="accept"
+                    class="pay-cf-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#myModalPaying"
+                  >
+                    YES
+                  </button>
+                  <button
+                    type="button"
+                    class="pay-cf-btn"
+                    data-bs-dismiss="modal"
+                  >
+                    NO
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="myModalPaying">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content pay-modal">
+              <!-- Modal Header -->
+
+              <!-- Modal body -->
+              <div class="modal-body pay-cf-msg2">
+                Thank you for choosing Here We Go, see you in the next trip!
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <div class="pay-cf">
+                  <button type="submit" value="accept" class="pay-cf-btn-e">
+                    OKE
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
