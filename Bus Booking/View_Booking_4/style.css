@@ -109,7 +109,7 @@ body {
   .cancel-msg {
     width: 100%;
     text-align: center;
-    font-size: 23px;
+    font-size: 20px;
     font-weight: bold;
   }
 
@@ -126,8 +126,14 @@ body {
   .cancel-cf-btn-e {
     padding: 3px 25px;
     border-radius: 20px;
-    border: 2px white solid;
-    background-color: #BBCDD2;
+    border: 2px #4191CC solid;
+    background-color: #fff;
     font-weight: 700;
     color: #4191CC;
+  }
+
+  .cancel-cf-btn-e:hover {
+    background-color: #4191CC;
+    color: #fff;
+    transition: 0.5s;
   }
