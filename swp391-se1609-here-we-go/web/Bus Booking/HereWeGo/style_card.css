@@ -84,7 +84,7 @@
     width: 100%;
     top: 0; left: 0;
     background: linear-gradient(94.68deg, #15136A -11.33%, #2B53BB 136%);
-    border-radius: 5px;
+    border-radius: 10px;
     backface-visibility: hidden;
     box-shadow: 0 15px 25px rgba(0,0,0,.2);
     padding:20px;
@@ -138,7 +138,7 @@
     height: 100%;
     width: 100%;
     background: linear-gradient(94.68deg, #15136A -11.33%, #2B53BB 136%);
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 20px 0;
     text-align: right;
     backface-visibility: hidden;
