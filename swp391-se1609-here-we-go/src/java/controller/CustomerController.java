@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import manager.UserManager;
 import model.User;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 /**
  *
@@ -25,16 +28,9 @@ import model.User;
 @WebServlet(name = "CustomerController", urlPatterns = {"/user"})
 public class CustomerController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     * @throws java.sql.SQLException
-     */
+    private static final String ACCOUNT_SID = "AC7531d18ea7e24011554d500770a01c58";
+    private static final String AUTH_TOKEN = "0f9f4431546a3dd7ee404768256b8671";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String action = (String) request.getAttribute("action");
@@ -46,7 +42,7 @@ public class CustomerController extends HttpServlet {
             case "logout":
                 logout(request, response);
                 break;
-            case "save" :
+            case "save":
                 save(request, response);
             default:
                 break;
@@ -80,7 +76,7 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_ROLE", roleID);
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
-                    request.setAttribute("action", "index");               
+                    request.setAttribute("action", "index");
                 } else if (roleID == 2) {
                     request.setAttribute("controller", "home");
                     request.setAttribute("action", "index");
@@ -101,7 +97,7 @@ public class CustomerController extends HttpServlet {
         }
 
     }
-    
+
     private void save(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -128,10 +124,27 @@ public class CustomerController extends HttpServlet {
                 //check if password meet the condition or not (8 digit,one lower,upper, special digit)
                 String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
                 if (password.matches(pattern)) {
-                    User user = new User(0, name,null, phone, "", 2, password);
+                    User user = new User(0, name, null, phone, "", 2, password);
                     if (userManager.register(user)) {
                         request.setAttribute("controller", "user");
                         request.setAttribute("action", "login");
+                        //Generate OTP
+                        int ramdonNum = (int) (Math.random() * 9000) + 10000;
+                        String otp = String.valueOf(ramdonNum);
+                        HttpSession session = request.getSession();
+                        session.setAttribute("SUBMIT_OTP", otp);
+                        if (session != null) {
+                            //Send OTP
+                            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+                            //process phone to +84
+                            String newPhone = "+84" + phone.substring(1);
+                            Message message = Message.creator(
+                                    new PhoneNumber(newPhone),
+                                    new PhoneNumber("+19785033345"),
+                                    otp
+                            ).create();
+
+                        }
                     }
                 } else {
                     request.setAttribute("name", name);
