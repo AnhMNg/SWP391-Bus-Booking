@@ -581,6 +581,7 @@ i {
   text-align: center;
   color: #000;
   margin-left: 24px;
+  margin-bottom: 16px;
 }
 
 .member-card p:last-child {
@@ -641,7 +642,9 @@ i {
   font-size: 14px;
   z-index: 10;
 }
-
+.contact{
+  height: 750px;
+}
 /*=============== SCROLL UP ===============*/
 .scrollup {
   position: fixed;
@@ -654,6 +657,7 @@ i {
   z-index: 10;
   opacity: .8;
   transition: .4s;
+  bottom: 3rem;
 }
 
 .scrollup__icon {
@@ -664,10 +668,6 @@ i {
 .scrollup:hover {
   background-color:#cee2e8;
   opacity: 1;
-}
-
-.show-scroll {
-  bottom: 3rem;
 }
 
 /*=============== SCROLL BAR ===============*/
