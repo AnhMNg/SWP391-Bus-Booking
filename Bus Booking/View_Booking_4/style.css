@@ -99,7 +99,7 @@ body {
   }
 
   .modal-content, .cancel-modal {
-    background: #BBCDD2;
+    background: #BBCDD2 !important;
   }
 
   .modal-header {
@@ -126,14 +126,15 @@ body {
   .cancel-cf-btn-e {
     padding: 3px 25px;
     border-radius: 20px;
-    border: 2px #4191CC solid;
-    background-color: #fff;
+    border: 2px #fff solid;
+    background-color: #BBCDD2;
     font-weight: 700;
-    color: #4191CC;
+    color: #fff;
   }
 
   .cancel-cf-btn-e:hover {
     background-color: #4191CC;
     color: #fff;
     transition: 0.5s;
+    border: 2px #4191CC solid;
   }
