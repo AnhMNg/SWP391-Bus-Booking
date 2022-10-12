@@ -1,0 +1,69 @@
+body{
+    height: 100vh;
+    background: linear-gradient(105.22deg, #9DC5D1 14.71%, #FFFFFF 195.49%) !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  }
+  .container{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .card{
+    display: block !important;
+    overflow: hidden;
+    border: 0 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  }
+  .card-body{
+    padding: 2rem;
+  }
+  
+  .title{
+    margin-bottom: 2rem;
+    font-size: 25px;
+    font-weight: bold;
+    color: #000;
+  }
+  .userInput{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-left: 64px;
+    margin-right: 64px;
+  }
+  input{
+    margin: 10px;
+    height: 35px;
+    width: 65px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: arimo;
+    font-size: 25px;
+    background: #eef2f3;
+  }
+  
+  .form-box button[type="submit"]{
+    width: 100%;
+    height: 43px;
+    background-color: #8371fd;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    font-size: 15px;
+    font-weight: bold;
+    transition: ease-out 0.6s;
+  }
+  
+  .form-box button[type="submit"]:hover{
+    box-shadow: inset 600px 0 0 0 #82b3fc;
+    
+  }
