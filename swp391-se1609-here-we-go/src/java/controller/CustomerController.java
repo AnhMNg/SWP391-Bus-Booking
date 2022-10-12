@@ -77,9 +77,11 @@ public class CustomerController extends HttpServlet {
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
                     request.setAttribute("action", "index");
+                    request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
                 } else if (roleID == 2) {
                     request.setAttribute("controller", "home");
                     request.setAttribute("action", "index");
+                    request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
                 } else {
                     request.setAttribute("message", "Your role is not support!");
                 }
