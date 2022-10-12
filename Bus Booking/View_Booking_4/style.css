@@ -99,7 +99,7 @@ body {
   }
 
   .modal-content, .cancel-modal {
-    background: #BBCDD2;
+    background: #BBCDD2 !important;
   }
 
   .modal-header {
