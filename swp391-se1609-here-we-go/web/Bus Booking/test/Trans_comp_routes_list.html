@@ -18,11 +18,52 @@
 </head>
 
 <body>
+    <div class="hd">
+        <section class="header" id="header">
+          <!-- Menu -->
+          <nav class="main-nav">
+            <!-- Logo -->
+            <a href="/">
+              <img src="images/Logo1.png" class="logo" />
+            </a>
+            <!-- NavBar -->
+            <div class="nav-links" id="navLinks">
+              <i class="fa fa-times" onclick="hideMenu()"></i>
+              <ul>
+                <li class="mb">
+                  <a href="">MY BOOKING</a>
+                </li>
+                <li>
+                  <!-- <a href="">LOGIN OR CREATE ACCOUNT</a> -->
+                  <div class="dropdown">
+                    <button class="button1">LOGIN OR CREATE ACCOUNT</button>
+                    <div class="dropdown-content">
+                      <a class="choose" href="#">Personal Account</a>
+                      <a class="choose" href="#">Transportation Company</a>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <select class="form-select">
+                      <option>English</option>
+                      <option>Vietnamese</option>
+                    </select>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+          </nav>
+          <!-- Content -->
+        </section>
+      </div>
+      <div class="ct">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="body-header">
-                    <h4 class="title text-left mt-3 ml-4">
+                <div class="header-title">
+                    <h4 class="title-header text-left mt-3 ml-4">
                         Thanh Buoi Bus
                     </h4>
                     <p class=" routes text-left mt-3 ml-4">Routes List</p>
@@ -45,8 +86,8 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
-                                        <button type="button" class="but-delete"
+                                    <div class="button-del">
+                                        <button type="button" class="button-delete"
                                             onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
@@ -63,9 +104,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -81,9 +122,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -99,9 +140,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -117,9 +158,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -135,9 +176,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -153,9 +194,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -171,9 +212,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -189,9 +230,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -207,9 +248,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -225,9 +266,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -243,9 +284,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -261,9 +302,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -279,9 +320,9 @@
                                 <td>Sleeper Bus</td>
                                 <td>7:00 AM</td>
                                 <td>
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -298,9 +339,9 @@
                                 <td>7:00 AM</td>
                                 <td>
 
-                                    <div class="button">
+                                    <div class="button-del">
 
-                                        <button type="button" class="but-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
+                                        <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display='inline-block'">
                                             <div class="but-content">
                                                 <span class="delete">
                                                     Delete
@@ -342,14 +383,78 @@
                 </div>
             </div>
         </div>
-        <script src="./js/bootstrap.bundle.min.js"></script>
-        <script src="./js/jquery-3.6.0.min.js"></script>
-        <script src="./js/datatables.min.js"></script>
-        <script src="./js/pdfmake.min.js"></script>
-        <script src="./js/vfs_fonts.js"></script>
-<script src="./js/custom.js"></script>
-        <script src="//code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        </div>
+        <div class="ft">
+            <footer class="footer">
+              <div class="footer__addr">
+                <img class="footer__logo" src="images/My project.png" alt="" />
+              </div>
+      
+              <ul class="footer__nav">
+                <li class="nav__item">
+                  <h2 class="nav__title">About Us</h2>
+      
+                  <ul class="nav__ul">
+                    <li>
+                      <a href="#">Contact Us</a>
+                    </li>
+      
+                    <li>
+                      <a href="#">Help Center</a>
+                    </li>
+      
+                    <li>
+                      <a href="#">Here We Go!</a>
+                    </li>
+                  </ul>
+                </li>
+      
+                <li class="nav__item">
+                  <h2 class="nav__title">Products</h2>
+      
+                  <ul class="nav__ul">
+                    <li>
+                      <a href="#">Bus Tickets</a>
+                    </li>
+      
+                    <li>
+                      <a href="#">Bus Operator</a>
+                    </li>
+                  </ul>
+                </li>
+      
+                <li class="nav__item">
+                  <h2 class="nav__title">About Us</h2>
+                  <div class="social">
+                    <ul class="nav__ul">
+                      <li>
+                        <a href="#">
+                          <img src="images/Facebook - Negative.png" alt="" />
+                        </a>
+                      </li>
+      
+                      <li>
+                        <a href="#">
+                          <img src="images/Twitter - Negative.png" alt="" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+              <div class="legal">
+                <p>Copyright &copy; 2022 Here We Go Co.</p>
+              </div>
+            </footer>
+          </div>
+          <script src="./js/bootstrap.bundle.min.js"></script>
+          <script src="./js/jquery-3.6.0.min.js"></script>
+          <script src="./js/datatables.min.js"></script>
+          <script src="./js/pdfmake.min.js"></script>
+          <script src="./js/vfs_fonts.js"></script>
+  <script src="./js/script.js"></script>
+          <script src="//code.jquery.com/jquery-3.5.1.js"></script>
+          <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 
 </body>
