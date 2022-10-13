@@ -1,30 +1,36 @@
- const navToggle = document.querySelector(".nav-toggle");
- const nav = document.querySelector(".nav1");
- const navOverlay = document.querySelector(".nav-overlay");
- const closeNav = document.querySelector(".close");
+const body = document.querySelector("body"),
+      modeToggle = body.querySelector(".mode-toggle");
+      sidebar = body.querySelector("nav");
+      sidebarToggle = body.querySelector(".sidebar-toggle");
 
- navToggle.addEventListener("click",() =>{
- 	navShow();
- })
- closeNav.addEventListener("click",() =>{
- 	hideNav();
- })
- 
- // hide nav after clicked outside of nav
- navOverlay.addEventListener("click",(e) =>{
-   hideNav();
- })
+let getMode = localStorage.getItem("mode");
+if(getMode && getMode ==="dark"){
+    body.classList.toggle("dark");
+}
 
- function navShow(){
-    navOverlay.style.transition = "all 0.5s ease";
-    navOverlay.classList.add("open");
-    nav.style.transition = "all 0.3s ease 0.5s";
-    nav.classList.add("open");
- }
+let getStatus = localStorage.getItem("status");
+if(getStatus && getStatus ==="close"){
+    sidebar.classList.toggle("close");
+}
 
- function hideNav(){
-   nav.style.transition = "all 0.3s ease";
-   nav.classList.remove("open");
-   navOverlay.style.transition = "all 0.5s ease 0.3s";
-   navOverlay.classList.remove("open");
- }
+// modeToggle.addEventListener("click", () =>{
+//     body.classList.toggle("dark");
+//     if(body.classList.contains("dark")){
+//         localStorage.setItem("mode", "dark");
+//     }else{
+//         localStorage.setItem("mode", "light");
+//     }
+// });
+
+sidebarToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+    if(sidebar.classList.contains("close")){
+        localStorage.setItem("status", "close");
+    }else{
+        localStorage.setItem("status", "open");
+    }
+})
+
+$(document).ready(function () {
+    $('#example').DataTable();
+});

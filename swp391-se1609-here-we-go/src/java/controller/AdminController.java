@@ -33,7 +33,7 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
         String controller = (String) request.getAttribute("controller");
-        request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
+        request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
