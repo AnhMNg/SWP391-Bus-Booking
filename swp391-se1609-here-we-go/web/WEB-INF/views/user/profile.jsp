@@ -34,54 +34,61 @@
         <title>User Profile Page</title>
     </head>
     <body>
-        <div class="profile">
-            <div class="content">
-                <div class="profile-detail">
-                    <div class="profile-col">
-                        <div class="profile-content">
-                            <div class="profile-photo">
-                                <span class="avatar">
-                                    <img src="<c:url value="/images/Edit Square.png"/>" class="upload-photo">
-                                </span>
-                            </div>
-                            <div class="profile-name">
-                                <p class="name">${sessionScope.LOGIN_CUSTOMER_NAME}</p>
-                                <p class="personal-profile">PERSONAL PROFILE</p>
-                            </div>
-                            <ul class="sideBarNav">
-                                <li class="profile-attribute">
-                                    <span class="bar-nav-icon"><img src="<c:url value="/images/Profile.png"/>" class="profile-img">
-                                        <a class="de" href="<c:url value="/user/profile.do"/>">My Profile</a>
+        <main>
+            <div class="  profile container">
+                <div class="content">
+                    <div class="profile-detail">
+                        <div class="profile-col">
+                            <div class="profile-content">
+                                <div class="profile-photo">
+                                    <div class="photo">
+                                        <img src="" class="user-photo" id="user-photo">
+                                    </div>
+                                    <span class="avatar">
+                                        <img src="<c:url value="/images/Edit Square.png"/>" class="upload-photo" >
+                                        <input type="file" name="userDisplayPic" accept=".jpg,.jpeg,.bmp,.gif,.png,.PNG,.JPG,.JPEG,.BMP,.GIF" class="inputUpload" id="inputUpload" value="">
                                     </span>
-                                </li>
-                                <li class="profile-attribute">
-                                    <span class="bar-nav-icon"><img src="<c:url value="/images/Logout.png"/>" class="logout">
-                                        <a class="de" href="<c:url value="/user/logout.do"/>">Logout</a>
-                                    </span>
-                                </li>
-                            </ul>
+                                </div>
+                                <div class="profile-name">
+                                    <p class="name">${sessionScope.LOGIN_CUSTOMER_NAME}</p>
+                                    <p class="personal-profile">PERSONAL PROFILE</p>
+                                </div>
+                                <ul class="sideBarNav">
+                                    <li class="profile-attribute">
+                                        <span class="bar-nav-icon"><img src="<c:url value="/images/Profile.png"/>" class="profile-img">
+                                            <a href="<c:url value="/user/profile.do"/>">Profile</a>
+                                        </span>
+                                    </li>
+                                    <li class="profile-attribute">
+                                        <span class="bar-nav-icon"><img src="<c:url value="/images/Logout.png"/>" class="logout">
+                                            <a href="<c:url value="/user/logout.do"/>">Logout</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="profile-detail-2">
-                    <h4>Profile</h4>
-                    <p>Basic info, for a faster booking experience</p>
-                    <ul class="information-list">
-                        <li class="information-item">
-                            <div class="information-content-first">
-                                <span class="information-name">Name</span>
-                                <span class=" mr-2 information-detail text-break d1">${sessionScope.LOGIN_CUSTOMER_NAME}</span>
-                            </div>
-                        </li>
-                        <li class="information-item">
-                            <div class="information-content">
-                                <span class="information-name">Phone</span>
-                                <span class=" mr-2 information-detail text-break d2">${sessionScope.LOGIN_CUSTOMER_PHONE}</span>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="profile-detail-2">
+                        <h4>Profile</h4>
+                        <p>Basic info, for a faster booking experience</p>
+                        <ul class="information-list">
+                            <li class="information-item">
+                                <div class="information-content-first">
+                                    <span class="information-name">Name</span>
+                                    <span class=" mr-2 information-detail text-break d1">${sessionScope.LOGIN_CUSTOMER_NAME}</span>
+                                </div>
+                            </li>
+                            <li class="information-item">
+                                <div class="information-content">
+                                    <span class="information-name">Phone</span>
+                                    <span class=" mr-2 information-detail text-break d2">${sessionScope.LOGIN_CUSTOMER_PHONE}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
+        <script src="<c:url value="js/profile.js"/>" type="text/javascript"></script>
     </body>
 </html>
