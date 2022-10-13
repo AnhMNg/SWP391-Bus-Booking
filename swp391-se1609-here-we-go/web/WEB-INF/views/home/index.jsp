@@ -234,15 +234,19 @@
                     <!-- Transportation Company List -->
                     <div class="container mt-3 content-tc-c">
                         <div class="list-group">
+                            <form action="<c:url value="/company/info.do"/>" method="POST">
+                                <% ArrayList<Company> listcom = CompanyManager.getTopCompany(10);
+                                    for (Company com : listcom) {
+                                %>
+                                <label for="<%=  com.getCompanyId()%>" class="list-group-item list-group-item-action"><%= com.getName()%></label>
+                                <input id="<%=  com.getCompanyId()%>" type="submit" hidden  name="comP" value="<%=  com.getCompanyId()%>"/>
+                                
+                                <%
+                                    }
 
-                            <% ArrayList<Company> listcom = CompanyManager.getTopCompany(10);
-                                for (Company com : listcom) {
-                            %>
-                            <a href="#" class="list-group-item list-group-item-action"><%= com.getName()%></a>
-                            <%
-                                }
-
-                            %>
+                                %>
+                               
+                            </form>
                         </div>          
                     </div>                 
                 </div>
