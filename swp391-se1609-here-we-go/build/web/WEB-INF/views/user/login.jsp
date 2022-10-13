@@ -77,7 +77,7 @@
                             </div>
                         </form>
 
-                        <form action="<c:url value="/user/save.do"/>" autocomplete="off" class="sign-up-form" method="POST">
+                        <form action="<c:url value="/user/signup.do"/>" autocomplete="off" class="sign-up-form" method="POST">
 
                             <div class="heading">
                                 <h2>Join  Here We Go Member</h2>

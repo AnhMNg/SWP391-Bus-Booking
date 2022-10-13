@@ -30,7 +30,7 @@
         <div class="hd">
             <section class="header">
                 <!-- Menu -->
-                <nav>
+                <nav class="main-nav">
                     <!-- Logo -->
                     <c:if test="${sessionScope.LOGIN_CUSTOMER == null && sessionScope.LOGIN_COMPANY == null}">
                         <a href="<c:url value="/home/index.do"/>">

@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="search-btn">
-                                <button class="btn btn-secondary">SEARCH</button>
+                                <button class="btn btn-secondary route-search-btn">SEARCH</button>
                             </div>
                         </form>
                     </div>         
