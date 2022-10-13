@@ -8,3 +8,8 @@ function showMenu() {
 function hideMenu() {
     navLinks.style.right = "-200px";
 }
+
+window.addEventListener("scroll", function() {
+    var header = document.querySelector('#header');
+    header.classList.toggle("sticky", window.scrollY > 0);
+})

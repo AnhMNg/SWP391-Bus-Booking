@@ -17,3 +17,13 @@ window.addEventListener("scroll", function() {
 let width = screen.width;
 let height = screen.height;
 let depth = screen.pixelDepth;
+
+// const nav = document.querySelector('nav');
+
+// window.addEventListener('scroll', () => {
+//     if (window.scrollY >=50) {
+//         nav.classList.add('active_nav');
+//     } else {
+//         nav.classList.remove('active_nav');
+//     }
+// })
