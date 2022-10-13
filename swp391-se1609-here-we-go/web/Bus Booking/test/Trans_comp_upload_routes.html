@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Here We Go</title>
@@ -109,24 +110,62 @@
                             <p>Bus Type</p>
                         </div>
                         <div class="col-md-8 select-type">
-                         <label class="input-check"><input type="checkbox" name="">   47 Seats</label>
-                        <label class="input-check"><input type="checkbox" name="">   Sleeper Bus</label>
-                        <label class="input-check"><input type="checkbox" name="">   Sleeper Room Bus</label>
+                          <label class="input-check"><input  type="radio" name="bus-type">   47 Seats</label>
+                          <label class="input-check"><input type="radio" name="bus-type">   Sleeper Bus</label>
+                          <label class="input-check"><input  type="radio" name="bus-type">   Sleeper Room Bus</label>
                         </div>
                         
                     </div>
+                    
                     <div class="row select-time ml-4">
-                        <div class="col-md-4 select-header">
-                            <p>Pickup Time</p>
-                        </div>
-                        <div class="col-md-8 select-type-time">
-                            <label class="input-check"><input type="checkbox" name="">   Morning (6 AM to 11 AM)</label><br>
-                        <label class="input-check"><input type="checkbox" name="">   Afternoon (11 AM to 6 PM)</label><br>
-                        <label class="input-check"><input type="checkbox" name="">   Evening (6 PM to 11 PM)</label><br>
-                        <label class="input-check"><input type="checkbox" name="">   Night (11 PM to 6 AM)</label>
-                        </div>
-                        
+                      <div class="col-md-4 select-header">
+                          <p>Pickup Time</p>
+                      </div>
+                      <div class="col-md-8 select-type-time">
+                         <form>
+                          <input class="form-control" type="datetime-local">
+                         </form>
+                      </div>
+                      
+                  </div>
+                  <div class="row select-time ml-4">
+                    <div class="col-md-4 select-header">
+                        <p>Cost</p>
                     </div>
+                    <div class="col-md-8 select-type-time ">
+                      <input class="price-choose" type="text" name="currency-field" id="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="100.000 VND">
+                    </div>
+                    
+                </div>
+                  <div class="row select-time ml-4">
+                    <div class="col-md-4 select-header">
+                        <p>Intended Time</p>
+                    </div>
+                    <div class="col-md-8 select-from">
+                      <select name="format" id="format">
+                        <option selected disabled>1</option>
+                        <option value="hcm"> 2</option>
+                        <option value="dalat">3</option>
+                        <option value="cantho">4</option>
+                        <option value="danang">5</option>
+                        <option value="danang">6</option>
+                        <option value="danang">7</option>
+                        <option value="danang">8</option>
+                        <option value="danang">9</option>
+                        <option value="danang">10</option>
+                        <option value="danang">11</option>
+                        <option value="danang">12</option>
+                        <option value="danang">13</option>
+                        <option value="danang">14</option>
+                        <option value="danang">15</option>
+                        <option value="danang">16</option><option value="danang">17</option><option value="danang">18</option>
+                        <option value="danang">19</option><option value="danang">20</option><option value="danang">21</option>
+                        <option value="danang">22</option><option value="danang">23</option><option value="danang">24</option>
+
+                    </select>
+                    </div>
+                    
+                </div>
                     <div class="button-upload ml-4">
                         <a href="#" id="open-popup-btn" class="upload btn-2">Upload</a>
                       </div>
@@ -239,6 +278,92 @@
             document.getElementsByClassName("popup-ques")[0].classList.remove("active");
             document.getElementsByClassName("pop-up-noti")[0].classList.remove("active");
         });
+        // Jquery Dependency
+
+$("input[data-type='currency']").on({
+    keyup: function() {
+      formatCurrency($(this));
+    },
+    blur: function() { 
+      formatCurrency($(this), "blur");
+    }
+});
+
+
+function formatNumber(n) {
+  // format number 1000000 to 1,234,567
+  return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
+
+function formatCurrency(input, blur) {
+  // appends $ to value, validates decimal side
+  // and puts cursor back in right position.
+  
+  // get input value
+  var input_val = input.val();
+  
+  // don't validate empty input
+  if (input_val === "") { return; }
+  
+  // original length
+  var original_len = input_val.length;
+
+  // initial caret position 
+  var caret_pos = input.prop("selectionStart");
+    
+  // check for decimal
+  if (input_val.indexOf(".") >= 0) {
+
+    // get position of first decimal
+    // this prevents multiple decimals from
+    // being entered
+    var decimal_pos = input_val.indexOf(".");
+
+    // split number by decimal point
+    var left_side = input_val.substring(0, decimal_pos);
+    var right_side = input_val.substring(decimal_pos);
+
+    // add commas to left side of number
+    left_side = formatNumber(left_side);
+
+    // validate right side
+    right_side = formatNumber(right_side);
+    
+    // On blur make sure 2 numbers after decimal
+    if (blur === "blur") {
+      right_side += "000";
+    }
+    
+    // Limit decimal to only 2 digits
+    right_side = right_side.substring(0, 2);
+
+    // join number by .
+    input_val =  left_side + "." + right_side + " VND";
+
+  } else {
+    // no decimal entered
+    // add commas to number
+    // remove all non-digits
+    input_val = formatNumber(input_val);
+    
+    
+    // final formatting
+    if (blur === "blur") {
+      input_val += ".000";
+      input_val =  input_val+ " VND";
+    }
+  }
+  
+  // send updated string to input
+  input.val(input_val);
+
+  // put caret back in the right position
+  var updated_len = input_val.length;
+  caret_pos = updated_len - original_len + caret_pos;
+  input[0].setSelectionRange(caret_pos, caret_pos);
+}
       </script>
+
 </body>
 </html>

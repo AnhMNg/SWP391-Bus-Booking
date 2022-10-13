@@ -2071,6 +2071,17 @@ padding: 6px;
     margin-right: 32px;
     margin-bottom: 32px;
   }
+  .price-choose{
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    font-size: 16px;
+    margin: 0 0 20px;
+    padding: .5rem 1rem;
+  }
+  .intend-time{
+    padding: .5rem 1rem;
+  }
   select {
     -webkit-appearance:none;
     -moz-appearance:none;
