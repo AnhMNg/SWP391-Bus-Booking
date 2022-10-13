@@ -29,7 +29,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    
+
 }
 
 .text-box p {
@@ -83,7 +83,7 @@
 .rt-mg h1 {
     font-size: 45px;
     font-family: 'Bebas Neue', cursive;
-    font-family: 'Roboto', sans-serif;  
+    font-family: 'Roboto', sans-serif;
     margin-bottom: 90px;
     color: #475f9b;
 }
@@ -109,7 +109,7 @@
     font-weight: bold;
     margin-bottom: 2rem;
     transition: 0.3s;
-  }
+}
 
 .mag-btn-dt:hover {
     background-color: #82b3fc;
@@ -259,6 +259,7 @@
         margin-top: 36px;
     }
 }
+
 
 
 

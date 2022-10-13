@@ -36,16 +36,19 @@ public class CompanyController extends HttpServlet {
             throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
         String controller = (String) request.getAttribute("controller");
-        switch(action){
-            case "submit": 
+        switch (action) {
+            case "submit":
                 Login(request, response);
                 break;
             case "logout":
                 Logout(request, response);
                 break;
+            case "info":
+                compInfo(request, response);
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
     }
+
     private void Logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -53,8 +56,9 @@ public class CompanyController extends HttpServlet {
         request.setAttribute("controller", "home");
         request.setAttribute("action", "index");
     }
-    private void Login(HttpServletRequest request, HttpServletResponse response){
-          try {
+
+    private void Login(HttpServletRequest request, HttpServletResponse response) {
+        try {
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
             Company com = null;
@@ -63,6 +67,8 @@ public class CompanyController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_COMPANY", com);
                 session.setAttribute("LOGIN_COMPANY_NAME", com.getName());
+                session.setAttribute("LOGIN_COMPANY_NAME_DES", com.getDesription());
+                session.setAttribute("LOGIN_COMPANY_NAME_LOGO", com.getImgLink());
                 request.setAttribute("controller", "company");
                 request.setAttribute("action", "index");
             } else {
@@ -75,6 +81,23 @@ public class CompanyController extends HttpServlet {
             request.setAttribute("action", "index");
             request.setAttribute("message", ex.getMessage());
             log("Error at MainController: " + ex.toString());
+        }
+    }
+
+    private void compInfo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        CompanyManager comMag = new CompanyManager();
+        int comId = Integer.parseInt(request.getParameter("comP"));
+        Company com = comMag.getCompanyInfo(comId);
+        if (com != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("COMPANY_NAME", com.getName());
+            session.setAttribute("COMPANY_DES", com.getDesription());
+            session.setAttribute("COMPANY_LOGO", com.getImgLink());
+            request.setAttribute("controller", "company");
+            request.setAttribute("action", "info");
+        } else {
+            request.setAttribute("message", "username or password is incorrect!");
         }
     }
 

@@ -3243,6 +3243,12 @@ color: #acacac;
     border-bottom: 0.5px solid #616060 ;
     height: 300px;
 }
+
+.tc-logo-img img {
+  width: 155px;
+  height: 107px;
+}
+
 .thanhbuoi-content {
     padding-left: 25px;
 }
