@@ -1,18 +1,21 @@
-
+main {
+    height: 100vh;
+    background: #fff !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 .profile {
     text-align: left;
-    padding: 150px 64px 64px 64px;
-    border-top: 1px solid rgba(168, 164, 164, 0.69);
-    position: relative;
+   padding: 64px;
 }
-
 .content {
     margin: 64px 0px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-
 .profile-detail {
     width: 283px;
     margin-left: 20px;
@@ -33,7 +36,26 @@
     border-radius: 8px;
     position: relative;
 }
-
+.avatar{
+    width: 37px;
+    background-position: -4px -31px;
+    height: 37px;
+    position: absolute;
+    bottom: 5px;
+    left: 139px;
+    z-index: 1;
+    overflow: hidden;
+}
+.photo{
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden
+}
+.user-photo{
+   height: 100%;
+    width: 100%;
+}
 .profile-avatar {
     width: 100%;
     height: 100%;
@@ -41,7 +63,17 @@
     align-items: center;
     justify-content: center;
 }
-
+.inputUpload {
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    outline: 0;
+    border: 0;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    bottom: 0;
+}
 .profile-img,
 .logout {
     margin: 15px;
@@ -62,8 +94,7 @@
 
 .upload-photo {
     position: absolute;
-    bottom: 5px;
-    left: 139px;
+    bottom: 0;
 }
 
 .sideBarNav {
@@ -71,14 +102,14 @@
     padding: 0px;
 }
 
-/* .profile-attribute:first-child {
+.profile-attribute:hover {
     background: rgba(107, 216, 251, 0.57);
-} */
+}
 
 .profile-attribute {
     display: flex;
     align-items: center;
-    cursor: pointer;
+
     border-radius: 10px;
     font-weight: 400;
     font-size: 20px;
@@ -87,10 +118,6 @@
 
     color: #000000;
     margin-bottom: 20px;
-}
-
-.profile-attribute:hover {
-    background-color: rgba(107, 216, 251, 0.57);
 }
 
 .profile-detail-2 {
@@ -160,23 +187,7 @@
     margin-right: 20px;
 }
 
-.de {
-    padding-top: 50px;
-    text-decoration: none;
-    color: #000000;
-    font-weight: 400;
-}
-
-.de:hover {
-    color: #000000;
-}
-
 @media screen and (min-width: 800px) {
-    .profile {
-        padding-left: 64px;
-        padding-right: 64px;
-    }
-
     .profile-detail {
         width: 30%;
     }
@@ -187,11 +198,6 @@
 }
 
 @media screen and (max-width: 800px) {
-    .profile {
-        padding-left: 64px;
-        padding-right: 64px;
-    }
-
     .profile-detail {
         width: 100%;
         padding-bottom: 35px;
@@ -207,4 +213,12 @@
     .d2{
         margin-top: 8px;
     }
+}
+
+.profile-attribute a {
+    text-decoration: none;
+    font-size: 20px;
+    line-height: 25px;
+    text-transform: capitalize;
+    color: #000000;
 }
