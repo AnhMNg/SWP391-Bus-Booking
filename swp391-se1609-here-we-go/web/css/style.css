@@ -6,7 +6,7 @@
 .header {
     height: 100px;
     width: 100%;
-    background: #9DC5D2;
+    background: transparent;
     background-position: center;
     background-size: cover;
     position: fixed;
@@ -14,13 +14,9 @@
     flex-wrap: wrap;
 }
 
-.banner {
-    min-height: 100vh;
-    width: 100%;
-    background: #9DC5D2;
-    background-position: center;
-    background-size: cover;
-    position: relative;
+.header.sticky {
+    background-color: #9DC5D2;
+    transition: ease-in-out 200ms;
 }
 
 .logo {
@@ -254,11 +250,17 @@ nav .fa {
 
 .element {
     text-align: start;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .element span {
     color: #505050;
     font-weight: 500;
+}
+
+.pl-select {
+    display: flex;
 }
 
 .route-selection {

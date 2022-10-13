@@ -60,18 +60,93 @@
                         <form action="">
                             <div class="col-md-12 input-route">
                                 <div class="col-md-4 element">
-                                    <span>From</sp>
-                                        <select class="form-select">
-                                            <option value="" disabled selected>Select Departure</option>
-                                            <option>#</option>
+                                    <span>From</span>
+                                    <div class="pl-select">
+                                        <select class="form-select form-select-md mb-3" id="cityfrom" aria-label=".form-select-md" name="cityfrom">
+                                            <option value="" selected>Select Province/City</option>
                                         </select>
+                                        <select class="form-select form-select-md mb-3" id="districtfrom" aria-label=".form-select-md" name="districtfrom">
+                                            <option value="" selected>Select City</option>
+                                        </select>
+                                    </div>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+                                    <script>
+                                        var citis = document.getElementById("cityfrom");
+                                        var districts = document.getElementById("districtfrom");
+                                        //var wards = document.getElementById("ward");
+                                        var Parameter = {
+                                            url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                                            method: "GET",
+                                            responseType: "application/json",
+                                        };
+                                        var promise = axios(Parameter);
+                                        promise.then(function (result) {
+                                            renderCity(result.data);
+                                        });
+
+                                        function renderCity(data) {
+                                            for (const x of data) {
+                                                citis.options[citis.options.length] = new Option(x.Name, x.Id);
+                                            }
+                                            citis.onchange = function () {
+                                                districts.length = 1;
+                                                // ward.length = 1;
+                                                if (this.value != "") {
+                                                    const result = data.filter(n => n.Id === this.value);
+
+                                                    for (const k of result[0].Districts) {
+                                                        districts.options[districts.options.length] = new Option(k.Name, k.Id);
+                                                    }
+                                                }
+                                            };
+
+                                        }
+                                    </script>
                                 </div>
                                 <div class="col-md-4 element">
                                     <span>To</span>
-                                    <select class="form-select">
-                                        <option value="" disabled selected>Select Destination</option>
-                                        <option>#</option>
-                                    </select>
+                                    <div class="pl-select">
+                                        <select class="form-select form-select-md mb-3" id="cityto" aria-label=".form-select-md" name="cityfrom">
+                                            <option value="" selected>Select Province/City</option>           
+                                        </select>
+                                        <select class="form-select form-select-md mb-3" id="districtto" aria-label=".form-select-md" name="districtfrom">
+                                            <option value="" selected>Select City</option>
+                                        </select>
+                                    </div>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+                                    <script>
+                                        var citis2 = document.getElementById("cityto");
+                                        var districts2 = document.getElementById("districtto");
+                                        //var wards = document.getElementById("ward");
+                                        var Parameter2 = {
+                                            url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                                            method: "GET",
+                                            responseType: "application/json",
+                                        };
+                                        var promise2 = axios(Parameter2);
+                                        promise2.then(function (result) {
+                                            renderCity2(result.data);
+                                        });
+
+                                        function renderCity2(data) {
+                                            for (const x of data) {
+                                                citis2.options[citis2.options.length] = new Option(x.Name, x.Id);
+                                            }
+                                            citis2.onchange = function () {
+                                                districts2.length = 1;
+                                                // ward.length = 1;
+                                                if (this.value != "") {
+                                                    const result = data.filter(n => n.Id === this.value);
+
+                                                    for (const k of result[0].Districts) {
+                                                        districts2.options[districts2.options.length] = new Option(k.Name, k.Id);
+                                                    }
+                                                }
+                                            };
+
+                                        }
+                                    </script>
+
                                 </div>
                                 <div class="col-md-4 element">
                                     <span>Departure Date</span>
@@ -159,14 +234,14 @@
                     <!-- Transportation Company List -->
                     <div class="container mt-3 content-tc-c">
                         <div class="list-group">
-                           
+
                             <% ArrayList<Company> listcom = CompanyManager.getTopCompany(10);
                                 for (Company com : listcom) {
-                                        %>
-                                         <a href="#" class="list-group-item list-group-item-action"><%= com.getName() %></a>
-                                <%
-                                    }
-                                
+                            %>
+                            <a href="#" class="list-group-item list-group-item-action"><%= com.getName()%></a>
+                            <%
+                                }
+
                             %>
                         </div>          
                     </div>                 
