@@ -141,26 +141,27 @@
                     <div class="col-md-4 select-header">
                         <p>Intended Time</p>
                     </div>
-                    <div class="col-md-8 select-from">
+                    <div class="col-md-8 select-from choose-time">
                       <select name="format" id="format">
-                        <option selected disabled>1</option>
-                        <option value="hcm"> 2</option>
-                        <option value="dalat">3</option>
-                        <option value="cantho">4</option>
-                        <option value="danang">5</option>
-                        <option value="danang">6</option>
-                        <option value="danang">7</option>
-                        <option value="danang">8</option>
-                        <option value="danang">9</option>
-                        <option value="danang">10</option>
-                        <option value="danang">11</option>
-                        <option value="danang">12</option>
-                        <option value="danang">13</option>
-                        <option value="danang">14</option>
-                        <option value="danang">15</option>
-                        <option value="danang">16</option><option value="danang">17</option><option value="danang">18</option>
-                        <option value="danang">19</option><option value="danang">20</option><option value="danang">21</option>
-                        <option value="danang">22</option><option value="danang">23</option><option value="danang">24</option>
+                        <option selected disabled>Choose Time</option>
+                        <option value="1"> 1</option>
+                        <option value="2"> 2 </option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option><option value="17">17</option><option value="18">18</option>
+                        <option value="19">19</option><option value="20">20</option><option value="21">21</option>
+                        <option value="22">22</option><option value="23">23</option><option value="24">24</option>
 
                     </select>
                     </div>
@@ -332,7 +333,7 @@ function formatCurrency(input, blur) {
     
     // On blur make sure 2 numbers after decimal
     if (blur === "blur") {
-      right_side += "000";
+      right_side ;
     }
     
     // Limit decimal to only 2 digits
@@ -350,7 +351,6 @@ function formatCurrency(input, blur) {
     
     // final formatting
     if (blur === "blur") {
-      input_val += ".000";
       input_val =  input_val+ " VND";
     }
   }
