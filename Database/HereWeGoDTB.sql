@@ -87,13 +87,16 @@ create table Feedback(
 )
 
 USE HereWeGo
-INSERT INTO Company VALUES(N'Phương Trang','phuongtrangstation@gmail.com','0929828338','','Nha xe Phuong Trang Description............................','phuongtrang123')
-INSERT INTO Company VALUES(N'Thành Bưởi','thanhbuoi@gmail.com','0928763562','','','thanhbuoi123')
-INSERT INTO Company VALUES(N'Cúc Phương','cucphuong@gmail.com','0989876537','','','cucphuong123')
-INSERT INTO Company VALUES(N'Hải Duyên','haiduyen@gmail.com','0987875625','','','haiduyen123')
-INSERT INTO Company VALUES(N'Anh Minh','anhminhbus@gmailcom','0989877862','','','anhminh123')
-INSERT INTO Company VALUES(N'Đại Ngân','dainganbus@gmail.com','0981452653','','','daingan123')
-INSERT INTO Company VALUES(N'Phước Sang','phuocsang@gmail.com','1231233243','','','phuocsang123')
+INSERT INTO Company VALUES(N'Phương Trang Bus','phuongtrangstation@gmail.com','0929828338','','Nha xe Phuong Trang Description............................','phuongtrang123')
+INSERT INTO Company VALUES(N'Thành Bưởi Bus','thanhbuoi@gmail.com','0928763562','','','thanhbuoi123')
+INSERT INTO Company VALUES(N'Hà Nội Rides On Time','hnride.ontime@gmail.com','0989876537','','','hnride123')
+INSERT INTO Company VALUES(N'Sapa Dragon','sapa.dragon@gmail.com','0987875625','','','sapadg123')
+INSERT INTO Company VALUES(N'Hoàng Long Bus','hoanglong@gmailcom','0989877862','','','hoanglong123')
+INSERT INTO Company VALUES(N'Huế Tourist Bus','huetour@gmail.com','0981452653','','','huetour123')
+INSERT INTO Company VALUES(N'Mai Linh Express Bus','mailinh@gmail.com','0986273737','','','mailinh123')
+INSERT INTO Company VALUES(N'Hải Vân Bus','haivan@gmail.com','0982935574','','','haivan123')
+INSERT INTO Company VALUES(N'Interbus Lines','interbus@gmail.com','0983538821','','','interbus123')
+INSERT INTO Company VALUES(N'Sapa Bus Lines','sapa.lines@gmail.com','0985662993','','','sapalines123')
 
 INSERT INTO [Role] VALUES('ADMIN')
 INSERT INTO [Role] VALUES('CUSTOMER')
