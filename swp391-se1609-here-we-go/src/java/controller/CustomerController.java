@@ -42,8 +42,12 @@ public class CustomerController extends HttpServlet {
             case "logout":
                 logout(request, response);
                 break;
+            case "signup":
+                signup(request, response);
+                break;
             case "save":
                 save(request, response);
+                break;
             default:
                 break;
         }
@@ -100,7 +104,7 @@ public class CustomerController extends HttpServlet {
 
     }
 
-    private void save(HttpServletRequest request, HttpServletResponse response)
+    private void signup(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             UserManager userManager = new UserManager();
@@ -126,28 +130,28 @@ public class CustomerController extends HttpServlet {
                 //check if password meet the condition or not (8 digit,one lower,upper, special digit)
                 String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
                 if (password.matches(pattern)) {
-                    User user = new User(0, name, null, phone, "", 2, password);
-                    if (userManager.register(user)) {
-                        request.setAttribute("controller", "user");
-                        request.setAttribute("action", "login");
-                        //Generate OTP
-                        int ramdonNum = (int) (Math.random() * 9000) + 10000;
-                        String otp = String.valueOf(ramdonNum);
-                        HttpSession session = request.getSession();
-                        session.setAttribute("SUBMIT_OTP", otp);
-                        if (session != null) {
-                            //Send OTP
-                            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-                            //process phone to +84
-                            String newPhone = "+84" + phone.substring(1);
-                            Message message = Message.creator(
-                                    new PhoneNumber(newPhone),
-                                    new PhoneNumber("+19785033345"),
-                                    otp
-                            ).create();
-
-                        }
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "otpSMS");
+                    //Generate OTP
+                    int ramdonNum = (int) (Math.random() * 9000) + 100000;
+                    String otp = String.valueOf(ramdonNum);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("SUBMIT_OTP", otp);
+                    if (session != null) {
+                        //Send OTP
+                        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+                        //process phone to +84
+                        String newPhone = "+84" + phone.substring(1);
+                        Message message = Message.creator(
+                                new PhoneNumber(newPhone),
+                                new PhoneNumber("+19785033345"),
+                                otp
+                        ).create();
                     }
+                    session.setAttribute("name", name);
+                    session.setAttribute("phone", phone);
+                    session.setAttribute("password", password);
+                    session.setAttribute("confirmPassword", confirmPassword);
                 } else {
                     request.setAttribute("name", name);
                     request.setAttribute("phone", phone);
@@ -171,6 +175,32 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("action", "index");
             request.setAttribute("message", ex.getMessage());
             log("Error at MainController: " + ex.toString());
+        }
+    }
+    
+    private void save(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, SQLException {
+        UserManager userManager = new UserManager();
+        HttpSession session = request.getSession();
+        String name = (String) session.getAttribute("name");
+        String phone = (String) session.getAttribute("phone");
+        String password = (String) session.getAttribute("password");
+        String SUBMIT_OTP = (String) session.getAttribute("SUBMIT_OTP");
+        String otp1 = request.getParameter("otp1");
+        String otp2 = request.getParameter("otp2");
+        String otp3 = request.getParameter("otp3");
+        String otp4 = request.getParameter("otp4");
+        String otp5 = request.getParameter("otp5");
+        String otp6 = request.getParameter("otp6");
+        String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
+        if (otpCheck.equals(SUBMIT_OTP)) {
+            User user = new User(0, name, null, phone, "", 2, password);
+            if (userManager.register(user)) {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "login");               
+            }
+        } else {
+            request.setAttribute("message", "Wrong OTP, please check again!");
         }
     }
 
