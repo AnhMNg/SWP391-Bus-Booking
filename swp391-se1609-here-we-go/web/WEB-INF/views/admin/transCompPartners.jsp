@@ -39,9 +39,10 @@
         <div class="activity">
             <!-- Hoverable Table rows -->
             <div class="card">
-                <form action="<c:url value="/admin/search.do"/>" method="post">
 
+                <form action="<c:url value="/admin/search.do"/>" method="post">   
                     <div class="card-header tc-head">
+
                         <div class="col-md-6">
                             <label for="sel1" class="form-label">Sorting by</label>
                             <select
@@ -54,8 +55,7 @@
                                 <option>The Most Routes</option>
                                 <option>The Least Routes</option>
                             </select>
-                        </div>
-
+                        </div>    
                         <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <input
@@ -66,10 +66,6 @@
                                     aria-label="Transportation Company's Name"
                                     aria-describedby="button-addon2"
                                     />
-                               
-                           
-
-
                                 <input type="submit" value="search"  class="btn btn-outline-secondary tc-s-btn"
                                        type="button"
                                        id="button-addon2"  />
@@ -78,36 +74,38 @@
 
 
                         </div>
-                    </div>
-                    <div class="list-group">
 
+                    </div>
+                </form>
+
+                <div class="list-group">
+                    <form action="<c:url value="/company/info.do"/>" method="POST">
                         <%
                             ArrayList<Company> listSearch = (ArrayList<Company>) request.getAttribute("listSearch");
                             if (listSearch == null) {
                                 ArrayList<Company> listcom = CompanyManager.getAllCompany();
                                 for (Company company : listcom) {
-                        %> <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p><%= company.getName()%></p>
-                        </div><%
-
-                                }
-                            } else if (listSearch.size() > 0){
-                                for (Company company : listSearch) {
-                        %> <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p><%= company.getName()%></p>
-                        </div><%
-
-                                }
-                        } else {
-                            %>
-                            <p>Don't find your company</p>
+                        %>  <label for="<%=  company.getCompanyId()%>" class="list-group-item list-group-item-action"><%= company.getName()%></label>
+                        <input id="<%=  company.getCompanyId()%>" type="submit" hidden  name="comP" value="<%=  company.getCompanyId()%>"/>
                         <%
-                        }
+
+                            }
+                        } else if (listSearch.size() > 0) {
+                            for (Company company : listSearch) {
+                        %>  <label for="<%=  company.getCompanyId()%>" class="list-group-item list-group-item-action"><%= company.getName()%></label>
+                        <input id="<%=  company.getCompanyId()%>" type="submit" hidden  name="comP" value="<%=  company.getCompanyId()%>"/><%
+
+                            }
+                        } else {
+                        %>
+                        <p>Don't find your company</p>
+                        <%
+                            }
 
                         %>
+                    </form>
 
-                    </div>
-                </form>
+                </div>
             </div>
             <!--/ Hoverable Table rows -->
         </div>

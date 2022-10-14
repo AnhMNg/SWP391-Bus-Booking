@@ -254,7 +254,7 @@
 
             <!-- Why book with Here We Go? -->
             <section class="impression">
-                <h1 class="imp-tt">Why book with Here We Go?</h1>     \
+                <h1 class="imp-tt">Why book with Here We Go?</h1>     
                 <div class="container-fluid why1">
                     <div class="col-md-6 price">
                         <img class="img" src="<c:url value="/images/BUY.png"/>" alt="">
