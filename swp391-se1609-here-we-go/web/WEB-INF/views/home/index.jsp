@@ -57,7 +57,7 @@
                         <img src="<c:url value="/images/Bus3.png"/>" alt="bus">
                     </div>
                     <div class="route-selection">
-                        <form action="">
+                        <form action="<c:url value="/user/booking.do"/>">
                             <div class="col-md-12 input-route">
                                 <div class="col-md-4 element">
                                     <span>From</span>
