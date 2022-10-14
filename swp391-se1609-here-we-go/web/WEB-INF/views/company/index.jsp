@@ -48,12 +48,18 @@
                 <h1>Routes Management</h1>
                 <!-- Route Selection -->
                 <div class="container col-md-12 routes-mag">
+                    
                     <div class="col-md-6 routes-mag-dt">
                         <div class="bus-img">
                             <img src="<c:url value="/images/Bus3.png"/>" alt="bus"> 
                         </div>
+                        
                         <div class="mag-btn">
-                            <input type="submit" value="UPLOAD NEW ROUTE" class="mag-btn-dt">
+                            <form action="<c:url value="/company/upload.do"/>" method="post">
+                                <input type="submit" value="UPLOAD NEW ROUTE" class="mag-btn-dt">
+                            
+                            </form>
+                            
                         </div>
                     </div>
                     <div class="col-md-6 routes-mag-dt">

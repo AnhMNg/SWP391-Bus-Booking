@@ -77,9 +77,9 @@
                 </div>
             </div>
             <!--Routes List-->
-            <div class="rout-list text-center">
+            <div class="rout-list text-center" >
                 <div class="rout-img">
-                    <a href="/">
+                    <a href="<c:url value="/company/routesList.do"/>">
                         <img src="<c:url value="/images/I3D-01 1.png"/>" alt="Routes List">
                     </a>
                 </div>

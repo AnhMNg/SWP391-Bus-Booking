@@ -8,6 +8,7 @@ package manager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.TicketDetail;
 import utils.DBUtils;
@@ -104,5 +105,38 @@ public class TicketManager {
         }
 
         return list;
+    }
+    public static long countTicketSold() throws SQLException{
+        long count = 0;
+        Connection cn = DBUtils.getConnection();
+        if (cn != null ){
+            PreparedStatement pst = cn.prepareStatement("SELECT COUNT(t.ticketId) FROM Ticket t");
+            ResultSet rs = pst.executeQuery();
+            if (rs != null && rs.next()) {
+                count  = rs.getLong(1);
+            }
+            cn.close();
+        }
+        return count;
+    }
+     public static int countTicketbyId(long id) throws SQLException {
+        int count = 0;
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            PreparedStatement pst = cn.prepareStatement("SELECT COUNT(tk.routeDeTailId)\n"
+                    + "FROM [Ticket] tk,[Order] od,[RouteDetail] rd,[Route] r,[BusType] bt,[Company] com,(SELECT dep.companyId, dep.routeId,dep.name depart,DES.name destination FROM\n"
+                    + "(SELECT * FROM Route,Place WHERE Route.departId = Place.placeId) dep,\n"
+                    + "(SELECT * FROM Route,Place WHERE Route.destinationId = Place.placeId) DES\n"
+                    + "WHERE DES.routeId = dep.routeId) PlaceName\n"
+                    + "WHERE tk.orderId = od.orderId and tk.routeDeTailId = rd.routeDetailId and rd.routeId = r.routeId \n"
+                    + "and rd.busTypeId = bt.busTypeId and od.customerId = ? and com.companyId = r.companyId and PlaceName.routeId = r.routeId");
+            pst.setLong(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null && rs.next()) {
+                count = rs.getInt(1);
+            }
+            cn.close();
+        }
+        return count;
     }
 }

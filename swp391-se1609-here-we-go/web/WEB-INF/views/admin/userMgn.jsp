@@ -4,6 +4,10 @@
     Author     : Admin
 --%>
 
+<%@page import="manager.TicketManager"%>
+<%@page import="manager.UserManager"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -56,186 +60,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <%
+                     ArrayList<model.User> list  = UserManager.getListCustomer();
+        for (model.User user : list) {
+            %>
                     <tr>
-                        <td>1</td>
-                        <td>Tiger Nixon</td>
-                        <td>2011-04-25</td>
-                        <td>2</td>
+                        <td><%= user.getUserId() %></td>
+                        <td><%= user.getName() %></td>
+                        <td>Coming soon</td>
+                        <td><%= TicketManager.countTicketbyId(user.getUserId()) %></td>
                         <td>
                             <input type="submit" class="btn btn-danger" value="Delete">
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Garrett Winters</td>
-                        <td>2011-07-25</td>
-                        <td>5</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Ashton Cox</td>
-                        <td>2009-01-12</td>
-                        <td>3</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Cedric Kelly</td>
-                        <td>2012-03-29</td>
-                        <td>6</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Airi Satou</td>
-                        <td>2008-11-28</td>
-                        <td>3</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Brielle Williamson</td>
-                        <td>2012-12-02</td>
-                        <td>8</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>Herrod Chandler</td>
-                        <td>2012-08-06</td>
-                        <td>5</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>Rhona Davidson</td>
-                        <td>2010-10-142</td>
-                        <td>8</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>Colleen Hurst</td>
-                        <td>2009-09-15</td>
-                        <td>4</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>Sonya Frost</td>
-                        <td>2008-12-13</td>
-                        <td>4</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>Jena Gaines</td>
-                        <td>2008-12-19</td>
-                        <td>10</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>Quinn Flynn</td>
-                        <td>2013-03-03</td>
-                        <td>8</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>13</td>
-                        <td>Charde Marshall</td>
-                        <td>2008-10-16</td>
-                        <td>9</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>Haley Kennedy</td>
-                        <td>2012-12-18</td>
-                        <td>7</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>Tatyana Fitzpatrick</td>
-                        <td>2010-03-17</td>
-                        <td>19</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>16</td>
-                        <td>Michael Silva</td>
-                        <td>2012-11-27</td>
-                        <td>3</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>17</td>
-                        <td>Paul Byrd</td>
-                        <td>2010-06-09</td>
-                        <td>4</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>18</td>
-                        <td>Gloria Little</td>
-                        <td>2009-04-10</td>
-                        <td>11</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>19</td>
-                        <td>Bradley Greer</td>
-                        <td>2012-10-13</td>
-                        <td>8</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>20</td>
-                        <td>Dai Rios</td>
-                        <td>2012-09-2</td>
-                        <td>5</td>
-                        <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
-                        </td>
-                    </tr>
+                    <%
+        }
+                    %>
                 </tbody>
                 <tfoot>
                     <tr>
