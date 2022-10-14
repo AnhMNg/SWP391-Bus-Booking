@@ -98,8 +98,8 @@ public class CompanyManager {
             cn = DBUtils.getConnection();
             if (cn != null) {
                 String sql = "SELECT TOP(?) * FROM Company,\n"
-                        + "(SELECT  Company.name,COUNT(routeId) AS numberofRoute FROM Company,Route \n"
-                        + "WHERE Company.companyId = Route.companyId \n"
+                        + "(SELECT  Company.name,COUNT(routeId) AS numberofRoute FROM Company left outer join Route \n"
+                        + "ON Company.companyId = Route.companyId \n"
                         + "GROUP BY name) AS long\n"
                         + "WHERE long.name = Company.name\n"
                         + "ORDER BY numberofRoute DESC";
