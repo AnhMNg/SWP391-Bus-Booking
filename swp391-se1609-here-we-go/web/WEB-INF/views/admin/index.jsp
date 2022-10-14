@@ -4,6 +4,10 @@
     Author     : Admin
 --%>
 
+<%@page import="manager.CompanyManager"%>
+<%@page import="manager.TicketManager"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="manager.UserManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -36,17 +40,17 @@
                 <div class="box box1">
                     <i class="uil uil-user"></i>
                     <span class="text">Customers</span>
-                    <span class="number">50,120</span>
+                    <span class="number"><%= UserManager.countCustomer() %></span>
                 </div>
                 <div class="box box2">
                     <i class="uil uil-ticket"></i>
                     <span class="text">Tickets Sold</span>
-                    <span class="number">20,120</span>
+                    <span class="number"><%=TicketManager.countTicketSold()%></span>
                 </div>
                 <div class="box box3">
                     <i class="uil uil-share"></i>
                     <span class="text">TC Partners</span>
-                    <span class="number">10</span>
+                    <span class="number"><%=CompanyManager.countCompany()%></span>
                 </div>
             </div>
         </div>
@@ -68,27 +72,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Nguyen Bao Long</td>
-                        <td>089345768</td>
-                        <td>25/09/2022</td>
-                        <td>Memeber</td>
+                    <%
+                        ArrayList<model.User> list  = UserManager.getListCustomer();
+        for (model.User user : list) {
+            %>
+                    
+                      <tr>
+                        <td><%= user.getUserId() %></td>
+                        <td><%= user.getName() %></td>
+                        <td><%= user.getPhone() %></td>
+                        <td>Coming soon</td>
+                        <td>Coming soon</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Do Hoang Huy</td>
-                        <td>085634988</td>
-                        <td>25/09/2022</td>
-                        <td>Memeber</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Jane Le</td>
-                        <td>083992343</td>
-                        <td>01/10/2022</td>
-                        <td>New</td>
-                    </tr>
+                    <%
+        }
+                    %>
+                    
                 </tbody>
             </table>
         </div>

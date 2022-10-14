@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.User;
 import utils.DBUtils;
 
@@ -33,7 +34,7 @@ public class UserManager {
                 pst.setLong(1, id);
                 ResultSet rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
-                    us = new User(id, rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5),
+                    us = new User(id, rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
                             rs.getInt(6), rs.getString(7));
                 }
                 if (rs != null) {
@@ -52,6 +53,7 @@ public class UserManager {
         }
         return us;
     }
+
     public static User checkLogin(String phone, String password) throws SQLException {
         User user = null;
         Connection cn = null;
@@ -65,7 +67,7 @@ public class UserManager {
                 pst.setString(2, password);
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getLong(1), rs.getString(2),rs.getString(3), phone, rs.getString(5), rs.getInt(6), "***");
+                    user = new User(rs.getLong(1), rs.getString(2), rs.getString(3), phone, rs.getString(5), rs.getInt(6), "***");
                 }
             }
         } catch (Exception e) {
@@ -83,6 +85,7 @@ public class UserManager {
         }
         return user;
     }
+
     public static User checkLoginGoogle(String googleId) throws SQLException {
         User user = null;
         Connection cn = null;
@@ -95,7 +98,7 @@ public class UserManager {
                 pst.setString(1, googleId);
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getLong(1), rs.getString(2),rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), "***");
+                    user = new User(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), "***");
                 }
             }
         } catch (Exception e) {
@@ -119,7 +122,7 @@ public class UserManager {
         if (con != null) {
             PreparedStatement ps = con.prepareStatement(REGISTER);
             ps.setString(1, user.getName());
-            ps.setString(2,user.getGoogleId());
+            ps.setString(2, user.getGoogleId());
             ps.setString(3, user.getPhone());
             ps.setString(4, user.getAvtLink());
             ps.setInt(5, 2);
@@ -130,7 +133,6 @@ public class UserManager {
         }
         return false;
     }
-    
 
     public static boolean checkDuplicate(String phone) throws SQLException {
         Connection con = DBUtils.getConnection();
@@ -143,5 +145,46 @@ public class UserManager {
             }
         }
         return false;
+    }
+
+    public static int countCustomer() throws SQLException {
+        int count = 0;
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            PreparedStatement pst = cn.prepareStatement("SELECT COUNT(u.userId) FROM [User] u WHERE u.roleId = 2");
+            ResultSet rs = pst.executeQuery();
+            if (rs != null && rs.next()) {
+                count = rs.getInt(1);
+            }
+            cn.close();
+        }
+        return count;
+    }
+
+    public static ArrayList<User> getListCustomer() throws SQLException {
+        Connection cn = DBUtils.getConnection();
+        ArrayList<User> list = new ArrayList<>();
+        User us = null;
+        if (cn != null) {
+            PreparedStatement pst = cn.prepareStatement("SELECT * FROM [User] WHERE roleId = 2");
+            ResultSet rs = pst.executeQuery();
+            while (rs != null && rs.next()) {
+                us = new User(rs.getLong(1), rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7));
+                list.add(us);
+            }
+            cn.close();
+
+        }
+        return list;
+    }
+
+    public static void deleteCustomer(long id) throws SQLException{
+        Connection cn = DBUtils.getConnection();
+        if (cn!= null){
+            PreparedStatement pst = cn.prepareStatement("DELETE FROM [User] WHERE [User].userId = ?");
+            pst.setLong(1, id);
+            pst.executeUpdate();
+            cn.close();
+        }
     }
 }

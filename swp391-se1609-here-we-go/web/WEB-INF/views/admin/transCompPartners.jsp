@@ -4,6 +4,9 @@
     Author     : Admin
 --%>
 
+<%@page import="manager.CompanyManager"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Company"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -36,7 +39,8 @@
         <div class="activity">
             <!-- Hoverable Table rows -->
             <div class="card">
-                <form action="">
+                <form action="<c:url value="/admin/search.do"/>" method="post">
+
                     <div class="card-header tc-head">
                         <div class="col-md-6">
                             <label for="sel1" class="form-label">Sorting by</label>
@@ -55,53 +59,53 @@
                         <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <input
+                                    name ="nameCom"
                                     type="text"
                                     class="form-control"
                                     placeholder="Transportation Company's Name"
                                     aria-label="Transportation Company's Name"
                                     aria-describedby="button-addon2"
                                     />
-                                <button
-                                    class="btn btn-outline-secondary tc-s-btn"
-                                    type="button"
-                                    id="button-addon2"
-                                    >
-                                    Search
-                                </button>
+                               
+                           
+
+
+                                <input type="submit" value="search"  class="btn btn-outline-secondary tc-s-btn"
+                                       type="button"
+                                       id="button-addon2"  />
+
                             </div>
+
+
                         </div>
                     </div>
                     <div class="list-group">
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Thanh Buoi Bus</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Phuong Trang Bus (Futa Bus)</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Ha Noi Rides On Time</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Sapa Dragon</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Hoang Long Bus</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Hue Tourist Bus</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Mai Linh Express Bus</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Hai Van Bus</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Interbus Lines</p>
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <p>Sapa Bus Lines</p>
-                        </div>
+
+                        <%
+                            ArrayList<Company> listSearch = (ArrayList<Company>) request.getAttribute("listSearch");
+                            if (listSearch == null) {
+                                ArrayList<Company> listcom = CompanyManager.getAllCompany();
+                                for (Company company : listcom) {
+                        %> <div class="list-group-item list-group-item-action nt-ct-group">
+                            <p><%= company.getName()%></p>
+                        </div><%
+
+                                }
+                            } else if (listSearch.size() > 0){
+                                for (Company company : listSearch) {
+                        %> <div class="list-group-item list-group-item-action nt-ct-group">
+                            <p><%= company.getName()%></p>
+                        </div><%
+
+                                }
+                        } else {
+                            %>
+                            <p>Don't find your company</p>
+                        <%
+                        }
+
+                        %>
+
                     </div>
                 </form>
             </div>
