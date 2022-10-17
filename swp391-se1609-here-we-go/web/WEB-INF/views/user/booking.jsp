@@ -13,12 +13,9 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="<c:url value="/css/seat-booking.css"/>" />
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -312,6 +309,33 @@
                             </div>
                         </div>
                         <div class="accordion-item">
+                            <h3 class="accordion-header" id="panelsStayOpen-headingFour">
+                                <a
+                                    href="/"
+                                    class="accordion collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseFour"
+                                    aria-expanded="false"
+                                    aria-controls="panelsStayOpen-collapseFour"
+                                    >
+                                    Desired Number Of Seats
+                                </a>
+                            </h3>
+                            <div
+                                id="panelsStayOpen-collapseFour"
+                                class="accordion-collapse collapse show"
+                                aria-labelledby="panelsStayOpen-headingFour"
+                                >
+                                <div class="accordion-body">
+                                    <div class="input-group">
+                                        <span class="input-group-text">Number</span>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
                             <h3 class="accordion-header" id="panelsStayOpen-headingThree">
                                 <a
                                     href="/"
@@ -391,6 +415,9 @@
                         </div>
                         <div class="seat-booking-form-dt-ct">
                             <div class="col-md-5 seat-booking-form-dt-ct-t-pt">
+                                <div class="route-name" style="display: flex;">
+                                    <h6 style="padding-right: 5px;">Ho Chi Minh City</h6><i class="fa fa-long-arrow-right" style="padding-top: 4px;"></i><h6 style="padding-left: 5px;">Da Lat, Lam Dong</h6>
+                                </div>   
                                 <p>6:00 AM</p>
                                 <hr style="width: 200px" />
                                 <div class="seat-point">
@@ -685,5 +712,6 @@
                 </div>
             </div>
         </section>
+        <script src="<c:url value="/js/script.js"/>"></script>
     </body>
 </html>

@@ -1400,6 +1400,7 @@ input[type="range"]::-moz-range-thumb {
     border-right: rgb(219, 219, 219) solid 1px;
 }
 
+
 .seat-point-select {
     width: 200px;
 }
