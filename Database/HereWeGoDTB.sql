@@ -48,36 +48,38 @@ create table [Role](
 
 create table [User](
 	userId bigint primary key identity(1,1) not null,
-	name nvarchar(50) not null,
+	name nvarchar(80) not null,
 	googleId varchar(200),
 	phone varchar(12),
 	avatarLink varchar(200),
 	roleId int foreign key references Role(roleId) not null,
-	password nvarchar(20) not null
+	password nvarchar(20) not null,
+	dateCreate date
 )
 
- create table [Order](
-	orderId bigint primary key identity(1,1) not null,
-	date datetime not null,
-	customerId bigint foreign key references [User](UserId) not null,
-	totalPrice int not null
- )
+
 
 create table Payment(
 	paymentId bigint primary key identity(1,1) not null,
-	orderId bigint foreign key references [Order](orderId) not null,
 	paymentAccount varchar(100) not null,
 	paymentDate datetime not null,
 	creditCardNumber varchar(20) not null,
 	creditCardEXPDate date not null,
 	cardHolderName varchar(50) not null,
 )
-
+ create table [Order](
+	orderId bigint primary key identity(1,1) not null,
+	date datetime not null,
+	customerId bigint foreign key references [User](UserId) not null,
+	totalPrice int not null,
+	paymentID bigint foreign key references Payment(paymentId),
+ )
 create table Ticket(
 	ticketId bigint primary key identity(1,1) not null,
 	orderId bigint foreign key references [Order](orderId) not null,
 	routeDeTailId bigint foreign key references RouteDetail(routeDetailId) not null,
-	position int not null, 
+	position int not null,
+	passengerName nvarchar(70) not null 
 )
 
 create table Feedback(
@@ -102,13 +104,13 @@ INSERT INTO [Role] VALUES('ADMIN')
 INSERT INTO [Role] VALUES('CUSTOMER')
 
 
-INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170','',2,'hoanghuy123')
-INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546','',2,'anhminh123')
-INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625','',2,'baotram123')
-INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365','',2,'hoanganh123')
-INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345','',2,'baolong123')
-INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276','',2,'hoailinh123')
-INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725','',1,'vinhhung123')
+INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170','',2,'hoanghuy123', CURRENT_TIMESTAMP)
+INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546','',2,'anhminh123',CURRENT_TIMESTAMP)
+INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625','',2,'baotram123',CURRENT_TIMESTAMP)
+INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365','',2,'hoanganh123',CURRENT_TIMESTAMP)
+INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345','',2,'baolong123',CURRENT_TIMESTAMP)
+INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276','',2,'hoailinh123',CURRENT_TIMESTAMP)
+INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725','',1,'vinhhung123',CURRENT_TIMESTAMP)
 
 INSERT INTO Place VALUES(N'Thành Phố Hồ Chí Minh')
 INSERT INTO Place VALUES(N'Hà Nội')
@@ -147,19 +149,19 @@ INSERT INTO RouteDetail VALUES(6,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:0
 INSERT INTO RouteDetail VALUES(7,5,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00')
 INSERT INTO RouteDetail VALUES(8,2,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00')
 
-INSERT INTO [Order] VALUES('2022-09-28 19:23:11',1,600000)
-INSERT INTO [Order] VALUES('2022-09-25 20:23:11',2,300000)
-INSERT INTO [Order] VALUES('2022-09-25 19:23:11',3,300000)
-INSERT INTO [Order] VALUES('2022-09-28 18:23:11',4,300000)
-INSERT INTO [Order] VALUES('2022-09-28 20:23:11',1,300000)
+INSERT INTO [Order] VALUES('2022-09-28 19:23:11',1,600000,null)
+INSERT INTO [Order] VALUES('2022-09-25 20:23:11',2,300000,null)
+INSERT INTO [Order] VALUES('2022-09-25 19:23:11',3,300000,null)
+INSERT INTO [Order] VALUES('2022-09-28 18:23:11',4,300000,null)
+INSERT INTO [Order] VALUES('2022-09-28 20:23:11',1,300000,null)
 
-INSERT INTO Ticket VALUES(1,1,1)
-INSERT INTO Ticket VALUES(1,2,3)
-INSERT INTO Ticket VALUES(2,2,4)
-INSERT INTO Ticket VALUES(3,1,2)
-INSERT INTO Ticket VALUES(4,1,3)
-INSERT INTO Ticket VALUES(5,1,4)
+INSERT INTO Ticket VALUES(1,1,1, 'Khá Bảnh')
+INSERT INTO Ticket VALUES(1,2,3, 'Huấn Hoa Hồng')
+INSERT INTO Ticket VALUES(2,2,4, 'Tiến Bịp')
+INSERT INTO Ticket VALUES(3,1,2, 'Chi Pu')
+INSERT INTO Ticket VALUES(4,1,3, 'Lộc Fuho')
+INSERT INTO Ticket VALUES(5,1,4, 'Đạt Vila')
 
-INSERT INTO [Order] VALUES('2022-09-12 19:23:11',1,300000)
+INSERT INTO [Order] VALUES('2022-09-12 19:23:11',1,300000, null)
 INSERT INTO RouteDetail VALUES(8,5,'2022-09-18 18:00:00',300000,'2022-10-18 22:00:00')
-INSERT INTO Ticket VALUES(1,9,1)
+INSERT INTO Ticket VALUES(1,9,1, 'Châu Việt Cường')
