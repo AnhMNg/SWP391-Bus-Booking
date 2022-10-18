@@ -1,0 +1,84 @@
+
+.header-comp {
+    justify-content:center;
+    display: flex;
+    padding: 2% 6%;
+    align-items: center;
+    border-bottom: 0.5px solid #616060 ;
+    height: 300px;
+}
+
+.tc-logo-img {
+    padding-right: 15px;
+}
+.tc-logo-img img {
+    width: 155px;
+    height: 107px;
+}
+.tc-header {
+    padding-left: 15px;
+}
+.transportation-comp-content {
+    padding-left: 25px;
+}
+.transportation-comp-content h1 {
+    color:#475f9b;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 81px;
+}
+.transportation-comp-content,
+.rout-list {
+    text-align: left;
+    padding: 64px;
+    margin: 0px 62.8px;
+}
+.bus-type-comp{
+    text-align: left;
+    margin: 0px 62.8px;
+}
+.transportation-comp-content h1,
+.bus-type-comp h1,
+.rout-list h1,
+.tc-header h1{
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 50px;
+    text-transform: capitalize;
+    color: #6180CD;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.transportation-comp-content .content {
+    padding-top: 32px;
+}
+
+.line-img {
+    margin-bottom: 15px;
+}
+
+.transportation-comp-content .content,
+.transportation-comp-content .conti-content {
+    margin: 0px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
+    color: #000000;
+    mix-blend-mode: normal;
+    text-align: justify;
+}
+
+.bus-type-comp .type-header {
+    margin-bottom: 20px;
+}
+
+.type-bus {
+    padding-top: 32px;
+}
+.rout-list h1 {
+    margin-bottom: 32px;
+}
+.bus-content h4{
+    padding: 25px;
+}
