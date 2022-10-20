@@ -13,16 +13,38 @@ public class Ticket {
     private long orderId;
     private long routeDetailId;
     private int position;
+    private String passengerName;
+    private String purchaseDate;
 
     public Ticket() {
     }
 
-    public Ticket(long ticketId, long orderId, long routeDetailId, int position) {
+    public Ticket(long ticketId, long orderId, long routeDetailId, int position, String passengerName, String purchaseDate) {
         this.ticketId = ticketId;
         this.orderId = orderId;
         this.routeDetailId = routeDetailId;
         this.position = position;
+        this.passengerName = passengerName;
+        this.purchaseDate = purchaseDate;
     }
+
+    public String getPassengerName() {
+        return passengerName;
+    }
+
+    public void setPassengerName(String passengerName) {
+        this.passengerName = passengerName;
+    }
+
+    public String getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(String purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+  
 
     public long getTicketId() {
         return ticketId;

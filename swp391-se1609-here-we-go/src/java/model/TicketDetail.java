@@ -10,7 +10,6 @@ package model;
  * @author baolo
  */
 public class TicketDetail extends Ticket{
-    private String purchaseDate;
     private int price;
     private String timeStart;
     private String timeArrival;
@@ -19,13 +18,10 @@ public class TicketDetail extends Ticket{
     private String kind;
     private String depart;
     private String destination;
+    private String departDetail;
+    private String destintionDetail;
 
-    public TicketDetail() {
-    }
-
-    public TicketDetail(long routeDetailId, int position, String purchaseDate, int price, String timeStart, String timeArrival, String companyName, int capacity, String kind, String depart, String destination,long ticketId, long orderId) {
-        super(ticketId, orderId, routeDetailId, position);
-        this.purchaseDate = purchaseDate;
+    public TicketDetail(int price, String timeStart, String timeArrival, String companyName, int capacity, String kind, String depart, String destination, String departDetail, String destintionDetail) {
         this.price = price;
         this.timeStart = timeStart;
         this.timeArrival = timeArrival;
@@ -34,14 +30,22 @@ public class TicketDetail extends Ticket{
         this.kind = kind;
         this.depart = depart;
         this.destination = destination;
+        this.departDetail = departDetail;
+        this.destintionDetail = destintionDetail;
     }
 
-    public String getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public void setPurchaseDate(String purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public TicketDetail(int price, String timeStart, String timeArrival, String companyName, int capacity, String kind, String depart, String destination, String departDetail, String destintionDetail, long ticketId, long orderId, long routeDetailId, int position, String passengerName, String purchaseDate) {
+        super(ticketId, orderId, routeDetailId, position, passengerName, purchaseDate);
+        this.price = price;
+        this.timeStart = timeStart;
+        this.timeArrival = timeArrival;
+        this.companyName = companyName;
+        this.capacity = capacity;
+        this.kind = kind;
+        this.depart = depart;
+        this.destination = destination;
+        this.departDetail = departDetail;
+        this.destintionDetail = destintionDetail;
     }
 
     public int getPrice() {
@@ -87,4 +91,42 @@ public class TicketDetail extends Ticket{
     public String getKind() {
         return kind;
     }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public String getDepart() {
+        return depart;
+    }
+
+    public void setDepart(String depart) {
+        this.depart = depart;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getDepartDetail() {
+        return departDetail;
+    }
+
+    public void setDepartDetail(String departDetail) {
+        this.departDetail = departDetail;
+    }
+
+    public String getDestintionDetail() {
+        return destintionDetail;
+    }
+
+    public void setDestintionDetail(String destintionDetail) {
+        this.destintionDetail = destintionDetail;
+    }
+    
+    
 }

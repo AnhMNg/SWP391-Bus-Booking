@@ -194,7 +194,7 @@ public class CustomerController extends HttpServlet {
         String otp6 = request.getParameter("otp6");
         String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
         if (otpCheck.equals(SUBMIT_OTP)) {
-            User user = new User(0, name, null, phone, "", 2, password);
+            User user = new User(0,name,null,phone, null, 2,password, "");
             if (userManager.register(user)) {
                 request.setAttribute("controller", "user");
                 request.setAttribute("action", "login");               
