@@ -16,12 +16,9 @@ public class User {
     private String avtLink;
     private int roleId;
     private String password;
+    private String dateCreate;
 
-    public User() {
-    }
-
-
-    public User(long userId, String name, String googleId, String phone, String avtLink, int roleId, String password) {
+    public User(long userId, String name, String googleId, String phone, String avtLink, int roleId, String password, String dateCreate) {
         this.userId = userId;
         this.name = name;
         this.googleId = googleId;
@@ -29,14 +26,10 @@ public class User {
         this.avtLink = avtLink;
         this.roleId = roleId;
         this.password = password;
+        this.dateCreate = dateCreate;
     }
 
-    public String getGoogleId() {
-        return googleId;
-    }
-
-    public void setGoogleId(String googleId) {
-        this.googleId = googleId;
+    public User() {
     }
 
     public long getUserId() {
@@ -53,6 +46,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
     }
 
     public String getPhone() {
@@ -86,5 +87,15 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(String dateCreate) {
+        this.dateCreate = dateCreate;
+    }
+
+    
     
 }

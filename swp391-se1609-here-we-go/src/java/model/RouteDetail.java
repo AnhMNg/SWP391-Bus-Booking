@@ -8,24 +8,24 @@ package model;
  *
  * @author baolo
  */
-public class RouteDetail {
+public class RouteDetail extends Route{
     private long routeDetailId;
-    private long routeId;
     private int busTypeId;
     private String startTime;
     private int price;
     private String arrivalTime;
+    private String departDetail;
+    private String destinationDetail;
 
-    public RouteDetail() {
-    }
-
-    public RouteDetail(long routeDetailId, long routeId, int busTypeId, String startTime, int price, String arrivalTime) {
+    public RouteDetail(long routeDetailId, int busTypeId, String startTime, int price, String arrivalTime, String departDetail, String destinationDetail, long routeId, String companyName, String depart, String destination) {
+        super(routeId, companyName, depart, destination);
         this.routeDetailId = routeDetailId;
-        this.routeId = routeId;
         this.busTypeId = busTypeId;
         this.startTime = startTime;
         this.price = price;
         this.arrivalTime = arrivalTime;
+        this.departDetail = departDetail;
+        this.destinationDetail =  destinationDetail;
     }
 
     public long getRouteDetailId() {
@@ -34,14 +34,6 @@ public class RouteDetail {
 
     public void setRouteDetailId(long routeDetailId) {
         this.routeDetailId = routeDetailId;
-    }
-
-    public long getRouteId() {
-        return routeId;
-    }
-
-    public void setRouteId(long routeId) {
-        this.routeId = routeId;
     }
 
     public int getBusTypeId() {
@@ -75,5 +67,26 @@ public class RouteDetail {
     public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
+
+    public String getDepartDetail() {
+        return departDetail;
+    }
+
+    public void setDepartDetail(String departDetail) {
+        this.departDetail = departDetail;
+    }
+
+    public String getDestinationDetail() {
+        return destinationDetail;
+    }
+
+    public void setDestinationDetail(String destinationDetail) {
+        this.destinationDetail = destinationDetail;
+    }
+
+    
+    
+    
+
     
 }

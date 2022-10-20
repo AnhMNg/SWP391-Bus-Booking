@@ -81,7 +81,7 @@
                         <td><%= user.getUserId() %></td>
                         <td><%= user.getName() %></td>
                         <td><%= user.getPhone() %></td>
-                        <td>Coming soon</td>
+                        <td><%= user.getDateCreate() %></td>
                         <td>Coming soon</td>
                     </tr>
                     <%

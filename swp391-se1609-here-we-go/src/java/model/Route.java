@@ -10,18 +10,15 @@ package model;
  */
 public class Route {
     private long routeId;
-    private int companyId;
-    private long departId;
-    private long destinationId;
+    private String companyName;
+    private String depart;
+    private String destination;
 
-    public Route() {
-    }
-
-    public Route(long routeId, int companyId, long departId, long destinationId) {
+    public Route(long routeId, String companyName, String depart, String destination) {
         this.routeId = routeId;
-        this.companyId = companyId;
-        this.departId = departId;
-        this.destinationId = destinationId;
+        this.companyName = companyName;
+        this.depart = depart;
+        this.destination = destination;
     }
 
     public long getRouteId() {
@@ -32,28 +29,30 @@ public class Route {
         this.routeId = routeId;
     }
 
-    public int getCompanyId() {
-        return companyId;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public long getDepartId() {
-        return departId;
+    public String getDepart() {
+        return depart;
     }
 
-    public void setDepartId(long departId) {
-        this.departId = departId;
+    public void setDepart(String depart) {
+        this.depart = depart;
     }
 
-    public long getDestinationId() {
-        return destinationId;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setDestinationId(long destinationId) {
-        this.destinationId = destinationId;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
+
+    
     
 }

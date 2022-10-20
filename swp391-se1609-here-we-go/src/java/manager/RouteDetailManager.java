@@ -249,14 +249,20 @@ public class RouteDetailManager {
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                pst = cn.prepareStatement("SELECT rd.routeDetailId, rd.routeId, rd.busTypeId, rd.startTime, rd.price, rd.timeArrival FROM [RouteDetail] rd\n"
-                        + "inner join \n"
-                        + "(SELECT * FROM [Route] WHERE Route.companyId = ?) r\n"
-                        + "ON rd.routeId = r.routeId");
+                pst = cn.prepareStatement("SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination  FROM [RouteDetail] rd\n" +
+"                        inner join\n" +
+"                        (SELECT Route.companyId, Route.departId, Route.destinationId, Route.routeId, com.name, PlaceName.depart, PlaceName.destination FROM [Route], [Company] com,\n" +
+"						(SELECT dep.routeId,dep.name depart,des.name destination FROM\n" +
+"						(SELECT * FROM Route,Place WHERE Route.departId = Place.placeId) dep,\n" +
+"						(SELECT * FROM Route,Place WHERE Route.destinationId = Place.placeId) des\n" +
+"						WHERE des.routeId = dep.routeId) PlaceName\n" +
+"						WHERE Route.companyId = 1 and com.companyId = Route.companyId and PlaceName.routeId = Route.routeId) r\n" +
+"                        ON rd.routeId = r.routeId");
                 pst.setLong(1, id);
                 rs = pst.executeQuery();
                 while (rs!= null && rs.next() ) {
-                    rd = new RouteDetail(rs.getLong(1), rs.getLong(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6));
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), rs.getString(3), rs.getInt(4),rs.getString(5), rs.getString(6),
+                            rs.getString(7), rs.getLong(8), rs.getString(9), rs.getString(10), rs.getString(11));
                     list.add(rd);
                 }
             }
