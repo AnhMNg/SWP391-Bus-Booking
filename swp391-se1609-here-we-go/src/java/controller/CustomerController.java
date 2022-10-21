@@ -20,12 +20,14 @@ import model.User;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import java.io.UnsupportedEncodingException;
 
 /**
  *
  * @author Admin
  */
 @WebServlet(name = "CustomerController", urlPatterns = {"/user"})
+
 public class CustomerController extends HttpServlet {
 
     private static final String ACCOUNT_SID = "AC7531d18ea7e24011554d500770a01c58";
@@ -47,6 +49,9 @@ public class CustomerController extends HttpServlet {
                 break;
             case "save":
                 save(request, response);
+                break;
+            case "search":
+                search(request, response);
                 break;
             default:
                 break;
@@ -177,7 +182,7 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-    
+
     private void save(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         UserManager userManager = new UserManager();
@@ -194,14 +199,25 @@ public class CustomerController extends HttpServlet {
         String otp6 = request.getParameter("otp6");
         String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
         if (otpCheck.equals(SUBMIT_OTP)) {
-            User user = new User(0,name,null,phone, null, 2,password, "");
+            User user = new User(0, name, null, phone, null, 2, password, "");
             if (userManager.register(user)) {
                 request.setAttribute("controller", "user");
-                request.setAttribute("action", "login");               
+                request.setAttribute("action", "login");
             }
         } else {
             request.setAttribute("message", "Wrong OTP, please check again!");
         }
+    }
+
+    private void search(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        String cityFrom = request.getParameter("cityfrom");
+        String cityTo = request.getParameter("cityto");
+        String districtFrom = request.getParameter("districtfrom");
+        String districtTo = request.getParameter("districtto");
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

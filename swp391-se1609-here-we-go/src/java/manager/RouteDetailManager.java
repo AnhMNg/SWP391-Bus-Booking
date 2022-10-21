@@ -18,6 +18,7 @@ import model.RouteDetail;
 import utils.DBUtils;
 
 public class RouteDetailManager {
+
     private static final String DELETE_ROUTEDETAIL = "DELETE FROM RouteDetail WHERE RouteDetail.routeDetailId = ?";
     private static final String GET_ROUTEDETAIL = "SELECT rpp.[Department], rpp.[Destination], b.kind, rd.startTime\n"
             + "FROM [BusType] b INNER JOIN [RouteDetail] rd ON b.busTypeId = rd.busTypeId JOIN\n"
@@ -245,23 +246,23 @@ public class RouteDetailManager {
         PreparedStatement pst = null;
         ResultSet rs = null;
         RouteDetail rd = null;
-        ArrayList<RouteDetail> list  = new ArrayList<>();
+        ArrayList<RouteDetail> list = new ArrayList<>();
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                pst = cn.prepareStatement("SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination  FROM [RouteDetail] rd\n" +
-"                        inner join\n" +
-"                        (SELECT Route.companyId, Route.departId, Route.destinationId, Route.routeId, com.name, PlaceName.depart, PlaceName.destination FROM [Route], [Company] com,\n" +
-"						(SELECT dep.routeId,dep.name depart,des.name destination FROM\n" +
-"						(SELECT * FROM Route,Place WHERE Route.departId = Place.placeId) dep,\n" +
-"						(SELECT * FROM Route,Place WHERE Route.destinationId = Place.placeId) des\n" +
-"						WHERE des.routeId = dep.routeId) PlaceName\n" +
-"						WHERE Route.companyId = 1 and com.companyId = Route.companyId and PlaceName.routeId = Route.routeId) r\n" +
-"                        ON rd.routeId = r.routeId");
+                pst = cn.prepareStatement("SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination  FROM [RouteDetail] rd\n"
+                        + "                        inner join\n"
+                        + "                        (SELECT Route.companyId, Route.departId, Route.destinationId, Route.routeId, com.name, PlaceName.depart, PlaceName.destination FROM [Route], [Company] com,\n"
+                        + "						(SELECT dep.routeId,dep.name depart,des.name destination FROM\n"
+                        + "						(SELECT * FROM Route,Place WHERE Route.departId = Place.placeId) dep,\n"
+                        + "						(SELECT * FROM Route,Place WHERE Route.destinationId = Place.placeId) des\n"
+                        + "						WHERE des.routeId = dep.routeId) PlaceName\n"
+                        + "						WHERE Route.companyId = 1 and com.companyId = Route.companyId and PlaceName.routeId = Route.routeId) r\n"
+                        + "                        ON rd.routeId = r.routeId");
                 pst.setLong(1, id);
                 rs = pst.executeQuery();
-                while (rs!= null && rs.next() ) {
-                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), rs.getString(3), rs.getInt(4),rs.getString(5), rs.getString(6),
+                while (rs != null && rs.next()) {
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),
                             rs.getString(7), rs.getLong(8), rs.getString(9), rs.getString(10), rs.getString(11));
                     list.add(rd);
                 }
@@ -281,41 +282,74 @@ public class RouteDetailManager {
         }
         return list;
     }
-    public static String getNameBusById(int id) throws SQLException{
+
+    public static String getNameBusById(int id) throws SQLException {
         Connection cn = DBUtils.getConnection();
-        if (cn != null){
+        if (cn != null) {
             PreparedStatement pst = cn.prepareStatement("SELECT BusType.kind FROM BusType WHERE busTypeId = ?");
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-            if (rs != null && rs.next()){
+            if (rs != null && rs.next()) {
                 return rs.getString(1);
             }
         }
         return null;
     }
-    public static String getNameDepartByRouteId(long id) throws SQLException{
+
+    public static String getNameDepartByRouteId(long id) throws SQLException {
         Connection cn = DBUtils.getConnection();
-        
-        if (cn != null){
+
+        if (cn != null) {
             PreparedStatement pst = cn.prepareStatement("SELECT p.name FROM Place p, Route r WHERE r.departId = p.placeId and r.routeId = ?");
             pst.setLong(1, id);
             ResultSet rs = pst.executeQuery();
-            if (rs != null && rs.next()){
+            if (rs != null && rs.next()) {
                 return rs.getString(1);
             }
         }
         return null;
     }
-    public static String getNameDestinationByRouteId(long id) throws SQLException{
+
+    public static String getNameDestinationByRouteId(long id) throws SQLException {
         Connection cn = DBUtils.getConnection();
-        if (cn != null){
+        if (cn != null) {
             PreparedStatement pst = cn.prepareStatement("SELECT p.name FROM Place p, Route r WHERE r.destinationId = p.placeId and r.routeId = ?");
             pst.setLong(1, id);
             ResultSet rs = pst.executeQuery();
-            if (rs != null && rs.next()){
+            if (rs != null && rs.next()) {
                 return rs.getString(1);
             }
         }
         return null;
+    }
+
+    public static ArrayList<RouteDetail> searchRouteDetail(String depart, String destination, String startDate) throws SQLException {
+        ArrayList<RouteDetail> list = new ArrayList<>();
+        Connection cn = DBUtils.getConnection();
+        RouteDetail rd = null;
+        if (cn != null) {
+            PreparedStatement pst = cn.prepareStatement("SELECT rd.routeDetailId, rd.busTypeId, rd.startTime, rd.price, rd.timeArrival, rd.departDetail, rd.detinationDetail, r.routeId, com.name, PlaceName.depart, PlaceName.destination\n"
+                    + "FROM RouteDetail rd, Route r,Company com ,(SELECT dep.routeId,dep.name depart,des.name destination FROM\n"
+                    + "						(SELECT * FROM Route,Place WHERE Route.departId = Place.placeId) dep,\n"
+                    + "						(SELECT * FROM Route,Place WHERE Route.destinationId = Place.placeId) des\n"
+                    + "					WHERE des.routeId = dep.routeId) PlaceName\n"
+                    + "WHERE rd.routeId = r.routeId   and PlaceName.routeId = r.routeId and com.companyId = r.companyId \n"
+                    + "and PlaceName.depart like ? and PlaceName.destination like ? and startTime > ?");
+            pst.setString(1,"%"+depart+"%");
+            pst.setString(2,"%"+destination+"%");
+            pst.setString(3,startDate + " 00:00:00");
+            ResultSet rs = pst.executeQuery();
+            while (rs != null && rs.next()){
+                rd = new RouteDetail(rs.getLong(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5),rs.getNString(6), rs.getNString(7), rs.getLong(8), rs.getNString(9), rs.getNString(10), rs.getNString(11));
+                list.add(rd);
+            }
+            if (rs != null) rs.close();
+            if (pst != null) pst.close();
+            if (cn != null) cn.close();
+            
+            
+        }
+
+        return list;
     }
 }
