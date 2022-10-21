@@ -4,23 +4,17 @@
  */
 package controller;
 
-import config.Config;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import manager.CompanyManager;
-import model.Company;
 
 /**
  *
- * @author Admin
+ * @author BAOTRAM
  */
-@WebServlet(name = "AdminController", urlPatterns = {"/admin"})
-public class AdminController extends HttpServlet {
+public class NotificationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,30 +27,8 @@ public class AdminController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = (String) request.getAttribute("action");
-        String controller = (String) request.getAttribute("controller");
-
-        switch(action) {
-            case "search":
-                Search(request, response);
-                break;
-            case "sortAZ":
-                SortAZ(request, response);
-                break;    
-        }
-        
-        request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
-
-    }
-    private void Search(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("utf-8");
-        String name = (String) request.getParameter("nameCom");
-        ArrayList<Company> listc2 = CompanyManager.searchCompanyByName(name);    
-        request.setAttribute("listSearch", listc2);
-        request.setAttribute("controller", "admin");
-        request.setAttribute("action", "transCompPartners");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -97,9 +69,5 @@ public class AdminController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void SortAZ(HttpServletRequest request, HttpServletResponse response) {
-        
-    }
 
 }
