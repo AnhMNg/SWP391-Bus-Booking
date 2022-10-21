@@ -7,13 +7,15 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="manager.CompanyManager"%>
 <%@page import="model.Company"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
     <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,7 +59,7 @@
                         <img src="<c:url value="/images/Bus3.png"/>" alt="bus">
                     </div>
                     <div class="route-selection">
-                        <form action="<c:url value="/user/booking.do"/>">
+                        <form action="<c:url value="/user/search.do"/>">
                             <div class="col-md-12 input-route">
                                 <div class="col-md-4 element">
                                     <span>From</span>
@@ -68,11 +70,16 @@
                                         <select class="form-select form-select-md mb-3" id="districtfrom" aria-label=".form-select-md" name="districtfrom">
                                             <option value="" selected>Select City</option>
                                         </select>
+                                       
                                     </div>
                                     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
                                     <script>
+                                        
+                                          
                                         var citis = document.getElementById("cityfrom");
                                         var districts = document.getElementById("districtfrom");
+                                        
+                                        
                                         //var wards = document.getElementById("ward");
                                         var Parameter = {
                                             url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
@@ -81,35 +88,40 @@
                                         };
                                         var promise = axios(Parameter);
                                         promise.then(function (result) {
-                                            renderCity(result.data);
+                                            renderCity2(result.data);
                                         });
 
-                                        function renderCity(data) {
+                                        function renderCity2(data) {
                                             for (const x of data) {
-                                                citis.options[citis.options.length] = new Option(x.Name, x.Id);
+                                                citis.options[citis.options.length] = new Option(x.Name, x.Name);
+                                                
                                             }
+                                            
                                             citis.onchange = function () {
                                                 districts.length = 1;
                                                 // ward.length = 1;
                                                 if (this.value != "") {
-                                                    const result = data.filter(n => n.Id === this.value);
+                                                    const result = data.filter(n => n.Name === this.value);
 
                                                     for (const k of result[0].Districts) {
-                                                        districts.options[districts.options.length] = new Option(k.Name, k.Id);
+                                                        districts.options[districts.options.length] = new Option(k.Name, k.Name);
+                                                        
                                                     }
                                                 }
                                             };
 
                                         }
+                                      
+                                        
                                     </script>
                                 </div>
                                 <div class="col-md-4 element">
                                     <span>To</span>
                                     <div class="pl-select">
-                                        <select class="form-select form-select-md mb-3" id="cityto" aria-label=".form-select-md" name="cityfrom">
+                                        <select class="form-select form-select-md mb-3" id="cityto" aria-label=".form-select-md" name="cityto">
                                             <option value="" selected>Select Province/City</option>           
                                         </select>
-                                        <select class="form-select form-select-md mb-3" id="districtto" aria-label=".form-select-md" name="districtfrom">
+                                        <select class="form-select form-select-md mb-3" id="districtto" aria-label=".form-select-md" name="districtto">
                                             <option value="" selected>Select City</option>
                                         </select>
                                     </div>
@@ -130,16 +142,16 @@
 
                                         function renderCity2(data) {
                                             for (const x of data) {
-                                                citis2.options[citis2.options.length] = new Option(x.Name, x.Id);
+                                                citis2.options[citis2.options.length] = new Option(x.Name, x.Name);
                                             }
                                             citis2.onchange = function () {
                                                 districts2.length = 1;
                                                 // ward.length = 1;
                                                 if (this.value != "") {
-                                                    const result = data.filter(n => n.Id === this.value);
+                                                    const result = data.filter(n => n.Name === this.value);
 
                                                     for (const k of result[0].Districts) {
-                                                        districts2.options[districts2.options.length] = new Option(k.Name, k.Id);
+                                                        districts2.options[districts2.options.length] = new Option(k.Name, k.Name);
                                                     }
                                                 }
                                             };
@@ -240,12 +252,12 @@
                                 %>
                                 <label for="<%=  com.getCompanyId()%>" class="list-group-item list-group-item-action"><%= com.getName()%></label>
                                 <input id="<%=  com.getCompanyId()%>" type="submit" hidden  name="comP" value="<%=  com.getCompanyId()%>"/>
-                                
+
                                 <%
                                     }
 
                                 %>
-                               
+
                             </form>
                         </div>          
                     </div>                 

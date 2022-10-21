@@ -33,6 +33,7 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
         String controller = (String) request.getAttribute("controller");
+        
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
     }
 
