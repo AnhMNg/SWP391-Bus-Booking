@@ -1,3 +1,8 @@
+
+.main-nav {
+    background-color: #9DC5D2;
+}
+
 .sticky-route-selection {
     position: fixed;
     width: 100%;
@@ -9,13 +14,17 @@
     display: flex;
 }
 
+.sticky-route-selection form {
+    display: flex;
+}
+
 .sticky-input-route {
     display: flex;
 }
 
 .sticky-route-search {
     padding-top: 20px;
-    padding-left: 150px;
+    padding-left: 100px;
 }
 
 .sticky-route-search-btn {
@@ -29,6 +38,10 @@
 .seat-booking {
     width: 100%;
     min-height: 150vh;
+}
+
+.pl-select {
+    display: flex;
 }
 
 @media(max-width:700px) {
@@ -256,6 +269,7 @@ input[type="range"]::-moz-range-thumb {
     width: 100%;
     border: #999 solid 1px;
     border-radius: 20px;
+    margin-bottom: 25px;
 }
 
 .seat-booking-form-dt-header {
@@ -395,8 +409,6 @@ input[type="range"]::-moz-range-thumb {
     display: none;
 }
 
-
-
 /* Style the checkmark/indicator */
 .seat-ctn .checkmark:after {
     left: 9px;
@@ -410,6 +422,94 @@ input[type="range"]::-moz-range-thumb {
     transform: rotate(45deg);
 }
 
+.seat-pos-map-room .seat-row {
+  display: flex;
+  height: 25px;
+}
+
+.seat-pos-map-room .seat-ctn {
+  display: block;
+  position: relative;
+  padding-left: 50px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.seat-pos-map-room .seat-ctn input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.seat-pos-map-room .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 40px;
+  margin: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #444451;
+}
+
+.seat-pos-map-room .disable-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 40px;
+  margin: 3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #D9D9D9;
+}
+
+/* On mouse-over, add a grey background color */
+.seat-pos-map-room .seat-ctn:hover input~.checkmark {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.seat-pos-map-room .seat-ctn:hover input~.disable-checkmark {
+  cursor: default;
+  transform: scale(1);
+}
+
+/* When the checkbox is checked, add a blue background */
+.seat-pos-map-room .seat-ctn input:checked~.checkmark {
+  background-color: #6feaf6;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.seat-pos-map-room .seat-ctn:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Style the checkmark/indicator */
+.seat-pos-map-room .seat-ctn .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.seat-pos-map-room .seat-row:nth-child(1) {
+  margin-bottom: 40px;
+}
+
 .seat-map {
     display: flex;
     padding-left: 30px;
@@ -420,6 +520,13 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 20px;
     margin-right: 130px;
     padding: 10px;
+}
+
+.seat-pos-map-room {
+  border: rgba(219, 219, 219, 0.664) solid 1px;
+  border-radius: 20px;
+  margin-right: 130px;
+  padding: 10px;
 }
 
 .seat-pick-tt {

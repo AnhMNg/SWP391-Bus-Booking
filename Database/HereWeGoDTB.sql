@@ -1,9 +1,9 @@
-﻿drop database HereWeGo
+﻿drop database HereWeGo2
 GO
-Create database HereWeGo
+Create database HereWeGo2
 GO
 
-use HereWeGo
+use HereWeGo2
 Create table Company(
 	companyId int primary key identity(1,1),
 	name nvarchar(100) not null,
@@ -56,11 +56,7 @@ create table [User](
 	avatarLink varchar(200),
 	roleId int foreign key references Role(roleId) not null,
 	password nvarchar(20) not null,
-<<<<<<< Updated upstream
-	dateCreate date
-=======
 	dateCreate datetime
->>>>>>> Stashed changes
 )
 
 
@@ -85,12 +81,8 @@ create table Ticket(
 	orderId bigint foreign key references [Order](orderId) not null,
 	routeDeTailId bigint foreign key references RouteDetail(routeDetailId) not null,
 	position int not null,
-<<<<<<< Updated upstream
-	passengerName nvarchar(70) not null 
-=======
 	passengerName nvarchar(70) not null,
 	purchaseDate datetime
->>>>>>> Stashed changes
 )
 
 create table Feedback(
@@ -105,7 +97,7 @@ create table [Notification](
 	date datetime not null
 )
 
-USE HereWeGo
+USE HereWeGo2
 INSERT INTO Company VALUES(N'Phương Trang Bus','phuongtrangstation@gmail.com','0929828338','','Nha xe Phuong Trang Description............................','phuongtrang123')
 INSERT INTO Company VALUES(N'Thành Bưởi Bus','thanhbuoi@gmail.com','0928763562','','','thanhbuoi123')
 INSERT INTO Company VALUES(N'Hà Nội Rides On Time','hnride.ontime@gmail.com','0989876537','','','hnride123')
@@ -157,16 +149,7 @@ INSERT INTO BusType VALUES(16, 'normal')
 INSERT INTO BusType VALUES(28, 'normal')
 INSERT INTO BusType VALUES(28, 'sleep')
 
-<<<<<<< Updated upstream
-INSERT INTO RouteDetail VALUES(1,1,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00')
-INSERT INTO RouteDetail VALUES(2,2,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00')
-INSERT INTO RouteDetail VALUES(3,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:00:00')
-INSERT INTO RouteDetail VALUES(2,1,'2022-10-18 18:00:00',300000,'2022-10-18 20:00:00')
-INSERT INTO RouteDetail VALUES(4,2,'2022-10-18 18:00:00',300000,'2022-10-18 19:00:00')
-INSERT INTO RouteDetail VALUES(6,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:00:00')
-INSERT INTO RouteDetail VALUES(7,5,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00')
-INSERT INTO RouteDetail VALUES(8,2,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00')
-=======
+
 INSERT INTO RouteDetail VALUES(1,1,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00', N'123 Lê Hồng Phong', N'321 Phan Đình Giót')
 INSERT INTO RouteDetail VALUES(2,2,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00', N'345 Hồ Hảo Hớn', N'543 Nguyễn Cư Trinh')
 INSERT INTO RouteDetail VALUES(3,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:00:00', N'284 Trần Đình Xu', N'756 Nguyễn Văn Cừ')
@@ -175,7 +158,7 @@ INSERT INTO RouteDetail VALUES(4,2,'2022-10-18 18:00:00',300000,'2022-10-18 19:0
 INSERT INTO RouteDetail VALUES(6,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:00:00', N'123 Đốc Binh Kiều', N'564 Nguyễn Thị Minh Khai')
 INSERT INTO RouteDetail VALUES(7,5,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00', N'80 Trần Bình Trọng', N'21 Ngô Gia Tự')
 INSERT INTO RouteDetail VALUES(8,2,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00', N'28 Nguyễn Đình Chiểu', N'87 Độc Lập')
->>>>>>> Stashed changes
+
 
 INSERT INTO [Order] VALUES('2022-09-28 19:23:11',1,600000,null)
 INSERT INTO [Order] VALUES('2022-09-25 20:23:11',2,300000,null)
@@ -183,18 +166,6 @@ INSERT INTO [Order] VALUES('2022-09-25 19:23:11',3,300000,null)
 INSERT INTO [Order] VALUES('2022-09-28 18:23:11',4,300000,null)
 INSERT INTO [Order] VALUES('2022-09-28 20:23:11',1,300000,null)
 
-<<<<<<< Updated upstream
-INSERT INTO Ticket VALUES(1,1,1, 'Khá Bảnh')
-INSERT INTO Ticket VALUES(1,2,3, 'Huấn Hoa Hồng')
-INSERT INTO Ticket VALUES(2,2,4, 'Tiến Bịp')
-INSERT INTO Ticket VALUES(3,1,2, 'Chi Pu')
-INSERT INTO Ticket VALUES(4,1,3, 'Lộc Fuho')
-INSERT INTO Ticket VALUES(5,1,4, 'Đạt Vila')
-
-INSERT INTO [Order] VALUES('2022-09-12 19:23:11',1,300000, null)
-INSERT INTO RouteDetail VALUES(8,5,'2022-09-18 18:00:00',300000,'2022-10-18 22:00:00')
-INSERT INTO Ticket VALUES(1,9,1, 'Châu Việt Cường')
-=======
 INSERT INTO Ticket VALUES(1,1,1, N'Khá Bảnh', CURRENT_TIMESTAMP)
 INSERT INTO Ticket VALUES(1,2,3, N'Huấn Hoa Hồng',CURRENT_TIMESTAMP)
 INSERT INTO Ticket VALUES(2,2,4, N'Tiến Bịp',CURRENT_TIMESTAMP)
@@ -205,4 +176,3 @@ INSERT INTO Ticket VALUES(5,1,4, N'Đạt Vila',CURRENT_TIMESTAMP)
 INSERT INTO [Order] VALUES('2022-09-12 19:23:11',1,300000, null)
 INSERT INTO RouteDetail VALUES(8,5,'2022-09-18 18:00:00',300000,'2022-10-18 22:00:00',N'123 Tân Kỳ Tân Quý', N'123 Lũy Bán Bích')
 INSERT INTO Ticket VALUES(1,9,1, 'Châu Việt Cường', CURRENT_TIMESTAMP)
->>>>>>> Stashed changes
