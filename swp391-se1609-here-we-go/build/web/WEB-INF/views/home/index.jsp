@@ -88,10 +88,10 @@
                                         };
                                         var promise = axios(Parameter);
                                         promise.then(function (result) {
-                                            renderCity2(result.data);
+                                            renderCity(result.data);
                                         });
 
-                                        function renderCity2(data) {
+                                        function renderCity(data) {
                                             for (const x of data) {
                                                 citis.options[citis.options.length] = new Option(x.Name, x.Name);
                                                 
@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="col-md-4 element">
                                     <span>Departure Date</span>
-                                    <input class="form-control" type="date" placeholder="Departure Date">
+                                    <input class="form-control" type="date" placeholder="Departure Date" name="startDate">
                                 </div>
                             </div>
                             <div class="search-btn">

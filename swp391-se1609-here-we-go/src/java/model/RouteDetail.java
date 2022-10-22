@@ -10,22 +10,28 @@ package model;
  */
 public class RouteDetail extends Route{
     private long routeDetailId;
-    private int busTypeId;
+    private int cappacity;
+    private int remaningPosition;
+    private String kindBus;
     private String startTime;
     private int price;
     private String arrivalTime;
     private String departDetail;
     private String destinationDetail;
+    private int[] listPosition; 
 
-    public RouteDetail(long routeDetailId, int busTypeId, String startTime, int price, String arrivalTime, String departDetail, String destinationDetail, long routeId, String companyName, String depart, String destination) {
+    public RouteDetail(long routeDetailId, int cappacity, int remaningPosition, String kindBus, String startTime, int price, String arrivalTime, String departDetail, String destinationDetail, int[] listPosition, long routeId, String companyName, String depart, String destination) {
         super(routeId, companyName, depart, destination);
         this.routeDetailId = routeDetailId;
-        this.busTypeId = busTypeId;
+        this.cappacity = cappacity;
+        this.remaningPosition = remaningPosition;
+        this.kindBus = kindBus;
         this.startTime = startTime;
         this.price = price;
         this.arrivalTime = arrivalTime;
         this.departDetail = departDetail;
-        this.destinationDetail =  destinationDetail;
+        this.destinationDetail = destinationDetail;
+        this.listPosition = listPosition;
     }
 
     public long getRouteDetailId() {
@@ -36,12 +42,28 @@ public class RouteDetail extends Route{
         this.routeDetailId = routeDetailId;
     }
 
-    public int getBusTypeId() {
-        return busTypeId;
+    public int getCappacity() {
+        return cappacity;
     }
 
-    public void setBusTypeId(int busTypeId) {
-        this.busTypeId = busTypeId;
+    public void setCappacity(int cappacity) {
+        this.cappacity = cappacity;
+    }
+
+    public int getRemaningPosition() {
+        return remaningPosition;
+    }
+
+    public void setRemaingPosition(int remaingPosition) {
+        this.remaningPosition = remaingPosition;
+    }
+
+    public String getKindBus() {
+        return kindBus;
+    }
+
+    public void setKindBus(String kindBus) {
+        this.kindBus = kindBus;
     }
 
     public String getStartTime() {
@@ -84,9 +106,13 @@ public class RouteDetail extends Route{
         this.destinationDetail = destinationDetail;
     }
 
-    
-    
-    
+    public int[] getListPosition() {
+        return listPosition;
+    }
 
-    
+    public void setListPosition(int[] listPosition) {
+        this.listPosition = listPosition;
+    }
+
+   
 }

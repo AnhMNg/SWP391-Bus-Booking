@@ -32,7 +32,15 @@ public class test {
             System.out.println("Price: " + rd.getPrice());
             System.out.println("StartTime: " + rd.getStartTime());
             System.out.println("=========================================================");
+            for (int i : rd.getListPosition()) {
+                System.out.println(i);
+            }
             
         }
+        int[] list2 = RouteDetailManager.getListPosition(2);
+        for (int i : list2) {
+            System.out.println(i);
+        }
+        
     }
 }
