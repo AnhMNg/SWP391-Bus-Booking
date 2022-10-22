@@ -4,6 +4,9 @@
     Author     : Admin
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="manager.RouteDetailManager"%>
+<%@page import="model.RouteDetail"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -40,35 +43,116 @@
     </head>
     <body>
         <div class="col-md-12 col-sm-12 container-fluid sticky-route-selection">
-            <div class="col-md-9 col-sm-8 sticky-input-route">
-                <div class="col-md-4 col-sm-4 element">
-                    <span>From</span>
-                    <select class="form-select">
-                        <option value="" disabled selected>Select Departure</option>
-                        <option>#</option>
-                    </select>
-                </div>
-                <div class="col-md-4 col-sm-4 element">
-                    <span>To</span>
-                    <select class="form-select">
-                        <option value="" disabled selected>Select Destination</option>
-                        <option>#</option>
-                    </select>
-                </div>
-                <div class="col-md-4 col-sm-4 element">
-                    <span>Departure Date</span>
-                    <input
-                        class="form-control"
-                        type="date"
-                        placeholder="Departure Date"
-                        />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-12 sticky-route-search">
-                <button class="btn btn-secondary sticky-route-search-btn">
-                    SEARCH
-                </button>
-            </div>
+            <form action="<c:url value="/user/search.do"/>">
+                            <div class="col-md-12 input-route">
+                                <div class="col-md-4 element">
+                                    <span>From</span>
+                                    <div class="pl-select">
+                                        <select class="form-select form-select-md mb-3" id="cityfrom" aria-label=".form-select-md" name="cityfrom">
+                                            <option value="" selected>Select Province/City</option>
+                                        </select>
+                                        <select class="form-select form-select-md mb-3" id="districtfrom" aria-label=".form-select-md" name="districtfrom">
+                                            <option value="" selected>Select City</option>
+                                        </select>
+                                       
+                                    </div>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+                                    <script>
+                                        
+                                          
+                                        var citis = document.getElementById("cityfrom");
+                                        var districts = document.getElementById("districtfrom");
+                                        
+                                        
+                                        //var wards = document.getElementById("ward");
+                                        var Parameter = {
+                                            url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                                            method: "GET",
+                                            responseType: "application/json",
+                                        };
+                                        var promise = axios(Parameter);
+                                        promise.then(function (result) {
+                                            renderCity(result.data);
+                                        });
+
+                                        function renderCity(data) {
+                                            for (const x of data) {
+                                                citis.options[citis.options.length] = new Option(x.Name, x.Name);
+                                                
+                                            }
+                                            
+                                            citis.onchange = function () {
+                                                districts.length = 1;
+                                                // ward.length = 1;
+                                                if (this.value != "") {
+                                                    const result = data.filter(n => n.Name === this.value);
+
+                                                    for (const k of result[0].Districts) {
+                                                        districts.options[districts.options.length] = new Option(k.Name, k.Name);
+                                                        
+                                                    }
+                                                }
+                                            };
+
+                                        }
+                                      
+                                        
+                                    </script>
+                                </div>
+                                <div class="col-md-4 element">
+                                    <span>To</span>
+                                    <div class="pl-select">
+                                        <select class="form-select form-select-md mb-3" id="cityto" aria-label=".form-select-md" name="cityto">
+                                            <option value="" selected>Select Province/City</option>           
+                                        </select>
+                                        <select class="form-select form-select-md mb-3" id="districtto" aria-label=".form-select-md" name="districtto">
+                                            <option value="" selected>Select City</option>
+                                        </select>
+                                    </div>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+                                    <script>
+                                        var citis2 = document.getElementById("cityto");
+                                        var districts2 = document.getElementById("districtto");
+                                        //var wards = document.getElementById("ward");
+                                        var Parameter2 = {
+                                            url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                                            method: "GET",
+                                            responseType: "application/json",
+                                        };
+                                        var promise2 = axios(Parameter2);
+                                        promise2.then(function (result) {
+                                            renderCity2(result.data);
+                                        });
+
+                                        function renderCity2(data) {
+                                            for (const x of data) {
+                                                citis2.options[citis2.options.length] = new Option(x.Name, x.Name);
+                                            }
+                                            citis2.onchange = function () {
+                                                districts2.length = 1;
+                                                // ward.length = 1;
+                                                if (this.value != "") {
+                                                    const result = data.filter(n => n.Name === this.value);
+
+                                                    for (const k of result[0].Districts) {
+                                                        districts2.options[districts2.options.length] = new Option(k.Name, k.Name);
+                                                    }
+                                                }
+                                            };
+
+                                        }
+                                    </script>
+
+                                </div>
+                                <div class="col-md-4 element">
+                                    <span>Departure Date</span>
+                                    <input class="form-control" type="date" placeholder="Departure Date" name="startDate">
+                                </div>
+                            </div>
+                            <div class="search-btn">
+                                <button class="btn btn-secondary route-search-btn">SEARCH</button>
+                            </div>
+                        </form>
         </div>
         <section class="seat-booking">
             <div class="col-md-12 col-sm-12 seat-booking-ct">
@@ -399,317 +483,326 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid col-md-10 col-sm-12 seat-booking-form">
-                    <div class="seat-booking-form-dt">
-                        <div class="seat-booking-form-dt-header">
-                            <div class="col-md-6 seat-booking-form-dt-tt">
-                                <h2>Thanh Buoi Bus</h2>
-                                <div class="type-amt">
-                                    <p class="col-md-6 type">Sleeper Bus</p>
-                                    <p class="col-md-6 amt">14 Seats Left</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 seat-booking-form-dt-pc">
-                                <h3 class="price">270,000VND</h3>
-                            </div>
-                        </div>
-                        <div class="seat-booking-form-dt-ct">
-                            <div class="col-md-5 seat-booking-form-dt-ct-t-pt">
-                                <div class="route-name" style="display: flex;">
-                                    <h6 style="padding-right: 5px;">Ho Chi Minh City</h6><i class="fa fa-long-arrow-right" style="padding-top: 4px;"></i><h6 style="padding-left: 5px;">Da Lat, Lam Dong</h6>
-                                </div>   
-                                <p>6:00 AM</p>
-                                <hr style="width: 200px" />
-                                <div class="seat-point">
-                                    <span>Select Pickup Point</span>
-                                    <select class="form-select seat-point-select">
-                                        <option>266, Le Hong Phong</option>
-                                        <option>#</option>
-                                    </select>
-                                </div>
-                                <div class="seat-point">
-                                    <span>Select Drop Point</span>
-                                    <select class="form-select seat-point-select">
-                                        <option>06 Lu Gia, Da Lat</option>
-                                        <option>#</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-7 seat-pick">
-                                <p class="seat-pick-tt">Select Seats</p>
-                                <div class="seat-rule">
-                                    <ul class="seat-rule-ins">
-                                        <li>
-                                            <div class="seat"></div>
-                                            <small>N/A</small>
-                                        </li>
+                <%-- <c:if test="${empty listSearch}">
+                    <i>No products are available</i>
+                </c:if> --%>
 
-                                        <li>
-                                            <div class="selected"></div>
-                                            <small>Selected</small>
-                                        </li>
-
-                                        <li>
-                                            <div class="seat occupied"></div>
-                                            <small>Occupied</small>
-                                        </li>
-                                    </ul>
+                <div class="container-fluid col-md-10 col-sm-12 seat-booking-form">         
+                    <c:forEach var="rd" items="${listSearch}">
+                        <div class="seat-booking-form-dt">
+                            <div class="seat-booking-form-dt-header">
+                                <div class="col-md-6 seat-booking-form-dt-tt">
+                                    <h2>${rd.companyName}</h2>
+                                    <div class="type-amt">
+                                        <p class="col-md-6 type">${rd.kindBus}</p>
+                                        <p class="col-md-6 amt">${rd.remaningPosition} Seats Left</p>
+                                    </div>
                                 </div>
-                                <div class="seat-map">
-                                    <div class="col-md-6">
-                                        <div class="seat-pos">
-                                            <div class="">
-                                                <p>Lower Berth</p>
+                                <div class="col-md-6 seat-booking-form-dt-pc">
+                                    <h3 class="price">${rd.price} VND</h3>
+                                </div>
+                            </div>
+                            <div class="seat-booking-form-dt-ct">
+                                <div class="col-md-5 seat-booking-form-dt-ct-t-pt">
+                                    <div class="route-name" style="display: flex;">
+                                        <h6 style="padding-right: 5px;">${rd.depart}</h6><i class="fa fa-long-arrow-right" style="padding-top: 4px;"></i><h6 style="padding-left: 5px;">${rd.destination}</h6>
+                                    </div>   
+                                    <p>${rd.startTime}</p>
+                                    <hr style="width: 200px" />
+                                    <div class="seat-point">
+                                        <span>Select Pickup Point</span>
+                                        <select class="form-select seat-point-select">
+                                            <option>${rd.departDetail}</option>
+                                            <option>#</option>
+                                        </select>
+                                    </div>
+                                    <div class="seat-point">
+                                        <span>Select Drop Point</span>
+                                        <select class="form-select seat-point-select">
+                                            <option>${rd.destinationDetail}</option>
+                                            <option>#</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 seat-pick">
+                                    <p class="seat-pick-tt">Select Seats</p>
+                                    <div class="seat-rule">
+                                        <ul class="seat-rule-ins">
+                                            <li>
+                                                <div class="seat"></div>
+                                                <small>N/A</small>
+                                            </li>
+
+                                            <li>
+                                                <div class="selected"></div>
+                                                <small>Selected</small>
+                                            </li>
+
+                                            <li>
+                                                <div class="seat occupied"></div>
+                                                <small>Occupied</small>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="seat-map">
+                                        <div class="col-md-6">
+                                            <div class="seat-pos">
+                                                <div class="">
+                                                    <p>Lower Berth</p>
+                                                </div>
+                                                <div class="seat-pos-map">
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span> 
+                                                        </label>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="seat-pos-map">
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span> 
-                                                    </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="seat-pos">
+                                                <div class="">
+                                                    <p>Upper Berth</p>
                                                 </div>
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
+                                                <div class="seat-pos-map">
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="seat-row">
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="checkbox" />
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                        <label class="seat-ctn">
+                                                            <input type="disable-checkbox" />
+                                                            <span class="checkmark disable-checkmark"></span>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="seat-pos">
-                                            <div class="">
-                                                <p>Upper Berth</p>
-                                            </div>
-                                            <div class="seat-pos-map">
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                </div>
-                                                <div class="seat-row">
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="checkbox" />
-                                                        <span class="checkmark"></span>
-                                                    </label>
-                                                    <label class="seat-ctn">
-                                                        <input type="disable-checkbox" />
-                                                        <span class="checkmark disable-checkmark"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="seat-pick-btn">
+                                        <input id="spt" type="submit" class="seat-pick-btn-b" value="book">
                                     </div>
-                                </div>
-                                <div class="seat-pick-btn">
-                                    <input id="spt" type="submit" class="seat-pick-btn-b" value="book">
                                 </div>
                             </div>
                         </div>
-                    </div>
+                                    <br/>
+                    </c:forEach>
                 </div>
+
+
             </div>
         </section>
         <script src="<c:url value="/js/script.js"/>"></script>

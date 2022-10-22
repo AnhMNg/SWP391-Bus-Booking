@@ -21,6 +21,9 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import manager.RouteDetailManager;
+import model.RouteDetail;
 
 /**
  *
@@ -209,15 +212,20 @@ public class CustomerController extends HttpServlet {
         }
     }
 
-    private void search(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    private void search(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String cityFrom = request.getParameter("cityfrom");
         String cityTo = request.getParameter("cityto");
         String districtFrom = request.getParameter("districtfrom");
         String districtTo = request.getParameter("districtto");
-        
-        
+        String startDate = request.getParameter("startDate");
+        String depart = districtFrom + ", "+ cityFrom;
+        String destination = districtTo + ", " + cityTo;
+        ArrayList<RouteDetail> list = RouteDetailManager.searchRouteDetail(depart, destination, startDate);
+        request.setAttribute("listSearch", list);
+        request.setAttribute("controller", "user");
+        request.setAttribute("action", "booking");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
