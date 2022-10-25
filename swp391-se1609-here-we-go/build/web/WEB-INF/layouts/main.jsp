@@ -44,7 +44,7 @@
                         <!-- Logo -->
                         <c:if test="${sessionScope.LOGIN_CUSTOMER == null && sessionScope.LOGIN_COMPANY == null}">
                             <a href="<c:url value="/home/index.do"/>">
-                                <img src="<c:url value="/images/Logo1.png"/>" class="logo">
+                                <img src="<c:url value="/images/Logo1.png"/>" class="logo"> 
                             </a>
                         </c:if>
                         <c:if test="${sessionScope.LOGIN_COMPANY == null && sessionScope.LOGIN_ROLE == 2}">
