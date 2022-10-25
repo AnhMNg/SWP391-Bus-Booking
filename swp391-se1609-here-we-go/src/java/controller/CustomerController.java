@@ -56,11 +56,25 @@ public class CustomerController extends HttpServlet {
             case "search":
                 search(request, response);
                 break;
+            case "booking":
+                booking(request, response);
+                break;
             default:
                 break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
 
+}
+    private void booking(HttpServletRequest request, HttpServletResponse response){
+        String[] listPosString;
+        listPosString = request.getParameterValues("seat");
+        int[] listPos = new int[listPosString.length];
+        for (int i= 0; i<listPosString.length; i++) {
+            listPos[i] = Integer.parseInt(listPosString[i]); 
+        }
+        for (int listPo : listPos) {
+            System.out.println(listPo);
+        }
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response)
