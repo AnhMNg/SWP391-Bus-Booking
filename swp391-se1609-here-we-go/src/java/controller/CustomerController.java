@@ -22,6 +22,7 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 import manager.RouteDetailManager;
 import model.RouteDetail;
 
@@ -64,13 +65,14 @@ public class CustomerController extends HttpServlet {
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
 
-}
-    private void booking(HttpServletRequest request, HttpServletResponse response){
+    }
+
+    private void booking(HttpServletRequest request, HttpServletResponse response) {
         String[] listPosString;
         listPosString = request.getParameterValues("seat");
         int[] listPos = new int[listPosString.length];
-        for (int i= 0; i<listPosString.length; i++) {
-            listPos[i] = Integer.parseInt(listPosString[i]); 
+        for (int i = 0; i < listPosString.length; i++) {
+            listPos[i] = Integer.parseInt(listPosString[i]);
         }
         for (int listPo : listPos) {
             System.out.println(listPo);
@@ -234,12 +236,55 @@ public class CustomerController extends HttpServlet {
         String districtFrom = request.getParameter("districtfrom");
         String districtTo = request.getParameter("districtto");
         String startDate = request.getParameter("startDate");
-        String depart = districtFrom + ", "+ cityFrom;
+        String depart = districtFrom + ", " + cityFrom;
         String destination = districtTo + ", " + cityTo;
         ArrayList<RouteDetail> list = RouteDetailManager.searchRouteDetail(depart, destination, startDate);
         request.setAttribute("listSearch", list);
         request.setAttribute("controller", "user");
         request.setAttribute("action", "booking");
+    }
+
+    private void filter(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String[] time_raw = request.getParameterValues("option1");
+            String min_raw = request.getParameter("min");
+            String max_raw = request.getParameter("max");
+            if (time_raw != null) {
+
+                String[] from = new String[time_raw.length];
+                String[] to = new String[time_raw.length];
+                String[] listtmp = new String[2];
+                for (int i = 0; i < time_raw.length; i++) {
+                    listtmp = time_raw[i].split(",");
+                    from[i] = listtmp[0];
+                    to[i] = listtmp[1];
+                    System.out.println(from[i]);
+                    System.out.println(to[i]);
+                }
+                RouteDetailManager dao = new RouteDetailManager();
+                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(from, to);
+                if (listRoute.size() > 0) {
+                    request.setAttribute("LIST_ROUTE", listRoute);
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "booking");
+                }
+            }
+            
+            if (min_raw != null && max_raw != null) {
+                int min = Integer.parseInt(min_raw);
+                int max = Integer.parseInt(max_raw);
+                RouteDetailManager dao = new RouteDetailManager();
+                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV2(min, max);
+                if (listRoute.size() > 0) {
+                    request.setAttribute("LIST_ROUTE", listRoute);
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "booking");
+                }
+            }
+
+        } catch (SQLException e) {
+            log("Error at SortController:" + e.toString());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

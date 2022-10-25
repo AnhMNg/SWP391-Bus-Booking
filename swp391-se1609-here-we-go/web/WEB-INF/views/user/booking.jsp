@@ -187,7 +187,7 @@
                                                     type="checkbox"
                                                     id="check1"
                                                     name="option1"
-                                                    value="something"
+                                                    value="6:00,11:00"
                                                     />
                                                 <label class="form-check-label"
                                                        >Morning (6AM to 11AM)</label
@@ -201,7 +201,7 @@
                                                     type="checkbox"
                                                     id="check1"
                                                     name="option1"
-                                                    value="something"
+                                                    value="11:00,18:00"
                                                     />
                                                 <label class="form-check-label"
                                                        >Afternoon (11AM to 6PM)</label
@@ -215,7 +215,7 @@
                                                     type="checkbox"
                                                     id="check1"
                                                     name="option1"
-                                                    value="something"
+                                                    value="18:00,23:00"
                                                     />
                                                 <label class="form-check-label"
                                                        >Evening (6PM to 11PM)</label
@@ -229,7 +229,7 @@
                                                     type="checkbox"
                                                     id="check1"
                                                     name="option1"
-                                                    value="something"
+                                                    value="23:00,6:00"
                                                     />
                                                 <label class="form-check-label"
                                                        >Night (11PM to 6AM)</label
