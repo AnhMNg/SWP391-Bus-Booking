@@ -13,7 +13,7 @@ import java.sql.DriverManager;
  */
 public class DBUtils {
     public static Connection getConnection() {
-        String url = "jdbc:sqlserver://localhost;databaseName=HereWeGo;user=sa;password=12345";
+        String url = "jdbc:sqlserver://localhost;databaseName=HereWeGo2;user=sa;password=12345";
         Connection con = null;
         try {
             //Loading a driver

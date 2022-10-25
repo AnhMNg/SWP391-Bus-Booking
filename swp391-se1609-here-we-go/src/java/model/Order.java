@@ -12,16 +12,20 @@ public class Order {
     private long OrderId;
     private String date;
     private long customerId;
-    private int totalPrice;
+    private float totalPrice;
 
     public Order() {
     }
 
-    public Order(long OrderId, String date, long customerId, int totalPrice) {
+    public Order(long OrderId, String date, long customerId, String totalPrice) {
         this.OrderId = OrderId;
         this.date = date;
         this.customerId = customerId;
-        this.totalPrice = totalPrice;
+        this.totalPrice = Float.parseFloat(totalPrice);
+    }
+    
+    public Order(String totalPrice) {
+        this.totalPrice = Float.parseFloat(totalPrice);
     }
 
     public long getOrderId() {
@@ -48,8 +52,8 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public int getTotalPrice() {
-        return totalPrice;
+    public String getTotalPrice() {
+        return String.format("%.2f", totalPrice);
     }
 
     public void setTotalPrice(int totalPrice) {
