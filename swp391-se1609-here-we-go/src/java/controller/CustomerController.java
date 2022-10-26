@@ -67,6 +67,7 @@ public class CustomerController extends HttpServlet {
 
     }
 
+<<<<<<< Updated upstream
     private void booking(HttpServletRequest request, HttpServletResponse response) {
         String[] listPosString;
         listPosString = request.getParameterValues("seat");
@@ -76,7 +77,40 @@ public class CustomerController extends HttpServlet {
         }
         for (int listPo : listPos) {
             System.out.println(listPo);
+=======
+    private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+
+        HttpSession session = request.getSession();
+        User us = (User) session.getAttribute("LOGIN_CUSTOMER");
+
+        if (us != null && us.getRoleId() == 2) {
+            String[] listPosString;
+            listPosString = request.getParameterValues("seat");
+
+            if (listPosString == null || listPosString.length == 0) {
+                request.setAttribute("notification", "Please select seats to book tickets");
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "booking");
+            } else {
+                long rid = Long.parseLong(request.getParameter("routeDe"));
+                RouteDetail rd = RouteDetailManager.getRouteDetailById(rid);
+                int[] listPos = new int[listPosString.length];
+                for (int i = 0; i < listPosString.length; i++) {
+                    listPos[i] = Integer.parseInt(listPosString[i]);
+                }
+                request.setAttribute("listPos", listPos);
+                request.setAttribute("routeDe", rd);
+                request.setAttribute("controller", "order");
+                request.setAttribute("action", "checkout");
+            }
+
+        } else {
+            request.setAttribute("notification", "Please login to book tickets");
+            request.setAttribute("controller", "user");
+            request.setAttribute("action", "booking");
+>>>>>>> Stashed changes
         }
+
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response)

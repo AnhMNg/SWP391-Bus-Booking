@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="model.RouteDetail"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -26,32 +27,37 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700&display=swap" rel="stylesheet">
     </head>
     <body>
+        <%
+            RouteDetail rd = (RouteDetail) request.getAttribute("routeDe");
+            int[] listPos = (int[]) request.getAttribute("listPos");
+        %>
         <section class="pay-ct">
             <div class="container pay-ct-dt">
                 <h3 class="pay-pl">
-                    Ho Chi Minh City <i class="fa fa-long-arrow-right"></i> Da Lat, Lam
-                    Dong
+                    <%= rd.getDepart() %> <i class="fa fa-long-arrow-right"></i> <%= rd.getDestination() %>
                 </h3>
-                <h1 class="pay-bs">Thanh Buoi Bus</h1>
-                <p class="pay-bs-tp">Sleeper Bus</p>
+                <h1 class="pay-bs"><%= rd.getCompanyName() %></h1>
+                <p class="pay-bs-tp"> <%= rd.getKindBus() %> </p>
                 <hr />
                 <div class="pay-bs-tm">
-                    <h4>6:00 AM</h4>
-                    <h5>Sep 09, 2022</h5>
+                    <h4> <%= rd.getStartTime() %> </h4>
                 </div>
                 <br />
                 <div class="pay-pk-p">
                     <h4>Pickup Point</h4>
-                    <p>266 Le Hong Phong, Ward 4, District 5, Ho Chi Minh City</p>
+                    <p><%= rd.getDepartDetail() %></p>
                 </div>
                 <div class="pay-pk-p">
                     <h4>Drop Point</h4>
-                    <p>6 Lu Gia Street, Ward 9, Da Lat, Lam Dong</p>
+                    <p><%= rd.getDestinationDetail() %></p>
                 </div>
                 <br />
-                <div class="pay-trl-dt">
+                <% 
+                    for (int i : listPos) {
+                            %>
+                 <div class="pay-trl-dt">
                     <h4>Enter Traveller Details</h4>
-                    <h6>Seat 1 - 13A</h6>
+                    <h6>Seat 1 - <%= i %></h6>
                     <div class="pay-trl-dt-form">
                         <div class="pay-trl-dt-ip" style="margin-right: 10px">
                             <p>Name</p>
@@ -67,6 +73,10 @@
                         </div>
                     </div>
                 </div>
+                <%
+                        }
+                %>
+               
                 <br />
                 <hr />
                 <br />
@@ -79,12 +89,12 @@
                     <div class="pay-pr">
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Ticket Price</p>
-                            <p class="pay-pr-ct2">270,000 VND</p>
+                            <p class="pay-pr-ct2"><%=rd.getPrice()%> VND</p>
                             <input type="hidden" name="subTotal" value="11.7"/>
                         </div>
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Number Of Tickets</p>
-                            <p class="pay-pr-ct2">1</p>
+                            <p class="pay-pr-ct2"><%= listPos.length %></p>
                             <input type="hidden" name="numberOfTickets" value="1"/>
                             <input type="hidden" name="productName" value="Bus Ticket"/>
                         </div>
@@ -95,7 +105,7 @@
                         </div>
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Total</p>
-                            <p class="pay-pr-ct2">270,000 VND</p>
+                            <p class="pay-pr-ct2"><%= rd.getPrice()*listPos.length %> VND</p>
                             <input type="hidden" name="totalPrice" value="11.7"/>
                         </div>
                         <div class="pay-btn">
