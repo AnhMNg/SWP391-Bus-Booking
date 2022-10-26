@@ -67,17 +67,6 @@ public class CustomerController extends HttpServlet {
 
     }
 
-<<<<<<< Updated upstream
-    private void booking(HttpServletRequest request, HttpServletResponse response) {
-        String[] listPosString;
-        listPosString = request.getParameterValues("seat");
-        int[] listPos = new int[listPosString.length];
-        for (int i = 0; i < listPosString.length; i++) {
-            listPos[i] = Integer.parseInt(listPosString[i]);
-        }
-        for (int listPo : listPos) {
-            System.out.println(listPo);
-=======
     private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 
         HttpSession session = request.getSession();
@@ -108,7 +97,6 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("notification", "Please login to book tickets");
             request.setAttribute("controller", "user");
             request.setAttribute("action", "booking");
->>>>>>> Stashed changes
         }
 
     }
