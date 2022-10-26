@@ -4,6 +4,8 @@
  */
 package model;
 
+import utils.DBUtils;
+
 /**
  *
  * @author baolo
@@ -112,6 +114,10 @@ public class RouteDetail extends Route{
 
     public void setListPosition(int[] listPosition) {
         this.listPosition = listPosition;
+    }
+    
+    public String getconverPrice(){
+        return DBUtils.convertMoney(price);
     }
 
    

@@ -10,9 +10,9 @@
         >
     <tlib-version>1.0</tlib-version>
     <function>
-        <name>contains</name>
+        
+    </function><name>contains</name>
         <function-class>utils.DBUtils</function-class>
         <function-signature>boolean contains(java.util.List,java.lang.Object)
         </function-signature>
-    </function>
 </taglib>

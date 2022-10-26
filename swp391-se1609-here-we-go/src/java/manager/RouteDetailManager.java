@@ -447,6 +447,49 @@ public class RouteDetailManager {
         
         return list;
     }
+    public static RouteDetail getRouteDetailById(long id) throws SQLException{
+        RouteDetail rd = null;
+        Connection cn = DBUtils.getConnection();
+        int[] listPosition = null;
+        if (cn!= null){
+            PreparedStatement pst = cn.prepareStatement("SELECT tbl1.routeDetailId, bus.capacity, bus.kind, tbl1.startTime, tbl1.price, tbl1.timeArrival, tbl1.departDetail, tbl1.detinationDetail, tbl1.routeId, tbl1.name, tbl1.depart, tbl1.destination\n" +
+"                    	  FROM (SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination  \n" +
+"                    		FROM [RouteDetail] rd\n" +
+"                    		inner join\n" +
+"                    		  (SELECT Route.companyId, Route.departId, Route.destinationId, Route.routeId, com.name, PlaceName.depart, PlaceName.destination FROM [Route], [Company] com,\n" +
+"                    	    (SELECT dep.routeId,dep.name depart,des.name destination \n" +
+"                    				FROM\n" +
+"                    				(SELECT * \n" +
+"                    						FROM Route,Place \n" +
+"                    						WHERE Route.departId = Place.placeId) dep,\n" +
+"                    					(SELECT *\n" +
+"                    						FROM Route,Place \n" +
+"                    						WHERE Route.destinationId = Place.placeId) des\n" +
+"                    				WHERE des.routeId = dep.routeId) PlaceName\n" +
+"                    	     WHERE com.companyId = Route.companyId and PlaceName.routeId = Route.routeId) r\n" +
+"                    		 ON rd.routeId = r.routeId) tbl1, BusType bus\n" +
+"                    WHERE tbl1.busTypeId = bus.busTypeId and tbl1.routeDetailId = ?");
+            pst.setLong(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs != null && rs.next()){
+                listPosition = getListPosition(rs.getLong(1));
+                rd = new RouteDetail(rs.getLong(1), rs.getInt(2), getNumberOfRemaningPosition(listPosition) , rs.getString(3), rs.getString(4),
+                        rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+        
+        return rd;
+    }
 
     public static int getNumberOfRemaningPosition(int[] list) {
         int count = 0;

@@ -24,23 +24,7 @@ import model.User;
 public class test {
 
     public static void main(String[] args) throws SQLException, SQLException {
-        ArrayList<RouteDetail> list = RouteDetailManager.searchRouteDetail("Tiền Giang", "Hà Nội", "2022-10-15");
-        for (RouteDetail rd : list) {
-            System.out.println("Cpmpany:" + rd.getCompanyName()); 
-           System.out.println(rd.getDepart() + " - " +rd.getDepartDetail());
-            System.out.println(rd.getDestinationDetail()+" - " +rd.getDestination());
-            System.out.println("Price: " + rd.getPrice());
-            System.out.println("StartTime: " + rd.getStartTime());
-            System.out.println("=========================================================");
-            for (int i : rd.getListPosition()) {
-                System.out.println(i);
-            }
-            
-        }
-        int[] list2 = RouteDetailManager.getListPosition(2);
-        for (int i : list2) {
-            System.out.println(i);
-        }
+        System.out.println(DBUtils.convertMoney(10000));
         
     }
 }
