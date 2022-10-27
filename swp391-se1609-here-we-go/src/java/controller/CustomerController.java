@@ -97,9 +97,9 @@ public class CustomerController extends HttpServlet {
             }
 
         } else {
-            request.setAttribute("notification", "Please login to book tickets");
+            
             request.setAttribute("controller", "user");
-            request.setAttribute("action", "booking");
+            request.setAttribute("action", "login");
         }
 
     }
