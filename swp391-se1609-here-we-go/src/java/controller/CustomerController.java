@@ -276,8 +276,9 @@ public class CustomerController extends HttpServlet {
             String[] time_raw = request.getParameterValues("option1");
             String depart = request.getParameter("depart");
             String destination = request.getParameter("destination");
-            String min_raw = request.getParameter("min");
-            String max_raw = request.getParameter("max");
+            String min_raw = request.getParameter("minPrice");
+            String max_raw = request.getParameter("maxPrice");
+            
             if (time_raw != null) {
 
                 String[] from = new String[time_raw.length];
@@ -294,8 +295,6 @@ public class CustomerController extends HttpServlet {
                 List<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to);
                 if (listRoute.size() > 0) {
                     request.setAttribute("listSearch", listRoute);
-                    request.setAttribute("controller", "user");
-                    request.setAttribute("action", "booking");
                 }
             }
             
@@ -306,11 +305,10 @@ public class CustomerController extends HttpServlet {
                 List<RouteDetail> listRoute = RouteDetailManager.getListRouteV2(min, max);
                 if (listRoute.size() > 0) {
                     request.setAttribute("listSearch", listRoute);
-                    request.setAttribute("controller", "user");
-                    request.setAttribute("action", "booking");
                 }
             }
-
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "booking");
         } catch (SQLException e) {
             log("Error at SortController:" + e.toString());
         }
