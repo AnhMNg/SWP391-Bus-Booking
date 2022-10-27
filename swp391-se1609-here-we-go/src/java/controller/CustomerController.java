@@ -302,7 +302,7 @@ public class CustomerController extends HttpServlet {
                 int min = Integer.parseInt(min_raw);
                 int max = Integer.parseInt(max_raw);
                 RouteDetailManager dao = new RouteDetailManager();
-                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV2(min, max);
+                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV2(depart, destination, min, max);
                 if (listRoute.size() > 0) {
                     request.setAttribute("listSearch", listRoute);
                 }
