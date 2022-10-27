@@ -43,15 +43,23 @@ public class RouteDetailManager {
             + "WHERE p.name = ? AND p1.name = ? AND c.companyId = ?";
     private static final String GET_BUSTYPE = "SELECT b.busTypeId FROM BusType b WHERE b.kind = ?";
     private static final String ADD_ROUTEDETAIL = "INSERT INTO RouteDetail([routeId],[busTypeId],[startTime],[price],[timeArrival]) VALUES(?,?,?,?,?)";
-    public static String FILTER_ROUTE = "SELECT rd.routeDetailId, rd.routeId, bt.kind AS 'Bus Type', rd.startTime, rd.price, dpn.Company, dpn.[Noi di], dpn.[Noi den] "
-            + "FROM RouteDetail rd inner join BusType bt ON rd.busTypeId = bt.busTypeId "
-            + "inner join (SELECT p.name AS 'Noi di', rp.[Noi den] AS 'Noi den', r.routeId, c.name AS 'Company' "
-            + "FROM Route r inner join Place p ON r.departId = p.placeId "
-            + "right outer join (SELECT p1.name AS 'Noi den', r1.routeId "
-            + "FROM Route r1 inner join Place p1 ON r1.destinationId = p1.placeId "
-            + " ) rp ON r.routeId =  rp.routeId "
-            + "inner join Company c ON r.companyId = c.companyId "
-            + ") dpn ON rd.routeId = dpn.routeId WHERE";
+    public static String FILTER_ROUTE = "SELECT tbl1.routeDetailId, bus.capacity, bus.kind, tbl1.startTime, tbl1.price, tbl1.timeArrival, tbl1.departDetail, tbl1.detinationDetail, tbl1.routeId, tbl1.name, tbl1.depart, tbl1.destination\n"
+                    + "	  FROM (SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination  \n"
+                    + "		FROM [RouteDetail] rd\n"
+                    + "		inner join\n"
+                    + "		  (SELECT Route.companyId, Route.departId, Route.destinationId, Route.routeId, com.name, PlaceName.depart, PlaceName.destination FROM [Route], [Company] com,\n"
+                    + "	    (SELECT dep.routeId,dep.name depart,des.name destination \n"
+                    + "				FROM\n"
+                    + "					(SELECT * \n"
+                    + "						FROM Route,Place \n"
+                    + "						WHERE Route.departId = Place.placeId) dep,\n"
+                    + "					(SELECT * \n"
+                    + "						FROM Route,Place \n"
+                    + "						WHERE Route.destinationId = Place.placeId) des\n"
+                    + "				WHERE des.routeId = dep.routeId) PlaceName\n"
+                    + "	     WHERE PlaceName.depart like ? and PlaceName.destination like ? and com.companyId = Route.companyId and PlaceName.routeId = Route.routeId) r\n"
+                    + "		 ON rd.routeId = r.routeId) tbl1, BusType bus\n"
+                    + "WHERE tbl1.busTypeId = bus.busTypeId and ";
     private static final String FILTER_PRICE = "SELECT rd.routeDetailId, rd.routeId, bt.kind AS 'Bus Type', rd.startTime, rd.price, dpn.Company, dpn.[Noi di], dpn.[Noi den] "
             + "FROM RouteDetail rd inner join BusType bt ON rd.busTypeId = bt.busTypeId "
             + "inner join (SELECT p.name AS 'Noi di', rp.[Noi den] AS 'Noi den', r.routeId, c.name AS 'Company' "
@@ -499,11 +507,13 @@ public class RouteDetailManager {
         return count;
     }
     
-    public static List<RouteDetail> getListRouteV1(String[] from, String[] to) throws SQLException {
+    public static List<RouteDetail> getListRouteV1(String depart, String destination, String[] from, String[] to) throws SQLException {
         List<RouteDetail> listRoute = new ArrayList<RouteDetail>();
         Connection conn = null;
         PreparedStatement psm = null;
         ResultSet rs = null;
+        RouteDetail rd = null;
+        int[] listPosition = null;
         for (int i = 0; i < from.length; i++) {
             if (i == 0) {
                 FILTER_ROUTE += " CAST(startTime AS TIME) BETWEEN '" + from[i] + "' and '" + to[i] + "'";
@@ -518,17 +528,11 @@ public class RouteDetailManager {
 
                 rs = psm.executeQuery();
             }
-            while (rs.next()) {
-
-                long routeDetailId = rs.getLong(1);
-                long routeId = rs.getLong(2);
-                String kindBus = rs.getString(3);
-                String startTime = rs.getString(4);
-                int price = rs.getInt(5);
-                String companyName = rs.getString(6);
-                String departDetail = rs.getNString(7);
-                String destinationDetail= rs.getNString(8);
-                listRoute.add(new RouteDetail(routeDetailId, 0, 0, kindBus, startTime, price, "", departDetail, destinationDetail, null, routeId, companyName, "", ""));
+            while (rs != null && rs.next()) {
+                listPosition = getListPosition(rs.getLong(1));
+                rd = new RouteDetail(rs.getLong(1), rs.getInt(2), getNumberOfRemaningPosition(listPosition) , rs.getString(3), rs.getString(4),
+                        rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                listRoute.add(rd);
             }
             
             

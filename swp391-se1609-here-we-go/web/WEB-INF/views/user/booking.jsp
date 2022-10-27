@@ -157,6 +157,7 @@
         </div>
         <section class="seat-booking">
             <div class="col-md-12 col-sm-12 seat-booking-ct">
+                <form action="<c:url value="/user/filter.do"/> class="container"">
                 <div class="col-md-2 col-sm-12 seat-booking-filter">
                     <div class="accordion" id="accordionPanelsStayOpenExample">
                         <div class="accordion-item">
@@ -484,7 +485,9 @@
                         </div>
                     </div>
                 </div>
-                
+                    <input type="hidden" name="depart" value="${depart}"/>
+                    <input type="hidden" name="destination" value="${destination}"/>
+                </form>
                 
 
 
