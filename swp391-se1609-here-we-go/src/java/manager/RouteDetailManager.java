@@ -525,7 +525,8 @@ public class RouteDetailManager {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 psm = conn.prepareStatement(FILTER_ROUTE);
-
+                psm.setString(1, "%" +depart + "%");
+                psm.setString(2, "%" +destination +"%");
                 rs = psm.executeQuery();
             }
             while (rs != null && rs.next()) {

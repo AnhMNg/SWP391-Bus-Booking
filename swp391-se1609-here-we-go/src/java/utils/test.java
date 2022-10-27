@@ -7,6 +7,7 @@ package utils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import manager.CompanyManager;
 import manager.RouteDetailManager;
 import manager.TicketManager;
@@ -24,7 +25,9 @@ import model.User;
 public class test {
 
     public static void main(String[] args) throws SQLException, SQLException {
-        System.out.println(DBUtils.convertMoney(10000));
-        
+        String[] from = {"6:00"};
+        String[] to = {"19:00"};
+        List<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(",", ",",from, to );
+        System.out.println(listRoute.size());
     }
 }
