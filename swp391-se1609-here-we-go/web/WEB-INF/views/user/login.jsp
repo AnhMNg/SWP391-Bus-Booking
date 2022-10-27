@@ -30,8 +30,15 @@
             <div class="box">
                 <div class="inner-box">
                     <div class="forms-wrap">
+                        
                         <form action="<c:url value="/user/submit.do"/>" autocomplete="off" class="sign-in-form" method="POST">
-
+                            <% String backToBook = null;
+                           backToBook = (String) request.getAttribute("backtobook");
+                                if (backToBook != null && backToBook.equals("true")){
+                                    %>
+                                    <input type="hidden" name="back" value="true" />
+                            <%
+                                }%>
                             <div class="heading">
                                 <h2>Welcome Back</h2>
                                 <h6>Not register yet?</h6>
