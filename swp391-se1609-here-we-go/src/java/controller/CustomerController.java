@@ -60,6 +60,9 @@ public class CustomerController extends HttpServlet {
             case "booking":
                 booking(request, response);
                 break;
+            case "filter":
+                filter(request, response);
+                break;
             default:
                 break;
         }
@@ -261,6 +264,8 @@ public class CustomerController extends HttpServlet {
         String depart = districtFrom + ", " + cityFrom;
         String destination = districtTo + ", " + cityTo;
         ArrayList<RouteDetail> list = RouteDetailManager.searchRouteDetail(depart, destination, startDate);
+        request.setAttribute("depart", depart);
+        request.setAttribute("destination", destination);
         request.setAttribute("listSearch", list);
         request.setAttribute("controller", "user");
         request.setAttribute("action", "booking");
@@ -269,6 +274,8 @@ public class CustomerController extends HttpServlet {
     private void filter(HttpServletRequest request, HttpServletResponse response) {
         try {
             String[] time_raw = request.getParameterValues("option1");
+            String depart = request.getParameter("depart");
+            String destination = request.getParameter("destination");
             String min_raw = request.getParameter("min");
             String max_raw = request.getParameter("max");
             if (time_raw != null) {
@@ -284,9 +291,9 @@ public class CustomerController extends HttpServlet {
                     System.out.println(to[i]);
                 }
                 RouteDetailManager dao = new RouteDetailManager();
-                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(from, to);
+                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to);
                 if (listRoute.size() > 0) {
-                    request.setAttribute("LIST_ROUTE", listRoute);
+                    request.setAttribute("listSearch", listRoute);
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "booking");
                 }
@@ -298,7 +305,7 @@ public class CustomerController extends HttpServlet {
                 RouteDetailManager dao = new RouteDetailManager();
                 List<RouteDetail> listRoute = RouteDetailManager.getListRouteV2(min, max);
                 if (listRoute.size() > 0) {
-                    request.setAttribute("LIST_ROUTE", listRoute);
+                    request.setAttribute("listSearch", listRoute);
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "booking");
                 }
