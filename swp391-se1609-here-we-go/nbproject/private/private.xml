@@ -6,10 +6,13 @@
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/home/index.jsp</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/controller/CustomerController.java</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/utils/test.java</file>
-            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/glassfish-web.xml</file>
+            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/login.jsp</file>
+            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/test.jsp</file>
+            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/model/User.java</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/profile.jsp</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/booking.jsp</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/manager/RouteDetailManager.java</file>
+            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/order/checkout.jsp</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/controller/CompanyController.java</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/controller/FrontController.java</file>
         </group>

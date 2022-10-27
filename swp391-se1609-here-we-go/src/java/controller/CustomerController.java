@@ -74,6 +74,7 @@ public class CustomerController extends HttpServlet {
 
         HttpSession session = request.getSession();
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
+        
 
         if (us != null && us.getRoleId() == 2) {
             String[] listPosString;
@@ -97,7 +98,7 @@ public class CustomerController extends HttpServlet {
             }
 
         } else {
-            
+            request.setAttribute("backtobook", "true");
             request.setAttribute("controller", "user");
             request.setAttribute("action", "login");
         }
@@ -117,6 +118,7 @@ public class CustomerController extends HttpServlet {
         try {
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
+            String back = request.getParameter("back");
             UserManager userManager = new UserManager();
             User user = null;
             user = userManager.checkLogin(phone, password);
@@ -132,9 +134,14 @@ public class CustomerController extends HttpServlet {
                     request.setAttribute("action", "index");
                     request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
                 } else if (roleID == 2) {
+                    if (back != null && back.equals("true")) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "booking");
+                    } else{
                     request.setAttribute("controller", "home");
                     request.setAttribute("action", "index");
-                    request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
+                    }
+                    
                 } else {
                     request.setAttribute("message", "Your role is not support!");
                 }
