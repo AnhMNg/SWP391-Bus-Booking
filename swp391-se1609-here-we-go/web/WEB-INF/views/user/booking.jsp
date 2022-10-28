@@ -461,7 +461,7 @@
                                                 type="range"
                                                 class="range-min"
                                                 min="0"
-                                                max="10000"
+                                                max="1000000"
                                                 value="2500"
                                                 step="100"
                                                 />
@@ -469,7 +469,7 @@
                                                 type="range"
                                                 class="range-max"
                                                 min="0"
-                                                max="10000"
+                                                max="1000000"
                                                 value="7500"
                                                 step="100"
                                                 />
