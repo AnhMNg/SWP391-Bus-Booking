@@ -63,6 +63,9 @@ public class CustomerController extends HttpServlet {
             case "filter":
                 filter(request, response);
                 break;
+            case "edit":
+                edit(request, response);
+                break;
             default:
                 break;
         }
@@ -320,6 +323,39 @@ public class CustomerController extends HttpServlet {
             log("Error at SortController:" + e.toString());
         }
     }
+     private void edit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            HttpSession session = request.getSession();
+            String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
+                        String newName = request.getParameter("newName");
+                        String file=request.getParameter("userDisplayPic");
+                        User user = UserManager.getUserByPhone(phone);
+                        String img=user.getAvtLink();
+                        if (user != null) {
+                            if ( file!= "" && newName != null) {
+                                if (UserManager.updateUser(newName, user.getUserId(),file)) {
+                                    request.setAttribute("controller", "user");
+                                    request.setAttribute("action", "profile");
+                                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                                }
+                            }
+                            if(file == "" && newName!=null){
+                               if (UserManager.updateUser(newName, user.getUserId(),img)) {
+                                    request.setAttribute("controller", "user");
+                                    request.setAttribute("action", "profile");
+                                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                                } 
+                            }
+                        }
+        } catch (Exception ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
