@@ -90,12 +90,15 @@
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Ticket Price</p>
                             <p class="pay-pr-ct2"><%=rd.getPrice()%> VND</p>
-                            <input type="hidden" name="subTotal" value="11.7"/>
+                            <%String s = (rd.getPrice()/24840)+""; %>
+                            
+                            <input type="hidden" name="subTotal" value="<%=s%>" id="test"/>
+                            
                         </div>
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Number Of Tickets</p>
                             <p class="pay-pr-ct2"><%= listPos.length %></p>
-                            <input type="hidden" name="numberOfTickets" value="1"/>
+                            <input type="hidden" name="numberOfTickets" value="<%= listPos.length %>"/>
                             <input type="hidden" name="productName" value="Bus Ticket"/>
                         </div>
                         <div class="pay-pr-ct">
@@ -106,7 +109,8 @@
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Total</p>
                             <p class="pay-pr-ct2"><%= rd.getPrice()*listPos.length %> VND</p>
-                            <input type="hidden" name="totalPrice" value="11.7"/>
+                            <% s = (rd.getPrice()/24840*listPos.length)+""; %>
+                            <input type="hidden" name="totalPrice" value="<%=s%>"/>
                         </div>
                         <div class="pay-btn">
                             <input
