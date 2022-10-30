@@ -101,7 +101,7 @@ public class CustomerController extends HttpServlet {
             }
 
         } else {
-            request.setAttribute("backtobook", "true");
+            
             request.setAttribute("controller", "user");
             request.setAttribute("action", "login");
         }
@@ -281,44 +281,42 @@ public class CustomerController extends HttpServlet {
         request.setAttribute("action", "booking");
     }
 
-    private void filter(HttpServletRequest request, HttpServletResponse response) {
+    private void filter(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnsupportedEncodingException {
         try {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
             String[] time_raw = request.getParameterValues("option1");
             String depart = request.getParameter("depart");
             String destination = request.getParameter("destination");
             String min_raw = request.getParameter("minPrice");
             String max_raw = request.getParameter("maxPrice");
-            
+            int min = Integer.parseInt(min_raw);
+            int max = Integer.parseInt(max_raw);
+
+            String[] from = null;
+            String[] to = null;
+
             if (time_raw != null) {
 
-                String[] from = new String[time_raw.length];
-                String[] to = new String[time_raw.length];
+                from = new String[time_raw.length];
+                to = new String[time_raw.length];
                 String[] listtmp = new String[2];
                 for (int i = 0; i < time_raw.length; i++) {
                     listtmp = time_raw[i].split(",");
                     from[i] = listtmp[0];
                     to[i] = listtmp[1];
-                    System.out.println(from[i]);
-                    System.out.println(to[i]);
-                }
-                RouteDetailManager dao = new RouteDetailManager();
-                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to);
-                if (listRoute.size() > 0) {
-                    request.setAttribute("listSearch", listRoute);
+
                 }
             }
-            
-            if (min_raw != null && max_raw != null) {
-                int min = Integer.parseInt(min_raw);
-                int max = Integer.parseInt(max_raw);
-                RouteDetailManager dao = new RouteDetailManager();
-                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV2(depart, destination, min, max);
-                if (listRoute.size() > 0) {
-                    request.setAttribute("listSearch", listRoute);
-                }
+            RouteDetailManager dao = new RouteDetailManager();
+            ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max);
+            if (listRoute.size() > 0) {
+                request.setAttribute("listSearch", listRoute);
             }
-                request.setAttribute("controller", "user");
-                request.setAttribute("action", "booking");
+            request.setAttribute("depart", depart);
+            request.setAttribute("destination", destination);
+            request.setAttribute("controller", "user");
+            request.setAttribute("action", "booking");
         } catch (SQLException e) {
             log("Error at SortController:" + e.toString());
         }
