@@ -516,14 +516,12 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .seat-pos-map {
-    border: rgba(219, 219, 219, 0.664) solid 1px;
     border-radius: 20px;
     margin-right: 130px;
     padding: 10px;
 }
 
 .seat-pos-map-room {
-  border: rgba(219, 219, 219, 0.664) solid 1px;
   border-radius: 20px;
   margin-right: 130px;
   padding: 10px;

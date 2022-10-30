@@ -90,11 +90,13 @@
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Ticket Price</p>
                             <p class="pay-pr-ct2"><%=rd.getPrice()%> VND</p>
-                            <input type="hidden" name="subTotal" value="11.7"/>
+                            <% String price = String.valueOf(rd.getPrice()); %>
+                            <input type="hidden" name="subTotal" value="11"/>
                         </div>
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Number Of Tickets</p>
                             <p class="pay-pr-ct2"><%= listPos.length %></p>
+                            <% String amount = String.valueOf(listPos.length); %>
                             <input type="hidden" name="numberOfTickets" value="1"/>
                             <input type="hidden" name="productName" value="Bus Ticket"/>
                         </div>
@@ -106,7 +108,8 @@
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Total</p>
                             <p class="pay-pr-ct2"><%= rd.getPrice()*listPos.length %> VND</p>
-                            <input type="hidden" name="totalPrice" value="11.7"/>
+                            <% String total = String.valueOf(rd.getPrice()*listPos.length); %>
+                            <input type="hidden" name="totalPrice" value="11"/>
                         </div>
                         <div class="pay-btn">
                             <input
