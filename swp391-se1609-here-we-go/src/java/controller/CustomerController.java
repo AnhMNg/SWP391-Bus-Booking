@@ -292,9 +292,10 @@ public class CustomerController extends HttpServlet {
             String max_raw = request.getParameter("maxPrice");
             int min = Integer.parseInt(min_raw);
             int max = Integer.parseInt(max_raw);
-
+            String[] company = request.getParameterValues("option2");
             String[] from = null;
             String[] to = null;
+            
 
             if (time_raw != null) {
 
@@ -309,7 +310,7 @@ public class CustomerController extends HttpServlet {
                 }
             }
             RouteDetailManager dao = new RouteDetailManager();
-            ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max);
+            ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company);
             if (listRoute.size() > 0) {
                 request.setAttribute("listSearch", listRoute);
             }

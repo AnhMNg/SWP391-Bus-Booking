@@ -267,8 +267,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Thành Bưởi Bus"
                                                         />
                                                     <label class="form-check-label">Thanh Buoi Bus</label>
                                                 </div>
@@ -279,8 +279,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Phương Trang Bus"
                                                         />
                                                     <label class="form-check-label"
                                                            >Phuong Trang Bus (Futa Bus)</label
@@ -293,8 +293,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Hà Nội Rides On Time"
                                                         />
                                                     <label class="form-check-label"
                                                            >Ha Noi Rides On Time</label
@@ -307,8 +307,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Sapa Dragon"
                                                         />
                                                     <label class="form-check-label"
                                                            >Sapa Dragon Express</label
@@ -321,8 +321,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Hoàng Long Bus"
                                                         />
                                                     <label class="form-check-label">Hoang Long Bus</label>
                                                 </div>
@@ -333,8 +333,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Huế Tourist Bus"
                                                         />
                                                     <label class="form-check-label"
                                                            >Hue Tourist Bus</label
@@ -347,8 +347,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Mai Linh Express Bus"
                                                         />
                                                     <label class="form-check-label"
                                                            >Mai Linh Express Bus</label
@@ -361,8 +361,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Hải Vân Bus"
                                                         />
                                                     <label class="form-check-label">Hai Van Bus</label>
                                                 </div>
@@ -373,8 +373,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Interbus Lines"
                                                         />
                                                     <label class="form-check-label">Interbus Lines</label>
                                                 </div>
@@ -385,8 +385,8 @@
                                                         class="form-check-input"
                                                         type="checkbox"
                                                         id="check1"
-                                                        name="option1"
-                                                        value="something"
+                                                        name="option2"
+                                                        value="Sapa Bus Lines"
                                                         />
                                                     <label class="form-check-label">Sapa Bus</label>
                                                 </div>
@@ -997,7 +997,7 @@
                                                                     </c:when>
                                                                     <c:when test="${contains == false}">
                                                                         <label class="seat-ctn">
-                                                                            <input type="checkbox" name="seat" value="20/>
+                                                                            <input type="checkbox" name="seat" value="20"/>
                                                                                    <span class="checkmark"></span>
                                                                         </label>
                                                                     </c:when>
