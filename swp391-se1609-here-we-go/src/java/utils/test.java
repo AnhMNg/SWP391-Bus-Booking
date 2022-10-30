@@ -25,8 +25,9 @@ import model.User;
 public class test {
 
     public static void main(String[] args) throws SQLException, SQLException {
-        
-        List<RouteDetail> listRoute = RouteDetailManager.getListRouteV2(",", ",", 0, 1000000);
+        String[] from = {"6:00"};
+        String[] to = {"19:00"};
+        List<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(",", ",", null, null, 0, 10000000);
         System.out.println(listRoute.size());
     }
 }

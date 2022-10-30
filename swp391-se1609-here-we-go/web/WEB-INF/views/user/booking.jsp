@@ -445,12 +445,12 @@
                                         <div class="price-input">
                                             <div class="field">
                                                 <span>Min</span>
-                                                <input type="number" class="input-min" value="2500" name="minPrice"/>
+                                                <input type="number" class="input-min" value="0" name="minPrice"/>
                                             </div>
                                             <div class="separator">-</div>
                                             <div class="field">
                                                 <span>Max</span>
-                                                <input type="number" class="input-max" value="7500" name="maxPrice"/>
+                                                <input type="number" class="input-max" value="5000000" name="maxPrice"/>
                                             </div>
                                         </div>
                                         <div class="slider">
@@ -461,17 +461,17 @@
                                                 type="range"
                                                 class="range-min"
                                                 min="0"
-                                                max="1000000"
-                                                value="2500"
-                                                step="100"
+                                                max="5000000"
+                                                value="0"
+                                                step="1000"
                                                 />
                                             <input
                                                 type="range"
                                                 class="range-max"
                                                 min="0"
-                                                max="1000000"
-                                                value="7500"
-                                                step="100"
+                                                max="5000000"
+                                                value="5000000"
+                                                step="1000"
                                                 />
                                         </div>
                                     </div>
