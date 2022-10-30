@@ -20,13 +20,18 @@ import model.User;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
-import manager.NotificationManager;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+import manager.RouteDetailManager;
+import model.RouteDetail;
 
 /**
  *
  * @author Admin
  */
 @WebServlet(name = "CustomerController", urlPatterns = {"/user"})
+
 public class CustomerController extends HttpServlet {
 
     private static final String ACCOUNT_SID = "AC7531d18ea7e24011554d500770a01c58";
@@ -49,13 +54,57 @@ public class CustomerController extends HttpServlet {
             case "save":
                 save(request, response);
                 break;
-            case "change":
-                change(request, response);
+            case "search":
+                search(request, response);
+                break;
+            case "booking":
+                booking(request, response);
+                break;
+            case "filter":
+                filter(request, response);
+                break;
+            case "edit":
+                edit(request, response);
                 break;
             default:
                 break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
+
+    }
+
+    private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+
+        HttpSession session = request.getSession();
+        User us = (User) session.getAttribute("LOGIN_CUSTOMER");
+        
+
+        if (us != null && us.getRoleId() == 2) {
+            String[] listPosString;
+            listPosString = request.getParameterValues("seat");
+
+            if (listPosString == null || listPosString.length == 0) {
+                request.setAttribute("notification", "Please select seats to book tickets");
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "booking");
+            } else {
+                long rid = Long.parseLong(request.getParameter("routeDe"));
+                RouteDetail rd = RouteDetailManager.getRouteDetailById(rid);
+                int[] listPos = new int[listPosString.length];
+                for (int i = 0; i < listPosString.length; i++) {
+                    listPos[i] = Integer.parseInt(listPosString[i]);
+                }
+                request.setAttribute("listPos", listPos);
+                request.setAttribute("routeDe", rd);
+                request.setAttribute("controller", "order");
+                request.setAttribute("action", "checkout");
+            }
+
+        } else {
+            
+            request.setAttribute("controller", "user");
+            request.setAttribute("action", "login");
+        }
 
     }
 
@@ -72,6 +121,7 @@ public class CustomerController extends HttpServlet {
         try {
             String phone = request.getParameter("phone");
             String password = request.getParameter("password");
+            String back = request.getParameter("back");
             UserManager userManager = new UserManager();
             User user = null;
             user = userManager.checkLogin(phone, password);
@@ -81,16 +131,20 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER", user);
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
-                session.setAttribute("LOGIN_CUSTOMER_PASSWORD", user.getPassword());
                 session.setAttribute("LOGIN_ROLE", roleID);
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
                     request.setAttribute("action", "index");
                     request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
                 } else if (roleID == 2) {
+                    if (back != null && back.equals("true")) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "booking");
+                    } else{
                     request.setAttribute("controller", "home");
                     request.setAttribute("action", "index");
-                    request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
+                    }
+                    
                 } else {
                     request.setAttribute("message", "Your role is not support!");
                 }
@@ -182,7 +236,7 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-    
+
     private void save(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         UserManager userManager = new UserManager();
@@ -199,16 +253,107 @@ public class CustomerController extends HttpServlet {
         String otp6 = request.getParameter("otp6");
         String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
         if (otpCheck.equals(SUBMIT_OTP)) {
-            User user = new User(0,name,null,phone, null, 2,password, "");
+            User user = new User(0, name, null, phone, null, 2, password, "");
             if (userManager.register(user)) {
-                NotificationManager.add(user.getUserId(),user.getName() + " just created an account" );
                 request.setAttribute("controller", "user");
-                request.setAttribute("action", "login");               
+                request.setAttribute("action", "login");
             }
         } else {
             request.setAttribute("message", "Wrong OTP, please check again!");
         }
     }
+
+    private void search(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        String cityFrom = request.getParameter("cityfrom");
+        String cityTo = request.getParameter("cityto");
+        String districtFrom = request.getParameter("districtfrom");
+        String districtTo = request.getParameter("districtto");
+        String startDate = request.getParameter("startDate");
+        String depart = districtFrom + ", " + cityFrom;
+        String destination = districtTo + ", " + cityTo;
+        ArrayList<RouteDetail> list = RouteDetailManager.searchRouteDetail(depart, destination, startDate);
+        request.setAttribute("depart", depart);
+        request.setAttribute("destination", destination);
+        request.setAttribute("listSearch", list);
+        request.setAttribute("controller", "user");
+        request.setAttribute("action", "booking");
+    }
+
+    private void filter(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnsupportedEncodingException {
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
+            String[] time_raw = request.getParameterValues("option1");
+            String depart = request.getParameter("depart");
+            String destination = request.getParameter("destination");
+            String min_raw = request.getParameter("minPrice");
+            String max_raw = request.getParameter("maxPrice");
+            int min = Integer.parseInt(min_raw);
+            int max = Integer.parseInt(max_raw);
+
+            String[] from = null;
+            String[] to = null;
+
+            if (time_raw != null) {
+
+                from = new String[time_raw.length];
+                to = new String[time_raw.length];
+                String[] listtmp = new String[2];
+                for (int i = 0; i < time_raw.length; i++) {
+                    listtmp = time_raw[i].split(",");
+                    from[i] = listtmp[0];
+                    to[i] = listtmp[1];
+
+                }
+            }
+            RouteDetailManager dao = new RouteDetailManager();
+            ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max);
+            if (listRoute.size() > 0) {
+                request.setAttribute("listSearch", listRoute);
+            }
+            request.setAttribute("depart", depart);
+            request.setAttribute("destination", destination);
+            request.setAttribute("controller", "user");
+            request.setAttribute("action", "booking");
+        } catch (SQLException e) {
+            log("Error at SortController:" + e.toString());
+        }
+    }
+     private void edit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            HttpSession session = request.getSession();
+            String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
+                        String newName = request.getParameter("newName");
+                        String file=request.getParameter("userDisplayPic");
+                        User user = UserManager.getUserByPhone(phone);
+                        String img=user.getAvtLink();
+                        if (user != null) {
+                            if ( file!= "" && newName != null) {
+                                if (UserManager.updateUser(newName, user.getUserId(),file)) {
+                                    request.setAttribute("controller", "user");
+                                    request.setAttribute("action", "profile");
+                                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                                }
+                            }
+                            if(file == "" && newName!=null){
+                               if (UserManager.updateUser(newName, user.getUserId(),img)) {
+                                    request.setAttribute("controller", "user");
+                                    request.setAttribute("action", "profile");
+                                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                                } 
+                            }
+                        }
+        } catch (Exception ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -257,10 +402,4 @@ public class CustomerController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void change(HttpServletRequest request, HttpServletResponse response) {
-        UserManager userManager = new UserManager();
-        HttpSession session = request.getSession();
-        String name = (String) session.getAttribute("name");
-        
-    }
 }
