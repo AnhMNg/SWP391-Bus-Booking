@@ -50,6 +50,8 @@ public class AdminController extends HttpServlet {
     }
     private void Search(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String name = (String) request.getParameter("nameCom");
         ArrayList<Company> listc2 = CompanyManager.searchCompanyByName(name);    
         request.setAttribute("listSearch", listc2);

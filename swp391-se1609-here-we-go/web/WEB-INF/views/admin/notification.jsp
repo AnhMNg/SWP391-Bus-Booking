@@ -4,10 +4,6 @@
     Author     : Admin
 --%>
 
-<%@page import="manager.NotificationManager"%>
-<%@page import="model.Notification"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -40,72 +36,72 @@
         <div class="activity">
             <!-- Hoverable Table rows -->
             <div class="card">
-                <form action="<c:url value="/notification/sort.do"/>" method="post">
+                <form action="">
                     <div class="card-header">
                         <label for="sel1" class="form-label">Sorting by</label>
-                        <select class="btn btn-outline-light text-dark" id="sel1" name="sellist" onchange="this.form.submit()"">
-                            <option value="latest">Latest</option>
-                            <option value="oldest">Oldest</option> 
-                            
-                        <!--     <input type="radio" id="latest" name="sortby" value="latest">
-                                <label for="latest">Latest</label>
-                                <input type="radio" id="oldest" name="sortby" value="oldest">
-                                <label for="oldest">Oldest</label>
-                                <input type="submit" value="sort" name="action"> 
-                        -->                              
-                        </select>                       
+                        <select
+                            class="btn btn-outline-light text-dark"
+                            id="sel1"
+                            name="sellist1"
+                            >
+                            <option>Day</option>
+                            <option>Week</option>
+                            <option>Month</option>
+                            <option>Year</option>
+                        </select>
+                        <select
+                            class="btn btn-outline-light text-dark"
+                            id="sel1"
+                            name="sellist1"
+                            >
+                            <option>Latest</option>
+                            <option>Oldest</option>
+                        </select>
                     </div>
-                    <table class="notification">
-                        <thead>
-                            <tr>
-                                <th>Message</th>
-                                <th>Time</th>
-                            </tr> 
-                        </thead>
-                    <tbody>
-                        <%
-                            ArrayList<Notification> list = (ArrayList<Notification>) request.getAttribute("list");
-                            //if (list == null) list = NotificationManager.getList();
-                            for (Notification no : list) {
-                        %>
-                        <tr>
-                            <td><%= no.getMessage()%></td>
-                            <td><%= no.getDate()%></td>
-                        </tr>
-                        <%
-                            }
-                        %>
-                    </tbody>
-                    </table>
+                    <div class="list-group">
+                        <div class="list-group-item list-group-item-action nt-ct-group">
+                            <div class="col-md-6">
+                                <ul class="d-flex list-unstyled nt-ct">
+                                    <li class="logo-image">
+                                        <img src="Images/profile1.png" alt="Avatar"/>
+                                    </li>
+                                    <li>User 23 has changed password</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 nt-ct-time">
+                                <p>23:13 02/10/2022</p>
+                            </div>                
+                        </div>
+                        <div class="list-group-item list-group-item-action nt-ct-group">
+                            <div class="col-md-6">
+                                <ul class="d-flex list-unstyled nt-ct">
+                                    <li class="logo-image">
+                                        <img src="Images/profile1.png" alt="Avatar"/>
+                                    </li>
+                                    <li>User 200 has created a new account</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 nt-ct-time">
+                                <p>23:13 02/10/2022</p>
+                            </div>                
+                        </div>
+                        <div class="list-group-item list-group-item-action nt-ct-group">
+                            <div class="col-md-6">
+                                <ul class="d-flex list-unstyled nt-ct">
+                                    <li class="logo-image">
+                                        <img src="Images/profile1.png" alt="Avatar"/>
+                                    </li>
+                                    <li>User 25 has changed password</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 nt-ct-time">
+                                <p>23:13 02/10/2022</p>
+                            </div>                
+                        </div>
+                    </div>
                 </form>
-                </div>
-                <div class="get-list">
-                        <form action="<c:url value="/notification/getlist.do"/>" method="post">
-                            <table class="notification">
-                                <thead>
-                                    <tr>
-                                        <th>Message</th>
-                                        <th>Time</th>
-                                    </tr> 
-                                </thead>
-                            <tbody>
-                                <%
-                                    ArrayList<Notification> list1 = (ArrayList<Notification>)request.getAttribute("list1");
-                                    if (list1 == null) list1 = NotificationManager.getList();
-                                    for (Notification no : list1){
-                                    %>
-                                    <tr>
-                                        <td><%= no.getMessage() %></td>
-                                        <td><%= no.getDate() %></td>
-                                    </tr>
-                                    <%
-                                    }
-                                    %>
-                            </tbody>
-                        </table>
-                        </form>
-                    </div>
-            
+
+            </div>
             <!--/ Hoverable Table rows -->
         </div>
     </body>
