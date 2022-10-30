@@ -191,7 +191,11 @@
                                         <i class="fa fa-search fa-5x"></i>
                                     </div>                        
                                     <div class="card-body">
-                                        <a href="/"><h4 class="card-title">Ho Chi Minh City - Da Lat</h4></a>                   
+                                        <a href="<c:url value="/user/search.do">
+                                               <c:param name="cityfrom" value="Hồ Chí Minh"></c:param>
+                                               <c:param name="cityto" value="Đà Lạt"></c:param>
+                                               <c:param name="startDate" value=""></c:param>
+                                        </c:url>"><h4 class="card-title">Ho Chi Minh City - Da Lat</h4></a>                   
                                     </div>   
                                 </div>
                             </div>
@@ -202,7 +206,11 @@
                                         <i class="fa fa-search fa-5x"></i>
                                     </div>                               
                                     <div class="card-body">
-                                        <a href="/"><h4 class="card-title">Da Nang - Hue</h4></a>  
+                                        <a href="<c:url value="/user/search.do">
+                                               <c:param name="districtfrom" value="Da Nang"></c:param>
+                                               <c:param name="districtto" value="Hue"></c:param>
+                                               <c:param name="startDate" value=""></c:param>
+                                        </c:url>"><h4 class="card-title">Da Nang - Hue</h4></a>  
                                     </div>   
                                 </div>
                             </div>
@@ -215,7 +223,11 @@
                                         <i class="fa fa-search fa-5x"></i>
                                     </div>                                
                                     <div class="card-body">
-                                        <a href="/"><h4 class="card-title">Ha Noi - Sa Pa</h4></a>                         
+                                        <a href="<c:url value="/user/search.do">
+                                               <c:param name="districtfrom" value="Ha Noi"></c:param>
+                                               <c:param name="cityto" value="Sa Pa"></c:param>
+                                               <c:param name="startDate" value=""></c:param>
+                                        </c:url>"><h4 class="card-title">Ha Noi - Sa Pa</h4></a>                         
                                     </div>   
                                 </div>
                             </div>
@@ -226,7 +238,11 @@
                                         <i class="fa fa-search fa-5x"></i>
                                     </div>                              
                                     <div class="card-body">
-                                        <a href="/"><h4 class="card-title">Ho Chi Minh City - Can Tho</h4></a>
+                                        <a href="<c:url value="/user/search.do">
+                                               <c:param name="cityfrom" value="Ho Chi Minh"></c:param>
+                                               <c:param name="districtto" value="Can Tho"></c:param>
+                                               <c:param name="startDate" value=""></c:param>
+                                        </c:url>"><h4 class="card-title">Ho Chi Minh City - Can Tho</h4></a>
                                     </div>   
                                 </div>
                             </div>
