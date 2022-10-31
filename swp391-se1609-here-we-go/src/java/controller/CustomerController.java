@@ -400,7 +400,7 @@ public class CustomerController extends HttpServlet {
                     System.out.println("-------save-------");
                 }
             }
-            if (newName != null && filename != null) {
+            if (newName != null && filename!="") {
                 if (UserManager.updateUser(newName, user.getUserId(), filename)) {
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
