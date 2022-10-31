@@ -47,10 +47,11 @@
                 <span class="text">User Management</span>
             </div>
         </div>
-
+        <div>
+   <form action="<c:url value="/admin/deleteCus.do"/>" method="post"> 
         <div class="activity">
-
             <table id="example" class="table table-hover table-responsive-md" style="width: 100%">
+              
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -62,17 +63,14 @@
                 </thead>
                
                 <tbody>
-                 <form action="<c:url value="/admin/deleteCus.do"/>" method="post"> 
+               
                     <%
                         ArrayList<model.User> list = UserManager.getListCustomer();
                         for (model.User user : list) {
                     %>
 
                     <tr>
-                        <td><%= user.getUserId() %></td>
-                        <td><%= user.getName() %></td>
-                        <td>Coming soon</td>
-                        <td><%= TicketManager.countTicketbyId(user.getUserId()) %></td>
+                         
                         <td>
                             <%= user.getUserId()%>
                             <input type="hidden" name="id" value="<%= user.getUserId()%>"/>
@@ -82,14 +80,13 @@
                     <td><%= user.getDateCreate()%></td>
                     <td><%= TicketManager.countTicketbyId(user.getUserId())%></td>
                     <td>
-                        <input type="submit" name="op" class="btn btn-danger" value="delete">
+                        <input type="submit" class="btn btn-danger" value="Delete">
                     </td>
                     </tr>
 
                     <%
                         }
                     %>
-                 </form>
                 </tbody>
                 <tfoot>
                     <tr>
@@ -101,6 +98,8 @@
                     </tr>
                 </tfoot>
             </table>
+        </div>
+   </form>
         </div>
     </body>
 </html>

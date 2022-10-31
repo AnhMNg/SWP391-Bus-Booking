@@ -36,7 +36,6 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         String action = (String) request.getAttribute("action");
         String controller = (String) request.getAttribute("controller");
-        String op=request.getParameter("op");
         switch (action) {
             case "search":
                 Search(request, response);
@@ -44,12 +43,10 @@ public class AdminController extends HttpServlet {
             case "sortAZ":
                 SortAZ(request, response);
                 break;
-            case "deleteCus":
-                if(op.equals("delete")){
+            case "deleteCus":{
                     DeleteCustomer(request, response);
                 break;
-                }
-                
+            }  
         }
 
         request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
