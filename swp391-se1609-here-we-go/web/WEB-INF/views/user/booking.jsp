@@ -41,6 +41,11 @@
             rel="stylesheet"
             />
         <title>Bus Booking</title>
+        <script>
+            function myFunction() {
+                document.getElementById("deNum").defaultValue = "0";
+            }          
+        </script>
     </head>
     <body>
         <div class="col-md-12 col-sm-12 container-fluid sticky-route-selection">
@@ -305,7 +310,7 @@
                                     <div class="accordion-body">
                                         <div class="input-group">
                                             <span class="input-group-text">Number</span>
-                                            <input type="text" class="form-control">
+                                            <input type="number" id="deNum" name="deNum" class="form-control" value="${deNum}">
                                         </div>
                                     </div>
                                 </div>
@@ -367,7 +372,7 @@
                             </div>
                             <div class="accordion-item">
                                 <div class="search-filter">
-                                    <button class="btn btn-secondary search-filter-btn">
+                                    <button class="btn btn-secondary search-filter-btn" onclick="myFunction()">
                                         APPLY
                                     </button>
                                 </div>
@@ -378,8 +383,6 @@
                     </form>
 
                 </div>
-
-
 
 
 

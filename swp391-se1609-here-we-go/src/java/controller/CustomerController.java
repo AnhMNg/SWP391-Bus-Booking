@@ -302,6 +302,7 @@ public class CustomerController extends HttpServlet {
             String[] company = request.getParameterValues("option2");
             String[] from = null;
             String[] to = null;
+            int deNum = Integer.parseInt(request.getParameter("deNum"));
 
             if (time_raw != null) {
 
@@ -315,8 +316,8 @@ public class CustomerController extends HttpServlet {
 
                 }
             }
-            ArrayList<Company> listCompany = CompanyManager.getAllCompany();
-            ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company);
+            RouteDetailManager dao = new RouteDetailManager();
+            ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company, deNum);
             if (listRoute.size() > 0) {
                 request.setAttribute("listSearch", listRoute);
             }
@@ -325,6 +326,8 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("listCompany", listCompany);
             request.setAttribute("controller", "user");
             request.setAttribute("action", "booking");
+            HttpSession session = request.getSession();
+            session.setAttribute("deNum", deNum);
         } catch (SQLException e) {
             log("Error at SortController:" + e.toString());
         }
