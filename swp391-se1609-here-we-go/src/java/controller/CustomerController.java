@@ -20,26 +20,13 @@ import model.User;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
-import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.servlet.ServletContext;
-
 import manager.CompanyManager;
-
 import manager.RouteDetailManager;
 import model.Company;
 import model.RouteDetail;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 /**
  *
@@ -91,11 +78,7 @@ public class CustomerController extends HttpServlet {
     private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         HttpSession session = request.getSession();
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
-
-
-
         request.getSession().setAttribute("backToBook", "false");
-
         if (us != null && us.getRoleId() == 2) {
             String[] listPosString;
             listPosString = request.getParameterValues("seat");
@@ -159,10 +142,7 @@ public class CustomerController extends HttpServlet {
                     request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
                 } else if (roleID == 2) {
                     if (back != null && back.equals("true")) {
-
-
                         request.setAttribute("listSearch", request.getSession().getAttribute("listReturn"));
-
                         request.setAttribute("controller", "user");
                         request.setAttribute("action", "booking");
                     } else {
@@ -317,7 +297,6 @@ public class CustomerController extends HttpServlet {
             String destination = request.getParameter("destination");
             String min_raw = request.getParameter("minPrice");
             String max_raw = request.getParameter("maxPrice");
-
             int min = Integer.parseInt(min_raw);
             int max = Integer.parseInt(max_raw);
             String[] company = request.getParameterValues("option2");
@@ -337,20 +316,6 @@ public class CustomerController extends HttpServlet {
 
                 }
             }
-
-
-            if (min_raw != null && max_raw != null) {
-                int min = Integer.parseInt(min_raw);
-                int max = Integer.parseInt(max_raw);
-                RouteDetailManager dao = new RouteDetailManager();
-                List<RouteDetail> listRoute = RouteDetailManager.getListRouteV2(depart, destination, min, max);
-                if (listRoute.size() > 0) {
-                    request.setAttribute("listSearch", listRoute);
-                }
-            }
-            request.setAttribute("controller", "user");
-            request.setAttribute("action", "booking");
-
             ArrayList<Company> listCompany = CompanyManager.getAllCompany();
             ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company, deNum);
             if (listRoute.size() > 0) {
@@ -363,7 +328,6 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("action", "booking");
             HttpSession session = request.getSession();
             session.setAttribute("deNum", deNum);
-
         } catch (SQLException e) {
             log("Error at SortController:" + e.toString());
         }
@@ -372,59 +336,8 @@ public class CustomerController extends HttpServlet {
     private void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String filename = null;
             HttpSession session = request.getSession();
             String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
-
-            // Create a factory for disk-based file items
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-
-// Configure a repository (to ensure a secure temp location is used)
-            ServletContext servletContext = this.getServletConfig().getServletContext();
-            File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
-            factory.setRepository(repository);
-
-// Create a new file upload handler
-            ServletFileUpload upload = new ServletFileUpload(factory);
-// Parse the request
-            List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));
-            Iterator<FileItem> iter = items.iterator();
-            HashMap<String, String> fields = new HashMap<>();
-            while (iter.hasNext()) {
-                FileItem item = iter.next();
-
-                if (item.isFormField()) {
-                    fields.put(item.getFieldName(), item.getString());
-                    String name = item.getFieldName();
-                    String value = item.getString();
-                    System.out.println("name: " + name);
-                    System.out.println("value: " + value);
-                } else {
-                    filename = item.getName();
-                    System.out.println("filename: " + filename);
-                    if (filename == null || filename.equals("")) {
-                       filename="";
-                    } else {
-                        Path path = Paths.get(filename);
-                        Path file = path.toAbsolutePath();
-                        String storePath = servletContext.getRealPath("/uploads");
-                        String s = servletContext.getContextPath();
-                        File uploadFile = new File(storePath + "/" + path.getFileName());
-                        item.write(uploadFile);
-                        System.out.println(storePath + "/" + path.getFileName());
-                    }
-                }
-            }
-            String newName = fields.get("newName");
-            User user = UserManager.getUserByPhone(phone);
-            if (newName != null) {
-                if (UserManager.updateUser(newName, user.getUserId(), filename)) {
-                    request.setAttribute("controller", "user");
-                    request.setAttribute("action", "profile");
-                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                    session.setAttribute("img", filename);
-                    System.out.println("-------save-------");
-
             String newName = request.getParameter("newName");
             String file = request.getParameter("userDisplayPic");
             User user = UserManager.getUserByPhone(phone);
@@ -443,7 +356,6 @@ public class CustomerController extends HttpServlet {
                         request.setAttribute("action", "profile");
                         session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
                     }
-
                 }
             }
         } catch (Exception ex) {
