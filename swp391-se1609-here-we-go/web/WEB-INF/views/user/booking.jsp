@@ -443,14 +443,13 @@
                                     aria-labelledby="panelsStayOpen-headingThree"
                                     >
                                     <div class="accordion-body">
+                                        <p class="currency">Currency: VND</p>
                                         <div class="price-input">
                                             <div class="field">
-                                                <span>Min</span>
                                                 <input type="number" class="input-min" value="0" name="minPrice"/>
                                             </div>
                                             <div class="separator">-</div>
                                             <div class="field">
-                                                <span>Max</span>
                                                 <input type="number" class="input-max" value="5000000" name="maxPrice"/>
                                             </div>
                                         </div>
