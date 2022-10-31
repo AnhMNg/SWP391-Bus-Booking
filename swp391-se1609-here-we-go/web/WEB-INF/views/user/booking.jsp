@@ -388,10 +388,16 @@
                         <h2 class="amt">No products are available</h2>
                     </c:if>
                     <h2  class="amt">${notification}</h2>
+                    <%
+                        ArrayList<RouteDetail> listReturn = (ArrayList<RouteDetail>) request.getAttribute("listSearch");
+                        request.getSession().setAttribute("listReturn", listReturn);
+                        
+                    %>
                     <c:forEach var="rd" items="${listSearch}">
                         <c:if test="${(rd.kindBus == 'Normal Bus') and (rd.cappacity == 29)}">
                             <%--29 Seats--%>
                             <form action="<c:url value="/user/booking.do"/>" class="container">
+
                                 <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
                                 <div class="seat-booking-form-dt">
                                     <div class="seat-booking-form-dt-header">
@@ -886,7 +892,7 @@
                                                                     <c:when test="${contains == false}">
                                                                         <label class="seat-ctn">
                                                                             <input type="checkbox" name="seat" value="20"/>
-                                                                                   <span class="checkmark"></span>
+                                                                            <span class="checkmark"></span>
                                                                         </label>
                                                                     </c:when>
                                                                 </c:choose>
@@ -1103,6 +1109,7 @@
                             <c:if test="${(rd.kindBus == 'Sleeper Bus') and (rd.cappacity == 52)}">
                                 <%--Sleeper Bus Form--%>
                                 <form action="<c:url value="/user/booking.do"/>" class="container">
+
                                     <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
                                     <div class="seat-booking-form-dt">
                                         <div class="seat-booking-form-dt-header">
@@ -2303,6 +2310,7 @@
                             <c:if test="${(rd.kindBus == 'Sleeper Bus') and (rd.cappacity == 20)}">
                                 <%--Sleeper Room--%>
                                 <form action="<c:url value="/user/booking.do"/>" class="container">
+
                                     <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
                                     <div class="seat-booking-form-dt">
                                         <div class="seat-booking-form-dt-header">
