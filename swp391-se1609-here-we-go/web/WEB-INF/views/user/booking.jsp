@@ -4,6 +4,8 @@
     Author     : Admin
 --%>
 
+<%@page import="manager.CompanyManager"%>
+<%@page import="model.Company"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="manager.RouteDetailManager"%>
 <%@page import="model.RouteDetail"%>
@@ -44,7 +46,7 @@
         <script>
             function myFunction() {
                 document.getElementById("deNum").defaultValue = "0";
-            }          
+            }
         </script>
     </head>
     <body>
@@ -66,39 +68,39 @@
                         <script>
 
 
-                            var citis = document.getElementById("cityfrom");
-                            var districts = document.getElementById("districtfrom");
+            var citis = document.getElementById("cityfrom");
+            var districts = document.getElementById("districtfrom");
 
 
-                            //var wards = document.getElementById("ward");
-                            var Parameter = {
-                                url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-                                method: "GET",
-                                responseType: "application/json",
-                            };
-                            var promise = axios(Parameter);
-                            promise.then(function (result) {
-                                renderCity(result.data);
-                            });
+            //var wards = document.getElementById("ward");
+            var Parameter = {
+                url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                method: "GET",
+                responseType: "application/json",
+            };
+            var promise = axios(Parameter);
+            promise.then(function (result) {
+                renderCity(result.data);
+            });
 
-                            function renderCity(data) {
-                                for (const x of data) {
-                                    citis.options[citis.options.length] = new Option(x.Name, x.Name);
-                                }
+            function renderCity(data) {
+                for (const x of data) {
+                    citis.options[citis.options.length] = new Option(x.Name, x.Name);
+                }
 
-                                citis.onchange = function () {
-                                    districts.length = 1;
-                                    // ward.length = 1;
-                                    if (this.value != "") {
-                                        const result = data.filter(n => n.Name === this.value);
+                citis.onchange = function () {
+                    districts.length = 1;
+                    // ward.length = 1;
+                    if (this.value != "") {
+                        const result = data.filter(n => n.Name === this.value);
 
-                                        for (const k of result[0].Districts) {
-                                            districts.options[districts.options.length] = new Option(k.Name, k.Name);
-                                        }
-                                    }
-                                };
+                        for (const k of result[0].Districts) {
+                            districts.options[districts.options.length] = new Option(k.Name, k.Name);
+                        }
+                    }
+                };
 
-                            }
+            }
 
 
                         </script>
@@ -115,36 +117,36 @@
                         </div>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
                         <script>
-                            var citis2 = document.getElementById("cityto");
-                            var districts2 = document.getElementById("districtto");
-                            //var wards = document.getElementById("ward");
-                            var Parameter2 = {
-                                url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-                                method: "GET",
-                                responseType: "application/json",
-                            };
-                            var promise2 = axios(Parameter2);
-                            promise2.then(function (result) {
-                                renderCity2(result.data);
-                            });
+            var citis2 = document.getElementById("cityto");
+            var districts2 = document.getElementById("districtto");
+            //var wards = document.getElementById("ward");
+            var Parameter2 = {
+                url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+                method: "GET",
+                responseType: "application/json",
+            };
+            var promise2 = axios(Parameter2);
+            promise2.then(function (result) {
+                renderCity2(result.data);
+            });
 
-                            function renderCity2(data) {
-                                for (const x of data) {
-                                    citis2.options[citis2.options.length] = new Option(x.Name, x.Name);
-                                }
-                                citis2.onchange = function () {
-                                    districts2.length = 1;
-                                    // ward.length = 1;
-                                    if (this.value != "") {
-                                        const result = data.filter(n => n.Name === this.value);
+            function renderCity2(data) {
+                for (const x of data) {
+                    citis2.options[citis2.options.length] = new Option(x.Name, x.Name);
+                }
+                citis2.onchange = function () {
+                    districts2.length = 1;
+                    // ward.length = 1;
+                    if (this.value != "") {
+                        const result = data.filter(n => n.Name === this.value);
 
-                                        for (const k of result[0].Districts) {
-                                            districts2.options[districts2.options.length] = new Option(k.Name, k.Name);
-                                        }
-                                    }
-                                };
+                        for (const k of result[0].Districts) {
+                            districts2.options[districts2.options.length] = new Option(k.Name, k.Name);
+                        }
+                    }
+                };
 
-                            }
+            }
                         </script>
 
                     </div>
@@ -266,24 +268,26 @@
                                     >
                                     <div class="accordion-body">
                                         <ul>
-                                            <c:if test="${requestScope.listCompany != null}">
-                                                <c:if test="${not empty requestScope.listCompany}">
-                                                    <c:forEach var="company" items="${requestScope.listCompany}">
-                                                        <li>
-                                                            <div class="form-check">
-                                                                <input
-                                                                    class="form-check-input"
-                                                                    type="checkbox"
-                                                                    id="check1"
-                                                                    name="option2"
-                                                                    value="${company.name}"
-                                                                    />
-                                                                <label class="form-check-label">${company.name}</label>
-                                                            </div>
-                                                        </li>
-                                                    </c:forEach>
-                                                </c:if>
-                                            </c:if>
+
+                                            <%
+                                                ArrayList<Company> listCom = CompanyManager.getTopCompany(15);
+                                                for (Company com : listCom) {
+                                            %>
+                                            <li>
+                                                <div class="form-check">
+                                                    <input
+                                                        class="form-check-input"
+                                                        type="checkbox"
+                                                        id="check1"
+                                                        name="option2"
+                                                        value="<%= com.getName()%>"
+                                                        />
+                                                    <label class="form-check-label"><%= com.getName()%></label>
+                                                </div>
+                                            </li>
+                                            <%
+                                                }
+                                            %>
                                         </ul>
                                     </div>
                                 </div>
@@ -393,7 +397,7 @@
                     <%
                         ArrayList<RouteDetail> listReturn = (ArrayList<RouteDetail>) request.getAttribute("listSearch");
                         request.getSession().setAttribute("listReturn", listReturn);
-                        
+
                     %>
                     <c:forEach var="rd" items="${listSearch}">
                         <c:if test="${(rd.kindBus == 'Normal Bus') and (rd.cappacity == 29)}">
