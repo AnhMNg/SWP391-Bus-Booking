@@ -67,7 +67,7 @@
                     <tr>
                         <td><%= user.getUserId() %></td>
                         <td><%= user.getName() %></td>
-                        <td><%= user.getDateCreate() %></td>
+                        <td>Coming soon</td>
                         <td><%= TicketManager.countTicketbyId(user.getUserId()) %></td>
                         <td>
                             <input type="submit" class="btn btn-danger" value="Delete">
