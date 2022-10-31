@@ -316,7 +316,7 @@ public class CustomerController extends HttpServlet {
 
                 }
             }
-            RouteDetailManager dao = new RouteDetailManager();
+            ArrayList<Company> listCompany = CompanyManager.getAllCompany();
             ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company, deNum);
             if (listRoute.size() > 0) {
                 request.setAttribute("listSearch", listRoute);
