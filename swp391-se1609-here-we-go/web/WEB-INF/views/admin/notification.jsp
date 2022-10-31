@@ -59,7 +59,22 @@
                         </select>
                     </div>
                     <div class="list-group">
-                        <div class="list-group-item list-group-item-action nt-ct-group">
+                        <c:forEach var="noti" items="${list}">
+                            <div class="list-group-item list-group-item-action nt-ct-group">
+                            <div class="col-md-6">
+                                <ul class="d-flex list-unstyled nt-ct">
+                                    <li class="logo-image">
+                                        <img src="Images/profile1.png" alt="Avatar"/>
+                                    </li>
+                                    <li>${noti.message}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 nt-ct-time">
+                                <p>${noti.messageDate}</p>
+                            </div>                
+                        </div>
+                        </c:forEach>
+<!--                        <div class="list-group-item list-group-item-action nt-ct-group">
                             <div class="col-md-6">
                                 <ul class="d-flex list-unstyled nt-ct">
                                     <li class="logo-image">
@@ -97,7 +112,7 @@
                             <div class="col-md-6 nt-ct-time">
                                 <p>23:13 02/10/2022</p>
                             </div>                
-                        </div>
+                        </div>-->
                     </div>
                 </form>
 
