@@ -183,7 +183,7 @@ public class UserManager {
         return list;
     }
 
-    public static void deleteCustomer(long id) throws SQLException{
+    public static boolean deleteCustomer(long id) throws SQLException{
         Connection cn = DBUtils.getConnection();
         if (cn!= null){
             PreparedStatement pst = cn.prepareStatement("DELETE FROM [User] WHERE [User].userId = ?");
@@ -191,6 +191,7 @@ public class UserManager {
             pst.executeUpdate();
             cn.close();
         }
+        return true;
     }
     public static String getTypeOfUser(long id) throws SQLException {
         Connection cn = null;
