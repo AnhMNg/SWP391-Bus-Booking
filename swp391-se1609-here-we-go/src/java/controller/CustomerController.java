@@ -20,14 +20,23 @@ import model.User;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import javax.servlet.ServletContext;
 import manager.CompanyManager;
 import manager.RouteDetailManager;
 import model.Company;
 import model.RouteDetail;
-
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 /**
  *
  * @author Admin
@@ -135,7 +144,9 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER", user);
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
+                session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
                 session.setAttribute("LOGIN_ROLE", roleID);
+                
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
                     request.setAttribute("action", "index");
@@ -334,26 +345,68 @@ public class CustomerController extends HttpServlet {
     private void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String filename = null;
             HttpSession session = request.getSession();
             String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
-            String newName = request.getParameter("newName");
-            String file = request.getParameter("userDisplayPic");
-            User user = UserManager.getUserByPhone(phone);
-            String img = user.getAvtLink();
-            if (user != null) {
-                if (file != "" && newName != null) {
-                    if (UserManager.updateUser(newName, user.getUserId(), file)) {
-                        request.setAttribute("controller", "user");
-                        request.setAttribute("action", "profile");
-                        session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+            String img=(String) session.getAttribute("LOGIN_CUSTOMER_IMG");
+            // Create a factory for disk-based file items
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+
+// Configure a repository (to ensure a secure temp location is used)
+            ServletContext servletContext = this.getServletConfig().getServletContext();
+            File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+            factory.setRepository(repository);
+
+// Create a new file upload handler
+            ServletFileUpload upload = new ServletFileUpload(factory);
+// Parse the request
+            List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));
+            Iterator<FileItem> iter = items.iterator();
+            HashMap<String, String> fields = new HashMap<>();
+            while (iter.hasNext()) {
+                FileItem item = iter.next();
+
+                if (item.isFormField()) {
+                    fields.put(item.getFieldName(), item.getString());
+                    String name = item.getFieldName();
+                    String value = item.getString();
+                    System.out.println("name: " + name);
+                    System.out.println("value: " + value);
+                } else {
+                    filename = item.getName();
+                    System.out.println("filename: " + filename);
+                    if (filename == null || filename.equals("")) {
+                       filename="";
+                    } else {
+                        Path path = Paths.get(filename);
+                        Path file = path.toAbsolutePath();
+                        String storePath = servletContext.getRealPath("/uploads");
+                        String s = servletContext.getContextPath();
+                        File uploadFile = new File(storePath + "/" + path.getFileName());
+                        item.write(uploadFile);
+                        System.out.println(storePath + "/" + path.getFileName());
+                        
                     }
                 }
-                if (file == "" && newName != null) {
-                    if (UserManager.updateUser(newName, user.getUserId(), img)) {
-                        request.setAttribute("controller", "user");
-                        request.setAttribute("action", "profile");
-                        session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                    }
+            }
+            String newName = fields.get("newName");
+            User user = UserManager.getUserByPhone(phone);
+            if (newName != null && filename.equals("")) {
+                if (UserManager.updateUser(newName, user.getUserId(), img)) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "profile");
+                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                     session.setAttribute("LOGIN_CUSTOMER_IMG", img);
+                    System.out.println("-------save-------");
+                }
+            }
+            if (newName != null && filename != null) {
+                if (UserManager.updateUser(newName, user.getUserId(), filename)) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "profile");
+                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                     session.setAttribute("LOGIN_CUSTOMER_IMG", filename);
+                    System.out.println("-------save-------");
                 }
             }
         } catch (Exception ex) {

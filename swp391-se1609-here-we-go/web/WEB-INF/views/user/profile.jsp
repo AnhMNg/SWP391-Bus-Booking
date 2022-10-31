@@ -43,8 +43,8 @@
                         <div class="profile-col">
                             <div class="profile-content">
                                 <div class="profile-photo">
-                                    <div class="photo">
-                                        <img name="userDisplay" src="" class="user-photo" id="user-photo" value="">
+                                    <div class="photo">       
+                                        <img name="userDisplay" src="<c:url value="/uploads/${sessionScope.LOGIN_CUSTOMER_IMG}"/>" " class="user-photo" id="user-photo" value="">
                                     </div>
                                     <span class="avatar">
                                         <img src="<c:url value="/images/Edit Square.png"/>" class="upload-photo" >
