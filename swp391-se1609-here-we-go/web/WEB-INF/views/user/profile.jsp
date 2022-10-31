@@ -4,6 +4,14 @@
     Author     : Admin
 --%>
 
+<%@page import="java.io.File"%>
+<%@page import="java.nio.file.Paths"%>
+<%@page import="java.nio.file.Path"%>
+<%@page import="java.util.Base64"%>
+<%@page import="java.nio.charset.StandardCharsets"%>
+<%@page import="manager.UserManager"%>
+<%@page import="model.User"%>
+<%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -36,15 +44,20 @@
     </head>
     <body>
         <main>
+            <% 
+            String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
+             User user = UserManager.getUserByPhone(phone);
+            %>
             <div class="  profile container">
-                <form action="<c:url value="/user/edit.do"/>">
+                <form action="<c:url value="/user/edit.do"/>" method="post" enctype="multipart/form-data">
                 <div class="content">
                     <div class="profile-detail">
                         <div class="profile-col">
                             <div class="profile-content">
                                 <div class="profile-photo">
-                                    <div class="photo">
-                                        <img name="userDisplay" src="" class="user-photo" id="user-photo" value="">
+                                    <div class="photo">       
+                                        <img name="userDisplay" src="<c:url value="/uploads/${sessionScope.img}"/>" " class="user-photo" id="user-photo" value="">
+       
                                     </div>
                                     <span class="avatar">
                                         <img src="<c:url value="/images/Edit Square.png"/>" class="upload-photo" >

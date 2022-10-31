@@ -25,13 +25,7 @@ input.addEventListener('change', (e) => {
     });
     reader.readAsDataURL(e.target.files[0]);
 });
-document.addEventListener("DOMContentLoaded", () => {
-    const recentImageDataUrl=localStorage.getItem("recent-image");
-    if(recentImageDataUrl){
-        document.querySelector('#user-photo').setAttribute("src",recentImageDataUrl);
-         document.querySelector('#inputUpload').setAttribute("value",recentImageDataUrl);
-    }
-})
+
 
 document.getElementById("edit-profile").addEventListener("click",function(){
     document.getElementsByClassName("pop-up-profile")[0].classList.add("active");
