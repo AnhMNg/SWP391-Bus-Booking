@@ -4,6 +4,9 @@
     Author     : Admin
 --%>
 
+<%@page import="manager.NotificationManager"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Notification"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -34,89 +37,60 @@
         </div>
 
         <div class="activity">
-            <!-- Hoverable Table rows -->
-            <div class="card">
-                <form action="">
+            <!-- Hoverable Table rows --> 
+            <div class="card">  
+                    <form action="<c:url value="/notification/sort.do"/>" method="post">
                     <div class="card-header">
                         <label for="sel1" class="form-label">Sorting by</label>
-                        <select
-                            class="btn btn-outline-light text-dark"
-                            id="sel1"
-                            name="sellist1"
-                            >
-                            <option>Day</option>
-                            <option>Week</option>
-                            <option>Month</option>
-                            <option>Year</option>
-                        </select>
-                        <select
-                            class="btn btn-outline-light text-dark"
-                            id="sel1"
-                            name="sellist1"
-                            >
-                            <option>Latest</option>
-                            <option>Oldest</option>
+                        <select class="btn btn-outline-light text-dark" id="sel1" name="sellist">
+                            <option value="latest">Latest</option>
+                            <c:if test="${not empty oldest}">
+                                <option selected="selected" value="oldest">Oldest</option>
+                            </c:if>
+                                <c:if test="${empty oldest}">
+                                <option value="oldest">Oldest</option>
+                            </c:if>
+                            <input type="submit" value="sort" name="sort"/>
                         </select>
                     </div>
+                    </form>
+               
                     <div class="list-group">
-                        <c:forEach var="noti" items="${list}">
+                        
+                        <c:forEach var="no" items="${list}">  
                             <div class="list-group-item list-group-item-action nt-ct-group">
-                            <div class="col-md-6">
-                                <ul class="d-flex list-unstyled nt-ct">
-                                    <li class="logo-image">
-                                        <img src="Images/profile1.png" alt="Avatar"/>
-                                    </li>
-                                    <li>${noti.message}</li>
-                                </ul>
+                                <div class="col-md-6">
+                                    <ul class="d-flex list-unstyled nt-ct">
+                                        <li>${no.message}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 nt-ct-time">
+                                    <p>${no.date}</p>
+                                </div>              
                             </div>
-                            <div class="col-md-6 nt-ct-time">
-                                <p>${noti.messageDate}</p>
-                            </div>                
-                        </div>
+                            
                         </c:forEach>
-<!--                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <div class="col-md-6">
-                                <ul class="d-flex list-unstyled nt-ct">
-                                    <li class="logo-image">
-                                        <img src="Images/profile1.png" alt="Avatar"/>
-                                    </li>
-                                    <li>User 23 has changed password</li>
-                                </ul>
+                    </div> 
+            
+            </div>
+            <div class="get-list">
+                <form action="<c:url value="/notification/getlist.do"/>" method="post">
+                    <div class="list-group">
+                        <c:forEach var="no1" items="${list1}">
+                            <div class="list-group-item list-group-item-action nt-ct-group">
+                                <div class="col-md-6">
+                                    <ul class="d-flex list-unstyled nt-ct">
+                                        <li>${no1.message}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 nt-ct-time">
+                                    <p>${no1.date}</p>
+                                </div>                
                             </div>
-                            <div class="col-md-6 nt-ct-time">
-                                <p>23:13 02/10/2022</p>
-                            </div>                
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <div class="col-md-6">
-                                <ul class="d-flex list-unstyled nt-ct">
-                                    <li class="logo-image">
-                                        <img src="Images/profile1.png" alt="Avatar"/>
-                                    </li>
-                                    <li>User 200 has created a new account</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6 nt-ct-time">
-                                <p>23:13 02/10/2022</p>
-                            </div>                
-                        </div>
-                        <div class="list-group-item list-group-item-action nt-ct-group">
-                            <div class="col-md-6">
-                                <ul class="d-flex list-unstyled nt-ct">
-                                    <li class="logo-image">
-                                        <img src="Images/profile1.png" alt="Avatar"/>
-                                    </li>
-                                    <li>User 25 has changed password</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6 nt-ct-time">
-                                <p>23:13 02/10/2022</p>
-                            </div>                
-                        </div>-->
+                        </c:forEach>
                     </div>
                 </form>
-
-            </div>
+            </div> 
             <!--/ Hoverable Table rows -->
         </div>
     </body>

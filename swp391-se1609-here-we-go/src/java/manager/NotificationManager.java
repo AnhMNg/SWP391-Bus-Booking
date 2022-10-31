@@ -21,8 +21,6 @@ public class NotificationManager {
 
     private static final String ADD = "INSERT INTO Notification([userId],[message],[date]) VALUES(?,?,CONVERT(datetime,CURRENT_TIMESTAMP))";
     private static final String GET_LIST = "SELECT * FROM [Notification]";
-    private static final String SORT = "SELECT * FROM Notification ORDER BY date";
-    private static final String SORT_DESC = "SELECT * FROM Notification ORDER BY date desc";
 
     public static boolean add(long userId, String message) throws SQLException {
         Connection cn = null;
@@ -81,54 +79,25 @@ public class NotificationManager {
         return list;
     }
 
-    public static ArrayList<Notification> sort() throws SQLException {
+    public static ArrayList<Notification> sortByDate(String sortby) throws SQLException {
         ArrayList<Notification> list = new ArrayList<>();
-        Notification no = null;
+        Notification no;
         Connection conn = null;
         PreparedStatement psm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            if (conn != null) {
-                psm = conn.prepareStatement(SORT);
+            if (conn != null && sortby != null) {
+                String sql = "SELECT * FROM Notification ORDER BY date";
+                if (sortby.equalsIgnoreCase("latest"))
+                    sql = sql + " desc";
+                psm = conn.prepareStatement(sql);
                 rs = psm.executeQuery();
-
-                while (rs != null && rs.next()) {
+                if (rs != null) {
+                while ( rs.next()) {
                     no = new Notification(rs.getLong(1), rs.getLong(2), rs.getString(3), rs.getString(4));
                     list.add(no);
                 }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (psm != null) {
-                psm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return list;
-    }
-    
-    public static ArrayList<Notification> sortDesc() throws SQLException {
-        ArrayList<Notification> list = new ArrayList<>();
-        Notification no = null;
-        Connection conn = null;
-        PreparedStatement psm = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.getConnection();
-            if (conn != null) {
-                psm = conn.prepareStatement(SORT_DESC);
-                rs = psm.executeQuery();
-
-                while (rs != null && rs.next()) {
-                    no = new Notification(rs.getLong(1), rs.getLong(2), rs.getString(3), rs.getString(4));
-                    list.add(no);
                 }
             }
         } catch (Exception e) {

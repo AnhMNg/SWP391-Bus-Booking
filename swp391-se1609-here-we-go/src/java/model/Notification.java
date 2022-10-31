@@ -55,6 +55,10 @@ public class Notification {
     public void setDate(String date) {
         this.date = date;
     }
+    @Override
+    public String toString() {
+        return "NotiId = " + NotiId + " userId = " + userId + " message = " + message + " date = " + date;
+    }
     
     
 }
