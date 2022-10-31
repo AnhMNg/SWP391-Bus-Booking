@@ -885,7 +885,7 @@
                                                                     </c:when>
                                                                     <c:when test="${contains == false}">
                                                                         <label class="seat-ctn">
-                                                                            <input type="checkbox" name="seat" value="20/>
+                                                                            <input type="checkbox" name="seat" value="20"/>
                                                                                    <span class="checkmark"></span>
                                                                         </label>
                                                                     </c:when>
