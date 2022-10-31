@@ -77,6 +77,9 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 edit(request, response);
                 break;
+                case "change":
+                change(request, response);
+                break;
             default:
                 break;
         }
@@ -463,5 +466,9 @@ public class CustomerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void change(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

@@ -27,8 +27,10 @@ public class UserManager {
     private static final String LOGIN_GOOGLE = "SELECT * FROM [User] WHERE googleId = ?";
     private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,?,?,?,?, CURRENT_TIMESTAMP)";
     private static final String CHECK_DUPLICATE = "SELECT * FROM [User] WHERE phone = ?";
- private static final String UPDATE_USER_INFORMATION="update [dbo].[User] set [name]=?, [avatarLink]=? where [userId]=?";
-  private static final String CREATED_DATE = "SELECT [User].dateCreate FROM [User] WHERE [User].userId = ?";
+    private static final String UPDATE_USER_INFORMATION="update [dbo].[User] set [name]=?, [avatarLink]=? where [userId]=?";
+    private static final String CREATED_DATE = "SELECT [User].dateCreate FROM [User] WHERE [User].userId = ?";
+    private static final String CHANGE_PASSWORD = "UPDATE [User] SET [password] = ? WHERE userId = ?";
+    
     public static User getUserById(long id) throws SQLException {
         Connection cn = null;
         User us = null;
@@ -272,6 +274,31 @@ public class UserManager {
             }
         }
         return us;
+    }
+        public static boolean changePasword(long userId, String password) throws Exception{
+        Connection cn = null;
+        PreparedStatement pst = null;
+        boolean change = false;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                pst = cn.prepareStatement(CHANGE_PASSWORD);
+                pst.setString(1, password);
+                pst.setLong(2, userId);
+                pst.executeUpdate();
+                change = true;              
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+        return change;
     }
 }
 
