@@ -278,12 +278,10 @@ public class CustomerController extends HttpServlet {
         String startDate = request.getParameter("startDate");
         String depart = districtFrom + ", " + cityFrom;
         String destination = districtTo + ", " + cityTo;
-        ArrayList<Company> listCompany = CompanyManager.getAllCompany();
         ArrayList<RouteDetail> list = RouteDetailManager.searchRouteDetail(depart, destination, startDate);
         request.setAttribute("depart", depart);
         request.setAttribute("destination", destination);
         request.setAttribute("listSearch", list);
-        request.setAttribute("listCompany", listCompany);
         request.setAttribute("controller", "user");
         request.setAttribute("action", "booking");
     }
@@ -316,14 +314,14 @@ public class CustomerController extends HttpServlet {
 
                 }
             }
-            ArrayList<Company> listCompany = CompanyManager.getAllCompany();
+            
             ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company, deNum);
             if (listRoute.size() > 0) {
                 request.setAttribute("listSearch", listRoute);
             }
             request.setAttribute("depart", depart);
             request.setAttribute("destination", destination);
-            request.setAttribute("listCompany", listCompany);
+       
             request.setAttribute("controller", "user");
             request.setAttribute("action", "booking");
             HttpSession session = request.getSession();
