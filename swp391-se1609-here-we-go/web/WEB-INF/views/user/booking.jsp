@@ -41,6 +41,11 @@
             rel="stylesheet"
             />
         <title>Bus Booking</title>
+        <script>
+            function myFunction() {
+                document.getElementById("deNum").defaultValue = "0";
+            }          
+        </script>
     </head>
     <body>
         <div class="col-md-12 col-sm-12 container-fluid sticky-route-selection">
@@ -261,136 +266,24 @@
                                     >
                                     <div class="accordion-body">
                                         <ul>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label">Thanh Buoi Bus</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label"
-                                                           >Phuong Trang Bus (Futa Bus)</label
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label"
-                                                           >Ha Noi Rides On Time</label
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label"
-                                                           >Sapa Dragon Express</label
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label">Hoang Long Bus</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label"
-                                                           >Hue Tourist Bus</label
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label"
-                                                           >Mai Linh Express Bus</label
-                                                    >
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label">Hai Van Bus</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label">Interbus Lines</label>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="form-check">
-                                                    <input
-                                                        class="form-check-input"
-                                                        type="checkbox"
-                                                        id="check1"
-                                                        name="option1"
-                                                        value="something"
-                                                        />
-                                                    <label class="form-check-label">Sapa Bus</label>
-                                                </div>
-                                            </li>
+                                            <c:if test="${requestScope.listCompany != null}">
+                                                <c:if test="${not empty requestScope.listCompany}">
+                                                    <c:forEach var="company" items="${requestScope.listCompany}">
+                                                        <li>
+                                                            <div class="form-check">
+                                                                <input
+                                                                    class="form-check-input"
+                                                                    type="checkbox"
+                                                                    id="check1"
+                                                                    name="option2"
+                                                                    value="${company.name}"
+                                                                    />
+                                                                <label class="form-check-label">${company.name}</label>
+                                                            </div>
+                                                        </li>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </c:if>
                                         </ul>
                                     </div>
                                 </div>
@@ -417,7 +310,7 @@
                                     <div class="accordion-body">
                                         <div class="input-group">
                                             <span class="input-group-text">Number</span>
-                                            <input type="text" class="form-control">
+                                            <input type="number" id="deNum" name="deNum" class="form-control" value="${deNum}">
                                         </div>
                                     </div>
                                 </div>
@@ -442,15 +335,14 @@
                                     aria-labelledby="panelsStayOpen-headingThree"
                                     >
                                     <div class="accordion-body">
+                                        <p class="currency">Currency: VND</p>
                                         <div class="price-input">
                                             <div class="field">
-                                                <span>Min</span>
-                                                <input type="number" class="input-min" value="2500" name="minPrice"/>
+                                                <input type="number" class="input-min" value="0" name="minPrice"/>
                                             </div>
                                             <div class="separator">-</div>
                                             <div class="field">
-                                                <span>Max</span>
-                                                <input type="number" class="input-max" value="7500" name="maxPrice"/>
+                                                <input type="number" class="input-max" value="5000000" name="maxPrice"/>
                                             </div>
                                         </div>
                                         <div class="slider">
@@ -461,17 +353,17 @@
                                                 type="range"
                                                 class="range-min"
                                                 min="0"
-                                                max="1000000"
-                                                value="2500"
-                                                step="100"
+                                                max="5000000"
+                                                value="0"
+                                                step="1000"
                                                 />
                                             <input
                                                 type="range"
                                                 class="range-max"
                                                 min="0"
-                                                max="1000000"
-                                                value="7500"
-                                                step="100"
+                                                max="5000000"
+                                                value="5000000"
+                                                step="1000"
                                                 />
                                         </div>
                                     </div>
@@ -479,7 +371,7 @@
                             </div>
                             <div class="accordion-item">
                                 <div class="search-filter">
-                                    <button class="btn btn-secondary search-filter-btn">
+                                    <button class="btn btn-secondary search-filter-btn" onclick="myFunction()">
                                         APPLY
                                     </button>
                                 </div>
@@ -493,17 +385,21 @@
 
 
 
-
-
                 <div class="container-fluid col-md-10 col-sm-12 seat-booking-form">   
                     <c:if test="${(empty listSearch) and (empty notification)}">
                         <h2 class="amt">No products are available</h2>
                     </c:if>
                     <h2  class="amt">${notification}</h2>
+                    <%
+                        ArrayList<RouteDetail> listReturn = (ArrayList<RouteDetail>) request.getAttribute("listSearch");
+                        request.getSession().setAttribute("listReturn", listReturn);
+                        
+                    %>
                     <c:forEach var="rd" items="${listSearch}">
                         <c:if test="${(rd.kindBus == 'Normal Bus') and (rd.cappacity == 29)}">
                             <%--29 Seats--%>
                             <form action="<c:url value="/user/booking.do"/>" class="container">
+
                                 <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
                                 <div class="seat-booking-form-dt">
                                     <div class="seat-booking-form-dt-header">
@@ -997,8 +893,8 @@
                                                                     </c:when>
                                                                     <c:when test="${contains == false}">
                                                                         <label class="seat-ctn">
-                                                                            <input type="checkbox" name="seat" value="20/>
-                                                                                   <span class="checkmark"></span>
+                                                                            <input type="checkbox" name="seat" value="20"/>
+                                                                            <span class="checkmark"></span>
                                                                         </label>
                                                                     </c:when>
                                                                 </c:choose>
@@ -1215,6 +1111,7 @@
                             <c:if test="${(rd.kindBus == 'Sleeper Bus') and (rd.cappacity == 52)}">
                                 <%--Sleeper Bus Form--%>
                                 <form action="<c:url value="/user/booking.do"/>" class="container">
+
                                     <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
                                     <div class="seat-booking-form-dt">
                                         <div class="seat-booking-form-dt-header">
@@ -2415,6 +2312,7 @@
                             <c:if test="${(rd.kindBus == 'Sleeper Bus') and (rd.cappacity == 20)}">
                                 <%--Sleeper Room--%>
                                 <form action="<c:url value="/user/booking.do"/>" class="container">
+
                                     <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
                                     <div class="seat-booking-form-dt">
                                         <div class="seat-booking-form-dt-header">

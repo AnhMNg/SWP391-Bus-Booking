@@ -148,14 +148,14 @@ INSERT INTO BusType VALUES(29, 'Normal Bus')
 INSERT INTO BusType VALUES(52, 'Sleeper Bus')
 INSERT INTO BusType VALUES(20, 'Sleeper Bus')
 
-INSERT INTO RouteDetail VALUES(1,1,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00', N'123 Lê Hồng Phong', N'321 Phan Đình Giót')
-INSERT INTO RouteDetail VALUES(2,2,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00', N'345 Hồ Hảo Hớn', N'543 Nguyễn Cư Trinh')
-INSERT INTO RouteDetail VALUES(3,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:00:00', N'284 Trần Đình Xu', N'756 Nguyễn Văn Cừ')
-INSERT INTO RouteDetail VALUES(2,1,'2022-10-18 18:00:00',300000,'2022-10-18 20:00:00', N'456 Lương Định Của', N'241 Võ Thi Sáu')
-INSERT INTO RouteDetail VALUES(4,2,'2022-10-18 18:00:00',300000,'2022-10-18 19:00:00', N'6213/123 Nguyễn Duy Dương', N'2613 Nguyễn Chí Thanh')
-INSERT INTO RouteDetail VALUES(6,3,'2022-10-18 18:00:00',300000,'2022-10-18 23:00:00', N'123 Đốc Binh Kiều', N'564 Nguyễn Thị Minh Khai')
-INSERT INTO RouteDetail VALUES(7,2,'2022-10-18 18:00:00',300000,'2022-10-18 21:00:00', N'80 Trần Bình Trọng', N'21 Ngô Gia Tự')
-INSERT INTO RouteDetail VALUES(8,2,'2022-10-18 18:00:00',300000,'2022-10-18 22:00:00', N'28 Nguyễn Đình Chiểu', N'87 Độc Lập')
+INSERT INTO RouteDetail VALUES(1,1,'2022-11-13 07:00:00',100000,'2022-10-18 22:00:00', N'123 Lê Hồng Phong', N'321 Phan Đình Giót')
+INSERT INTO RouteDetail VALUES(2,2,'2022-11-14 09:00:00',300000,'2022-10-18 21:00:00', N'345 Hồ Hảo Hớn', N'543 Nguyễn Cư Trinh')
+INSERT INTO RouteDetail VALUES(3,3,'2022-11-18 10:00:00',400000,'2022-10-18 23:00:00', N'284 Trần Đình Xu', N'756 Nguyễn Văn Cừ')
+INSERT INTO RouteDetail VALUES(2,1,'2022-11-18 12:00:00',500000,'2022-10-18 20:00:00', N'456 Lương Định Của', N'241 Võ Thi Sáu')
+INSERT INTO RouteDetail VALUES(4,2,'2022-11-18 14:00:00',600000,'2022-10-18 19:00:00', N'6213/123 Nguyễn Duy Dương', N'2613 Nguyễn Chí Thanh')
+INSERT INTO RouteDetail VALUES(6,3,'2022-11-19 16:00:00',700000,'2022-10-18 23:00:00', N'123 Đốc Binh Kiều', N'564 Nguyễn Thị Minh Khai')
+INSERT INTO RouteDetail VALUES(7,2,'2022-11-12 18:00:00',800000,'2022-10-18 21:00:00', N'80 Trần Bình Trọng', N'21 Ngô Gia Tự')
+INSERT INTO RouteDetail VALUES(8,2,'2022-10-28 23:00:00',900000,'2022-10-18 22:00:00', N'28 Nguyễn Đình Chiểu', N'87 Độc Lập')
 
 INSERT INTO [Order] VALUES('2022-09-28 19:23:11',1,600000,null)
 INSERT INTO [Order] VALUES('2022-09-25 20:23:11',2,300000,null)
@@ -174,14 +174,6 @@ INSERT INTO [Order] VALUES('2022-09-12 19:23:11',1,300000, null)
 INSERT INTO RouteDetail VALUES(8,2,'2022-09-18 18:00:00',300000,'2022-10-18 22:00:00',N'123 Tân Kỳ Tân Quý', N'123 Lũy Bán Bích')
 INSERT INTO Ticket VALUES(1,9,1, 'Châu Việt Cường', CURRENT_TIMESTAMP)
 
-
-SELECT rd.routeDetailId, rd.busTypeId, rd.startTime, rd.price, rd.timeArrival, rd.departDetail, rd.detinationDetail, r.routeId, com.name, PlaceName.depart, PlaceName.destination
-FROM RouteDetail rd, Route r,Company com ,(SELECT dep.routeId,dep.name depart,des.name destination FROM
-						(SELECT * FROM Route,Place WHERE Route.departId = Place.placeId) dep,
-						(SELECT * FROM Route,Place WHERE Route.destinationId = Place.placeId) des
-					WHERE des.routeId = dep.routeId) PlaceName
-WHERE rd.routeId = r.routeId   and PlaceName.routeId = r.routeId and com.companyId = r.companyId 
-and PlaceName.depart like N'%Tỉnh Tiền Giang%' and PlaceName.destination like N'%Thành phố Hà Nội%' and startTime > '2022-10-15 00:00:00'
 
 
 
