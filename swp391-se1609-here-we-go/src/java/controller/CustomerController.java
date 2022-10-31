@@ -76,17 +76,18 @@ public class CustomerController extends HttpServlet {
     }
 
     private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-
         HttpSession session = request.getSession();
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
-        
-
+        request.getSession().setAttribute("backToBook", "false");
         if (us != null && us.getRoleId() == 2) {
             String[] listPosString;
             listPosString = request.getParameterValues("seat");
+            
 
             if (listPosString == null || listPosString.length == 0) {
                 request.setAttribute("notification", "Please select seats to book tickets");
+                ArrayList<RouteDetail> listReturn = (ArrayList<RouteDetail>) session.getAttribute("listReturn");
+                request.setAttribute("listSearch", listReturn);
                 request.setAttribute("controller", "user");
                 request.setAttribute("action", "booking");
             } else {
@@ -103,7 +104,8 @@ public class CustomerController extends HttpServlet {
             }
 
         } else {
-            
+            request.getSession().setAttribute("backToBook", "true");
+            request.setAttribute("message", "Please login to booking!!!");
             request.setAttribute("controller", "user");
             request.setAttribute("action", "login");
         }
@@ -140,13 +142,14 @@ public class CustomerController extends HttpServlet {
                     request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
                 } else if (roleID == 2) {
                     if (back != null && back.equals("true")) {
-                    request.setAttribute("controller", "user");
-                    request.setAttribute("action", "booking");
-                    } else{
-                    request.setAttribute("controller", "home");
-                    request.setAttribute("action", "index");
+                        request.setAttribute("listSearch", request.getSession().getAttribute("listReturn"));
+                        request.setAttribute("controller", "user");
+                        request.setAttribute("action", "booking");
+                    } else {
+                        request.setAttribute("controller", "home");
+                        request.setAttribute("action", "index");
                     }
-                    
+
                 } else {
                     request.setAttribute("message", "Your role is not support!");
                 }
@@ -299,7 +302,6 @@ public class CustomerController extends HttpServlet {
             String[] company = request.getParameterValues("option2");
             String[] from = null;
             String[] to = null;
-            
 
             if (time_raw != null) {
 
@@ -327,31 +329,32 @@ public class CustomerController extends HttpServlet {
             log("Error at SortController:" + e.toString());
         }
     }
-     private void edit(HttpServletRequest request, HttpServletResponse response)
+
+    private void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
             String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
-                        String newName = request.getParameter("newName");
-                        String file=request.getParameter("userDisplayPic");
-                        User user = UserManager.getUserByPhone(phone);
-                        String img=user.getAvtLink();
-                        if (user != null) {
-                            if ( file!= "" && newName != null) {
-                                if (UserManager.updateUser(newName, user.getUserId(),file)) {
-                                    request.setAttribute("controller", "user");
-                                    request.setAttribute("action", "profile");
-                                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                                }
-                            }
-                            if(file == "" && newName!=null){
-                               if (UserManager.updateUser(newName, user.getUserId(),img)) {
-                                    request.setAttribute("controller", "user");
-                                    request.setAttribute("action", "profile");
-                                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                                } 
-                            }
-                        }
+            String newName = request.getParameter("newName");
+            String file = request.getParameter("userDisplayPic");
+            User user = UserManager.getUserByPhone(phone);
+            String img = user.getAvtLink();
+            if (user != null) {
+                if (file != "" && newName != null) {
+                    if (UserManager.updateUser(newName, user.getUserId(), file)) {
+                        request.setAttribute("controller", "user");
+                        request.setAttribute("action", "profile");
+                        session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                    }
+                }
+                if (file == "" && newName != null) {
+                    if (UserManager.updateUser(newName, user.getUserId(), img)) {
+                        request.setAttribute("controller", "user");
+                        request.setAttribute("action", "profile");
+                        session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                    }
+                }
+            }
         } catch (Exception ex) {
             request.setAttribute("controller", "error");
             request.setAttribute("action", "index");
@@ -359,7 +362,6 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
