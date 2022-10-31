@@ -37,7 +37,7 @@
     <body>
         <main>
             <div class="  profile container">
-                <form action="<c:url value="/user/edit.do"/>">
+                <form action="<c:url value="/user/edit.do"/>"  method="post" enctype="multipart/form-data">
                 <div class="content">
                     <div class="profile-detail">
                         <div class="profile-col">
