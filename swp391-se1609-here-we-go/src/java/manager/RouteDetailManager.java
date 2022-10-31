@@ -551,10 +551,11 @@ public class RouteDetailManager {
                        rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
                     listRoute.add(rd);
                 }
-//                if (deNumSeat == 0) {
-//                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), rs.getString(4),
-//                       rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
-//                }
+                if (deNumSeat == 0) {
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), rs.getString(4),
+                       rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                    listRoute.add(rd);
+                }
                 
             }
 
