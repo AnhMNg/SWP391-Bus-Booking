@@ -33,7 +33,7 @@
                         
                         <form action="<c:url value="/user/submit.do"/>" autocomplete="off" class="sign-in-form" method="POST">
                             <% String backToBook = null;
-                           backToBook = (String) request.getAttribute("backtobook");
+                           backToBook = (String) request.getSession().getAttribute("backToBook");
                                 if (backToBook != null && backToBook.equals("true")){
                                     %>
                                     <input type="hidden" name="back" value="true" />
