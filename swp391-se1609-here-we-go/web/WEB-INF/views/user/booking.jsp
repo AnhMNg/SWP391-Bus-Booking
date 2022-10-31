@@ -41,6 +41,11 @@
             rel="stylesheet"
             />
         <title>Bus Booking</title>
+        <script>
+            function myFunction() {
+                document.getElementById("deNum").defaultValue = "0";
+            }          
+        </script>
     </head>
     <body>
         <div class="col-md-12 col-sm-12 container-fluid sticky-route-selection">
@@ -282,9 +287,7 @@
                                                         name="option2"
                                                         value="Phương Trang Bus"
                                                         />
-                                                    <label class="form-check-label"
-                                                           >Phuong Trang Bus (Futa Bus)</label
-                                                    >
+                                                    <label class="form-check-label">Phuong Trang Bus (Futa Bus)</label>
                                                 </div>
                                             </li>
                                             <li>
@@ -294,11 +297,9 @@
                                                         type="checkbox"
                                                         id="check1"
                                                         name="option2"
-                                                        value="Hà Nội Rides On Time"
+                                                        value="Ha Noi Rides On Time"
                                                         />
-                                                    <label class="form-check-label"
-                                                           >Ha Noi Rides On Time</label
-                                                    >
+                                                    <label class="form-check-label">Ha Noi Rides On Time</label>
                                                 </div>
                                             </li>
                                             <li>
@@ -308,7 +309,7 @@
                                                         type="checkbox"
                                                         id="check1"
                                                         name="option2"
-                                                        value="Sapa Dragon"
+                                                        value="Sapa Dragon Express"
                                                         />
                                                     <label class="form-check-label"
                                                            >Sapa Dragon Express</label
@@ -417,7 +418,7 @@
                                     <div class="accordion-body">
                                         <div class="input-group">
                                             <span class="input-group-text">Number</span>
-                                            <input type="text" class="form-control">
+                                            <input type="number" id="deNum" name="deNum" class="form-control" value="${deNum}">
                                         </div>
                                     </div>
                                 </div>
@@ -479,7 +480,7 @@
                             </div>
                             <div class="accordion-item">
                                 <div class="search-filter">
-                                    <button class="btn btn-secondary search-filter-btn">
+                                    <button class="btn btn-secondary search-filter-btn" onclick="myFunction()">
                                         APPLY
                                     </button>
                                 </div>
@@ -490,8 +491,6 @@
                     </form>
 
                 </div>
-
-
 
 
 
@@ -998,7 +997,7 @@
                                                                     <c:when test="${contains == false}">
                                                                         <label class="seat-ctn">
                                                                             <input type="checkbox" name="seat" value="20"/>
-                                                                                   <span class="checkmark"></span>
+                                                                            <span class="checkmark"></span>
                                                                         </label>
                                                                     </c:when>
                                                                 </c:choose>
