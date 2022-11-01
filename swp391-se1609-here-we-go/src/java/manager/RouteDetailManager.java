@@ -501,7 +501,7 @@ public class RouteDetailManager {
         return count;
     }
 
-    public static ArrayList<RouteDetail> getListRouteV1(String depart, String destination, String[] from, String[] to, int min, int max, String[] company) throws SQLException {
+    public static ArrayList<RouteDetail> getListRouteV1(String depart, String destination, String[] from, String[] to, int min, int max, String[] company, int deNumSeat) throws SQLException {
         ArrayList<RouteDetail> listRoute = new ArrayList<RouteDetail>();
         Connection conn = null;
         PreparedStatement psm = null;
@@ -545,9 +545,18 @@ public class RouteDetailManager {
             }
             while (rs != null && rs.next()) {
                 listPosition = getListPosition(rs.getLong(1));
-                rd = new RouteDetail(rs.getLong(1), rs.getInt(2), getNumberOfRemaningPosition(listPosition), rs.getString(3), rs.getString(4),
-                        rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
-                listRoute.add(rd);
+                int deNum = getNumberOfRemaningPosition(listPosition);
+                if (deNumSeat != 0 && deNumSeat <= deNum) {
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), rs.getString(4),
+                       rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                    listRoute.add(rd);
+                }
+                if (deNumSeat == 0) {
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), rs.getString(4),
+                       rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                    listRoute.add(rd);
+                }
+                
             }
 
         } catch (SQLException e) {

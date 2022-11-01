@@ -20,14 +20,23 @@ import model.User;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import javax.servlet.ServletContext;
 import manager.CompanyManager;
 import manager.RouteDetailManager;
 import model.Company;
 import model.RouteDetail;
-
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 /**
  *
  * @author Admin
@@ -68,6 +77,9 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 edit(request, response);
                 break;
+                case "change":
+                change(request, response);
+                break;
             default:
                 break;
         }
@@ -76,17 +88,18 @@ public class CustomerController extends HttpServlet {
     }
 
     private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-
         HttpSession session = request.getSession();
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
-        
-
+        request.getSession().setAttribute("backToBook", "false");
         if (us != null && us.getRoleId() == 2) {
             String[] listPosString;
             listPosString = request.getParameterValues("seat");
+            
 
             if (listPosString == null || listPosString.length == 0) {
                 request.setAttribute("notification", "Please select seats to book tickets");
+                ArrayList<RouteDetail> listReturn = (ArrayList<RouteDetail>) session.getAttribute("listReturn");
+                request.setAttribute("listSearch", listReturn);
                 request.setAttribute("controller", "user");
                 request.setAttribute("action", "booking");
             } else {
@@ -103,7 +116,8 @@ public class CustomerController extends HttpServlet {
             }
 
         } else {
-            
+            request.getSession().setAttribute("backToBook", "true");
+            request.setAttribute("message", "Please login to booking!!!");
             request.setAttribute("controller", "user");
             request.setAttribute("action", "login");
         }
@@ -133,20 +147,23 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER", user);
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
+                session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
                 session.setAttribute("LOGIN_ROLE", roleID);
+                
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
                     request.setAttribute("action", "index");
                     request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
                 } else if (roleID == 2) {
                     if (back != null && back.equals("true")) {
-                    request.setAttribute("controller", "user");
-                    request.setAttribute("action", "booking");
-                    } else{
-                    request.setAttribute("controller", "home");
-                    request.setAttribute("action", "index");
+                        request.setAttribute("listSearch", request.getSession().getAttribute("listReturn"));
+                        request.setAttribute("controller", "user");
+                        request.setAttribute("action", "booking");
+                    } else {
+                        request.setAttribute("controller", "home");
+                        request.setAttribute("action", "index");
                     }
-                    
+
                 } else {
                     request.setAttribute("message", "Your role is not support!");
                 }
@@ -275,12 +292,10 @@ public class CustomerController extends HttpServlet {
         String startDate = request.getParameter("startDate");
         String depart = districtFrom + ", " + cityFrom;
         String destination = districtTo + ", " + cityTo;
-        ArrayList<Company> listCompany = CompanyManager.getAllCompany();
         ArrayList<RouteDetail> list = RouteDetailManager.searchRouteDetail(depart, destination, startDate);
         request.setAttribute("depart", depart);
         request.setAttribute("destination", destination);
         request.setAttribute("listSearch", list);
-        request.setAttribute("listCompany", listCompany);
         request.setAttribute("controller", "user");
         request.setAttribute("action", "booking");
     }
@@ -299,7 +314,7 @@ public class CustomerController extends HttpServlet {
             String[] company = request.getParameterValues("option2");
             String[] from = null;
             String[] to = null;
-            
+            int deNum = Integer.parseInt(request.getParameter("deNum"));
 
             if (time_raw != null) {
 
@@ -313,45 +328,90 @@ public class CustomerController extends HttpServlet {
 
                 }
             }
-            ArrayList<Company> listCompany = CompanyManager.getAllCompany();
-            ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company);
+            
+            ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company, deNum);
             if (listRoute.size() > 0) {
                 request.setAttribute("listSearch", listRoute);
             }
             request.setAttribute("depart", depart);
             request.setAttribute("destination", destination);
-            request.setAttribute("listCompany", listCompany);
+       
             request.setAttribute("controller", "user");
             request.setAttribute("action", "booking");
+            HttpSession session = request.getSession();
+            session.setAttribute("deNum", deNum);
         } catch (SQLException e) {
             log("Error at SortController:" + e.toString());
         }
     }
-     private void edit(HttpServletRequest request, HttpServletResponse response)
+
+    private void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String filename = null;
             HttpSession session = request.getSession();
             String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
-                        String newName = request.getParameter("newName");
-                        String file=request.getParameter("userDisplayPic");
-                        User user = UserManager.getUserByPhone(phone);
-                        String img=user.getAvtLink();
-                        if (user != null) {
-                            if ( file!= "" && newName != null) {
-                                if (UserManager.updateUser(newName, user.getUserId(),file)) {
-                                    request.setAttribute("controller", "user");
-                                    request.setAttribute("action", "profile");
-                                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                                }
-                            }
-                            if(file == "" && newName!=null){
-                               if (UserManager.updateUser(newName, user.getUserId(),img)) {
-                                    request.setAttribute("controller", "user");
-                                    request.setAttribute("action", "profile");
-                                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                                } 
-                            }
-                        }
+            String img=(String) session.getAttribute("LOGIN_CUSTOMER_IMG");
+            // Create a factory for disk-based file items
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+
+// Configure a repository (to ensure a secure temp location is used)
+            ServletContext servletContext = this.getServletConfig().getServletContext();
+            File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
+            factory.setRepository(repository);
+
+// Create a new file upload handler
+            ServletFileUpload upload = new ServletFileUpload(factory);
+// Parse the request
+            List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));
+            Iterator<FileItem> iter = items.iterator();
+            HashMap<String, String> fields = new HashMap<>();
+            while (iter.hasNext()) {
+                FileItem item = iter.next();
+
+                if (item.isFormField()) {
+                    fields.put(item.getFieldName(), item.getString());
+                    String name = item.getFieldName();
+                    String value = item.getString();
+                    System.out.println("name: " + name);
+                    System.out.println("value: " + value);
+                } else {
+                    filename = item.getName();
+                    System.out.println("filename: " + filename);
+                    if (filename == null || filename.equals("")) {
+                       filename="";
+                    } else {
+                        Path path = Paths.get(filename);
+                        Path file = path.toAbsolutePath();
+                        String storePath = servletContext.getRealPath("/uploads");
+                        String s = servletContext.getContextPath();
+                        File uploadFile = new File(storePath + "/" + path.getFileName());
+                        item.write(uploadFile);
+                        System.out.println(storePath + "/" + path.getFileName());
+                        
+                    }
+                }
+            }
+            String newName = fields.get("newName");
+            User user = UserManager.getUserByPhone(phone);
+            if (newName != null && filename.equals("")) {
+                if (UserManager.updateUser(newName, user.getUserId(), img)) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "profile");
+                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                     session.setAttribute("LOGIN_CUSTOMER_IMG", img);
+                    System.out.println("-------save-------");
+                }
+            }
+            if (newName != null && filename!="") {
+                if (UserManager.updateUser(newName, user.getUserId(), filename)) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "profile");
+                    session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
+                     session.setAttribute("LOGIN_CUSTOMER_IMG", filename);
+                    System.out.println("-------save-------");
+                }
+            }
         } catch (Exception ex) {
             request.setAttribute("controller", "error");
             request.setAttribute("action", "index");
@@ -359,7 +419,6 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -407,5 +466,9 @@ public class CustomerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void change(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

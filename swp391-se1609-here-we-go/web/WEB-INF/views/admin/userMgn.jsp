@@ -47,9 +47,11 @@
                 <span class="text">User Management</span>
             </div>
         </div>
-
+        <div>
+   <form action="<c:url value="/admin/deleteCus.do"/>" method="post"> 
         <div class="activity">
             <table id="example" class="table table-hover table-responsive-md" style="width: 100%">
+              
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -59,22 +61,31 @@
                         <th>Action</th>
                     </tr>
                 </thead>
+               
                 <tbody>
+               
                     <%
-                     ArrayList<model.User> list  = UserManager.getListCustomer();
-        for (model.User user : list) {
-            %>
+                        ArrayList<model.User> list = UserManager.getListCustomer();
+                        for (model.User user : list) {
+                    %>
+
                     <tr>
-                        <td><%= user.getUserId() %></td>
-                        <td><%= user.getName() %></td>
-                        <td>Coming soon</td>
-                        <td><%= TicketManager.countTicketbyId(user.getUserId()) %></td>
+                         
                         <td>
-                            <input type="submit" class="btn btn-danger" value="Delete">
+                            <%= user.getUserId()%>
+                            <input type="hidden" name="id" value="<%= user.getUserId()%>"/>
                         </td>
+                    
+                    <td><%= user.getName()%></td>
+                    <td><%= user.getDateCreate()%></td>
+                    <td><%= TicketManager.countTicketbyId(user.getUserId())%></td>
+                    <td>
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </td>
                     </tr>
+
                     <%
-        }
+                        }
                     %>
                 </tbody>
                 <tfoot>
@@ -87,6 +98,8 @@
                     </tr>
                 </tfoot>
             </table>
+        </div>
+   </form>
         </div>
     </body>
 </html>

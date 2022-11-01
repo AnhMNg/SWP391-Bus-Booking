@@ -38,11 +38,11 @@
                     </tr>
                     <tr>
                         <td>Subtotal: </td>
-                        <td>${transaction.amount.details.subtotal}</td>
+                        <td>${transaction.amount.details.subtotal}$</td>
                     </tr>
                     <tr>
                         <td>Total: </td>
-                        <td>${transaction.amount.total}</td>
+                        <td>${transaction.amount.total}$</td>
                     </tr>
                     <tr><td><br/></td></tr>
                     <tr>
