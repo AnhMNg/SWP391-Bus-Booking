@@ -389,7 +389,6 @@ public class CustomerController extends HttpServlet {
                         File uploadFile = new File(action + "web\\uploads/" + path.getFileName());
                         item.write(uploadFile);
                         System.out.println(action + "web\\uploads/" + path.getFileName());
-                        
                     }
                 }
             }
