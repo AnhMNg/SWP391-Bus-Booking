@@ -383,11 +383,13 @@ public class CustomerController extends HttpServlet {
                     } else {
                         Path path = Paths.get(filename);
                         Path file = path.toAbsolutePath();
-                        String storePath = servletContext.getRealPath("/uploads");
+                         String storePath = servletContext.getRealPath("/uploads");
+                          String action = storePath.substring(0, storePath.lastIndexOf("build"));
                         String s = servletContext.getContextPath();
-                        File uploadFile = new File(storePath + "/" + path.getFileName());
+                        File uploadFile = new File(action + "web\\uploads/" + path.getFileName());
                         item.write(uploadFile);
-                        System.out.println(storePath + "/" + path.getFileName());
+
+                        System.out.println(action + "web\\uploads/" + path.getFileName());
                     }
                 }
             }
