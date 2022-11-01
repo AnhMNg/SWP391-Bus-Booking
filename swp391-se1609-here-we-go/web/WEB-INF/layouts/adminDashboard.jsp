@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<c:url value="/admin/notification.do"/>">
+                        <a href="<c:url value="/notification/getlist.do"/>">
                             <i class="uil uil-bell"></i>
                             <span class="link-name">Notification</span>
                         </a>
