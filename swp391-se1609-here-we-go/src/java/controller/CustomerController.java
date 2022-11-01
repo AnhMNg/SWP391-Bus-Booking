@@ -77,7 +77,7 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 edit(request, response);
                 break;
-                case "change":
+            case "change":
                 change(request, response);
                 break;
             default:
@@ -388,8 +388,8 @@ public class CustomerController extends HttpServlet {
                         String s = servletContext.getContextPath();
                         File uploadFile = new File(action + "web\\uploads/" + path.getFileName());
                         item.write(uploadFile);
+
                         System.out.println(action + "web\\uploads/" + path.getFileName());
-                        
                     }
                 }
             }
@@ -469,7 +469,7 @@ public class CustomerController extends HttpServlet {
     }// </editor-fold>
 
     private void change(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
 }
