@@ -30,6 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.servlet.ServletContext;
 import manager.CompanyManager;
+import manager.NotificationManager;
 import manager.RouteDetailManager;
 import model.Company;
 import model.RouteDetail;
@@ -49,7 +50,7 @@ public class CustomerController extends HttpServlet {
     private static final String AUTH_TOKEN = "0f9f4431546a3dd7ee404768256b8671";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, Exception {
         String action = (String) request.getAttribute("action");
         String controller = (String) request.getAttribute("controller");
         switch (action) {
@@ -177,9 +178,7 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("action", "index");
             request.setAttribute("message", ex.getMessage());
             log("Error at MainController: " + ex.toString());
-
         }
-
     }
 
     private void signup(HttpServletRequest request, HttpServletResponse response)
@@ -257,8 +256,8 @@ public class CustomerController extends HttpServlet {
     }
 
     private void save(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        UserManager userManager = new UserManager();
+            throws ServletException, IOException, SQLException, Exception {
+        //UserManager userManager = new UserManager();
         HttpSession session = request.getSession();
         String name = (String) session.getAttribute("name");
         String phone = (String) session.getAttribute("phone");
@@ -273,8 +272,10 @@ public class CustomerController extends HttpServlet {
         String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
         if (otpCheck.equals(SUBMIT_OTP)) {
             User user = new User(0, name, null, phone, null, 2, password, "");
-            if (userManager.register(user)) {
+            if (UserManager.register(user)) {
                 request.setAttribute("controller", "user");
+                User us = UserManager.getUserByPhone(user.getPhone());
+                NotificationManager.add(us.getUserId(), us.getName() + " has created new account");
                 request.setAttribute("action", "login");
             }
         } else {
@@ -397,6 +398,7 @@ public class CustomerController extends HttpServlet {
             User user = UserManager.getUserByPhone(phone);
             if (newName != null && filename.equals("")) {
                 if (UserManager.updateUser(newName, user.getUserId(), img)) {
+                    NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
                     session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
@@ -406,6 +408,7 @@ public class CustomerController extends HttpServlet {
             }
             if (newName != null && filename!="") {
                 if (UserManager.updateUser(newName, user.getUserId(), filename)) {
+                    NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
                     session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
@@ -419,6 +422,9 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("message", ex.getMessage());
             log("Error at MainController: " + ex.toString());
         }
+    }
+     private void change(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -436,6 +442,8 @@ public class CustomerController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -455,6 +463,8 @@ public class CustomerController extends HttpServlet {
             processRequest(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -468,8 +478,5 @@ public class CustomerController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void change(HttpServletRequest request, HttpServletResponse response) {
-        
-    }
 
 }
