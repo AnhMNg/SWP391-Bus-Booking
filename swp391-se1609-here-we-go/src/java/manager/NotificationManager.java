@@ -22,10 +22,10 @@ public class NotificationManager {
     private static final String ADD = "INSERT INTO Notification([userId],[message],[date]) VALUES(?,?,CONVERT(datetime,CURRENT_TIMESTAMP))";
     private static final String GET_LIST = "SELECT * FROM [Notification]";
 
-    public static boolean add(long userId, String message) throws SQLException {
+    public static void add(long userId, String message) throws SQLException {
         Connection cn = null;
         PreparedStatement pst = null;
-        boolean add = false;
+        //boolean add = false;
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
@@ -33,7 +33,7 @@ public class NotificationManager {
                 pst.setLong(1, userId);
                 pst.setString(2, message);
                 pst.executeUpdate();
-                add = true;
+                //add = true;
             }
         } catch (Exception e) {
         } finally {
@@ -44,7 +44,6 @@ public class NotificationManager {
                 cn.close();
             }
         }
-        return add;
     }
 
     public static ArrayList<Notification> getList() throws SQLException {
