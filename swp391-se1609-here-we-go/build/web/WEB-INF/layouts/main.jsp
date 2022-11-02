@@ -63,7 +63,7 @@
                             </a>
                         </c:if>
                         <!-- NavBar -->
-                        <div class="nav-links" id="navLinks">
+                        <div class="main-nav-links" id="mainNavLinks">
                             <i class="fa fa-times" onclick="hideMenu()"></i>
                             <ul>
                                 <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_ROLE == 2}">

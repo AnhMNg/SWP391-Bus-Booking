@@ -78,7 +78,7 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 edit(request, response);
                 break;
-            case "change":
+                case "change":
                 change(request, response);
                 break;
             default:
@@ -389,7 +389,6 @@ public class CustomerController extends HttpServlet {
                         String s = servletContext.getContextPath();
                         File uploadFile = new File(action + "web\\uploads/" + path.getFileName());
                         item.write(uploadFile);
-
                         System.out.println(action + "web\\uploads/" + path.getFileName());
                     }
                 }
@@ -477,6 +476,7 @@ public class CustomerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 
 }

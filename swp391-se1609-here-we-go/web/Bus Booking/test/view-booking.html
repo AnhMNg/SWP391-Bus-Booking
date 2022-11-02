@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Here We Go</title>
+  </head>
+  <body>
+    <div class="hd">
+      <section class="header" id="header">
+        <!-- Menu -->
+        <nav class="main-nav">
+          <!-- Logo -->
+          <a href="/">
+            <img src="images/Logo1.png" class="logo" />
+          </a>
+          <!-- NavBar -->
+          <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+            <ul>
+              <li class="mb">
+                <a href="">MY BOOKING</a>
+              </li>
+              <li>
+                <!-- <a href="">LOGIN OR CREATE ACCOUNT</a> -->
+                <div class="dropdown">
+                  <button class="button1">LOGIN OR CREATE ACCOUNT</button>
+                  <div class="dropdown-content">
+                    <a class="choose" href="#">Personal Account</a>
+                    <a class="choose" href="#">Transportation Company</a>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <select class="form-select">
+                    <option>English</option>
+                    <option>Vietnamese</option>
+                  </select>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <!-- Content -->
+      </section>
+    </div>
+    <!-- Header -->
+    <div class="ct">
+      <section class="my-booking">
+        <div class="container main-my-booking">
+          <div class="col-md-3 banner-my-booking">
+
+          </div>
+          <div class="col-md-9 my-booking-content">
+            <div class="my-booking-info">
+              <div class="my-ava">
+                <img src="/test/images/Untitled (2).png" alt="">
+              </div>
+              <div class="my-info">
+                <p>Nguyen Anh Minh</p>
+              </div>
+            </div>
+            <ul class="tabs">
+              <li><i class="uil uil-ticket"></i> Upcoming</li>
+              <li><i class="uil uil-suitcase"></i> Completed</li>
+            </ul>
+
+            <div class="container myb-ct">
+              <div class="content">
+                <div class="detail mb-2 mt-4">
+                  <div class="booking-detail ml-3 mt-2">
+                    <p class="address">Ha Noi <i class="fa fa-long-arrow-right"></i> Trang An, Ninh Binh</p>
+                    <p class="bus-name">Hoang Long Bus</p>
+                    <p class="bus-type">47 Seats</p>
+                    <p class="bus-time">10/11/2022 11:00</p>
+                  </div>
+                  <div class="button-group-myb">
+                    <div class="myb-btn mx-2 md-3">
+                      <button type="submit" class="btn my-btn-ch text-uppercase">
+                        Change 
+                      </button>
+                    </div>
+                    <div class="myb-btn mx-5 md-4">
+                      <button type="submit" class="btn my-btn-dl text-uppercase">
+                        Cancel
+                      </button>
+                    </div>
+                  </div>        
+                </div>
+                <div class="detail mb-2 mt-4">
+                  <div class="booking-detail ml-3 mt-2">
+                    <p class="address">Ha Noi <i class="fa fa-long-arrow-right"></i> Trang An, Ninh Binh</p>
+                    <p class="bus-name">Hoang Long Bus</p>
+                    <p class="bus-type">47 Seats</p>
+                    <p class="bus-time">10/11/2022 11:00</p>
+                  </div>
+                  <div class="button-group-myb">
+                    <div class="myb-btn mx-2 md-3">
+                      <button type="submit" class="btn my-btn-ch text-uppercase">
+                        Change 
+                      </button>
+                    </div>
+                    <div class="myb-btn mx-5 md-4">
+                      <button type="submit" class="btn my-btn-dl text-uppercase">
+                        Cancel
+                      </button>
+                    </div>
+                  </div>        
+                </div>
+              </div>
+
+              <div class="content">
+                <div class="detail mb-2 mt-4">
+                  <div class="booking-detail ml-3 mt-2">
+                    <p class="address">Ha Noi <i class="fa fa-long-arrow-right"></i> Sapa, Lao Cai</p>
+                    <p class="bus-name">Sapa Dragon Bus</p>
+                    <p class="bus-type">47 Seats</p>
+                    <p class="bus-time">4/11/2022 12:00</p>
+                  </div>
+                  <div class="button-group-myb">
+                    <div class="myb-btn mx-5 md-4">
+                      <button type="submit" class="btn my-btn-dl text-uppercase">
+                        Delete
+                      </button>
+                    </div>
+                  </div>        
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="ft">
+      <footer class="footer">
+        <div class="footer__addr">
+          <img class="footer__logo" src="images/My project.png" alt="" />
+        </div>
+
+        <ul class="footer__nav">
+          <li class="nav__item">
+            <h2 class="nav__title">About Us</h2>
+
+            <ul class="nav__ul">
+              <li>
+                <a href="#">Contact Us</a>
+              </li>
+
+              <li>
+                <a href="#">Help Center</a>
+              </li>
+
+              <li>
+                <a href="#">Here We Go!</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav__item">
+            <h2 class="nav__title">Products</h2>
+
+            <ul class="nav__ul">
+              <li>
+                <a href="#">Bus Tickets</a>
+              </li>
+
+              <li>
+                <a href="#">Bus Operator</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav__item">
+            <h2 class="nav__title">About Us</h2>
+            <div class="social">
+              <ul class="nav__ul">
+                <li>
+                  <a href="#">
+                    <img src="images/Facebook - Negative.png" alt="" />
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    <img src="images/Twitter - Negative.png" alt="" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <div class="legal">
+          <p>Copyright &copy; 2022 Here We Go Co.</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="./js/tabs.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> -->
+  </body>
+</html>

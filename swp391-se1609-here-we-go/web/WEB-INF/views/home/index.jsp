@@ -35,22 +35,37 @@
                 background-position: center bottom;
                 background-repeat: no-repeat;
             }
+
+            .popular-routes {
+                background-image: url('<c:url value="/images/vietnam-culture-landmarks_24908-70481-1.png"/>');
+                background-position: center bottom;
+                background-size: 60%;
+                background-repeat: no-repeat;
+            }
+
+            .trans-comp {
+                background-image: url('<c:url value="/images/travel-bnnn.png"/>');
+                background-position: center bottom;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
         </style>
+
         <title>Here We Go</title>
     </head>
     <body>
         <div class="ct">
-            <section class="banner">
+            <section id="bn" class="banner" data-label="Banner">
                 <div class="text-box">
                     <h1>Here We Go</h1>
                     <p>Accompany your trips and provide the cheapest services</p>
-                    <a href="#bus-booking-st" class="book-btn">Booking Now</a>
+                    <a href="#bs" class="book-btn">Booking Now</a>
                 </div>
             </section>
 
 
             <!-- Booking -->
-            <section id="bus-booking-st" class="bus-booking">
+            <section id="bs" class="section bus-booking" data-label="Booking">
                 <!-- Title -->
                 <h1>Bus Tickets Booking</h1>
                 <!-- Route Selection -->
@@ -70,16 +85,16 @@
                                         <select class="form-select form-select-md mb-3" id="districtfrom" aria-label=".form-select-md" name="districtfrom">
                                             <option value="" selected>Select City</option>
                                         </select>
-                                       
+
                                     </div>
                                     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
                                     <script>
-                                        
-                                          
+
+
                                         var citis = document.getElementById("cityfrom");
                                         var districts = document.getElementById("districtfrom");
-                                        
-                                        
+
+
                                         //var wards = document.getElementById("ward");
                                         var Parameter = {
                                             url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
@@ -94,9 +109,8 @@
                                         function renderCity(data) {
                                             for (const x of data) {
                                                 citis.options[citis.options.length] = new Option(x.Name, x.Name);
-                                                
                                             }
-                                            
+
                                             citis.onchange = function () {
                                                 districts.length = 1;
                                                 // ward.length = 1;
@@ -105,14 +119,13 @@
 
                                                     for (const k of result[0].Districts) {
                                                         districts.options[districts.options.length] = new Option(k.Name, k.Name);
-                                                        
                                                     }
                                                 }
                                             };
 
                                         }
-                                      
-                                        
+
+
                                     </script>
                                 </div>
                                 <div class="col-md-4 element">
@@ -174,7 +187,7 @@
             </section>
 
             <!-- Popular Routes -->
-            <section class="popular-routes">
+            <section id="pr" class="section popular-routes" data-label="Popular Routes">
                 <div class="container-fluid content-pr">
                     <!-- Title -->
                     <div class="content-pr-tt">
@@ -195,7 +208,7 @@
                                                <c:param name="cityfrom" value="Hồ Chí Minh"></c:param>
                                                <c:param name="cityto" value="Đà Lạt"></c:param>
                                                <c:param name="startDate" value=""></c:param>
-                                        </c:url>"><h4 class="card-title">Ho Chi Minh City - Da Lat</h4></a>                   
+                                           </c:url>"><h4 class="card-title">Ho Chi Minh City - Da Lat</h4></a>                   
                                     </div>   
                                 </div>
                             </div>
@@ -210,7 +223,7 @@
                                                <c:param name="districtfrom" value="Da Nang"></c:param>
                                                <c:param name="districtto" value="Hue"></c:param>
                                                <c:param name="startDate" value=""></c:param>
-                                        </c:url>"><h4 class="card-title">Da Nang - Hue</h4></a>  
+                                           </c:url>"><h4 class="card-title">Da Nang - Hue</h4></a>  
                                     </div>   
                                 </div>
                             </div>
@@ -227,7 +240,7 @@
                                                <c:param name="districtfrom" value="Ha Noi"></c:param>
                                                <c:param name="cityto" value="Sa Pa"></c:param>
                                                <c:param name="startDate" value=""></c:param>
-                                        </c:url>"><h4 class="card-title">Ha Noi - Sa Pa</h4></a>                         
+                                           </c:url>"><h4 class="card-title">Ha Noi - Sa Pa</h4></a>                         
                                     </div>   
                                 </div>
                             </div>
@@ -242,7 +255,7 @@
                                                <c:param name="cityfrom" value="Ho Chi Minh"></c:param>
                                                <c:param name="districtto" value="Can Tho"></c:param>
                                                <c:param name="startDate" value=""></c:param>
-                                        </c:url>"><h4 class="card-title">Ho Chi Minh City - Can Tho</h4></a>
+                                           </c:url>"><h4 class="card-title">Ho Chi Minh City - Can Tho</h4></a>
                                     </div>   
                                 </div>
                             </div>
@@ -252,7 +265,7 @@
             </section>
 
             <!-- Transportation Company Partners -->
-            <section class="trans-comp">
+            <section id="tc" class="section trans-comp" data-label="Transportation Company">
                 <div class="container-fluid content-tc">
                     <!-- Title -->
                     <div class="content-tc-tt">
@@ -281,7 +294,7 @@
             </section>
 
             <!-- Why book with Here We Go? -->
-            <section class="impression">
+            <section id="imp" class="section impression" data-label="Why book with Here We Go?">
                 <h1 class="imp-tt">Why book with Here We Go?</h1>     
                 <div class="container-fluid why1">
                     <div class="col-md-6 price">
@@ -304,6 +317,26 @@
                     </div>
                 </div>
             </section>
+
+            <nav class="vertical-nav">
+                <div id="verNav" class="vertical-nav-item" data-for-section="Booking">
+                    <a href="#bs" class="ver-nav-link"></a>
+                    <span class="nav-label">Booking</span>
+                </div>
+                <div id="verNav" class="vertical-nav-item" data-for-section="Popular Routes">
+                    <a href="#pr" class="ver-nav-link"></a>
+                    <span class="nav-label">Popular Routes</span>
+                </div>
+                <div id="verNav" class="vertical-nav-item" data-for-section="Transportation Company">
+                    <a href="#tc" class="ver-nav-link"></a>
+                    <span class="nav-label">Transportation Company</span>
+                </div>
+                <div id="verNav" class="vertical-nav-item" data-for-section="Why book with Here We Go?">
+                    <a href="#imp" class="ver-nav-link"></a>
+                    <span class="nav-label">Why book with Here We Go?</span>
+                </div>
+            </nav> 
         </div>
+
     </body>
 </html>
