@@ -57,11 +57,13 @@
                             %>
                  <div class="pay-trl-dt">
                     <h4>Enter Traveller Details</h4>
+                    <small>Please enter name and phone of passenger</small>
                     <h6>Seat 1 - <%= i %></h6>
                     <div class="pay-trl-dt-form">
                         <div class="pay-trl-dt-ip" style="margin-right: 10px">
                             <p>Name</p>
                             <input
+                                value="<%= request.getSession().getAttribute("LOGIN_CUSTOMER_NAME") %>"
                                 type="text"
                                 placeholder="Full Name"
                                 class="form-control"
@@ -69,7 +71,7 @@
                         </div>
                         <div class="pay-trl-dt-ip">
                             <p>Phone Number</p>
-                            <input type="phone" placeholder="Phone" class="form-control" />
+                            <input type="phone" placeholder="Phone" class="form-control" value="<%= request.getSession().getAttribute("LOGIN_CUSTOMER_PHONE") %>"/>
                         </div>
                     </div>
                 </div>

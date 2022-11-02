@@ -68,11 +68,11 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         try {
             String id = request.getParameter("id");
-            int idCus = Integer.parseInt(id);
+            long idCus = Long.parseLong(id);
             ArrayList<model.User> list = UserManager.getListCustomer();
             for (model.User user : list) {
                 if (user.getUserId() == idCus) {
-                    if (UserManager.deleteCustomer(idCus)) {
+                    if (UserManager.deleteUser(idCus)) {
                         request.setAttribute("controller", "admin");
                         request.setAttribute("action", "userMgn");
                     }
