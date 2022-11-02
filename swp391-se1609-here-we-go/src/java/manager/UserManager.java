@@ -27,10 +27,10 @@ public class UserManager {
     private static final String LOGIN_GOOGLE = "SELECT * FROM [User] WHERE googleId = ?";
     private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,?,?,?,?, CURRENT_TIMESTAMP)";
     private static final String CHECK_DUPLICATE = "SELECT * FROM [User] WHERE phone = ?";
-    private static final String UPDATE_USER_INFORMATION="update [dbo].[User] set [name]=?, [avatarLink]=? where [userId]=?";
+    private static final String UPDATE_USER_INFORMATION = "update [dbo].[User] set [name]=?, [avatarLink]=? where [userId]=?";
     private static final String CREATED_DATE = "SELECT [User].dateCreate FROM [User] WHERE [User].userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE [User] SET [password] = ? WHERE userId = ?";
-    
+
     public static User getUserById(long id) throws SQLException {
         Connection cn = null;
         User us = null;
@@ -185,19 +185,52 @@ public class UserManager {
         return list;
     }
 
-    public static boolean deleteCustomer(long id) throws SQLException{
+    public static boolean deleteUser(long id) throws SQLException {
         Connection cn = DBUtils.getConnection();
-        if (cn!= null){
-            PreparedStatement pst = cn.prepareStatement("DELETE FROM [User] WHERE [User].userId = ?");
-            pst.setLong(1, id);
-            pst.executeUpdate();
-            cn.close();
+        boolean delete = false;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                PreparedStatement pst = cn.prepareStatement("select  e.orderId from[dbo].[User] join [dbo].[Order] as e on [dbo].[User].userId=e.customerId and [dbo].[User].userId=? join [dbo].[Ticket] as d on e.orderId=d.orderId");
+                pst.setLong(1, id);
+                ResultSet rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    long orderId = rs.getLong(1);
+                    PreparedStatement pt = cn.prepareStatement("DELETE FROM [dbo].[Ticket] WHERE [dbo].[Ticket].orderId=?");
+                    pt.setLong(1, orderId);
+                    pt.executeUpdate();
+
+                }
+                PreparedStatement p = cn.prepareStatement("DELETE FROM [dbo].[Order] WHERE [dbo].[Order].customerId=?");
+                p.setLong(1, id);
+                p.executeUpdate();
+                PreparedStatement s = cn.prepareStatement("DELETE FROM [dbo].[Notification] WHERE [dbo].[Notification].userId=?");
+                s.setLong(1, id);
+                s.executeUpdate();
+                PreparedStatement st = cn.prepareStatement("DELETE FROM [dbo].[User] WHERE [dbo].[User].userId=?");
+                st.setLong(1, id);
+                st.executeUpdate();
+                delete = true;
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            }
+        } catch (Exception e) {
+
+        } finally {
+            if (cn != null) {
+                cn.close();
+            }
         }
-        return true;
+        return delete;
     }
+
     public static String getTypeOfUser(long id) throws SQLException {
         Connection cn = null;
-        String type=null;
+        String type = null;
         Timestamp d = new Timestamp(System.currentTimeMillis());
         DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -214,8 +247,11 @@ public class UserManager {
 
                     long getDiff = date2.getTime() - date1.getTime();
                     long getDaysDiff = TimeUnit.MILLISECONDS.toHours(getDiff);
-                    if(getDaysDiff < 12) type="Newbie";
-                    else type="Member";
+                    if (getDaysDiff < 12) {
+                        type = "Newbie";
+                    } else {
+                        type = "Member";
+                    }
                 }
                 if (rs != null) {
                     rs.close();
@@ -233,19 +269,21 @@ public class UserManager {
         }
         return type;
     }
-     public static boolean updateUser( String newFullname,long id,String avatarLink) throws SQLException {
-         Connection cn = DBUtils.getConnection();
+
+    public static boolean updateUser(String newFullname, long id, String avatarLink) throws SQLException {
+        Connection cn = DBUtils.getConnection();
         if (cn != null) {
             PreparedStatement pst = cn.prepareStatement(UPDATE_USER_INFORMATION);
-             pst.setString(1, newFullname);
-             pst.setString(2, avatarLink);
-             pst.setLong(3, id);
+            pst.setString(1, newFullname);
+            pst.setString(2, avatarLink);
+            pst.setLong(3, id);
             pst.executeUpdate();
             cn.close();
         }
         return true;
-     }
-        public static User getUserByPhone(String phone) throws SQLException {
+    }
+
+    public static User getUserByPhone(String phone) throws SQLException {
         Connection cn = null;
         User us = null;
         try {
@@ -275,7 +313,8 @@ public class UserManager {
         }
         return us;
     }
-        public static boolean changePasword(long userId, String password) throws Exception{
+
+    public static boolean changePasword(long userId, String password) throws Exception {
         Connection cn = null;
         PreparedStatement pst = null;
         boolean change = false;
@@ -286,7 +325,7 @@ public class UserManager {
                 pst.setString(1, password);
                 pst.setLong(2, userId);
                 pst.executeUpdate();
-                change = true;              
+                change = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -301,4 +340,3 @@ public class UserManager {
         return change;
     }
 }
-
