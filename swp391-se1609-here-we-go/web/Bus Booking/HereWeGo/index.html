@@ -20,13 +20,13 @@
     <div class="hd">
         <section class="header" id="header">
             <!-- Menu -->
-            <nav>
+            <nav class="main-nav">
                 <!-- Logo -->
                 <a href="/">
                     <img src="images/Logo1.png" class="logo">
                 </a>
                 <!-- NavBar -->
-                <div class="nav-links" id="navLinks">
+                <div class="main-nav-links" id="mainNavLinks">
                     <i class="fa fa-times" onclick="hideMenu()"></i>
                     <ul>
                         <li class="mb">
@@ -61,7 +61,7 @@
     <!-- Header -->
     
     <div class="ct">
-        <section class="banner">
+        <section id="bn" class="banner" data-label="Banner">
             <div class="text-box">
                 <h1>Here We Go</h1>
                 <p>Accompany your trips and provide the cheapest services</p>
@@ -71,9 +71,9 @@
         
     
         <!-- Booking -->
-        <section id="bs" class="bus-booking">
+        <section id="bs" class="section bus-booking" data-label="Booking">
             <!-- Title -->
-            <h1>Bus Tickets Booking</h1>
+            <h1>BOOKING</h1>
             <!-- Route Selection -->
             <div class="container-fluid bus-booking-dt">
                 <div class="bus-img">
@@ -110,7 +110,7 @@
         </section>
     
         <!-- Popular Routes -->
-        <section class="popular-routes">
+        <section id="pr" class="section popular-routes" data-label="Popular Routes">
             <div class="container-fluid content-pr">
                 <!-- Title -->
                 <div class="content-pr-tt">
@@ -172,7 +172,7 @@
         </section>
     
         <!-- Transportation Company Partners -->
-        <section class="trans-comp">
+        <section id="tc" class="section trans-comp" data-label="Transportation Company">
             <div class="container-fluid content-tc">
                 <!-- Title -->
                 <div class="content-tc-tt">
@@ -198,8 +198,8 @@
         </section>
     
         <!-- Why book with Here We Go? -->
-        <section class="impression">
-                <h1 class="imp-tt">Why book with Here We Go?</h1>     \
+        <section id="imp" class="section impression" data-label="Why book with Here We Go?">
+                <h1 class="imp-tt">Why book with Here We Go?</h1>     
                 <div class="container-fluid why1">
                     <div class="col-md-6 price">
                         <img class="img" src="images/BUY.png" alt="">
@@ -221,6 +221,40 @@
                     </div>
                 </div>
         </section>
+
+
+        <!-- <script>
+            function activateNavigation() {
+                const sections = document.querySelectorAll(".section");
+                const navContainer = document.createElement("nav");
+                const navItems = Array.from(sections).map(section => {
+                    return `
+                        <div class="vertical-nav-item" data-for-section="${section.id}">
+                            <a href="#${section.id}" class="ver-nav-link"></a>
+                            <span class="nav-label">${section.dataset.label}</span>
+                        </div>
+                    `;
+                });
+
+                navContainer.classList.add("vertical-nav");
+                navContainer.innerHTML = navItems.join("");
+
+                const observer = new IntersectionObserver(entries => {
+                    document.querySelectorAll(".ver-nav-link").forEach(navLink => {
+                        navLink.classList.remove("ver-nav-link-selected");
+                    });
+
+                    const visibleSection = entries.filter(entry => entry.isIntersecting)[0];
+                    document.querySelector(`.vertical-nav-item[data-for-section="${visibleSection.target.id}"] .ver-nav-link`).classList.add("ver-nav-link-selected");
+                }, { threshold: 0.5 });
+
+                sections.forEach(section => observer.observe(section));
+
+                document.body.appendChild(navContainer);
+            }
+
+            activateNavigation();
+        </script> -->
     </div>
 
     <div class="ft">

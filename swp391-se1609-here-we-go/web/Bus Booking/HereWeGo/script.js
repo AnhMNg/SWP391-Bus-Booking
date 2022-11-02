@@ -1,12 +1,12 @@
 //script for Toggle menu
-var navLinks = document.getElementById('navLinks');
+var mainNavLinks = document.getElementById('mainNavLinks');
 
 function showMenu() {
-    navLinks.style.right = "0";
+    mainNavLinks.style.right = "0";
 }
 
 function hideMenu() {
-    navLinks.style.right = "-200px";
+    mainNavLinks.style.right = "-200px";
 }
 
 window.addEventListener("scroll", function() {
@@ -28,5 +28,33 @@ let depth = screen.pixelDepth;
 //     }
 // })
 
-var dt = new Date();
-document.getElementById('date-time').innerHTML = dt;
+function activateNavigation() {
+    const sections = document.querySelectorAll(".section");
+    const navContainer = document.createElement("nav");
+    const navItems = Array.from(sections).map(section => {
+        return `
+            <div class="vertical-nav-item" data-for-section="${section.id}">
+                <a href="#${section.id}" class="ver-nav-link"></a>
+                <span class="nav-label">${section.dataset.label}</span>
+            </div>
+        `;
+    });
+
+    navContainer.classList.add("vertical-nav");
+    navContainer.innerHTML = navItems.join("");
+
+    const observer = new IntersectionObserver(entries => {
+        document.querySelectorAll(".ver-nav-link").forEach(navLink => {
+            navLink.classList.remove("ver-nav-link-selected");
+        });
+
+        const visibleSection = entries.filter(entry => entry.isIntersecting)[0];
+        document.querySelector(`.vertical-nav-item[data-for-section="${visibleSection.target.id}"] .ver-nav-link`).classList.add("ver-nav-link-selected");
+    }, { threshold: 0.5 });
+
+    sections.forEach(section => observer.observe(section));
+
+    document.body.appendChild(navContainer);
+}
+
+activateNavigation();
