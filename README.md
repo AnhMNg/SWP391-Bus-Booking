@@ -17,7 +17,9 @@ But there are many passenger transport companies in Vietnam, and each of these c
   <li>Java</li>
 </ul>
 <hr></hr>
-
+<br>
+<i style:"color: red;">Note: Library</i>
+<p>/swp391-se1609-here-we-go/web/WEB-INF/lib</p>
 <h3>Contact</h3>
 Minh Nguyen - aminhng3012@gmail.com <br>
 or Connect with me: <a href="https://www.linkedin.com/in/anh-minh-nguy%C3%AA%CC%83n-a2339b225/">Anh Minh Nguyễn - Linkedin</a>
