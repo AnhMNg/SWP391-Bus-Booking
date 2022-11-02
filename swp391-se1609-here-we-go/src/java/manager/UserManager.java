@@ -219,7 +219,7 @@ public class UserManager {
                 }
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         } finally {
             if (cn != null) {
                 cn.close();
@@ -227,7 +227,7 @@ public class UserManager {
         }
         return delete;
     }
-
+    
     public static String getTypeOfUser(long id) throws SQLException {
         Connection cn = null;
         String type = null;
@@ -339,4 +339,5 @@ public class UserManager {
         }
         return change;
     }
+
 }
