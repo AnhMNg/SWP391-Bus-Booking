@@ -5,10 +5,13 @@
  */
 package utils;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import manager.CompanyManager;
+import manager.NotificationManager;
 import manager.RouteDetailManager;
 import manager.TicketManager;
 import manager.UserManager;
@@ -24,10 +27,7 @@ import model.User;
  */
 public class test {
 
-    public static void main(String[] args) throws SQLException, SQLException {
-        String[] from = {"6:00"};
-        String[] to = {"19:00"};
-        
+    public static void main(String[] args) throws SQLException, SQLException, Exception {
         
     }
 }
