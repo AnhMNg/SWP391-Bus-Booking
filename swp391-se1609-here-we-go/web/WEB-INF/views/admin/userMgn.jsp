@@ -73,7 +73,7 @@
                          
                         <td>
                             <%= user.getUserId()%>
-                            <input type="hidden" name="id" value="<%= user.getUserId()%>"/>
+                            
                         </td>
                     
                     <td><%= user.getName()%></td>
@@ -81,6 +81,7 @@
                     <td><%= TicketManager.countTicketbyId(user.getUserId())%></td>
                     <td>
                         <input type="submit" class="btn btn-danger" value="Delete">
+                        <input type="hidden" name="id" value="<%= user.getUserId()%>"/>
                     </td>
                     </tr>
 
