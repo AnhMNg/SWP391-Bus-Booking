@@ -31,7 +31,9 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import manager.CompanyManager;
 import manager.NotificationManager;
+import manager.OrderManager;
 import manager.RouteDetailManager;
+import manager.TicketManager;
 import model.Company;
 import model.RouteDetail;
 import org.apache.tomcat.util.http.fileupload.FileItem;
@@ -83,17 +85,38 @@ public class CustomerController extends HttpServlet {
                 change(request, response);
                 break;
             case "payment":
+                payment(request, response);
                 break;
+
             default:
                 break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
 
     }
-    
-    private void payment(HttpServletRequest request, HttpServletResponse response){
+
+    private void payment(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        HttpSession session = request.getSession();
+        User us = (User) session.getAttribute("LOGIN_CUSTOMER");
+        int[] listPos = (int[]) session.getAttribute("listPosForTicket");
+        String[] listName = (String[]) session.getAttribute("listPasNameForTicket");
+        String[] listPhone = (String[]) session.getAttribute("listPasPhoneForTicket");
+        RouteDetail rd = (RouteDetail) session.getAttribute("RouteDetailForTicket");
+
+        OrderManager.addOrder(us.getUserId(), rd.getPrice() * listPos.length);
+        long id = OrderManager.getOrderIdLatest(us.getUserId());
+        TicketManager.addTicket(id, rd.getRouteDetailId(), listPos, listName, listPhone);
+
+        session.removeAttribute("listPosForTicket");
+        session.removeAttribute("listPasNameForTicket");
+        session.removeAttribute("listPasPhoneForTicket");
+        session.removeAttribute("RouteDetailForTicket");
         
+        request.setAttribute("controller", "user");
+        request.setAttribute("action", "myBooking");
+
     }
+
     private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         HttpSession session = request.getSession();
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");

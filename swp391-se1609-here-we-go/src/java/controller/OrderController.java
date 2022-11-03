@@ -77,11 +77,11 @@ public class OrderController extends HttpServlet {
         String numberOfTickets = request.getParameter("numberOfTickets");
         String totalPrice = request.getParameter("totalPrice");
         
-//        String[] listPasName = request.getParameterValues("pasName");
-//        String[] listPasPhone = request.getParameterValues("pasPhone");
-//        HttpSession session = request.getSession();
-//        session.setAttribute("listPasNameForTicket", listPasName);
-//        session.setAttribute("listPasNameForTicket", listPasPhone);
+        String[] listPasName = request.getParameterValues("pasName");
+        String[] listPasPhone = request.getParameterValues("pasPhone");
+        HttpSession session = request.getSession();
+        session.setAttribute("listPasNameForTicket", listPasName);
+        session.setAttribute("listPasPhoneForTicket", listPasPhone);
         
 
         OrderDetail orderDetail = new OrderDetail(productName, numberOfTickets, subTotal, totalPrice);
