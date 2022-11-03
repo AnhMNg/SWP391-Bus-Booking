@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.RouteDetail;
 import model.TicketDetail;
+import model.User;
 import utils.DBUtils;
 
 /**
@@ -139,4 +141,23 @@ public class TicketManager {
         }
         return count;
     }
+     public static void addTicket(long orderId, long routeDetailId, int[] position, String[] passengerName, String[] passengerPhone) throws SQLException{
+         Connection cn = DBUtils.getConnection();
+         if (cn!= null){
+             for (int i = 0; i<position.length; i++){
+                 String sql = "INSERT INTO Ticket VALUES(?,?,?, ?, ?, CURRENT_TIMESTAMP)";
+                 PreparedStatement pst = cn.prepareStatement(sql);
+             pst.setLong(1, orderId);
+             pst.setLong(2,routeDetailId);
+             pst.setInt(3, position[i]);
+             pst.setString(4, passengerName[i]);
+             pst.setString(5, passengerPhone[i]);
+             pst.executeUpdate();
+             pst.close();
+             }
+            cn.close();
+             
+             
+         }
+     }
 }

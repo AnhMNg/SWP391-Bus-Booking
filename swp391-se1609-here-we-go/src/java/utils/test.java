@@ -5,21 +5,13 @@
  */
 package utils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import manager.CompanyManager;
-import manager.NotificationManager;
-import manager.RouteDetailManager;
+import manager.OrderManager;
 import manager.TicketManager;
-import manager.UserManager;
-import model.Company;
-import model.RouteDetail;
 import model.Ticket;
-import model.TicketDetail;
-import model.User;
+import sun.security.krb5.internal.TicketFlags;
+
+
 
 /**
  *
@@ -28,6 +20,11 @@ import model.User;
 public class test {
 
     public static void main(String[] args) throws SQLException, SQLException, Exception {
-        
+        OrderManager.addOrder(2, 999999);
+        long id = OrderManager.getOrderIdLatest(2);
+        int[] listPos = {1,2};
+        String[] listName = {"Long thu nhat","Long thu 2"};
+        String[] listPhone = {"092982887","0929828938"};
+        TicketManager.addTicket(id, 1, listPos, listName, listPhone);
     }
 }

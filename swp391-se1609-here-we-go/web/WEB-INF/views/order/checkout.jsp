@@ -38,8 +38,13 @@
         <%
             RouteDetail rd = (RouteDetail) request.getAttribute("routeDe");
             int[] listPos = (int[]) request.getAttribute("listPos");
+            
+            
+            request.getSession().setAttribute("RouteDetailForTicket", rd);
+            request.getSession().setAttribute("listPosForTicket", listPos);
         %>
         <section class="pay-ct">
+            <form action="<c:url value="/order/authorizePayment.do"/>" method="post">
             <div class="container pay-ct-dt">
                 <h3 class="pay-pl" style="font-size: 20px;">
                     <%= rd.getDepart()%> <i class="fa fa-long-arrow-right"></i> <%= rd.getDestination()%>
@@ -72,7 +77,8 @@
                         <div class="pay-trl-dt-ip" style="margin-right: 10px">
                             <p>Name</p>
                             <input
-                                value="${passengerName}"
+                                name="pasName"
+                                value="${LOGIN_CUSTOMER_NAME}"
                                 type="text" 
                                 placeholder="Full Name"
                                 class="form-control"
@@ -80,7 +86,7 @@
                         </div>
                         <div class="pay-trl-dt-ip">
                             <p>Phone Number</p>
-                            <input type="phone" placeholder="Phone" class="form-control" value="${passengerPhone}" required/>
+                            <input type="phone" placeholder="Phone" class="form-control" value="${LOGIN_CUSTOMER_PHONE}" name="pasPhone" required/>
                         </div>
                     </div>
                     <%
@@ -91,7 +97,7 @@
 
                 <br />
                 <br />
-                <form action="<c:url value="/order/authorizePayment.do"/>" method="post">
+                
                     <div class="pay-pr">
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Ticket Price</p>
@@ -165,9 +171,10 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                
 
             </div>
+            </form>
         </section>
     </body>
 </html>

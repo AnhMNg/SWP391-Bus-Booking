@@ -38,6 +38,7 @@ import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
+
 /**
  *
  * @author Admin
@@ -78,8 +79,10 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 edit(request, response);
                 break;
-                case "change":
+            case "change":
                 change(request, response);
+                break;
+            case "payment":
                 break;
             default:
                 break;
@@ -87,7 +90,10 @@ public class CustomerController extends HttpServlet {
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
 
     }
-
+    
+    private void payment(HttpServletRequest request, HttpServletResponse response){
+        
+    }
     private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         HttpSession session = request.getSession();
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
@@ -95,7 +101,6 @@ public class CustomerController extends HttpServlet {
         if (us != null && us.getRoleId() == 2) {
             String[] listPosString;
             listPosString = request.getParameterValues("seat");
-            
 
             if (listPosString == null || listPosString.length == 0) {
                 request.setAttribute("notification", "Please select seats to book tickets");
@@ -150,7 +155,7 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
                 session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
                 session.setAttribute("LOGIN_ROLE", roleID);
-                
+
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
                     request.setAttribute("action", "index");
@@ -329,14 +334,14 @@ public class CustomerController extends HttpServlet {
 
                 }
             }
-            
+
             ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company, deNum);
             if (listRoute.size() > 0) {
                 request.setAttribute("listSearch", listRoute);
             }
             request.setAttribute("depart", depart);
             request.setAttribute("destination", destination);
-       
+
             request.setAttribute("controller", "user");
             request.setAttribute("action", "booking");
             HttpSession session = request.getSession();
@@ -352,7 +357,7 @@ public class CustomerController extends HttpServlet {
             String filename = null;
             HttpSession session = request.getSession();
             String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
-            String img=(String) session.getAttribute("LOGIN_CUSTOMER_IMG");
+            String img = (String) session.getAttribute("LOGIN_CUSTOMER_IMG");
             // Create a factory for disk-based file items
             DiskFileItemFactory factory = new DiskFileItemFactory();
 
@@ -380,12 +385,12 @@ public class CustomerController extends HttpServlet {
                     filename = item.getName();
                     System.out.println("filename: " + filename);
                     if (filename == null || filename.equals("")) {
-                       filename="";
+                        filename = "";
                     } else {
                         Path path = Paths.get(filename);
                         Path file = path.toAbsolutePath();
-                         String storePath = servletContext.getRealPath("/uploads");
-                          String action = storePath.substring(0, storePath.lastIndexOf("build"));
+                        String storePath = servletContext.getRealPath("/uploads");
+                        String action = storePath.substring(0, storePath.lastIndexOf("build"));
                         String s = servletContext.getContextPath();
                         File uploadFile = new File(action + "web\\uploads/" + path.getFileName());
                         item.write(uploadFile);
@@ -401,17 +406,17 @@ public class CustomerController extends HttpServlet {
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
                     session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                     session.setAttribute("LOGIN_CUSTOMER_IMG", img);
+                    session.setAttribute("LOGIN_CUSTOMER_IMG", img);
                     System.out.println("-------save-------");
                 }
             }
-            if (newName != null && filename!="") {
+            if (newName != null && filename != "") {
                 if (UserManager.updateUser(newName, user.getUserId(), filename)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
                     session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                     session.setAttribute("LOGIN_CUSTOMER_IMG", filename);
+                    session.setAttribute("LOGIN_CUSTOMER_IMG", filename);
                     System.out.println("-------save-------");
                 }
             }
@@ -422,7 +427,8 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-     private void change(HttpServletRequest request, HttpServletResponse response) {
+
+    private void change(HttpServletRequest request, HttpServletResponse response) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -476,7 +482,5 @@ public class CustomerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-
 
 }
