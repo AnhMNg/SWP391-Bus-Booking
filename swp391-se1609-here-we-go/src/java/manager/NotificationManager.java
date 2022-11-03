@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Notification;
 import utils.DBUtils;
+import utils.DateUtil;
 
 /**
  *
@@ -58,7 +59,7 @@ public class NotificationManager {
                 psm = conn.prepareStatement(GET_LIST);
                 rs = psm.executeQuery();
                 while (rs != null && rs.next()) {
-                    no = new Notification(rs.getLong(1), rs.getLong(2), rs.getString(3), rs.getString(4));
+                    no = new Notification(rs.getLong(1), rs.getLong(2), rs.getString(3),DateUtil.convertDateFormat(rs.getString(4)) );
                     list.add(no);
                 }
             }
@@ -94,7 +95,7 @@ public class NotificationManager {
                 rs = psm.executeQuery();
                 if (rs != null) {
                 while ( rs.next()) {
-                    no = new Notification(rs.getLong(1), rs.getLong(2), rs.getString(3), rs.getString(4));
+                    no = new Notification(rs.getLong(1), rs.getLong(2), rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)));
                     list.add(no);
                 }
                 }

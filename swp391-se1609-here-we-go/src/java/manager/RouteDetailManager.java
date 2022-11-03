@@ -14,10 +14,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import model.RouteDetail;
 import utils.DBUtils;
+import utils.DateUtil;
 
 public class RouteDetailManager {
 
@@ -291,8 +293,8 @@ public class RouteDetailManager {
                 rs = pst.executeQuery();
                 while (rs != null && rs.next()) {
                     listPosition = getListPosition(rs.getLong(1));
-                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), rs.getInt(2) - listPosition.length, rs.getString(3), rs.getString(4),
-                            rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), rs.getInt(2) - listPosition.length, rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
+                            rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
                     list.add(rd);
                 }
             }
@@ -399,7 +401,7 @@ public class RouteDetailManager {
         return null;
     }
 
-    public static ArrayList<RouteDetail> searchRouteDetail(String depart, String destination, String startDate) throws SQLException {
+    public static ArrayList<RouteDetail> searchRouteDetail(String depart, String destination, String startDate) throws SQLException, ParseException {
         ArrayList<RouteDetail> list = new ArrayList<>();
         Connection cn = DBUtils.getConnection();
         RouteDetail rd = null;
@@ -428,8 +430,8 @@ public class RouteDetailManager {
             ResultSet rs = pst.executeQuery();
             while (rs != null && rs.next()) {
                 listPosition = getListPosition(rs.getLong(1));
-                rd = new RouteDetail(rs.getLong(1), rs.getInt(2), getNumberOfRemaningPosition(listPosition), rs.getString(3), rs.getString(4),
-                        rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                rd = new RouteDetail(rs.getLong(1), rs.getInt(2), getNumberOfRemaningPosition(listPosition), rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
+                        rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
                 list.add(rd);
             }
             if (rs != null) {
@@ -447,7 +449,7 @@ public class RouteDetailManager {
         return list;
     }
 
-    public static RouteDetail getRouteDetailById(long id) throws SQLException {
+    public static RouteDetail getRouteDetailById(long id) throws SQLException, ParseException {
         RouteDetail rd = null;
         Connection cn = DBUtils.getConnection();
         int[] listPosition = null;
@@ -473,8 +475,8 @@ public class RouteDetailManager {
             ResultSet rs = pst.executeQuery();
             if (rs != null && rs.next()) {
                 listPosition = getListPosition(rs.getLong(1));
-                rd = new RouteDetail(rs.getLong(1), rs.getInt(2), getNumberOfRemaningPosition(listPosition), rs.getString(3), rs.getString(4),
-                        rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                rd = new RouteDetail(rs.getLong(1), rs.getInt(2), getNumberOfRemaningPosition(listPosition), rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
+                        rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
 
             }
             if (rs != null) {
@@ -501,7 +503,7 @@ public class RouteDetailManager {
         return count;
     }
 
-    public static ArrayList<RouteDetail> getListRouteV1(String depart, String destination, String[] from, String[] to, int min, int max, String[] company, int deNumSeat) throws SQLException {
+    public static ArrayList<RouteDetail> getListRouteV1(String depart, String destination, String[] from, String[] to, int min, int max, String[] company, int deNumSeat) throws SQLException, ParseException {
         ArrayList<RouteDetail> listRoute = new ArrayList<RouteDetail>();
         Connection conn = null;
         PreparedStatement psm = null;
@@ -547,13 +549,13 @@ public class RouteDetailManager {
                 listPosition = getListPosition(rs.getLong(1));
                 int deNum = getNumberOfRemaningPosition(listPosition);
                 if (deNumSeat != 0 && deNumSeat <= deNum) {
-                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), rs.getString(4),
-                       rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
+                       rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
                     listRoute.add(rd);
                 }
                 if (deNumSeat == 0) {
-                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), rs.getString(4),
-                       rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
+                       rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
                     listRoute.add(rd);
                 }
                 
