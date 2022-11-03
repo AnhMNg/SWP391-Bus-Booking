@@ -64,7 +64,7 @@
                         <div class="pay-trl-dt-ip" style="margin-right: 10px">
                             <p>Name</p>
                             <input
-                                value="<%= request.getSession().getAttribute("LOGIN_CUSTOMER_NAME")%>"
+                                value="${passengerName}"
                                 type="text"
                                 placeholder="Full Name"
                                 class="form-control"
@@ -72,7 +72,7 @@
                         </div>
                         <div class="pay-trl-dt-ip">
                             <p>Phone Number</p>
-                            <input type="phone" placeholder="Phone" class="form-control" value="<%= request.getSession().getAttribute("LOGIN_CUSTOMER_PHONE")%>"/>
+                            <input type="phone" placeholder="Phone" class="form-control" value="${passengerPhone}"/>
                         </div>
                     </div>
                     <%
@@ -117,7 +117,7 @@
                             <%
                                 float total = (float) ((rd.getPrice() * listPos.length) / 24840);
                                 String totalPrice = String.valueOf(total);
-                            %>
+                            %> 
                             <input type="hidden" name="totalPrice" value="<%=totalPrice%>"/>
                         </div>
                         <div class="pay-btn">

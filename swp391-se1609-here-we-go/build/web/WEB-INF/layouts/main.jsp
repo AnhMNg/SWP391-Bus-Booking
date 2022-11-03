@@ -68,7 +68,7 @@
                             <ul>
                                 <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_ROLE == 2}">
                                     <li class="mb">
-                                        <a class="mb-text" href="/">MY BOOKING</a>
+                                        <a class="mb-text" href="<c:url value="/user/myBooking.do"/>">MY BOOKING</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.LOGIN_COMPANY != null}">
