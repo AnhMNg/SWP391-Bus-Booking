@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -87,12 +88,26 @@ public class CustomerController extends HttpServlet {
             case "payment":
                 payment(request, response);
                 break;
-
+            case "cancle":
+                cancleTicket(request, response);
+                break;
             default:
                 break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
 
+    }
+
+    private void cancleTicket(HttpServletRequest request, HttpServletResponse response) throws ParseException, SQLException {
+        long ticketId = Long.parseLong(request.getParameter("ticketIdCancle"));
+        String timeStart = request.getParameter("ticketTimeStartCancle");
+        if (TicketManager.cancleTicket(ticketId, timeStart)) {
+            request.setAttribute("controller", "user");
+            request.setAttribute("action", "myBooking");
+        } else {
+        request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+        }
     }
 
     private void payment(HttpServletRequest request, HttpServletResponse response) throws SQLException {
@@ -111,7 +126,7 @@ public class CustomerController extends HttpServlet {
         session.removeAttribute("listPasNameForTicket");
         session.removeAttribute("listPasPhoneForTicket");
         session.removeAttribute("RouteDetailForTicket");
-        
+
         request.setAttribute("controller", "user");
         request.setAttribute("action", "myBooking");
 

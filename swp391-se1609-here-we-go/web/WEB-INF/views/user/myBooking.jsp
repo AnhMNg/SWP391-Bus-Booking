@@ -4,6 +4,10 @@
     Author     : Admin
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.User"%>
+<%@page import="manager.TicketManager"%>
+<%@page import="model.TicketDetail"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -78,12 +82,20 @@
 
                     <div class="container myb-ct">
                         <div class="content">
+                            <%
+                                User us = (User) session.getAttribute("LOGIN_CUSTOMER");
+                                ArrayList<TicketDetail> listUpcoming = (ArrayList<TicketDetail>) TicketManager.getUpcomingTickeDetailtByCustomerId(us.getUserId());
+                                ArrayList<TicketDetail> listComplete = (ArrayList<TicketDetail>) TicketManager.getCompletedTickeDetailtByCustomerId(us.getUserId());
+
+                                for (TicketDetail tku : listUpcoming) {
+                            %>
+
                             <div class="detail mb-2 mt-4">
                                 <div class="booking-detail ml-3 mt-2">
-                                    <p class="address">Ha Noi <i class="fa fa-long-arrow-right"></i> Trang An, Ninh Binh</p>
-                                    <p class="bus-name">Hoang Long Bus</p>
-                                    <p class="bus-type">47 Seats</p>
-                                    <p class="bus-time">10/11/2022 11:00</p>
+                                    <p class="address"> <%= tku.getDepart()%> <i class="fa fa-long-arrow-right"></i> <%= tku.getDestination()%></p>
+                                    <p class="bus-name"><%= tku.getCompanyName()%></p>
+                                    <p class="bus-type"><%= tku.getKind()%> <%= tku.getCapacity()%> Seats - Position: <%= tku.getPosition()%></p>
+                                    <p class="bus-time"> <%= tku.getTimeStart()%> </p>
                                 </div>
                                 <div class="button-group-myb">
                                     <div class="myb-btn mx-2 md-3">
@@ -91,33 +103,32 @@
                                             Change 
                                         </button>
                                     </div>
-                                    <div class="myb-btn mx-5 md-4">
-                                        <button type="submit" class="btn my-btn-dl text-uppercase">
-                                            Cancel
-                                        </button>
-                                    </div>
+                                    <%
+                                        if (TicketManager.checkValidCancle(tku.getTimeStart())) {
+                                    %>
+                                    <form action="<c:url value="/user/cancle.do"/>" method="POST">
+                                        <input name="ticketIdCancle" value="<%= tku.getTicketId()%>" type="hidden" />
+                                        <input name="ticketTimeStartCancle" value="<%= tku.getTimeStart()%>" type="hidden" />
+                                        <div class="myb-btn mx-5 md-4">
+                                            <button type="submit" class="btn my-btn-dl text-uppercase">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <%
+                                        }
+                                    %>
+
                                 </div>        
                             </div>
-                            <div class="detail mb-2 mt-4">
-                                <div class="booking-detail ml-3 mt-2">
-                                    <p class="address">Ha Noi <i class="fa fa-long-arrow-right"></i> Trang An, Ninh Binh</p>
-                                    <p class="bus-name">Hoang Long Bus</p>
-                                    <p class="bus-type">47 Seats</p>
-                                    <p class="bus-time">10/11/2022 11:00</p>
-                                </div>
-                                <div class="button-group-myb">
-                                    <div class="myb-btn mx-2 md-3">
-                                        <button type="submit" class="btn my-btn-ch text-uppercase">
-                                            Change 
-                                        </button>
-                                    </div>
-                                    <div class="myb-btn mx-5 md-4">
-                                        <button type="submit" class="btn my-btn-dl text-uppercase">
-                                            Cancel
-                                        </button>
-                                    </div>
-                                </div>        
-                            </div>
+
+                            <%
+                                }
+                            %>
+
+                            <%
+                                if (listUpcoming.isEmpty()) {
+                            %>
                             <div class="detail-null mb-2 mt-4">
                                 <div class="detail-null-img">
                                     <img src="<c:url value="/images/suitcase-trv.png"/>" alt="" />
@@ -127,24 +138,29 @@
                                     <button class="plan-btn">Plan a trip</button>
                                 </div>
                             </div>
+                            <%
+                                }
+                            %>
                         </div>
 
                         <div class="content">
+                            <% for (TicketDetail tkc : listComplete) {
+                            %>
                             <div class="detail mb-2 mt-4">
                                 <div class="booking-detail ml-3 mt-2">
-                                    <p class="address">Ha Noi <i class="fa fa-long-arrow-right"></i> Sapa, Lao Cai</p>
-                                    <p class="bus-name">Sapa Dragon Bus</p>
-                                    <p class="bus-type">47 Seats</p>
-                                    <p class="bus-time">4/11/2022 12:00</p>
+                                    <p class="address"> <%= tkc.getDepart()%> <i class="fa fa-long-arrow-right"></i> <%= tkc.getDestination()%></p>
+                                    <p class="bus-name"><%= tkc.getCompanyName()%></p>
+                                    <p class="bus-type"><%= tkc.getKind()%> <%= tkc.getCapacity()%> Seats - Position: <%= tkc.getPosition()%></p>
+                                    <p class="bus-time"> <%= tkc.getTimeStart()%> </p>
                                 </div>
-                                <div class="button-group-myb">
-                                    <div class="myb-btn mx-5 md-4">
-                                        <button type="submit" class="btn my-btn-dl text-uppercase">
-                                            Delete
-                                        </button>
-                                    </div>
-                                </div>        
+
                             </div>
+                            <%
+                                }
+                            %>
+                            <%
+                                if (listComplete.isEmpty()) {
+                            %>
                             <div class="detail-null mb-2 mt-4">
                                 <div class="detail-null-img">
                                     <img src="<c:url value="/images/suitcase-trv.png"/>" alt="" />
@@ -154,6 +170,10 @@
                                     <button class="plan-btn">Plan a trip</button>
                                 </div>
                             </div>
+                            <%
+                                }
+                            %>
+
                         </div>
                     </div>
                 </div>

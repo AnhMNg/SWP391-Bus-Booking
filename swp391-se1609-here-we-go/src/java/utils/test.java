@@ -20,11 +20,6 @@ import sun.security.krb5.internal.TicketFlags;
 public class test {
 
     public static void main(String[] args) throws SQLException, SQLException, Exception {
-        OrderManager.addOrder(2, 999999);
-        long id = OrderManager.getOrderIdLatest(2);
-        int[] listPos = {1,2};
-        String[] listName = {"Long thu nhat","Long thu 2"};
-        String[] listPhone = {"092982887","0929828938"};
-        TicketManager.addTicket(id, 1, listPos, listName, listPhone);
+        
     }
 }
