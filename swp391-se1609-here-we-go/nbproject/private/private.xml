@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/FrontController.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/CustomerController.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/profile.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/css/style.css</file>
+            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/manager/UserManager.java</file>
             <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/home/index.jsp</file>
-            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/manager/RouteDetailManager.java</file>
-            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/booking.jsp</file>
-            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/nbproject/build-impl.xml</file>
-            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/controller/CustomerController.java</file>
-            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/controller/ExecutePaymentServlet.java</file>
-            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/booking.jsp</file>
-            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/order/checkout.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/layouts/main.jsp</file>
+            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/AdminController.java</file>
+            <file>file:/C:/Users/Admin/OneDrive/Máy%20tính/CN5%20Fall%202022/SWP391/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/js/script.js</file>
         </group>
     </open-files>
 </project-private>
