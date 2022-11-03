@@ -74,10 +74,10 @@ public class OrderController extends HttpServlet {
         String productName = request.getParameter("productName");
         String subTotal = request.getParameter("subTotal");
         String numberOfTickets = request.getParameter("numberOfTickets");
-        String coupon = request.getParameter("coupon");
+//        String coupon = request.getParameter("coupon");
         String totalPrice = request.getParameter("totalPrice");
 
-        OrderDetail orderDetail = new OrderDetail(productName, coupon, numberOfTickets, subTotal, totalPrice);
+        OrderDetail orderDetail = new OrderDetail(productName, numberOfTickets, subTotal, totalPrice);
 
         try {
             PaymentServices paymentServices = new PaymentServices();
