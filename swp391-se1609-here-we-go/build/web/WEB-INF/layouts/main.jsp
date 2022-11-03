@@ -120,14 +120,6 @@
                                         </div>
                                     </li>
                                 </c:if>      
-                                <li>
-                                    <div>
-                                        <select class="form-select">
-                                            <option>English</option>
-                                            <option>Vietnamese</option>                                      
-                                        </select>
-                                    </div>
-                                </li>
                             </ul>
 
                         </div>
@@ -168,15 +160,11 @@
                         </li>
 
                         <li class="nav__item">
-                            <h2 class="nav__title">Products</h2>
+                            <h2 class="nav__title">Services</h2>
 
                             <ul class="nav__ul">
                                 <li>
-                                    <a href="#">Bus Tickets</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">Bus Operator</a>
+                                    <a href="#">Bus Booking</a>
                                 </li>
                             </ul>
                         </li>
