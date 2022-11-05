@@ -173,14 +173,13 @@ public class TicketManager {
         if (currentDate.before(date)) return true;
         else return false;
     }
-     public static boolean cancleTicket(long ticketId, String timeStart) throws ParseException, SQLException{
-         if(!checkValidCancle(timeStart)) return false;
+     public static boolean deleteTicket(long ticketId) throws ParseException, SQLException{
          Connection cn = DBUtils.getConnection();
          if (cn != null){
              String sql = "DELETE FROM Ticket WHERE ticketId = ?";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setLong(1, ticketId);
-            pst.executeUpdate();
+            if (pst.executeUpdate() <= 0) return false;
         }
          return true;
      }
