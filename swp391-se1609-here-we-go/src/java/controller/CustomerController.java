@@ -82,8 +82,14 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 edit(request, response);
                 break;
-            case "change":
-                change(request, response);
+            case "checkPass":
+                checkPass(request, response);
+                break;
+            case "forgot":
+                forgot(request, response);
+                break;
+            case "reset":
+                reset(request, response);
                 break;
             case "payment":
                 payment(request, response);
@@ -154,7 +160,6 @@ public class CustomerController extends HttpServlet {
         if (us != null && us.getRoleId() == 2) {
             String[] listPosString;
             listPosString = request.getParameterValues("seat");
-            
             if (listPosString == null || listPosString.length == 0) {
                 request.setAttribute("notification", "Please select seats to book tickets");
                 ArrayList<RouteDetail> listReturn = (ArrayList<RouteDetail>) session.getAttribute("listReturn");
@@ -208,7 +213,7 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
                 session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
                 session.setAttribute("LOGIN_ROLE", roleID);
-                
+
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
                     request.setAttribute("action", "index");
@@ -229,7 +234,7 @@ public class CustomerController extends HttpServlet {
             } else {
                 request.setAttribute("controller", "user");
                 request.setAttribute("action", "login");
-                request.setAttribute("message", "username or password is incorrect!");
+                request.setAttribute("message", "Username or Password is incorrect!");
             }
         } catch (SQLException ex) {
             request.setAttribute("controller", "error");
@@ -294,7 +299,7 @@ public class CustomerController extends HttpServlet {
                     request.setAttribute("confirmPassword", confirmPassword);
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "login");
-                    request.setAttribute("messagePW", "password must contain at least 8 letters with lower, upper letter and a special digit!");
+                    request.setAttribute("messagePW", "Password must contain at least 8 letters with lower, upper letter and a special digit!");
                 }
             } else {
                 request.setAttribute("name", name);
@@ -387,14 +392,13 @@ public class CustomerController extends HttpServlet {
                     
                 }
             }
-            
+
             ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company, deNum);
             if (listRoute.size() > 0) {
                 request.setAttribute("listSearch", listRoute);
             }
             request.setAttribute("depart", depart);
             request.setAttribute("destination", destination);
-            
             request.setAttribute("controller", "user");
             request.setAttribute("action", "booking");
             HttpSession session = request.getSession();
@@ -480,9 +484,95 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-    
-    private void change(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+    private void checkPass(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User userFound = (User) session.getAttribute("userFound");
+        String SUBMIT_OTP = (String) session.getAttribute("SUBMIT_OTP");
+        String otp1 = request.getParameter("otp1");
+        String otp2 = request.getParameter("otp2");
+        String otp3 = request.getParameter("otp3");
+        String otp4 = request.getParameter("otp4");
+        String otp5 = request.getParameter("otp5");
+        String otp6 = request.getParameter("otp6");
+        String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
+        if (otpCheck.equals(SUBMIT_OTP)) {
+            if (userFound != null) {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "changePass");
+            }
+
+        } else {
+            request.setAttribute("message", "Wrong OTP, please check again!");
+        }
+    }
+
+    private void forgot(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            UserManager um = new UserManager();
+            String forgotPhone = request.getParameter("forgotPhone");
+            User user = um.getUserByPhone(forgotPhone);
+            if (user != null) {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "otpSMSChange");
+                //Generate OTP
+                int ramdonNum = (int) (Math.random() * 9000) + 100000;
+                String otp = String.valueOf(ramdonNum);
+                HttpSession session = request.getSession();
+                session.setAttribute("SUBMIT_OTP", otp);
+                if (session != null) {
+                    //Send OTP
+                    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+                    //process phone to +84
+                    String newPhone = "+84" + forgotPhone.substring(1);
+                    Message message = Message.creator(
+                            new PhoneNumber(newPhone),
+                            new PhoneNumber("+19785033345"),
+                            otp
+                    ).create();
+
+                }
+                session.setAttribute("userFound", user);
+            } else {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "forgotPass");
+                request.setAttribute("message", "Looks like the phone number doesn't exist in the system!");
+            }
+        } catch (SQLException ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
+
+    }
+
+    private void reset(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, Exception {
+        try {
+            HttpSession session = request.getSession();
+            User userFound = (User) session.getAttribute("userFound");
+            String resetPass = request.getParameter("resetPass");
+            String confirmRPass = request.getParameter("confirmRPass");
+            if (resetPass.equals(confirmRPass)) {
+                if (UserManager.changePasword(userFound.getUserId(), resetPass)) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "login");
+                    request.setAttribute("message", "Successfully change password!");
+                }
+            } else {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "changePass");
+                request.setAttribute("message", "Confirm password doesn't match!");
+            }
+        } catch (SQLException ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
