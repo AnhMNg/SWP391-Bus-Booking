@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import manager.PaymentServices;
 import model.OrderDetail;
 
@@ -74,10 +75,16 @@ public class OrderController extends HttpServlet {
         String productName = request.getParameter("productName");
         String subTotal = request.getParameter("subTotal");
         String numberOfTickets = request.getParameter("numberOfTickets");
-        String coupon = request.getParameter("coupon");
         String totalPrice = request.getParameter("totalPrice");
+        
+        String[] listPasName = request.getParameterValues("pasName");
+        String[] listPasPhone = request.getParameterValues("pasPhone");
+        HttpSession session = request.getSession();
+        session.setAttribute("listPasNameForTicket", listPasName);
+        session.setAttribute("listPasPhoneForTicket", listPasPhone);
+        
 
-        OrderDetail orderDetail = new OrderDetail(productName, coupon, numberOfTickets, subTotal, totalPrice);
+        OrderDetail orderDetail = new OrderDetail(productName, numberOfTickets, subTotal, totalPrice);
 
         try {
             PaymentServices paymentServices = new PaymentServices();

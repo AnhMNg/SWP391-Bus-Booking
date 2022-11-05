@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="">
+                <form action="<c:url value="/user/payment.do"/>" method="POST">
                     <div class="table-bill">
                         <table class="table-service">
                             <thead>

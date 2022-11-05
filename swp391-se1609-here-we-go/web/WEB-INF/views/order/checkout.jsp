@@ -25,107 +25,117 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>   
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <style>
+            .pay-ct-dt {
+                background-image: url('<c:url value="/images/specialoffer.png"/>');
+                background-position: top right;
+                background-repeat: no-repeat;
+                background-size: 30%;
+            }
+        </style>
     </head>
     <body>
         <%
             RouteDetail rd = (RouteDetail) request.getAttribute("routeDe");
             int[] listPos = (int[]) request.getAttribute("listPos");
+            
+            
+            request.getSession().setAttribute("RouteDetailForTicket", rd);
+            request.getSession().setAttribute("listPosForTicket", listPos);
         %>
         <section class="pay-ct">
+            <form action="<c:url value="/order/authorizePayment.do"/>" method="post">
             <div class="container pay-ct-dt">
-                <h3 class="pay-pl">
-                    <%= rd.getDepart() %> <i class="fa fa-long-arrow-right"></i> <%= rd.getDestination() %>
+                <h3 class="pay-pl" style="font-size: 20px;">
+                    <%= rd.getDepart()%> <i class="fa fa-long-arrow-right"></i> <%= rd.getDestination()%>
                 </h3>
-                <h1 class="pay-bs"><%= rd.getCompanyName() %></h1>
-                <p class="pay-bs-tp"> <%= rd.getKindBus() %> </p>
-                <hr />
+                <h1 class="pay-bs"><%= rd.getCompanyName()%></h1>
+                <p class="pay-bs-tp"> <%= rd.getKindBus()%> </p>
+                <br />
                 <div class="pay-bs-tm">
-                    <h4> <%= rd.getStartTime() %> </h4>
+                    <h4> <%= rd.getStartTime()%> </h4>
                 </div>
                 <br />
                 <div class="pay-pk-p">
                     <h4>Pickup Point</h4>
-                    <p><%= rd.getDepartDetail() %></p>
+                    <p><%= rd.getDepartDetail()%></p>
                 </div>
                 <div class="pay-pk-p">
                     <h4>Drop Point</h4>
-                    <p><%= rd.getDestinationDetail() %></p>
+                    <p><%= rd.getDestinationDetail()%></p>
                 </div>
                 <br />
-                <% 
-                    for (int i : listPos) {
-                            %>
-                 <div class="pay-trl-dt">
+
+                <div class="pay-trl-dt">
                     <h4>Enter Traveller Details</h4>
                     <small>Please enter name and phone of passenger</small>
-                    <h6>Seat 1 - <%= i %></h6>
+                    <%
+                        for (int i : listPos) {
+                    %>
+                    <h6>Seat <%= i%></h6>
                     <div class="pay-trl-dt-form">
                         <div class="pay-trl-dt-ip" style="margin-right: 10px">
                             <p>Name</p>
                             <input
-                                value="<%= request.getSession().getAttribute("LOGIN_CUSTOMER_NAME") %>"
-                                type="text"
+                                name="pasName"
+                                value="${LOGIN_CUSTOMER_NAME}"
+                                type="text" 
                                 placeholder="Full Name"
                                 class="form-control"
-                                />
+                                required/>
                         </div>
                         <div class="pay-trl-dt-ip">
                             <p>Phone Number</p>
-                            <input type="phone" placeholder="Phone" class="form-control" value="<%= request.getSession().getAttribute("LOGIN_CUSTOMER_PHONE") %>"/>
+                            <input type="phone" placeholder="Phone" class="form-control" value="${LOGIN_CUSTOMER_PHONE}" name="pasPhone" required/>
                         </div>
                     </div>
-                </div>
-                <%
+                    <%
                         }
-                %>
-               
-                <br />
-                <hr />
-                <br />
-                <a href="/">
-                    Add Payment Method <i class="fa fa-angle-double-right"></i>
-                </a>
+                    %>
+                </div>
+
+
                 <br />
                 <br />
-                <form action="<c:url value="/order/authorizePayment.do"/>" method="post">
+                
                     <div class="pay-pr">
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Ticket Price</p>
                             <p class="pay-pr-ct2"><%=rd.getPrice()%> VND</p>
-                            <% 
-                                float price = (float)((rd.getPrice()*listPos.length)/24840);
-                                String priceTicket = String.valueOf(price); 
+                            <%
+                                float price = (float) ((rd.getPrice() * listPos.length) / 24840);
+                                String priceTicket = String.valueOf(price);
                             %>
                             <input type="hidden" name="subTotal" value="<%=priceTicket%>"/>
                         </div>
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Number Of Tickets</p>
-                            <p class="pay-pr-ct2"><%= listPos.length %></p>
+                            <p class="pay-pr-ct2"><%= listPos.length%></p>
                             <input type="hidden" name="numberOfTickets" value="1"/>
                             <input type="hidden" name="productName" value="Order Ticket"/>
                         </div>
-                        <div class="pay-pr-ct">
-                            <p class="pay-pr-ct1">Coupon</p>
-                            <p class="pay-pr-ct2">No Coupon</p>
-                            <input type="hidden" name="coupon" value="0"/>
-                        </div>
+                        <!--                        <div class="pay-pr-ct">
+                                                    <p class="pay-pr-ct1">Coupon</p>
+                                                    <p class="pay-pr-ct2">No Coupon</p>
+                                                    <input type="hidden" name="coupon" value="0"/>
+                                                </div>-->
                         <div class="pay-pr-ct">
                             <p class="pay-pr-ct1">Total</p>
-                            <p class="pay-pr-ct2"><%= rd.getPrice()*listPos.length %> VND</p>
-                            <% 
-                                float total = (float)((rd.getPrice()*listPos.length)/24840);
-                                String totalPrice = String.valueOf(total); 
-                            %>
+                            <p class="pay-pr-ct2" style="color: #EA4335"><%= rd.getPrice() * listPos.length%> VND</p>
+                            <%
+                                float total = (float) ((rd.getPrice() * listPos.length) / 24840);
+                                String totalPrice = String.valueOf(total);
+                            %> 
                             <input type="hidden" name="totalPrice" value="<%=totalPrice%>"/>
                         </div>
                         <div class="pay-btn">
                             <input
                                 type="button"
                                 value="BUY NOW"
-                                class="btn btn-secondary"
+                                class="button-92 btn btn-secondary"
                                 data-bs-toggle="modal"
                                 data-bs-target="#myModal"
-                            />
+                                />
                         </div>
                     </div>
                     <!-- The Modal -->
@@ -148,7 +158,7 @@
                                             class="pay-cf-btn"
                                             data-bs-toggle="modal"
                                             data-bs-target="#myModalPaying"
-                                        />
+                                            />
                                         <button
                                             type="button"
                                             class="pay-cf-btn"
@@ -161,9 +171,10 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                
 
             </div>
+            </form>
         </section>
     </body>
 </html>

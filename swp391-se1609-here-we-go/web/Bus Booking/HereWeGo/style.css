@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .header {
     height: 100px;
     width: 100%;
@@ -38,16 +42,28 @@
     top: 0px;
 }
 
-nav {
+.main-nav {
     display: flex;
     padding: 2% 6%;
     justify-content: space-between;
     align-items: center;
     height: 100px;
+    animation: changeBackgroundColor 10s ease-in-out infinite;
 }
 
+@keyframes changeBackgroundColor {
+    0% {
+      background-color: #9DC5D2;
+    }
+    50% {
+      background-color: #000000;
+    }
+    100% {
+      background-color: #9DC5D2;
+    }
+  }
 
-.nav-links ul li {
+.main-nav-links ul li {
     list-style: none;
     display: inline-block;
     padding: 8px 12px;
@@ -59,7 +75,7 @@ nav {
     max-height: 24;
 }
 
-.nav-links ul li a {
+.main-nav-links ul li a {
     color: #fff;
     text-decoration: none;
     font-size: 12px;
@@ -308,9 +324,11 @@ nav .fa {
     .input-route {
         display: inline-block;
     }
+
     .bus-booking h1 {
         font-size: 35px;
     }
+
     .bus-img img {
         width: 300px;
         height: 145.16px;
@@ -323,6 +341,10 @@ nav .fa {
     width: 100%;
     text-align: center;
     min-height: 100vh;
+    background-image: url('images/vietnam-culture-landmarks_24908-70481-1.png');
+    background-position: center bottom;
+    background-size: 60%;
+    background-repeat: no-repeat;
 }
 
 .content-pr {
@@ -332,6 +354,7 @@ nav .fa {
     width: 80%;
     height: 120px;
     display: relative;
+    margin-top: 60px;
 }
 
 .content-pr-tt {
@@ -360,6 +383,7 @@ nav .fa {
 
 .card {
     margin-top: 40px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .card-left {
@@ -456,6 +480,10 @@ nav .fa {
 
 .trans-comp {
     background: linear-gradient(180deg, #FFFFFF 19.28%, #9DC5D1 115.87%);
+    background-image: url('images/travel-bnnn.png');
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
     min-height: 100vh;
     width: 100%;
     position: relative;
@@ -467,6 +495,7 @@ nav .fa {
     border-radius: 20px;
     width: 80%;
     height: 120px;
+    margin-top: 170px;
 }
 
 .content-tc-tt {
@@ -485,7 +514,7 @@ nav .fa {
 }
 
 .list-group a {
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -499,7 +528,9 @@ nav .fa {
     min-height: 100vh;
     width: 100%;
     position: relative;
-    background: linear-gradient(180deg, #9DC5D1 -26.79%, #FFFFFF 118.94%);
+    background: linear-gradient(180deg, #FFFFFF 19.28%, #9DC5D1 115.87%);
+    margin-top: 80px;
+    padding-top: 50px;
 }
 
 .imp-tt {
@@ -508,7 +539,7 @@ nav .fa {
     font-size: 48px;
     font-family: 'Bebas Neue', cursive;
     font-family: 'Roboto', sans-serif;
-    padding-top: 30px;
+    padding-top: 70px;
     color: #475f9b;
 }
 
@@ -728,12 +759,14 @@ body {
 .ct {
     background: #FFFFFF;
 }
+
 /* checkout */
 .pay-ct {
     min-height: 100vh;
     width: 100%;
     background: #FFFFFF;
     margin-bottom: 200px;
+    
 }
 
 .pay-pl {
@@ -749,6 +782,13 @@ body {
 .pay-bs-tp {
     font-size: 20px;
     color: #555;
+}
+
+.pay-ct-dt {
+    background-image: url('images/specialoffer.png');
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: 30%;
 }
 
 .pay-ct-dt hr {
@@ -802,10 +842,10 @@ body {
     box-sizing: border-box;
     width: 450px;
     height: 270px;
-    background: #FFFFFF;
-    border: 1px solid #7B7B7B;
+    background: #ddf5fd;
     border-radius: 20px;
     padding: 20px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .pay-pr-ct {
@@ -828,32 +868,39 @@ body {
 }
 
 .pay-btn {
-    margin-top: 20px;   
-    text-align: center; 
+    margin-top: 20px;
+    text-align: center;
 }
 
 @media(max-width:700px) {
     .pay-pl {
         font-size: 20px;
     }
+
     .pay-bs {
         font-size: 35px;
     }
+
     .pay-bs-tm h4 {
         font-size: 25px;
     }
+
     .pay-bs-tm h5 {
         font-size: 20px;
     }
+
     .pay-pk-p h4 {
         font-size: 25px;
     }
+
     .pay-pk-p p {
         font-size: 17px;
     }
+
     .pay-trl-dt h4 {
         font-size: 25px;
     }
+
     .pay-trl-dt-form {
         width: 550px;
     }
@@ -916,4 +963,88 @@ body {
     text-align: center;
     font-size: 15px;
     font-weight: bold;
+}
+
+
+
+
+/* CSS */
+.button-92 {
+  --c: #fff;
+  /* text color */
+  background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%) var(--_p,100%)/300% no-repeat,
+    #4191CC;
+  /* background color */
+  color: #0000;
+  border: none;
+  transform: perspective(500px) rotateY(calc(20deg*var(--_i,-1)));
+  text-shadow: calc(var(--_i,-1)* 0.08em) -.01em 0   var(--c),
+    calc(var(--_i,-1)*-0.08em)  .01em 2px #0004;
+  outline-offset: .1em;
+  transition: 0.3s;
+}
+
+.button-92:hover,
+.button-92:focus-visible {
+  --_p: 0%;
+  --_i: 1;
+}
+
+.button-92:active {
+  text-shadow: none;
+  color: var(--c);
+  box-shadow: inset 0 0 9e9q #0005;
+  transition: 0s;
+}
+
+.button-92 {
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 0;
+  cursor: pointer;
+  padding: .1em .3em;
+}
+
+/* vertical navbar */
+.vertical-nav {
+    --nav-gap: 15px;
+    padding: var(--nav-gap);
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.vertical-nav-item {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: var(--nav-gap);
+}
+
+.ver-nav-link:hover~.nav-label {
+    opacity: 1;
+}
+
+
+.nav-label {
+    color: #2c4b55;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.1s;
+    font-size: 17px;
+}
+
+.ver-nav-link {
+    background: #19306988;
+    border-radius: 50%;
+    height: var(--nav-gap);
+    margin-left: var(--nav-gap);
+    transition: transform 0.1s;
+    width: var(--nav-gap);
+}
+
+.ver-nav-link-selected {
+    background: #193069;
+    transform: scale(1.4);
 }

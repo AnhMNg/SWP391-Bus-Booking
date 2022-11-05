@@ -9,9 +9,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import model.RouteDetail;
 import model.TicketDetail;
+import model.User;
 import utils.DBUtils;
+import utils.DateUtil;
+import static utils.DateUtil.addDays;
 
 /**
  *
@@ -37,8 +44,8 @@ public class TicketManager {
                 pst.setLong(1, id);
                 ResultSet rs = pst.executeQuery();
                 while (rs != null && rs.next()) {
-                    tik = new TicketDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)
-                            , rs.getString(8), rs.getString(9), rs.getString(10), rs.getLong(11), rs.getLong(12), rs.getLong(13), rs.getInt(14), rs.getString(15), rs.getString(16));
+                    tik = new TicketDetail(rs.getInt(1), DateUtil.convertDateFormat(rs.getString(2)), DateUtil.convertDateFormat(rs.getString(3)), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)
+                            , rs.getString(8), rs.getString(9), rs.getString(10), rs.getLong(11), rs.getLong(12), rs.getLong(13), rs.getInt(14), rs.getString(15), DateUtil.convertDateFormat(rs.getString(16)));
                     list.add(tik);
                 }
                 if (pst != null) {
@@ -81,8 +88,8 @@ public class TicketManager {
                 pst.setLong(1, id);
                 ResultSet rs = pst.executeQuery();
                 while (rs != null && rs.next()) {
-                    tik = new TicketDetail(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)
-                            , rs.getString(8), rs.getString(9), rs.getString(10), rs.getLong(11), rs.getLong(12), rs.getLong(13), rs.getInt(14), rs.getString(15), rs.getString(16));
+                    tik = new TicketDetail(rs.getInt(1), DateUtil.convertDateFormat(rs.getString(2)), DateUtil.convertDateFormat(rs.getString(3)), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)
+                            , rs.getString(8), rs.getString(9), rs.getString(10), rs.getLong(11), rs.getLong(12), rs.getLong(13), rs.getInt(14), rs.getString(15), DateUtil.convertDateFormat(rs.getString(16)));
                     list.add(tik);
                 }
                 if (pst != null) {
@@ -139,4 +146,41 @@ public class TicketManager {
         }
         return count;
     }
+     public static void addTicket(long orderId, long routeDetailId, int[] position, String[] passengerName, String[] passengerPhone) throws SQLException{
+         Connection cn = DBUtils.getConnection();
+         if (cn!= null){
+             for (int i = 0; i<position.length; i++){
+                 String sql = "INSERT INTO Ticket VALUES(?,?,?, ?, ?, CURRENT_TIMESTAMP)";
+                 PreparedStatement pst = cn.prepareStatement(sql);
+             pst.setLong(1, orderId);
+             pst.setLong(2,routeDetailId);
+             pst.setInt(3, position[i]);
+             pst.setString(4, passengerName[i]);
+             pst.setString(5, passengerPhone[i]);
+             pst.executeUpdate();
+             pst.close();
+             }
+            cn.close();
+             
+             
+         }
+     }
+     public static boolean checkValidCancle(String dateString) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss  E, dd-MM-yyyy");
+        Date date = formatter.parse(dateString);
+        Date currentDate = new Date();
+        currentDate = DateUtil.addDays(currentDate, 3);        
+        if (currentDate.before(date)) return true;
+        else return false;
+    }
+     public static boolean deleteTicket(long ticketId) throws ParseException, SQLException{
+         Connection cn = DBUtils.getConnection();
+         if (cn != null){
+             String sql = "DELETE FROM Ticket WHERE ticketId = ?";
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setLong(1, ticketId);
+            if (pst.executeUpdate() <= 0) return false;
+        }
+         return true;
+     }
 }

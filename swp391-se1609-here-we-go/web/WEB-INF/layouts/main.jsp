@@ -63,12 +63,12 @@
                             </a>
                         </c:if>
                         <!-- NavBar -->
-                        <div class="nav-links" id="navLinks">
+                        <div class="main-nav-links" id="mainNavLinks">
                             <i class="fa fa-times" onclick="hideMenu()"></i>
                             <ul>
                                 <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_ROLE == 2}">
                                     <li class="mb">
-                                        <a class="mb-text" href="/">MY BOOKING</a>
+                                        <a class="mb-text" href="<c:url value="/user/myBooking.do"/>">MY BOOKING</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.LOGIN_COMPANY != null}">
@@ -120,14 +120,6 @@
                                         </div>
                                     </li>
                                 </c:if>      
-                                <li>
-                                    <div>
-                                        <select class="form-select">
-                                            <option>English</option>
-                                            <option>Vietnamese</option>                                      
-                                        </select>
-                                    </div>
-                                </li>
                             </ul>
 
                         </div>
@@ -168,15 +160,11 @@
                         </li>
 
                         <li class="nav__item">
-                            <h2 class="nav__title">Products</h2>
+                            <h2 class="nav__title">Services</h2>
 
                             <ul class="nav__ul">
                                 <li>
-                                    <a href="#">Bus Tickets</a>
-                                </li>
-
-                                <li>
-                                    <a href="#">Bus Operator</a>
+                                    <a href="#">Bus Booking</a>
                                 </li>
                             </ul>
                         </li>
