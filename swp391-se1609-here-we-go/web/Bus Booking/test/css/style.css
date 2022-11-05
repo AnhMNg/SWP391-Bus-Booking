@@ -1798,7 +1798,9 @@ input[type="range"]::-moz-range-thumb {
   background: #FFFFFF;
   border: 1px solid #7B7B7B;
   border-radius: 15px;
+  
 }
+
 
 .address {
   font-weight: 500;
@@ -1815,9 +1817,7 @@ input[type="range"]::-moz-range-thumb {
   margin: 0;
 }
 
-.booking-detail {
-  margin-left: 16px;
-}
+
 
 .bus-type {
   font-weight: 400;
@@ -3615,6 +3615,18 @@ i {
   border: 1px solid #5695aa;
   border-radius: 15px;
   margin-left: 100px;
+  height: 163px;
+  transition: 0.5s;
+}
+
+.booking-detail .point {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+.booking-detail small {
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .address {
@@ -3636,6 +3648,7 @@ i {
   font-weight: 500;
   font-size: 20px;
   color: #000;
+  margin-bottom: 10;
 }
 
 .bus-type {
@@ -3654,8 +3667,10 @@ i {
   margin-right: 0px;
 }
 
-.booking-detail{
+
+.booking-detail {
   margin-left: 16px;
+  overflow: hidden;
 }
 
 .form-box button[type="submit"]:hover {
@@ -3789,4 +3804,23 @@ i {
   font-size: 20px;
   font-weight: 700;
   color: #394a75;
+}
+
+
+.detail:hover {
+  height: 350px;
+}
+
+.passenger {
+  display: flex;
+  margin-top: 20px;
+}
+
+.passenger p {
+  margin-left: 20px;
+}
+
+.passenger p, .passenger span {
+  font-size: 17px;
+  font-weight: 500;
 }
