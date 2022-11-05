@@ -153,6 +153,15 @@
                                     <p class="bus-type"><%= tkc.getKind()%> <%= tkc.getCapacity()%> Seats - Position: <%= tkc.getPosition()%></p>
                                     <p class="bus-time"> <%= tkc.getTimeStart()%> </p>
                                 </div>
+                                <form action="<c:url value="/user/deleteTicket.do"/>" method="POST">
+                                        <input name="ticketIdCDelete" value="<%= tkc.getTicketId()%>" type="hidden" />
+                                       
+                                        <div class="myb-btn mx-5 md-4">
+                                            <button type="submit" class="btn my-btn-dl text-uppercase">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </form>
 
                             </div>
                             <%
