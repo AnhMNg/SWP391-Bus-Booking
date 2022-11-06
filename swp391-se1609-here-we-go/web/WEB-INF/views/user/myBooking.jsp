@@ -102,7 +102,7 @@
                                     <small><%= tku.getDestintionDetail() %></small>
                                     <div class="passenger">
                                         <span>Seat <%= tku.getPosition() %></span>
-                                        <p><%= tku.getPassengerName() %> - 0926372882</p> 
+                                        <p><%= tku.getPassengerName() %> - <%= tku.getPassengerPhone() %></p> 
                                     </div>
                                 </div>
                                 <div class="button-group-myb">
@@ -166,7 +166,7 @@
                                     <small><%= tkc.getDestintionDetail() %></small>
                                     <div class="passenger">
                                         <span>Seat <%= tkc.getPosition() %></span>
-                                        <p><%= tkc.getPassengerName() %> - 0926372882</p> 
+                                        <p><%= tkc.getPassengerName() %> - <%= tkc.getPassengerPhone() %></p> 
                                     </div>
                                 </div>
                                 <form action="<c:url value="/user/deleteTicket.do"/>" method="POST">
@@ -190,10 +190,12 @@
                                 <div class="detail-null-img">
                                     <img src="<c:url value="/images/suitcase-trv.png"/>" alt="" />
                                 </div>
+                               
                                 <div class="detail-null-ctn">
                                     <p>Looks empty, you've no upcoming bookings.</p>
                                     <button class="plan-btn">Plan a trip</button>
                                 </div>
+                               
                             </div>
                             <%
                                 }

@@ -32,7 +32,7 @@ public class TicketManager {
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                String sql = "select rd.price,rd.startTime,rd.timeArrival, com.name, bt.capacity, bt.kind,PlaceName.depart,PlaceName.destination,rd.departDetail, rd.detinationDetail,tk.ticketId,tk.orderId,tk.routeDeTailId, tk.position, tk.passengerName, tk.purchaseDate\n" +
+                String sql = "select rd.price,rd.startTime,rd.timeArrival, com.name, bt.capacity, bt.kind,PlaceName.depart,PlaceName.destination,rd.departDetail, rd.detinationDetail,tk.ticketId,tk.orderId,tk.routeDeTailId, tk.position, tk.passengerName, tk.passengerPhone,  tk.purchaseDate\n" +
 "                        from [Ticket] tk,[Order] od,[RouteDetail] rd,[Route] r,[BusType] bt,[Company] com,(select dep.companyId, dep.routeId,dep.name depart,des.name destination from\n" +
 "                        (select * from Route,Place where Route.departId = Place.placeId) dep,\n" +
 "                        (select * from Route,Place where Route.destinationId = Place.placeId) des\n" +
@@ -45,7 +45,7 @@ public class TicketManager {
                 ResultSet rs = pst.executeQuery();
                 while (rs != null && rs.next()) {
                     tik = new TicketDetail(rs.getInt(1), DateUtil.convertDateFormat(rs.getString(2)), DateUtil.convertDateFormat(rs.getString(3)), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)
-                            , rs.getString(8), rs.getString(9), rs.getString(10), rs.getLong(11), rs.getLong(12), rs.getLong(13), rs.getInt(14), rs.getString(15), DateUtil.convertDateFormat(rs.getString(16)));
+                            , rs.getString(8), rs.getString(9), rs.getString(10), rs.getLong(11), rs.getLong(12), rs.getLong(13), rs.getInt(14), rs.getString(15),rs.getString(16), DateUtil.convertDateFormat(rs.getString(17)));
                     list.add(tik);
                 }
                 if (pst != null) {
@@ -76,7 +76,7 @@ public class TicketManager {
         try {
             cn = DBUtils.getConnection();
             if (cn != null) {
-                String sql = "select rd.price,rd.startTime,rd.timeArrival, com.name, bt.capacity, bt.kind,PlaceName.depart,PlaceName.destination,rd.departDetail, rd.detinationDetail,tk.ticketId,tk.orderId,tk.routeDeTailId, tk.position, tk.passengerName, tk.purchaseDate\n" +
+                String sql = "select rd.price,rd.startTime,rd.timeArrival, com.name, bt.capacity, bt.kind,PlaceName.depart,PlaceName.destination,rd.departDetail, rd.detinationDetail,tk.ticketId,tk.orderId,tk.routeDeTailId, tk.position, tk.passengerName,tk.passengerPhone, tk.purchaseDate\n" +
 "                        from [Ticket] tk,[Order] od,[RouteDetail] rd,[Route] r,[BusType] bt,[Company] com,(select dep.companyId, dep.routeId,dep.name depart,des.name destination from\n" +
 "                        (select * from Route,Place where Route.departId = Place.placeId) dep,\n" +
 "                        (select * from Route,Place where Route.destinationId = Place.placeId) des\n" +
@@ -89,7 +89,7 @@ public class TicketManager {
                 ResultSet rs = pst.executeQuery();
                 while (rs != null && rs.next()) {
                     tik = new TicketDetail(rs.getInt(1), DateUtil.convertDateFormat(rs.getString(2)), DateUtil.convertDateFormat(rs.getString(3)), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7)
-                            , rs.getString(8), rs.getString(9), rs.getString(10), rs.getLong(11), rs.getLong(12), rs.getLong(13), rs.getInt(14), rs.getString(15), DateUtil.convertDateFormat(rs.getString(16)));
+                            , rs.getString(8), rs.getString(9), rs.getString(10), rs.getLong(11), rs.getLong(12), rs.getLong(13), rs.getInt(14), rs.getString(15), rs.getString(16) ,DateUtil.convertDateFormat(rs.getString(17)));
                     list.add(tik);
                 }
                 if (pst != null) {

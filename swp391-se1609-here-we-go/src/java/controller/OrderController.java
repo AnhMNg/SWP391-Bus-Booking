@@ -72,6 +72,8 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String productName = request.getParameter("productName");
         String subTotal = request.getParameter("subTotal");
         String numberOfTickets = request.getParameter("numberOfTickets");
