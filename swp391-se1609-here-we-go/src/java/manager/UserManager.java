@@ -275,7 +275,7 @@ public class UserManager {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
             PreparedStatement pst = cn.prepareStatement(UPDATE_USER_INFORMATION);
-            pst.setString(1, newFullname);
+            pst.setNString(1, newFullname);
             pst.setString(2, avatarLink);
             pst.setLong(3, id);
             pst.executeUpdate();

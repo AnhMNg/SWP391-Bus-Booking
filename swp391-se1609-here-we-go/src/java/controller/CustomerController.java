@@ -4,6 +4,8 @@
  */
 package controller;
 
+import com.google.gson.internal.Streams;
+import com.sun.el.stream.Stream;
 import config.Config;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,6 +23,7 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import java.io.File;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -131,7 +134,9 @@ public class CustomerController extends HttpServlet {
         }
     }
     
-    private void payment(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    private void payment(HttpServletRequest request, HttpServletResponse response) throws SQLException, UnsupportedEncodingException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
         int[] listPos = (int[]) session.getAttribute("listPosForTicket");
@@ -153,8 +158,10 @@ public class CustomerController extends HttpServlet {
         
     }
     
-    private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException, ParseException {
+    private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException, ParseException, UnsupportedEncodingException {
         HttpSession session = request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
         request.getSession().setAttribute("backToBook", "false");
         if (us != null && us.getRoleId() == 2) {
@@ -410,7 +417,10 @@ public class CustomerController extends HttpServlet {
     
     private void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         try {
+            
             String filename = null;
             HttpSession session = request.getSession();
             String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
@@ -425,6 +435,7 @@ public class CustomerController extends HttpServlet {
 
 // Create a new file upload handler
             ServletFileUpload upload = new ServletFileUpload(factory);
+            upload.setHeaderEncoding("UTF-8"); 
 // Parse the request
             List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));
             Iterator<FileItem> iter = items.iterator();
@@ -433,9 +444,9 @@ public class CustomerController extends HttpServlet {
                 FileItem item = iter.next();
                 
                 if (item.isFormField()) {
-                    fields.put(item.getFieldName(), item.getString());
+                    fields.put(item.getFieldName(), item.getString("utf-8"));
                     String name = item.getFieldName();
-                    String value = item.getString();
+                    String value = item.getString("UTF-8");
                     System.out.println("name: " + name);
                     System.out.println("value: " + value);
                 } else {
@@ -552,6 +563,7 @@ public class CustomerController extends HttpServlet {
     private void reset(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
+            
             HttpSession session = request.getSession();
             User userFound = (User) session.getAttribute("userFound");
             String resetPass = request.getParameter("resetPass");

@@ -14,19 +14,31 @@ public class Ticket {
     private long routeDetailId;
     private int position;
     private String passengerName;
+    private String passengerPhone;
     private String purchaseDate;
 
     public Ticket() {
     }
 
-    public Ticket(long ticketId, long orderId, long routeDetailId, int position, String passengerName, String purchaseDate) {
+    public Ticket(long ticketId, long orderId, long routeDetailId, int position, String passengerName, String passengerPhone, String purchaseDate) {
         this.ticketId = ticketId;
         this.orderId = orderId;
         this.routeDetailId = routeDetailId;
         this.position = position;
         this.passengerName = passengerName;
+        this.passengerPhone = passengerPhone;
         this.purchaseDate = purchaseDate;
     }
+
+    public String getPassengerPhone() {
+        return passengerPhone;
+    }
+
+    public void setPassengerPhone(String passengerPhone) {
+        this.passengerPhone = passengerPhone;
+    }
+
+    
 
     public String getPassengerName() {
         return passengerName;
