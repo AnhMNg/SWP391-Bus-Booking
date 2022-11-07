@@ -122,3 +122,427 @@
 .read-more-text--show{
     display: inline;
 }
+
+.tc-info-des-sec {
+    min-height: 100vh;
+}
+
+.img-slider{
+    position: relative;
+    width: 800px;
+    height: 500px;
+    margin: 10px;
+    background: #1D212B;
+  }
+  
+  .img-slider .slide{
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    clip-path: circle(0% at 0 50%);
+  }
+  
+  .img-slider .slide.active{
+    clip-path: circle(150% at 0 50%);
+    transition: 2s;
+    transition-property: clip-path;
+  }
+  
+  .img-slider .slide img{
+    z-index: 1;
+    width: 800px;
+    height: 497.500px;
+    border-radius: 5px;
+  }
+  
+  .img-slider .slide .info{
+    position: absolute;
+    top: 0;
+    padding: 15px 30px;
+  }
+  
+  .img-slider .slide .info h2{
+    color: #fff;
+    font-size: 45px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background-color: #0000005b;
+  }
+  
+  .img-slider .slide .info p{
+    color: #fff;
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    width: 60%;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .img-slider .navigation{
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .img-slider .navigation .btn{
+    background: rgba(255, 255, 255, 0.5);
+    width: 10px;
+    height: 5px;
+    margin: 10px;
+    /* border-radius: 50%; */
+    cursor: pointer;
+  }
+  
+  .img-slider .navigation .btn.active{
+    background: #c3e4df;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  @media (max-width: 820px){
+    .img-slider{
+      width: 600px;
+      height: 375px;
+    }
+  
+    .img-slider .slide .info{
+      padding: 10px 25px;
+    }
+  
+    .img-slider .slide .info h2{
+      font-size: 35px;
+    }
+  
+    .img-slider .slide .info p{
+      width: 70%;
+      font-size: 15px;
+    }
+  
+    .img-slider .navigation{
+      bottom: 25px;
+    }
+  
+    .img-slider .navigation .btn{
+      width: 10px;
+      height: 10px;
+      margin: 8px;
+    }
+  }
+  
+  @media (max-width: 620px){
+    .img-slider{
+      width: 400px;
+      height: 250px;
+    }
+  
+    .img-slider .slide .info{
+      padding: 10px 20px;
+    }
+  
+    .img-slider .slide .info h2{
+      font-size: 30px;
+    }
+  
+    .img-slider .slide .info p{
+      width: 80%;
+      font-size: 13px;
+    }
+  
+    .img-slider .navigation{
+      bottom: 15px;
+    }
+  
+    .img-slider .navigation .btn{
+      width: 8px;
+      height: 8px;
+      margin: 6px;
+    }
+  }
+  
+  @media (max-width: 420px){
+    .img-slider{
+      width: 320px;
+      height: 200px;
+    }
+  
+    .img-slider .slide .info{
+      padding: 5px 10px;
+    }
+  
+    .img-slider .slide .info h2{
+      font-size: 25px;
+    }
+  
+    .img-slider .slide .info p{
+      width: 90%;
+      font-size: 11px;
+    }
+  
+    .img-slider .navigation{
+      bottom: 10px;
+    }
+  }
+
+  .slide1 {
+    background: url('images/vị-trí-số-ghế-xe-giường-nằm-1024x563.jpg');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  .review {
+    min-height: 100vh;
+  }
+
+  .contribute {
+    margin-bottom: 100px;
+  }
+
+  .contribute h2 {
+    margin-bottom: 30px;
+    font-weight: 500;
+    color: #6180CD;
+  }
+
+  .contribute .btn {
+    width: 200px;
+    padding: 10px;
+    border-radius: 20px;
+    border: #6180CD solid 2px;
+    color: #6180CD;
+    font-weight: 500;
+    font-size: 17px;
+  }
+
+  .contribute .btn:hover {
+    background-color: #6180CD;
+    color: #fff;
+  }
+
+  .review-cm h2 {
+    margin-bottom: 30px;
+    font-weight: 500;
+    color: #6180CD;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .user-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .user-info p {
+    margin: 10px;
+    font-weight: 500;
+  }
+
+  .seat-row {
+    display: flex;
+    height: 25px;
+  }
+  
+  .seat-ctn {
+    display: block;
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .seat-ctn input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 25px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #444451;
+  }
+  
+  .disable-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 25px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #D9D9D9;
+  }
+  
+  
+  /* On mouse-over, add a grey background color */
+  .seat-ctn:hover input~.checkmark {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+  
+  .seat-ctn:hover input~.disable-checkmark {
+    cursor: default;
+    transform: scale(1);
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .seat-ctn input:checked~.checkmark {
+    background-color: #6feaf6;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .seat-ctn:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Style the checkmark/indicator */
+  .seat-ctn .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  .seat-row {
+    display: flex;
+    height: 25px;
+  }
+  
+  .seat-ctn {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .seat-ctn input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 40px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #444451;
+  }
+  
+  .disable-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    margin: 3px;
+    border-radius: 50%;
+    background-color: #6180CD;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .seat-ctn:hover input~.checkmark {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+  
+  .seat-ctn:hover input~.disable-checkmark {
+    cursor: default;
+    transform: scale(1);
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .seat-ctn input:checked~.checkmark {
+    background-color: #6feaf6;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .seat-ctn:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Style the checkmark/indicator */
+  .seat-ctn .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .rate-cm {
+    margin-left: 5px;
+    margin-top: 5px;
+    font-weight: 500;
+  }
+
+  .date-cm {
+    margin-left: 5px;
+    margin-top: 10px;
+  }
+
+  .re-cm {
+    margin-left: 5px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .rate-ov {
+    display: flex;
+    align-items: center;
+  }
+  
+  .rate-ov p {
+    margin: 5px 10px 5px 5px;
+    font-size: 30px;  
+    font-weight: bold;
+  }
+
+  .rate-ov span {
+    margin-left: 10px;
+    font-weight: 400;
+    font-size: 17px;
+  }
