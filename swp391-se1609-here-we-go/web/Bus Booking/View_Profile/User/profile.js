@@ -1,27 +1,32 @@
-(function () {
-    var imageUpload = function () {
-        var self = this;
-        this.selector = {
-            fileInput: document.getElementById('inputUpload'),
-            imagePreview: document.getElementById('user-photo'),
-        };
-        this.onChangeInput = function (e) {
-            self.selector.imagePreview.setAttribute('src', "");
-            self.imageData='';
-            var file = e.target.files[0];
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                self.imageData = e.target.result;
-                self.selector.imagePreview.setAttribute('src', self.imageData);
-            };
-            reader.readAsDataURL(file);
-        };
-        this.selector.fileInput.addEventListener('change', function (e) {
-            self.onChangeInput(e);
-        });
-    };
-    window.addEventListener("DOMContentLoaded", function () {
-        console.log('DOM is loaded');
-        new imageUpload();
+const input = document.getElementById('inputUpload');
+const image = document.getElementById('user-photo');
+
+input.addEventListener('change', (e) => {
+    const reader=new FileReader();
+    
+    if (e.target.files.length) {
+        const src = URL.createObjectURL(e.target.files[0]);
+        image.setAttribute('src',src)
+    }
+    reader.addEventListener("load",()=>{
+        localStorage.setItem("recent-image",reader.result);
     });
-})();
+    reader.readAsDataURL(e.target.files[0]);
+});
+
+document.getElementById("edit-profile").addEventListener("click",function(){
+    document.getElementsByClassName("pop-up-profile")[0].classList.add("active");
+    document.getElementsByClassName("popup-ques")[0].classList.add("active");
+});
+document.getElementById("no").addEventListener("click",function(){
+    document.getElementsByClassName("popup-ques")[0].classList.remove("active");
+    document.getElementsByClassName("pop-up-profile")[0].classList.remove("active");
+});
+function show(anything){
+    document.querySelector('.profile-textbox').value=anything;
+}
+let dropdown=document.querySelector('.dropdown-profile');
+dropdown.onclick=function(){
+    dropdown.classList.toggle('active');
+}
+   
