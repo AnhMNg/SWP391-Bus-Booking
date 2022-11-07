@@ -96,6 +96,14 @@
                                     <p class="bus-name"><%= tku.getCompanyName()%></p>
                                     <p class="bus-type"><%= tku.getKind()%> <%= tku.getCapacity()%> Seats - Position: <%= tku.getPosition()%></p>
                                     <p class="bus-time"> <%= tku.getTimeStart()%> </p>
+                                    <p class="point">Pickup point</p>
+                                    <small> <%= tku.getDepartDetail() %> </small>
+                                    <p class="point">Drop point</p>
+                                    <small><%= tku.getDestintionDetail() %></small>
+                                    <div class="passenger">
+                                        <span>Seat <%= tku.getPosition() %></span>
+                                        <p><%= tku.getPassengerName() %> - <%= tku.getPassengerPhone() %></p> 
+                                    </div>
                                 </div>
                                 <div class="button-group-myb">
                                     <div class="myb-btn mx-2 md-3">
@@ -152,16 +160,24 @@
                                     <p class="bus-name"><%= tkc.getCompanyName()%></p>
                                     <p class="bus-type"><%= tkc.getKind()%> <%= tkc.getCapacity()%> Seats - Position: <%= tkc.getPosition()%></p>
                                     <p class="bus-time"> <%= tkc.getTimeStart()%> </p>
+                                    <p class="point">Pickup point</p>
+                                    <small> <%= tkc.getDepartDetail() %> </small>
+                                    <p class="point">Drop point</p>
+                                    <small><%= tkc.getDestintionDetail() %></small>
+                                    <div class="passenger">
+                                        <span>Seat <%= tkc.getPosition() %></span>
+                                        <p><%= tkc.getPassengerName() %> - <%= tkc.getPassengerPhone() %></p> 
+                                    </div>
                                 </div>
                                 <form action="<c:url value="/user/deleteTicket.do"/>" method="POST">
-                                        <input name="ticketIdCDelete" value="<%= tkc.getTicketId()%>" type="hidden" />
-                                       
-                                        <div class="myb-btn mx-5 md-4">
-                                            <button type="submit" class="btn my-btn-dl text-uppercase">
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </form>
+                                    <input name="ticketIdCDelete" value="<%= tkc.getTicketId()%>" type="hidden" />
+
+                                    <div class="myb-btn mx-5 md-4">
+                                        <button type="submit" class="btn my-btn-dl text-uppercase">
+                                            Delete
+                                        </button>
+                                    </div>
+                                </form>
 
                             </div>
                             <%
@@ -174,10 +190,12 @@
                                 <div class="detail-null-img">
                                     <img src="<c:url value="/images/suitcase-trv.png"/>" alt="" />
                                 </div>
+                               
                                 <div class="detail-null-ctn">
                                     <p>Looks empty, you've no upcoming bookings.</p>
                                     <button class="plan-btn">Plan a trip</button>
                                 </div>
+                               
                             </div>
                             <%
                                 }

@@ -72,7 +72,9 @@
 
                                 <input type="submit" value="Booking Now" class="sign-btn" />
                                 <i style="color: red">${message}</i>
-                                <p class="forgot-pass">Forgot Password ?</p>
+                                <br/>
+                                <a href="/swp391-se1609-here-we-go/user/forgotPass.do" class="forgot-pass">Forgot Password?</a>
+<!--                                <p class="forgot-pass">Forgot Password?</p>-->
 
                                 <div class="social-media">
                                     <p>Or Login With</p>

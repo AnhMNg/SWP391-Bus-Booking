@@ -23,19 +23,26 @@ html {
 }
 
 .header.sticky .main-nav {
-    animation: changeBackgroundColor 10s ease-in-out infinite;
+    animation: changeBackgroundColor 5s ease-in-out infinite;
 }
 
 @keyframes changeBackgroundColor {
     0% {
-        background-color: #9DC5D2;
+        background-color: #c3e1eb;
     }
+
     50% {
-        background-color: #000000;
+        background-color: #d1d8ee;
     }
+
+    75% {
+        background-color: #c3e4df;
+    }
+
     100% {
-        background-color: #9DC5D2;
+        background-color: #c3e1eb;
     }
+
 }
 
 .logo {
