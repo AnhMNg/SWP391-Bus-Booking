@@ -10,7 +10,7 @@ Create table Company(
 	email varchar(100) not null,
 	phone varchar(12) not null,
 	imgLink varchar(300),
-	description nvarchar(2000),
+	description nvarchar(4000),
 	Password nvarchar(30)
 )
 
@@ -56,7 +56,8 @@ create table [User](
 	avatarLink varchar(200),
 	roleId int foreign key references Role(roleId) not null,
 	password nvarchar(20) not null,
-	dateCreate datetime
+	dateCreate datetime,
+	gender varchar(10)
 )
 
 
@@ -88,8 +89,10 @@ create table Ticket(
 
 create table Feedback(
 	feedback bigint primary key identity(1,1) not null,
-	ticketID bigint foreign key references Ticket(ticketId) not null,
+	companyId int foreign key references Company(companyId) not null,
+	userId bigint foreign key references [User](userId) not null,
 	Description nvarchar(500),
+	star int
 )
 create table [Notification](
 	NId bigint primary key identity(1,1) not null,
@@ -99,28 +102,29 @@ create table [Notification](
 )
 
 USE HereWeGo
-INSERT INTO Company VALUES(N'Phương Trang Bus','phuongtrangstation@gmail.com','0929828338','','Nha xe Phuong Trang Description............................','phuongtrang123')
-INSERT INTO Company VALUES(N'Thành Bưởi Bus','thanhbuoi@gmail.com','0928763562','','','thanhbuoi123')
-INSERT INTO Company VALUES(N'Hà Nội Rides On Time','hnride.ontime@gmail.com','0989876537','','','hnride123')
-INSERT INTO Company VALUES(N'Sapa Dragon','sapa.dragon@gmail.com','0987875625','','','sapadg123')
-INSERT INTO Company VALUES(N'Hoàng Long Bus','hoanglong@gmailcom','0989877862','','','hoanglong123')
-INSERT INTO Company VALUES(N'Huế Tourist Bus','huetour@gmail.com','0981452653','','','huetour123')
-INSERT INTO Company VALUES(N'Mai Linh Express Bus','mailinh@gmail.com','0986273737','','','mailinh123')
-INSERT INTO Company VALUES(N'Hải Vân Bus','haivan@gmail.com','0982935574','','','haivan123')
-INSERT INTO Company VALUES(N'Interbus Lines','interbus@gmail.com','0983538821','','','interbus123')
-INSERT INTO Company VALUES(N'Sapa Bus Lines','sapa.lines@gmail.com','0985662993','','','sapalines123')
+INSERT INTO Company VALUES(N'Phương Trang Bus','phuongtrangstation@gmail.com','0929828338','phuongtranglogo.png','Founded in 2001 focusing on supporting the transportation needs of Vietnamese people, Phuong Trang Group (FUTA Group) has become the industry leaders and contributed to the country’s development. Our efforts to improve products and services have been recognized through many prestigious awards such as “Top 5&nbsp;Reputable Transportation &amp;amp; Logistics Companies In Vietnam&nbsp;In 2020”, “Asian Quality Products-Services” and “Top 10 of Asian famous brands”, etc.','phuongtrang123')
+INSERT INTO Company VALUES(N'Thành Bưởi Bus','thanhbuoi@gmail.com','0928763562','thanhbuoilogo.png','Established in 2000 until now, with more than 10 years of experience in the field of transportation, Thanh Buoi has served more than thousands of bus routes across the country. With the motto "Serving customers from a dedicated heart", Thanh Buoi always constantly improves, improves service quality and expands the size of its company every day in order to bring customers the best service and most diverse.
+With the unremitting efforts and efforts of the staff of company during its operation, Thanh Buoi has achieved many great achievements, being voted by consumers as "Enterprise providing transportation services". most satisfied in 2008, 2010, 2011, 2013" and won the title of "Prestigious Brand 2009". Not stopping there, the size of the company also increased significantly. From a company specializing in transporting passengers and goods, Thanh Buoi has now become a multi-industry, multi-field company across the country.','thanhbuoi123')
+INSERT INTO Company VALUES(N'Hà Nội Rides On Time','hnride.ontime@gmail.com','0989876537','hanoiridelogo.jpg','Hanoi Rides on time’s management team leaders have a background in Bachelor of Business Administration, and degree of hospitality management at Vatel international business school hotel & tourism management USA and many years of customer service experience which ensures that our operations run smoothly and efficiently Hanoi Rides On Time specializes in professional and efficient transportation services in the Hanoi area. We offer affordable rates and experienced drivers who take you from your location to your final destination, in a safe and timely matter','hnride123')
+INSERT INTO Company VALUES(N'Sapa Dragon','sapa.dragon@gmail.com','0987875625','sapadragonlogo.png','Sapa Dragon Express is a Vietnamese bus company serving routes between Hanoi and Sapa.','sapadg123')
+INSERT INTO Company VALUES(N'Hoàng Long Bus','hoanglong@gmailcom','0989877862','hoanglonglogo.png','Hoang Long company would like to send customers a respectfully greeting and thank you for choosing Hoang Long brand. During the 10 years of company building and development, we have pleasured to serve tens of millions passengers along the routes from North to South. HOANG LONG became the most popular brand in Viet Nam by choosing and decision of customers with three consecutive times Vietnam Gold Star award winning. This is our honor and great encouragement to continue serving customers better. We hope the selected information will help customers get more understanding about the works and enthusiasm of HOANG LONG company employees, and the contents on the website of company will help you get the necessary information for journeys as well as other services of the HOANG LONG company.','hoanglong123')
+INSERT INTO Company VALUES(N'Huế Tourist Bus','huetour@gmail.com','0981452653','huetouristlogo.png','Since 2006, Hue Trading and Tourist Service Corporation - Huetourist Company in Hue, Vietnam is focused on inbound market and other travel services and operating successfully in another primary tourism fields including outbound, and domestic travel. Especially, Huetourist is confident to organize events and bring you the best solutions in the field of events in order to build and create the brand equity.','huetour123')
+INSERT INTO Company VALUES(N'Mai Linh Express Bus','mailinh@gmail.com','0986273737','mailinhlogo.jpg','Mai Linh Express is a member of Mai Linh Group. Currently, the company has more than 150 vehicles operating on 12 routes connecting over 10 provinces and cities nationwide. With the motto "car departs on time - no smoke. drugs - do not pick up customers along the way", along with a professional, dedicated, thoughtful and honest service style, so far the Mai Linh Express brand has become familiar to customers.','mailinh123')
+INSERT INTO Company VALUES(N'Hải Vân Bus','haivan@gmail.com','0982935574','haivanlogo.jpg','Established in 1994, after more than 2 decades, Hai Van has now become one of the leading passenger transport companies in Vietnam in the high-end segment, with more than 1,000 employees. Hai Van is headquartered in Hanoi and has a nationwide service network. With the mission of providing high-class, kind and reliable transportation services to all customers, we are not only regular update the latest transport trends in the world to apply and launch unique products and services, but also invest in research and understanding to best meet all the needs of all customers. With a strong commitment to ensuring quality and safety, we always periodically take care of and maintain transport vehicles according to strict standards. Hai Van team of drivers - reliable companions and protection of all customers are experienced drivers, carefully selected by us and undergo standard and methodical training. In order to further improve service quality and promptly adjust when it is not suitable, Hai Van has built a customer feedback collection system to further improve our services.','haivan123')
+INSERT INTO Company VALUES(N'Interbus Lines','interbus@gmail.com','0983538821','interbuslogo.png','Inter Bus Line was established in 2005 by Inter Bus Line Joint Stock Company. This is a facility with offices in Hanoi and Sapa, specializing in providing transportation services for tourists. With more than 15 years in the field of providing this service, this has become the first choice of many travelers and is trusted for its professionalism.','interbus123')
+INSERT INTO Company VALUES(N'Cúc Phương Bus','cuc.phuong@gmail.com','0985662993','cucphuonglogo.png','In recent years, the trend of transportation services has developed strongly with many garages springing up to bring good quality services to customers. One of the prominent bus companies with the route Saigon - Long Khanh, Dong Nai is Cuc Phuong bus. With many years of operation, providing safe and quality trips for many passengers.','cucphuong123')
 
 INSERT INTO [Role] VALUES('ADMIN')
 INSERT INTO [Role] VALUES('CUSTOMER')
 
 
-INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170','',2,'hoanghuy123', CURRENT_TIMESTAMP)
-INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546','',2,'anhminh123',CURRENT_TIMESTAMP)
-INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625','',2,'baotram123',CURRENT_TIMESTAMP)
-INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365','',2,'hoanganh123',CURRENT_TIMESTAMP)
-INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345','',2,'baolong123',CURRENT_TIMESTAMP)
-INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276','',2,'hoailinh123',CURRENT_TIMESTAMP)
-INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725','',1,'vinhhung123',CURRENT_TIMESTAMP)
+INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170','',2,'hoanghuy123', CURRENT_TIMESTAMP,'man')
+INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546','',2,'anhminh123',CURRENT_TIMESTAMP,'man')
+INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625','',2,'baotram123',CURRENT_TIMESTAMP,'woman')
+INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365','',2,'hoanganh123',CURRENT_TIMESTAMP,'woman')
+INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345','',2,'baolong123',CURRENT_TIMESTAMP,'man')
+INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276','',2,'hoailinh123',CURRENT_TIMESTAMP,'man')
+INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725','',1,'vinhhung123',CURRENT_TIMESTAMP,'man')
 
 INSERT INTO Place VALUES(N'Huyện Cai Lậy, Tỉnh Tiền Giang')
 INSERT INTO Place VALUES(N'Quận Hoàn Kiếm, Thành phố Hà Nội')
@@ -146,7 +150,7 @@ INSERT INTO Route VALUES(5,2,1)
 
 INSERT INTO BusType VALUES(29, 'Normal Bus')
 INSERT INTO BusType VALUES(52, 'Sleeper Bus')
-INSERT INTO BusType VALUES(20, 'Sleeper Bus')
+INSERT INTO BusType VALUES(20, 'Sleeper Room Bus')
 
 INSERT INTO RouteDetail VALUES(1,1,'2022-11-13 07:00:00',100000,'2022-10-18 22:00:00', N'123 Lê Hồng Phong', N'321 Phan Đình Giót')
 INSERT INTO RouteDetail VALUES(2,2,'2022-11-14 09:00:00',300000,'2022-10-18 21:00:00', N'345 Hồ Hảo Hớn', N'543 Nguyễn Cư Trinh')
