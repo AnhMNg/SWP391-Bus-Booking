@@ -92,7 +92,8 @@ create table Feedback(
 	companyId int foreign key references Company(companyId) not null,
 	userId bigint foreign key references [User](userId) not null,
 	Description nvarchar(500),
-	star int
+	star int,
+	dateComment datetime
 )
 create table [Notification](
 	NId bigint primary key identity(1,1) not null,

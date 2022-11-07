@@ -41,65 +41,194 @@
             </h1>
           </div>
         </div>
-        <div class="tc-info-des container">
-          <!--General information-->
-          <div class="col-md-4 transportation-comp-content">
-            <h1 class="">General Information</h1>
-            <p class="content">
-              Established in 2000 until now, with more than 10 years of
-              experience in the field of transportation, Thanh Buoi has served
-              more than thousands of bus routes across the country. With the
-              motto "Serving customers from a dedicated heart", Thanh Buoi
-              always constantly improves, improves service quality and expands
-              the size of its company every day in order to bring customers the
-              best service and most diverse.
-              <span class="read-more-text">
-                With the unremitting efforts and efforts of the staff of company
-                during its operation, Thanh Buoi has achieved many great
-                achievements, being voted by consumers as "Enterprise providing
-                transportation services". most satisfied in 2008, 2010, 2011,
-                2013" and won the title of "Prestigious Brand 2009". Not
-                stopping there, the size of the company also increased
-                significantly. From a company specializing in transporting
-                passengers and goods, Thanh Buoi has now become a
-                multi-industry, multi-field company across the country.
-              </span>
-            </p>
-            <span class="read-more-btn">Read More...</span>
-          </div>
-
-          <!--Bus Type-->
-          <div class="bus-type-comp">
-            <div class="type-header">
-              <h1 class="text-center">Bus Types</h1>
-              <p class="line-img text-center">
-                <img src="images/Line 16.png" class="line" />
+        <section class="tc-info-des-sec">
+          <div class="tc-info-des container">
+            <!--General information-->
+            <div class="col-md-4 transportation-comp-content">
+              <h1 class="">General Information</h1>
+              <p class="content">
+                Established in 2000 until now, with more than 10 years of
+                experience in the field of transportation, Thanh Buoi has served
+                more than thousands of bus routes across the country. With the
+                motto "Serving customers from a dedicated heart", Thanh Buoi
+                always constantly improves, improves service quality and expands
+                the size of its company every day in order to bring customers
+                the best service and most diverse.
+                <span class="read-more-text">
+                  With the unremitting efforts and efforts of the staff of
+                  company during its operation, Thanh Buoi has achieved many
+                  great achievements, being voted by consumers as "Enterprise
+                  providing transportation services". most satisfied in 2008,
+                  2010, 2011, 2013" and won the title of "Prestigious Brand
+                  2009". Not stopping there, the size of the company also
+                  increased significantly. From a company specializing in
+                  transporting passengers and goods, Thanh Buoi has now become a
+                  multi-industry, multi-field company across the country.
+                </span>
               </p>
+              <span class="read-more-btn">Read More...</span>
             </div>
-            <div class="row col-md-12 type-bus text-center mx-0 my-0">
-              <div class="col-md-6 part">
-                <div class="comp-img">
-                  <img src="images/vị-trí-số-ghế-xe-giường-nằm-1 1.png" />
-                </div>
-                <div class="bus-content">
-                  <h4>Sleeper Bus</h4>
-                </div>
-              </div>
-              <div class="col-md-6 part">
-                <div class="comp-img">
+
+            <!--Bus Type-->
+            <div class="col-md-8 bus-type-comp">
+              <div class="img-slider">
+                <div class="slide active">
                   <img
-                    src="images/xe-khach-limousine-giuong-nam-quy-nhon 1.png"
+                    src="images/vị-trí-số-ghế-xe-giường-nằm-1024x563.jpg"
+                    alt=""
                   />
+                  <div class="info">
+                    <h2>Sleeper Bus</h2>
+                  </div>
                 </div>
-                <div class="bus-content">
-                  <h4>Sleeper Room Bus</h4>
+                <div class="slide">
+                  <img src="images/xe-phong-nam-di-da-lat-4.jpg" alt="" />
+                  <div class="info">
+                    <h2>Sleeper Room Bus</h2>
+                  </div>
+                </div>
+                <div class="slide">
+                  <img src="images/xe-khach-29-cho-4.jpg" alt="" />
+                  <div class="info">
+                    <h2>29 Seats - Normal Bus</h2>
+                  </div>
+                </div>
+                <div class="navigation">
+                  <div class="btn active"></div>
+                  <div class="btn"></div>
+                  <div class="btn"></div>
                 </div>
               </div>
+              <script type="text/javascript">
+                var slides = document.querySelectorAll(".slide");
+                var btns = document.querySelectorAll(".btn");
+                let currentSlide = 1;
+
+                // Javascript for image slider manual navigation
+                var manualNav = function (manual) {
+                  slides.forEach((slide) => {
+                    slide.classList.remove("active");
+
+                    btns.forEach((btn) => {
+                      btn.classList.remove("active");
+                    });
+                  });
+
+                  slides[manual].classList.add("active");
+                  btns[manual].classList.add("active");
+                };
+
+                btns.forEach((btn, i) => {
+                  btn.addEventListener("click", () => {
+                    manualNav(i);
+                    currentSlide = i;
+                  });
+                });
+
+                // Javascript for image slider autoplay navigation
+                var repeat = function (activeClass) {
+                  let active = document.getElementsByClassName("active");
+                  let i = 1;
+
+                  var repeater = () => {
+                    setTimeout(function () {
+                      [...active].forEach((activeSlide) => {
+                        activeSlide.classList.remove("active");
+                      });
+
+                      slides[i].classList.add("active");
+                      btns[i].classList.add("active");
+                      i++;
+
+                      if (slides.length == i) {
+                        i = 0;
+                      }
+                      if (i >= slides.length) {
+                        return;
+                      }
+                      repeater();
+                    }, 10000);
+                  };
+                  repeater();
+                };
+                repeat();
+              </script>
             </div>
           </div>
-        </div>
+        </section>
+
+        <!-- Review -->
+        <section class="review">
+          <div class="contribute">
+            <h2>Contribute</h2>
+            <button class="btn">Write a review</button>
+          </div>
+          <div class="review-cm">
+            <h2>Reviews</h2>
+            <hr />
+            <div class="rate-ov">
+                <p>5.0</p>
+                <div class="seat-row">
+                    <label class="seat-ctn">
+                      <input type="disable-checkbox" />
+                      <span class="checkmark disable-checkmark"></span>
+                    </label>
+                    <label class="seat-ctn">
+                      <input type="disable-checkbox" />
+                      <span class="checkmark disable-checkmark"></span>
+                    </label>
+                    <label class="seat-ctn">
+                      <input type="disable-checkbox" />
+                      <span class="checkmark disable-checkmark"></span>
+                    </label>
+                    <label class="seat-ctn">
+                      <input type="disable-checkbox" />
+                      <span class="checkmark disable-checkmark"></span>
+                    </label>
+                    <label class="seat-ctn">
+                      <input type="disable-checkbox" />
+                      <span class="checkmark disable-checkmark"></span>
+                    </label>
+                </div>
+                <span>1 review</span>
+            </div>
+            <hr>
+            <div class="comment">
+              <div class="user-info">
+                <img src="images/Untitled (2).png" alt="" />
+                <p>Do Hoang Huy Bu</p>             
+              </div>
+              <div class="seat-row">
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+              </div>
+              <span class="rate-cm">Greate, nothing</span>
+              <p class="date-cm">Oct 20, 2022</p>
+              <p class="re-cm">Price for their quality, their kindness, trustworthy, everything is just too great.
+                I’ve tried many transfer services and they are The best so far.</p>
+              <hr>
+            </div>
+          </div>
+        </section>
       </div>
-      
     </main>
     <script src="script.js"></script>
   </body>
