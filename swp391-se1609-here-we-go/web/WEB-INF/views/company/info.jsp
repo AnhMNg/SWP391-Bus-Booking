@@ -30,10 +30,10 @@
         <main>
             <div class="container-fluid mt-5 px-5 py-5 header-comp">
                 <div class="tc-logo-img ml-3">
-                    <img src="<c:url value="/images/${sessionScope.COMPANY_LOGO}"/>">
+                    <img src="<c:url value="/images/${sessionScope.LOGIN_COMPANY_NAME_LOGO}"/>">
                 </div>
                 <div class="tc-header">
-                    <h1 style="text-transform: uppercase; font-weight: bold">${sessionScope.COMPANY_NAME}</h1>
+                    <h1 style="text-transform: uppercase; font-weight: bold">${sessionScope.LOGIN_COMPANY_NAME}</h1>
                 </div>
             </div>
             <!--General information-->
@@ -41,15 +41,8 @@
                 <h1 class="text-center">General Information</h1>
                 <p class="line-img text-center"><img src="<c:url value="/images/Line 16.png"/>" class="line"></p>
                 <p class="content">
-                    ${sessionScope.COMPANY_DES}
+                    ${sessionScope.LOGIN_COMPANY_NAME_DES}
                 </p>
-<!--                <p class="content">
-                    With the unremitting efforts and efforts of the company's staff during its operation,
-                    Thanh Buoi has achieved many great achievements, being voted by consumers as "Enterprise providing
-                    transportation services". most satisfied in 2008, 2010, 2011, 2013" and won the title of "Prestigious Brand
-                    2009". Not stopping there, the size of the company also increased significantly. From a company specializing
-                    in transporting passengers and goods, Thanh Buoi has now become a multi-industry, multi-field company across
-                </p>    -->
             </div>
             <!--Bus Type-->
             <div class="bus-type-comp">

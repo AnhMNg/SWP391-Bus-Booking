@@ -1,10 +1,18 @@
 //script for Toggle menu
-var navLinks = document.getElementById('navLinks');
+const parentContainer =  document.querySelector('.transportation-comp-content');
 
-function showMenu() {
-    navLinks.style.right = "0";
-}
+parentContainer.addEventListener('click', event=>{
 
-function hideMenu() {
-    navLinks.style.right = "-200px";
-}
+    const current = event.target;
+
+    const isReadMoreBtn = current.className.includes('read-more-btn');
+
+    if(!isReadMoreBtn) return;
+
+    const currentText = event.target.parentNode.querySelector('.read-more-text');
+
+    currentText.classList.toggle('read-more-text--show');
+
+    current.textContent = current.textContent.includes('Read More') ? "Read Less..." : "Read More...";
+
+})

@@ -103,6 +103,9 @@ public class CustomerController extends HttpServlet {
             case "deleteTicket":
                 deleteTicket(request, response);
                 break;
+            case "about":
+                about(request, response);
+                break;
             default:
                 break;
         }
@@ -585,6 +588,10 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("message", ex.getMessage());
             log("Error at MainController: " + ex.toString());
         }
+    }
+    
+    private void about(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher(Config.ABOUT_US).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -275,7 +275,7 @@
                     <!-- Transportation Company List -->
                     <div class="container mt-3 content-tc-c">
                         <div class="list-group">
-                            <form action="<c:url value="/company/info.do"/>" method="POST">
+                            <form action="<c:url value="/company/infoFind.do"/>" method="POST">
                                 <% ArrayList<Company> listcom = CompanyManager.getTopCompany(10);
                                     for (Company com : listcom) {
                                 %>

@@ -1,15 +1,55 @@
+.main-nav {
+    animation: changeBackgroundColor 5s ease-in-out infinite;
+}
 
-.container-fluid {
-    justify-content:center;
+@keyframes changeBackgroundColor {
+    0% {
+        background-color: #c3e1eb;
+    }
+
+    50% {
+        background-color: #d1d8ee;
+    }
+
+    75% {
+        background-color: #c3e4df;
+    }
+
+    100% {
+        background-color: #c3e1eb;
+    }
+
+}
+.header-comp {
     display: flex;
     padding: 2% 6%;
     align-items: center;
-    border-bottom: 0.5px solid #616060 ;
+    height: 300px;
 }
-.thanhbuoi-content {
-    padding-left: 25px;
+
+.tc-info-des {
+    display: flex;
 }
-.thanhbuoi-content h1 {
+
+.tc-logo-img {
+    padding-right: 15px;
+}
+.tc-logo-img img {
+    width: 155px;
+    height: 107px;
+}
+.tc-header {
+    padding-left: 15px;
+}
+
+.transportation-comp-content {
+    padding: 30px;
+    border-radius: 20px;
+    /* border: #000000 solid 1px; */
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
+}
+
+.transportation-comp-content h1 {
     color:#475f9b;
     font-weight: 700;
     font-size: 64px;
@@ -18,18 +58,19 @@
 .transportation-comp-content,
 .rout-list {
     text-align: left;
-    padding: 64px;
-    margin: 0px 62.8px;
+    /* padding: 64px; */
+    margin: 0px 30px 0px 30px;
 }
-.bus-type{
+.bus-type-comp{
     text-align: left;
     margin: 0px 62.8px;
 }
 .transportation-comp-content h1,
-.bus-type h1,
-.rout-list h1 {
+.bus-type-comp h1,
+.rout-list h1,
+.tc-header h1{
     font-weight: 600;
-    font-size: 40px;
+    font-size: 30px;
     line-height: 50px;
     text-transform: capitalize;
     color: #6180CD;
@@ -48,19 +89,19 @@
 .transportation-comp-content .content,
 .transportation-comp-content .conti-content {
     margin: 0px;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 15px;
     line-height: 25px;
     color: #000000;
     mix-blend-mode: normal;
-    text-align: justify;
+    /* text-align: justify; */
 }
 
-.bus-type .type-header {
+.bus-type-comp .type-header {
     margin-bottom: 20px;
 }
 
-.type {
+.type-bus {
     padding-top: 32px;
 }
 .rout-list h1 {
@@ -68,4 +109,16 @@
 }
 .bus-content h4{
     padding: 25px;
+}
+
+.read-more-btn{
+    color: #0984e3;
+}
+
+.read-more-text{
+    display: none;
+}
+
+.read-more-text--show{
+    display: inline;
 }

@@ -13,5 +13,5 @@ public class Config {
     public static final String LAYOUT = "WEB-INF/layouts/main.jsp";
     public static final String ADMIN_LAYOUT = "WEB-INF/layouts/adminDashboard.jsp";
     public static final String ERROR_PAGE = "WEB-INF/layouts/error.jsp";
-    
+    public static final String ABOUT_US = "WEB-INF/layouts/info.jsp";
 }
