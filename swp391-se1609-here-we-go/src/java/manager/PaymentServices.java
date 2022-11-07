@@ -26,8 +26,8 @@ import model.OrderDetail;
  * @author Admin
  */
 public class PaymentServices {
-    private static final String CLIENT_ID = "AbOEvtddWFhRwAU2y8Jmjf-0ybXsa9wLud-NlQZ2sLza6OSJcG4W__jQtIFL2w2xjDE58T74ez6xFhko";
-    private static final String CLIENT_SECRET = "EOfUdMi568hCSbtY9LaxNeXmHk35ZNAVm7f154cDl8-dZ66Af8-51cfvZu518CY4nq1fbj8tb7KknxrU";
+    private static final String CLIENT_ID = "AXvH6FD6auqt_7HeMy9ZYlV_THCxaYai3TJia4_IQBNTrXDZH3IexML4d-JoHxbrR_tvX2fRUfXTm1Zn";
+    private static final String CLIENT_SECRET = "ECjz70PY8cPaBjb562DKd0-PF2uJAOlEBjVynEce_uqeo0ODGvRWDTT3SMoQsD1Ft8g-4KDawwoqZVsU";
     private static final String MODE = "sandbox";
     
     private Payer getPayerInformation() {
@@ -46,8 +46,8 @@ public class PaymentServices {
     
     private RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:17470/swp391-se1609-here-we-go/order/checkout.do");
-        redirectUrls.setReturnUrl("http://localhost:17470/swp391-se1609-here-we-go/review_payment");
+        redirectUrls.setCancelUrl("http://localhost:8080/swp391-se1609-here-we-go/order/checkout.do");
+        redirectUrls.setReturnUrl("http://localhost:8080/swp391-se1609-here-we-go/review_payment");
 
 
         return redirectUrls;

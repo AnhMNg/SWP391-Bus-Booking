@@ -119,7 +119,7 @@
 <p class="form-message"></p>
             <div class="dismiss-btn">
                 <button id="yes" type="submit">Save</button>
-                <button id="no">Cancel</button>
+                <button id="no" type="reset" >Cancel</button>
             </div>
         </div>
     </div>

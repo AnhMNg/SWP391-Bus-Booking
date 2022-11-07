@@ -21,6 +21,9 @@ public class TicketDetail extends Ticket{
     private String departDetail;
     private String destintionDetail;
 
+    public TicketDetail() {
+    }
+
     public TicketDetail(int price, String timeStart, String timeArrival, String companyName, int capacity, String kind, String depart, String destination, String departDetail, String destintionDetail) {
         this.price = price;
         this.timeStart = timeStart;
@@ -34,8 +37,8 @@ public class TicketDetail extends Ticket{
         this.destintionDetail = destintionDetail;
     }
 
-    public TicketDetail(int price, String timeStart, String timeArrival, String companyName, int capacity, String kind, String depart, String destination, String departDetail, String destintionDetail, long ticketId, long orderId, long routeDetailId, int position, String passengerName, String purchaseDate) {
-        super(ticketId, orderId, routeDetailId, position, passengerName, purchaseDate);
+    public TicketDetail(int price, String timeStart, String timeArrival, String companyName, int capacity, String kind, String depart, String destination, String departDetail, String destintionDetail, long ticketId, long orderId, long routeDetailId, int position, String passengerName, String passengerPhone, String purchaseDate) {
+        super(ticketId, orderId, routeDetailId, position, passengerName, passengerPhone, purchaseDate);
         this.price = price;
         this.timeStart = timeStart;
         this.timeArrival = timeArrival;
@@ -47,6 +50,10 @@ public class TicketDetail extends Ticket{
         this.departDetail = departDetail;
         this.destintionDetail = destintionDetail;
     }
+
+    
+
+    
 
     public int getPrice() {
         return price;

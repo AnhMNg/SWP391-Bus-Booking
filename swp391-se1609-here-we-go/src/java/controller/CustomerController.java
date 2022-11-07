@@ -4,6 +4,8 @@
  */
 package controller;
 
+import com.google.gson.internal.Streams;
+import com.sun.el.stream.Stream;
 import config.Config;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -21,9 +23,11 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import java.io.File;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -31,13 +35,16 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import manager.CompanyManager;
 import manager.NotificationManager;
+import manager.OrderManager;
 import manager.RouteDetailManager;
+import manager.TicketManager;
 import model.Company;
 import model.RouteDetail;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
+
 /**
  *
  * @author Admin
@@ -45,10 +52,10 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 @WebServlet(name = "CustomerController", urlPatterns = {"/user"})
 
 public class CustomerController extends HttpServlet {
-
+    
     private static final String ACCOUNT_SID = "AC7531d18ea7e24011554d500770a01c58";
     private static final String AUTH_TOKEN = "0f9f4431546a3dd7ee404768256b8671";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
         String action = (String) request.getAttribute("action");
@@ -78,25 +85,88 @@ public class CustomerController extends HttpServlet {
             case "edit":
                 edit(request, response);
                 break;
-            case "change":
-                change(request, response);
+            case "checkPass":
+                checkPass(request, response);
+                break;
+            case "forgot":
+                forgot(request, response);
+                break;
+            case "reset":
+                reset(request, response);
+                break;
+            case "payment":
+                payment(request, response);
+                break;
+            case "cancle":
+                cancleTicket(request, response);
+                break;
+            case "deleteTicket":
+                deleteTicket(request, response);
                 break;
             default:
                 break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
-
+        
     }
 
-    private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    private void deleteTicket(HttpServletRequest request, HttpServletResponse response) throws ParseException, SQLException {
+        long ticketId = Long.parseLong(request.getParameter("ticketIdCDelete"));
+        if (TicketManager.deleteTicket(ticketId)) {
+            request.setAttribute("controller", "user");
+            request.setAttribute("action", "myBooking");
+        } else {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+        }
+    }
+
+    private void cancleTicket(HttpServletRequest request, HttpServletResponse response) throws ParseException, SQLException {
+        long ticketId = Long.parseLong(request.getParameter("ticketIdCancle"));
+        String timeStart = request.getParameter("ticketTimeStartCancle");
+        if (TicketManager.checkValidCancle(timeStart)) {
+            TicketManager.deleteTicket(ticketId);
+            request.setAttribute("controller", "user");
+            request.setAttribute("action", "myBooking");
+        } else {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+        }
+    }
+    
+    private void payment(HttpServletRequest request, HttpServletResponse response) throws SQLException, UnsupportedEncodingException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         HttpSession session = request.getSession();
+        User us = (User) session.getAttribute("LOGIN_CUSTOMER");
+        int[] listPos = (int[]) session.getAttribute("listPosForTicket");
+        String[] listName = (String[]) session.getAttribute("listPasNameForTicket");
+        String[] listPhone = (String[]) session.getAttribute("listPasPhoneForTicket");
+        RouteDetail rd = (RouteDetail) session.getAttribute("RouteDetailForTicket");
+        
+        OrderManager.addOrder(us.getUserId(), rd.getPrice() * listPos.length);
+        long id = OrderManager.getOrderIdLatest(us.getUserId());
+        TicketManager.addTicket(id, rd.getRouteDetailId(), listPos, listName, listPhone);
+        
+        session.removeAttribute("listPosForTicket");
+        session.removeAttribute("listPasNameForTicket");
+        session.removeAttribute("listPasPhoneForTicket");
+        session.removeAttribute("RouteDetailForTicket");
+        
+        request.setAttribute("controller", "user");
+        request.setAttribute("action", "myBooking");
+        
+    }
+    
+    private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException, ParseException, UnsupportedEncodingException {
+        HttpSession session = request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
         request.getSession().setAttribute("backToBook", "false");
         if (us != null && us.getRoleId() == 2) {
             String[] listPosString;
             listPosString = request.getParameterValues("seat");
-            
-
             if (listPosString == null || listPosString.length == 0) {
                 request.setAttribute("notification", "Please select seats to book tickets");
                 ArrayList<RouteDetail> listReturn = (ArrayList<RouteDetail>) session.getAttribute("listReturn");
@@ -115,16 +185,16 @@ public class CustomerController extends HttpServlet {
                 request.setAttribute("controller", "order");
                 request.setAttribute("action", "checkout");
             }
-
+            
         } else {
             request.getSession().setAttribute("backToBook", "true");
             request.setAttribute("message", "Please login to booking!!!");
             request.setAttribute("controller", "user");
             request.setAttribute("action", "login");
         }
-
+        
     }
-
+    
     private void logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -132,7 +202,7 @@ public class CustomerController extends HttpServlet {
         request.setAttribute("controller", "home");
         request.setAttribute("action", "index");
     }
-
+    
     private void login(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         try {
@@ -150,7 +220,7 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
                 session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
                 session.setAttribute("LOGIN_ROLE", roleID);
-                
+
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
                     request.setAttribute("action", "index");
@@ -164,14 +234,14 @@ public class CustomerController extends HttpServlet {
                         request.setAttribute("controller", "home");
                         request.setAttribute("action", "index");
                     }
-
+                    
                 } else {
                     request.setAttribute("message", "Your role is not support!");
                 }
             } else {
                 request.setAttribute("controller", "user");
                 request.setAttribute("action", "login");
-                request.setAttribute("message", "username or password is incorrect!");
+                request.setAttribute("message", "Username or Password is incorrect!");
             }
         } catch (SQLException ex) {
             request.setAttribute("controller", "error");
@@ -180,7 +250,7 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-
+    
     private void signup(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -236,7 +306,7 @@ public class CustomerController extends HttpServlet {
                     request.setAttribute("confirmPassword", confirmPassword);
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "login");
-                    request.setAttribute("messagePW", "password must contain at least 8 letters with lower, upper letter and a special digit!");
+                    request.setAttribute("messagePW", "Password must contain at least 8 letters with lower, upper letter and a special digit!");
                 }
             } else {
                 request.setAttribute("name", name);
@@ -254,7 +324,7 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-
+    
     private void save(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
         //UserManager userManager = new UserManager();
@@ -282,8 +352,8 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("message", "Wrong OTP, please check again!");
         }
     }
-
-    private void search(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException {
+    
+    private void search(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String cityFrom = request.getParameter("cityfrom");
@@ -300,8 +370,8 @@ public class CustomerController extends HttpServlet {
         request.setAttribute("controller", "user");
         request.setAttribute("action", "booking");
     }
-
-    private void filter(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnsupportedEncodingException {
+    
+    private void filter(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnsupportedEncodingException, ParseException {
         try {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("utf-8");
@@ -316,9 +386,9 @@ public class CustomerController extends HttpServlet {
             String[] from = null;
             String[] to = null;
             int deNum = Integer.parseInt(request.getParameter("deNum"));
-
+            
             if (time_raw != null) {
-
+                
                 from = new String[time_raw.length];
                 to = new String[time_raw.length];
                 String[] listtmp = new String[2];
@@ -326,17 +396,16 @@ public class CustomerController extends HttpServlet {
                     listtmp = time_raw[i].split(",");
                     from[i] = listtmp[0];
                     to[i] = listtmp[1];
-
+                    
                 }
             }
-            
+
             ArrayList<RouteDetail> listRoute = RouteDetailManager.getListRouteV1(depart, destination, from, to, min, max, company, deNum);
             if (listRoute.size() > 0) {
                 request.setAttribute("listSearch", listRoute);
             }
             request.setAttribute("depart", depart);
             request.setAttribute("destination", destination);
-       
             request.setAttribute("controller", "user");
             request.setAttribute("action", "booking");
             HttpSession session = request.getSession();
@@ -345,14 +414,17 @@ public class CustomerController extends HttpServlet {
             log("Error at SortController:" + e.toString());
         }
     }
-
+    
     private void edit(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         try {
+            
             String filename = null;
             HttpSession session = request.getSession();
             String phone = (String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
-            String img=(String) session.getAttribute("LOGIN_CUSTOMER_IMG");
+            String img = (String) session.getAttribute("LOGIN_CUSTOMER_IMG");
             // Create a factory for disk-based file items
             DiskFileItemFactory factory = new DiskFileItemFactory();
 
@@ -363,33 +435,33 @@ public class CustomerController extends HttpServlet {
 
 // Create a new file upload handler
             ServletFileUpload upload = new ServletFileUpload(factory);
+            upload.setHeaderEncoding("UTF-8"); 
 // Parse the request
             List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));
             Iterator<FileItem> iter = items.iterator();
             HashMap<String, String> fields = new HashMap<>();
             while (iter.hasNext()) {
                 FileItem item = iter.next();
-
+                
                 if (item.isFormField()) {
-                    fields.put(item.getFieldName(), item.getString());
+                    fields.put(item.getFieldName(), item.getString("utf-8"));
                     String name = item.getFieldName();
-                    String value = item.getString();
+                    String value = item.getString("UTF-8");
                     System.out.println("name: " + name);
                     System.out.println("value: " + value);
                 } else {
                     filename = item.getName();
                     System.out.println("filename: " + filename);
                     if (filename == null || filename.equals("")) {
-                       filename="";
+                        filename = "";
                     } else {
                         Path path = Paths.get(filename);
                         Path file = path.toAbsolutePath();
-                         String storePath = servletContext.getRealPath("/uploads");
-                          String action = storePath.substring(0, storePath.lastIndexOf("build"));
+                        String storePath = servletContext.getRealPath("/uploads");
+                        String action = storePath.substring(0, storePath.lastIndexOf("build"));
                         String s = servletContext.getContextPath();
                         File uploadFile = new File(action + "web\\uploads/" + path.getFileName());
                         item.write(uploadFile);
-
                         System.out.println(action + "web\\uploads/" + path.getFileName());
                     }
                 }
@@ -402,17 +474,17 @@ public class CustomerController extends HttpServlet {
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
                     session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                     session.setAttribute("LOGIN_CUSTOMER_IMG", img);
+                    session.setAttribute("LOGIN_CUSTOMER_IMG", img);
                     System.out.println("-------save-------");
                 }
             }
-            if (newName != null && filename!="") {
+            if (newName != null && filename != "") {
                 if (UserManager.updateUser(newName, user.getUserId(), filename)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
                     session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
-                     session.setAttribute("LOGIN_CUSTOMER_IMG", filename);
+                    session.setAttribute("LOGIN_CUSTOMER_IMG", filename);
                     System.out.println("-------save-------");
                 }
             }
@@ -423,8 +495,96 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
-     private void change(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+    private void checkPass(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User userFound = (User) session.getAttribute("userFound");
+        String SUBMIT_OTP = (String) session.getAttribute("SUBMIT_OTP");
+        String otp1 = request.getParameter("otp1");
+        String otp2 = request.getParameter("otp2");
+        String otp3 = request.getParameter("otp3");
+        String otp4 = request.getParameter("otp4");
+        String otp5 = request.getParameter("otp5");
+        String otp6 = request.getParameter("otp6");
+        String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
+        if (otpCheck.equals(SUBMIT_OTP)) {
+            if (userFound != null) {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "changePass");
+            }
+
+        } else {
+            request.setAttribute("message", "Wrong OTP, please check again!");
+        }
+    }
+
+    private void forgot(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            UserManager um = new UserManager();
+            String forgotPhone = request.getParameter("forgotPhone");
+            User user = um.getUserByPhone(forgotPhone);
+            if (user != null) {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "otpSMSChange");
+                //Generate OTP
+                int ramdonNum = (int) (Math.random() * 9000) + 100000;
+                String otp = String.valueOf(ramdonNum);
+                HttpSession session = request.getSession();
+                session.setAttribute("SUBMIT_OTP", otp);
+                if (session != null) {
+                    //Send OTP
+                    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+                    //process phone to +84
+                    String newPhone = "+84" + forgotPhone.substring(1);
+                    Message message = Message.creator(
+                            new PhoneNumber(newPhone),
+                            new PhoneNumber("+19785033345"),
+                            otp
+                    ).create();
+
+                }
+                session.setAttribute("userFound", user);
+            } else {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "forgotPass");
+                request.setAttribute("message", "Looks like the phone number doesn't exist in the system!");
+            }
+        } catch (SQLException ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
+
+    }
+
+    private void reset(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, Exception {
+        try {
+            
+            HttpSession session = request.getSession();
+            User userFound = (User) session.getAttribute("userFound");
+            String resetPass = request.getParameter("resetPass");
+            String confirmRPass = request.getParameter("confirmRPass");
+            if (resetPass.equals(confirmRPass)) {
+                if (UserManager.changePasword(userFound.getUserId(), resetPass)) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "login");
+                    request.setAttribute("message", "Successfully change password!");
+                }
+            } else {
+                request.setAttribute("controller", "user");
+                request.setAttribute("action", "changePass");
+                request.setAttribute("message", "Confirm password doesn't match!");
+            }
+        } catch (SQLException ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -477,6 +637,5 @@ public class CustomerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 
 }

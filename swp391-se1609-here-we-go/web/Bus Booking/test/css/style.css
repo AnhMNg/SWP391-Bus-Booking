@@ -1798,7 +1798,9 @@ input[type="range"]::-moz-range-thumb {
   background: #FFFFFF;
   border: 1px solid #7B7B7B;
   border-radius: 15px;
+  
 }
+
 
 .address {
   font-weight: 500;
@@ -1815,9 +1817,7 @@ input[type="range"]::-moz-range-thumb {
   margin: 0;
 }
 
-.booking-detail {
-  margin-left: 16px;
-}
+
 
 .bus-type {
   font-weight: 400;
@@ -3544,4 +3544,283 @@ i {
 
 .bus-content h4 {
   padding: 25px;
+}
+
+
+/* my booking */
+
+
+.my-booking {
+  width: 100%;
+  height: 150vh;
+}
+
+.main-my-booking {
+  display: flex;
+  margin-top: 100px;
+  height: 150vh;
+  background: #fff;
+  padding: 0;
+  background-image: url('/test/images/tou-removebg-preview.png');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+.banner-my-booking {  
+  height: 70%;
+  background-image: url('/test/images/bannermb2.png');
+  background-position: center bottom;
+  background-size: cover;
+  background-repeat: none;
+}
+
+.tabs {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+  
+}
+
+.tabs li {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4191CC;
+  cursor: pointer;
+  position: relative;
+}
+
+.tabs li::after {
+  content: "";
+  position: absolute;
+  bottom: -20%;
+  left: -3%;
+  width: 0%;
+  height: 5px;
+  background: #394a75;
+  border-radius: 30px;
+  transition: width .8s ease;
+}
+
+.tabs li.active::after {
+  width: 106%;
+}
+
+.detail {
+  display: flex;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border: 1px solid #5695aa;
+  border-radius: 15px;
+  margin-left: 100px;
+  height: 163px;
+  transition: 0.5s;
+}
+
+.booking-detail .point {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+
+.booking-detail small {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.address {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  color: #D80027;
+}
+
+.bus-name {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 38px;
+  color: #000000;
+  margin: 0;
+}
+
+.bus-time {
+  font-weight: 500;
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 10;
+}
+
+.bus-type {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #8A8888;
+  margin-bottom: 10px;
+}
+
+.myb-btn {
+  margin-top: 30px;
+}
+
+.myb-btn:nth-child(1) {
+  margin-right: 0px;
+}
+
+
+.booking-detail {
+  margin-left: 16px;
+  overflow: hidden;
+}
+
+.form-box button[type="submit"]:hover {
+  background: #D80027;
+  color: #fff;
+}
+
+.my-btn-ch {
+  margin-top: 30px;
+  cursor: pointer;
+  background: #5695aa;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.my-btn-dl {
+  margin-top: 30px;
+  cursor: pointer;
+  background: #EA4335;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.button-group-myb {
+  display: flex;
+}
+
+.myb-ct .content { 
+  width: 100%;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.content.active {
+  display: block;
+  animation: fade 1s ease;
+}
+
+.myb-ct {
+  position: relative;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.detail-null {
+  height: 200px;
+  display: flex;
+  background: #FFFFFF;
+  margin-left: 100px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 20px;
+}
+
+.detail-null-img {
+  width: 30%;
+}
+
+.detail-null-img img {
+  padding-top: 40px;
+  padding-left: 40px;
+}
+
+.plan-btn {
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
+  border-radius: 60px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 15px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.plan-btn:hover {
+  background: #fff;
+  border: 3px solid #394a75;
+  color: #4191CC;
+  transition: ease-in-out 0.6s;
+}
+
+.detail-null-ctn {
+  padding-top: 40px;
+}
+
+.detail-null-ctn p {
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.my-booking-info {
+  display: flex;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.my-ava {
+  width: 40px;
+  height: 40px;
+}
+
+.my-ava img {
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+}
+
+.my-info {
+  padding-left: 17px;
+}
+
+.my-info p {
+  font-size: 20px;
+  font-weight: 700;
+  color: #394a75;
+}
+
+
+.detail:hover {
+  height: 350px;
+}
+
+.passenger {
+  display: flex;
+  margin-top: 20px;
+}
+
+.passenger p {
+  margin-left: 20px;
+}
+
+.passenger p, .passenger span {
+  font-size: 17px;
+  font-weight: 500;
 }

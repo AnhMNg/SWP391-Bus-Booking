@@ -5,21 +5,13 @@
  */
 package utils;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import manager.CompanyManager;
-import manager.NotificationManager;
-import manager.RouteDetailManager;
+import manager.OrderManager;
 import manager.TicketManager;
-import manager.UserManager;
-import model.Company;
-import model.RouteDetail;
 import model.Ticket;
-import model.TicketDetail;
-import model.User;
+import sun.security.krb5.internal.TicketFlags;
+
+
 
 /**
  *
