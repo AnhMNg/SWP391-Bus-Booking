@@ -106,11 +106,17 @@
                                     </div>
                                 </div>
                                 <div class="button-group-myb">
+                                    
+                                    <form action="<c:url value="/user/changeTicket.do"/>" method="POST">
+                                        <input name="changeTicketId" value="<%= tku.getTicketId()%>" type="hidden"/>
+                                        <input name="depart" value="<%= tku.getDepart() %>" type="hidden"/>
+                                        <input name="destination" value="<%= tku.getDestination() %>" type="hidden" />
                                     <div class="myb-btn mx-2 md-3">
                                         <button type="submit" class="btn my-btn-ch text-uppercase">
                                             Change 
                                         </button>
                                     </div>
+                                    </form>
                                     <%
                                         if (TicketManager.checkValidCancle(tku.getTimeStart())) {
                                     %>
@@ -189,13 +195,11 @@
                             <div class="detail-null mb-2 mt-4">
                                 <div class="detail-null-img">
                                     <img src="<c:url value="/images/suitcase-trv.png"/>" alt="" />
-                                </div>
-                               
+                                </div>                               
                                 <div class="detail-null-ctn">
                                     <p>Looks empty, you've no upcoming bookings.</p>
                                     <button class="plan-btn">Plan a trip</button>
                                 </div>
-                               
                             </div>
                             <%
                                 }

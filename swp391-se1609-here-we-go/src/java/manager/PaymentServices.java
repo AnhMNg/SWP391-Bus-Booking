@@ -46,8 +46,8 @@ public class PaymentServices {
     
     private RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:17470/swp391-se1609-here-we-go/order/checkout.do");
-        redirectUrls.setReturnUrl("http://localhost:17470/swp391-se1609-here-we-go/review_payment");
+        redirectUrls.setCancelUrl("http://localhost:8080/swp391-se1609-here-we-go/order/checkout.do");
+        redirectUrls.setReturnUrl("http://localhost:8080/swp391-se1609-here-we-go/review_payment");
 
 
         return redirectUrls;
