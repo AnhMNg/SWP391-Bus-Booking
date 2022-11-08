@@ -6,8 +6,11 @@
 package utils;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import manager.OrderManager;
+import manager.RouteDetailManager;
 import manager.TicketManager;
+import model.RouteDetail;
 import model.Ticket;
 
 
@@ -20,6 +23,9 @@ import model.Ticket;
 public class test {
 
     public static void main(String[] args) throws SQLException, SQLException, Exception {
-        
+        ArrayList<RouteDetail> list = RouteDetailManager.searchRouteDetail("Đà Lạt", "Hồ Chí Minh", "");
+        for (RouteDetail routeDetail : list) {
+            System.out.println(routeDetail.getCappacity());
+        }
     }
 }

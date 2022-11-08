@@ -14,8 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import manager.OrderManager;
 import manager.PaymentServices;
+import manager.TicketManager;
 import model.OrderDetail;
+import model.RouteDetail;
+import model.User;
 
 /**
  *
@@ -42,7 +46,7 @@ public class OrderController extends HttpServlet {
                 doPost(request, response);
                 break;
         }
-        
+
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
     }
 
@@ -74,30 +78,79 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-        String productName = request.getParameter("productName");
-        String subTotal = request.getParameter("subTotal");
-        String numberOfTickets = request.getParameter("numberOfTickets");
-        String totalPrice = request.getParameter("totalPrice");
-        
-        String[] listPasName = request.getParameterValues("pasName");
-        String[] listPasPhone = request.getParameterValues("pasPhone");
-        HttpSession session = request.getSession();
-        session.setAttribute("listPasNameForTicket", listPasName);
-        session.setAttribute("listPasPhoneForTicket", listPasPhone);
-        
+        String typeChange = request.getParameter("typeChange");
+        if (typeChange == null) {
 
-        OrderDetail orderDetail = new OrderDetail(productName, numberOfTickets, subTotal, totalPrice);
+            String productName = request.getParameter("productName");
+            String subTotal = request.getParameter("subTotal");
+            String numberOfTickets = request.getParameter("numberOfTickets");
+            String totalPrice = request.getParameter("totalPrice");
 
-        try {
-            PaymentServices paymentServices = new PaymentServices();
-            String approvalLink = paymentServices.authorizePayment(orderDetail);
+            String[] listPasName = request.getParameterValues("pasName");
+            String[] listPasPhone = request.getParameterValues("pasPhone");
+            HttpSession session = request.getSession();
+            session.setAttribute("listPasNameForTicket", listPasName);
+            session.setAttribute("listPasPhoneForTicket", listPasPhone);
 
-            response.sendRedirect(approvalLink);
-        } catch (PayPalRESTException ex) {
-            ex.printStackTrace();
-            request.setAttribute("errorMessage", "Invalid Payment Details");
-            request.getRequestDispatcher(Config.ERROR_PAGE).forward(request, response);
+            OrderDetail orderDetail = new OrderDetail(productName, numberOfTickets, subTotal, totalPrice);
+
+            try {
+                PaymentServices paymentServices = new PaymentServices();
+                String approvalLink = paymentServices.authorizePayment(orderDetail);
+
+                response.sendRedirect(approvalLink);
+            } catch (PayPalRESTException ex) {
+                ex.printStackTrace();
+                request.setAttribute("errorMessage", "Invalid Payment Details");
+                request.getRequestDispatcher(Config.ERROR_PAGE).forward(request, response);
+            }
+        } else if (typeChange.equals("extra")) {
+
+            String productName = request.getParameter("productName");
+            String subTotal = request.getParameter("subTotal");
+            String numberOfTickets = request.getParameter("numberOfTickets");
+            String totalPrice = request.getParameter("totalPrice");
+
+            String[] listPasName = request.getParameterValues("pasName");
+            String[] listPasPhone = request.getParameterValues("pasPhone");
+            HttpSession session = request.getSession();
+            session.setAttribute("listPasNameForTicket", listPasName);
+            session.setAttribute("listPasPhoneForTicket", listPasPhone);
+
+            OrderDetail orderDetail = new OrderDetail(productName, numberOfTickets, subTotal, totalPrice);
+
+            try {
+                PaymentServices paymentServices = new PaymentServices();
+                String approvalLink = paymentServices.authorizePayment(orderDetail);
+
+                response.sendRedirect(approvalLink);
+            } catch (PayPalRESTException ex) {
+                ex.printStackTrace();
+                request.setAttribute("errorMessage", "Invalid Payment Details");
+                request.getRequestDispatcher(Config.ERROR_PAGE).forward(request, response);
+            }
+        } else {
+            HttpSession session = request.getSession();
+            User us = (User) session.getAttribute("LOGIN_CUSTOMER");
+            int pos = (int) session.getAttribute("posForTicket");
+            String[] listName = request.getParameterValues("pasName");
+            String[] listPhone = request.getParameterValues("pasPhone");
+            RouteDetail rd = (RouteDetail) session.getAttribute("RouteDetailForTicket");
+            try {
+                OrderManager.addOrder(us.getUserId(), rd.getPrice());
+
+                long id = OrderManager.getOrderIdLatest(us.getUserId());
+                long idChange = (long) request.getSession().getAttribute("ticketIdChange");
+                TicketManager.changeTicket(idChange, id, rd.getRouteDetailId(), pos, listName[0], listPhone[0]);
+                session.removeAttribute("ticketIdChange");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            request.setAttribute("controller", "user");
+            request.setAttribute("action", "myBooking");
+            request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
         }
+
     }
 
     /**
