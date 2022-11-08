@@ -26,6 +26,10 @@
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>Transportation Company Profile</title>
   </head>
   <body>
@@ -66,7 +70,13 @@
                   multi-industry, multi-field company across the country.
                 </span>
               </p>
-              <span class="read-more-btn">Read More...</span>
+              <span class="read-more-btn" style="margin-bottom: 50px;">Read More...</span>
+              <br />
+              <!-- Only TC role can view and edit data from routes list -->
+              <a href="" 
+                >Routes List <i class="fa fa-bus"></i
+              ></a>
+              <!--  -->
             </div>
 
             <!--Bus Type-->
@@ -154,49 +164,65 @@
                 repeat();
               </script>
             </div>
+            
+          </div>
+          <div style="margin-top: 100px;">
+            <img src="images/Here we go (1).jpg" alt="">
+          </div>
+          <div style="margin-top: 50px;">
+            <img src="images/Here we go2.png" alt="">
           </div>
         </section>
 
         <!-- Review -->
         <section class="review">
+          <!-- Only Customer can use -->
           <div class="contribute">
             <h2>Contribute</h2>
-            <button class="btn">Write a review</button>
+            <button
+              class="btn"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+            >
+              Write a review
+            </button>
           </div>
+          <!--  -->
           <div class="review-cm">
             <h2>Reviews</h2>
             <hr />
             <div class="rate-ov">
-                <p>5.0</p>
-                <div class="seat-row">
-                    <label class="seat-ctn">
-                      <input type="disable-checkbox" />
-                      <span class="checkmark disable-checkmark"></span>
-                    </label>
-                    <label class="seat-ctn">
-                      <input type="disable-checkbox" />
-                      <span class="checkmark disable-checkmark"></span>
-                    </label>
-                    <label class="seat-ctn">
-                      <input type="disable-checkbox" />
-                      <span class="checkmark disable-checkmark"></span>
-                    </label>
-                    <label class="seat-ctn">
-                      <input type="disable-checkbox" />
-                      <span class="checkmark disable-checkmark"></span>
-                    </label>
-                    <label class="seat-ctn">
-                      <input type="disable-checkbox" />
-                      <span class="checkmark disable-checkmark"></span>
-                    </label>
-                </div>
-                <span>1 review</span>
+              <p>5.0</p>
+              <div class="seat-row">
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+                <label class="seat-ctn">
+                  <input type="disable-checkbox" />
+                  <span class="checkmark disable-checkmark"></span>
+                </label>
+              </div>
+              <span>1 review</span>
             </div>
-            <hr>
+            <hr />
             <div class="comment">
               <div class="user-info">
                 <img src="images/Untitled (2).png" alt="" />
-                <p>Do Hoang Huy Bu</p>             
+                <p>Do Hoang Huy Bu</p>
+                <p class="date-cm" style="font-weight: 400">Oct 20, 2022</p>
               </div>
               <div class="seat-row">
                 <label class="seat-ctn">
@@ -221,10 +247,122 @@
                 </label>
               </div>
               <span class="rate-cm">Greate, nothing</span>
-              <p class="date-cm">Oct 20, 2022</p>
-              <p class="re-cm">Price for their quality, their kindness, trustworthy, everything is just too great.
-                I’ve tried many transfer services and they are The best so far.</p>
-              <hr>
+              <p
+                style="
+                  font-weight: 500;
+                  font-size: 17px;
+                  margin-left: 5px;
+                  margin-top: 5px;
+                "
+              >
+                Bus type: Sleeper Bus
+              </p>
+
+              <p class="re-cm">
+                Price for their quality, their kindness, trustworthy, everything
+                is just too great. I’ve tried many transfer services and they
+                are The best so far.
+              </p>
+              <hr />
+            </div>
+          </div>
+          <!-- The Modal -->
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered">
+              <div
+                class="modal-content pay-modal"
+                style="border-radius: 20px; background: #e7f0f3"
+              >
+                <!-- Modal Header -->
+                <div
+                  class="modal-header"
+                  style="font-size: 30px; font-weight: bold"
+                >
+                  My review
+                </div>
+                <!-- Modal body -->
+                <div
+                  class="modal-body pay-cf-msg"
+                  style="font-size: 20px; font-weight: 500"
+                >
+                  <p>Rate Your Experience</p>
+                  <div class="rating">
+                    <input id="rating1" type="radio" name="rating" value="1" />
+                    <label for="rating1"></label>
+                    <input id="rating2" type="radio" name="rating" value="2" />
+                    <label for="rating2"></label>
+                    <input id="rating3" type="radio" name="rating" value="3" />
+                    <label for="rating3"></label>
+                    <input id="rating4" type="radio" name="rating" value="4" />
+                    <label for="rating4"></label>
+                    <input id="rating5" type="radio" name="rating" value="5" />
+                    <label for="rating5"></label>
+                  </div>
+                  <hr />
+                  <p>Bus Type</p>
+                  <div class="select-box">
+                    <div class="options-container">
+                      <div class="option">
+                        <input
+                          type="radio"
+                          class="radio"
+                          id="normal-bus"
+                          name="category"
+                        />
+                        <label for="normal-bus">29 Seats</label>
+                      </div>
+
+                      <div class="option">
+                        <input
+                          type="radio"
+                          class="radio"
+                          id="sleeper-bus"
+                          name="category"
+                        />
+                        <label for="sleeper-bus">Sleeper Bus</label>
+                      </div>
+
+                      <div class="option">
+                        <input
+                          type="radio"
+                          class="radio"
+                          id="sleeper-room-bus"
+                          name="category"
+                        />
+                        <label for="sleeper-room-bus">Sleeper Room Bus</label>
+                      </div>
+                    </div>
+
+                    <div class="selected" style="font-size: 15px">
+                      Select Bus Type
+                    </div>
+                  </div>
+                  <hr />
+                  <p style="font-size: 20px; font-weight: 500">
+                    Leave a review(required)
+                  </p>
+                  <!-- <input class="cm-txt" type="text" placeholder="Tell people about what your experience!"/> -->
+                  <textarea
+                    class="cm-txt"
+                    id="myTextarea"
+                    placeholder="Tell people about what your experience!..."
+                    required
+                  ></textarea>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <div class="pay-cf">
+                    <input
+                      type="submit"
+                      value="SUBMIT"
+                      class="pay-cf-btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#myModalPaying"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -1,4 +1,5 @@
-﻿drop database HereWeGo
+﻿use FastFoodStore
+drop database HereWeGo
 GO
 Create database HereWeGo
 GO
@@ -61,21 +62,11 @@ create table [User](
 )
 
 
-
-create table Payment(
-	paymentId bigint primary key identity(1,1) not null,
-	paymentAccount varchar(100) not null,
-	paymentDate datetime not null,
-	creditCardNumber varchar(20) not null,
-	creditCardEXPDate date not null,
-	cardHolderName varchar(50) not null,
-)
  create table [Order](
 	orderId bigint primary key identity(1,1) not null,
 	date datetime not null,
 	customerId bigint foreign key references [User](UserId) not null,
-	totalPrice int not null,
-	paymentID bigint foreign key references Payment(paymentId),
+	totalPrice int not null
  )
 create table Ticket(
 	ticketId bigint primary key identity(1,1) not null,
@@ -162,11 +153,11 @@ INSERT INTO RouteDetail VALUES(6,3,'2022-11-19 16:00:00',700000,'2022-10-18 23:0
 INSERT INTO RouteDetail VALUES(7,2,'2022-11-12 18:00:00',800000,'2022-10-18 21:00:00', N'80 Trần Bình Trọng', N'21 Ngô Gia Tự')
 INSERT INTO RouteDetail VALUES(8,2,'2022-10-28 23:00:00',900000,'2022-10-18 22:00:00', N'28 Nguyễn Đình Chiểu', N'87 Độc Lập')
 
-INSERT INTO [Order] VALUES('2022-09-28 19:23:11',1,600000,null)
-INSERT INTO [Order] VALUES('2022-09-25 20:23:11',2,300000,null)
-INSERT INTO [Order] VALUES('2022-09-25 19:23:11',3,300000,null)
-INSERT INTO [Order] VALUES('2022-09-28 18:23:11',4,300000,null)
-INSERT INTO [Order] VALUES('2022-09-28 20:23:11',1,300000,null)
+INSERT INTO [Order] VALUES('2022-09-28 19:23:11',1,600000)
+INSERT INTO [Order] VALUES('2022-09-25 20:23:11',2,300000)
+INSERT INTO [Order] VALUES('2022-09-25 19:23:11',3,300000)
+INSERT INTO [Order] VALUES('2022-09-28 18:23:11',4,300000)
+INSERT INTO [Order] VALUES('2022-09-28 20:23:11',1,300000)
 
 INSERT INTO Ticket VALUES(1,1,1, N'Khá Bảnh', '0908277560', CURRENT_TIMESTAMP)
 INSERT INTO Ticket VALUES(1,2,3, N'Huấn Hoa Hồng', '0973224890', CURRENT_TIMESTAMP)
@@ -175,8 +166,9 @@ INSERT INTO Ticket VALUES(3,1,2, N'Chi Pu', '0908535767', CURRENT_TIMESTAMP)
 INSERT INTO Ticket VALUES(4,1,3, N'Lộc Fuho', '0937299535', CURRENT_TIMESTAMP)
 INSERT INTO Ticket VALUES(5,1,4, N'Đạt Vila', '0783999402', CURRENT_TIMESTAMP)
 
-INSERT INTO [Order] VALUES('2022-09-12 19:23:11',1,300000, null)
+INSERT INTO [Order] VALUES('2022-09-12 19:23:11',1,300000)
 INSERT INTO RouteDetail VALUES(8,2,'2022-09-18 18:00:00',300000,'2022-10-18 22:00:00',N'123 Tân Kỳ Tân Quý', N'123 Lũy Bán Bích')
+
 
 
 
