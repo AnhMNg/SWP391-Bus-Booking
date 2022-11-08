@@ -61,21 +61,11 @@ create table [User](
 )
 
 
-
-create table Payment(
-	paymentId bigint primary key identity(1,1) not null,
-	paymentAccount varchar(100) not null,
-	paymentDate datetime not null,
-	creditCardNumber varchar(20) not null,
-	creditCardEXPDate date not null,
-	cardHolderName varchar(50) not null,
-)
  create table [Order](
 	orderId bigint primary key identity(1,1) not null,
 	date datetime not null,
 	customerId bigint foreign key references [User](UserId) not null,
-	totalPrice int not null,
-	paymentID bigint foreign key references Payment(paymentId),
+	totalPrice int not null
  )
 create table Ticket(
 	ticketId bigint primary key identity(1,1) not null,
