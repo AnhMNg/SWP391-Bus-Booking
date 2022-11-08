@@ -24,69 +24,372 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
                 integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+            />
         <title>Transportation Company Profile</title>
+        <style>
+            .selected::after {
+                content: "";
+                background: url('<c:url value="/images/arrow-down.svg"/>');
+                background-size: contain;
+                background-repeat: no-repeat;
+
+                position: absolute;
+                height: 100%;
+                width: 32px;
+                right: 10px;
+                top: 5px;
+
+                transition: all 0.4s;
+            }
+
+            .rating label {
+                width: 48px;
+                height: 48px;
+                padding: 48px 0 0;
+                overflow: hidden;
+                background: url('<c:url value="/images/stars.svg"/>') no-repeat top left;
+            }
+        </style>
     </head>
     <body>
         <main>
-            <div class="container-fluid mt-5 px-5 py-5 header-comp">
-                <div class="tc-logo-img ml-3">
-                    <img src="<c:url value="/images/${sessionScope.COMPANY_LOGO}"/>">
-                </div>
-                <div class="tc-header">
-                    <h1 style="text-transform: uppercase; font-weight: bold">${sessionScope.COMPANY_NAME}</h1>
-                </div>
-            </div>
-            <!--General information-->
-            <div class="transportation-comp-content">
-                <h1 class="text-center">General Information</h1>
-                <p class="line-img text-center"><img src="<c:url value="/images/Line 16.png"/>" class="line"></p>
-                <p class="content">
-                    ${sessionScope.COMPANY_DES}
-                </p>
-<!--                <p class="content">
-                    With the unremitting efforts and efforts of the company's staff during its operation,
-                    Thanh Buoi has achieved many great achievements, being voted by consumers as "Enterprise providing
-                    transportation services". most satisfied in 2008, 2010, 2011, 2013" and won the title of "Prestigious Brand
-                    2009". Not stopping there, the size of the company also increased significantly. From a company specializing
-                    in transporting passengers and goods, Thanh Buoi has now become a multi-industry, multi-field company across
-                </p>    -->
-            </div>
-            <!--Bus Type-->
-            <div class="bus-type-comp">
-                <div class="type-header">
-                    <h1 class="text-center">Bus Types</h1>
-                    <p class="line-img text-center"><img src="<c:url value="/images/Line 16.png"/>" class="line"></p>
-                </div>
-                <div class=" row col-md-12 type-bus text-center mx-0 my-0">
-                    <div class=" col-md-6 part">
-                        <div class="comp-img">
-                            <img src="<c:url value="/images/vị-trí-số-ghế-xe-giường-nằm-1 1.png"/>">
-                        </div>
-                        <div class="bus-content">
-                            <h4>Sleeper Bus</h4>
-                        </div>
+            <div class="container">
+                <div class="container mt-5 px-5 py-5 header-comp">
+                    <div class="tc-logo-img ml-3">
+                        <img src="images/thanhbuoilogo.png" />
                     </div>
-                    <div class="col-md-6 part">
-                        <div class="comp-img">
-                            <img src="<c:url value="/images/xe-khach-limousine-giuong-nam-quy-nhon 1.png"/>">
-                        </div>
-                        <div class="bus-content">
-                            <h4>Sleeper Room Bus</h4>
-                        </div>
+                    <div class="tc-header">
+                        <h1 style="text-transform: uppercase; font-weight: bold">
+                            Thanh Buoi Bus
+                        </h1>
                     </div>
                 </div>
-            </div>
-            <!--Routes List-->
-            <div class="rout-list text-center" >
-                <div class="rout-img">
-                    <a href="<c:url value="/company/routesList.do"/>">
-                        <img src="<c:url value="/images/I3D-01 1.png"/>" alt="Routes List">
-                    </a>
-                </div>
-                <div class="rount-content">
-                    <h1 class="text-center">Routes List</h1>
-                </div>
+                <section class="tc-info-des-sec">
+                    <div class="tc-info-des container">
+                        <!--General information-->
+                        <div class="col-md-4 transportation-comp-content">
+                            <h1 class="">General Information</h1>
+                            <p class="content">
+                                Established in 2000 until now, with more than 10 years of
+                                experience in the field of transportation, Thanh Buoi has served
+                                more than thousands of bus routes across the country. With the
+                                motto "Serving customers from a dedicated heart", Thanh Buoi
+                                always constantly improves, improves service quality and expands
+                                the size of its company every day in order to bring customers
+                                the best service and most diverse.
+                                <span class="read-more-text">
+                                    With the unremitting efforts and efforts of the staff of
+                                    company during its operation, Thanh Buoi has achieved many
+                                    great achievements, being voted by consumers as "Enterprise
+                                    providing transportation services". most satisfied in 2008,
+                                    2010, 2011, 2013" and won the title of "Prestigious Brand
+                                    2009". Not stopping there, the size of the company also
+                                    increased significantly. From a company specializing in
+                                    transporting passengers and goods, Thanh Buoi has now become a
+                                    multi-industry, multi-field company across the country.
+                                </span>
+                            </p>
+                            <span class="read-more-btn" style="margin-bottom: 50px;">Read More...</span>
+                            <br />
+                            <!-- Only TC role can view and edit data from routes list -->
+                            <a href="" 
+                               >Routes List <i class="fa fa-bus"></i
+                                ></a>
+                            <!--  -->
+                        </div>
+
+                        <!--Bus Type-->
+                        <div class="col-md-8 bus-type-comp">
+                            <div class="img-slider">
+                                <div class="slide active">
+                                    <img
+                                        src="<c:url value="/images/vị-trí-số-ghế-xe-giường-nằm-1024x563.jpg"/>"
+                                        alt=""
+                                        />
+                                    <div class="info">
+                                        <h2>Sleeper Bus</h2>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <img src="<c:url value="/images/xe-phong-nam-di-da-lat-4.jpg"/>" alt="" />
+                                    <div class="info">
+                                        <h2>Sleeper Room Bus</h2>
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <img src="<c:url value="/images/xe-khach-29-cho-4.jpg"/>" alt="" />
+                                    <div class="info">
+                                        <h2>29 Seats - Normal Bus</h2>
+                                    </div>
+                                </div>
+                                <div class="navigation">
+                                    <div class="btn active"></div>
+                                    <div class="btn"></div>
+                                    <div class="btn"></div>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                var slides = document.querySelectorAll(".slide");
+                                var btns = document.querySelectorAll(".btn");
+                                let currentSlide = 1;
+
+                                // Javascript for image slider manual navigation
+                                var manualNav = function (manual) {
+                                    slides.forEach((slide) => {
+                                        slide.classList.remove("active");
+
+                                        btns.forEach((btn) => {
+                                            btn.classList.remove("active");
+                                        });
+                                    });
+
+                                    slides[manual].classList.add("active");
+                                    btns[manual].classList.add("active");
+                                };
+
+                                btns.forEach((btn, i) => {
+                                    btn.addEventListener("click", () => {
+                                        manualNav(i);
+                                        currentSlide = i;
+                                    });
+                                });
+
+                                // Javascript for image slider autoplay navigation
+                                var repeat = function (activeClass) {
+                                    let active = document.getElementsByClassName("active");
+                                    let i = 1;
+
+                                    var repeater = () => {
+                                        setTimeout(function () {
+                                            [...active].forEach((activeSlide) => {
+                                                activeSlide.classList.remove("active");
+                                            });
+
+                                            slides[i].classList.add("active");
+                                            btns[i].classList.add("active");
+                                            i++;
+
+                                            if (slides.length == i) {
+                                                i = 0;
+                                            }
+                                            if (i >= slides.length) {
+                                                return;
+                                            }
+                                            repeater();
+                                        }, 10000);
+                                    };
+                                    repeater();
+                                };
+                                repeat();
+                            </script>
+                        </div>
+
+                    </div>
+                    <div style="margin-top: 100px;">
+                        <img src="<c:url value="/images/Here we go (1).jpg"/>" alt="">
+                    </div>
+                    <div style="margin-top: 50px;">
+                        <img src="<c:url value="/images/Here we go2.png"/>" alt="">
+                    </div>
+                </section>
+
+                <!-- Review -->
+                <section class="review">
+                    <!-- Only Customer can use -->
+                    <div class="contribute">
+                        <h2>Contribute</h2>
+                        <button
+                            class="btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#myModal"
+                            >
+                            Write a review
+                        </button>
+                    </div>
+                    <!--  -->
+                    <div class="review-cm">
+                        <h2>Reviews</h2>
+                        <hr />
+                        <div class="rate-ov">
+                            <p>5.0</p>
+                            <div class="seat-row">
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                            </div>
+                            <span>1 review</span>
+                        </div>
+                        <hr />
+                        <div class="comment">
+                            <div class="user-info">
+                                <img src="images/Untitled (2).png" alt="" />
+                                <p>Do Hoang Huy Bu</p>
+                                <p class="date-cm" style="font-weight: 400">Oct 20, 2022</p>
+                            </div>
+                            <div class="seat-row">
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                            </div>
+                            <span class="rate-cm">Greate, nothing</span>
+                            <p
+                                style="
+                                font-weight: 500;
+                                font-size: 17px;
+                                margin-left: 5px;
+                                margin-top: 5px;
+                                "
+                                >
+                                Bus type: Sleeper Bus
+                            </p>
+
+                            <p class="re-cm">
+                                Price for their quality, their kindness, trustworthy, everything
+                                is just too great. I’ve tried many transfer services and they
+                                are The best so far.
+                            </p>
+                            <hr />
+                        </div>
+                    </div>
+                    <!-- The Modal -->
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div
+                                class="modal-content pay-modal"
+                                style="border-radius: 20px; background: #e7f0f3"
+                                >
+                                <!-- Modal Header -->
+                                <div
+                                    class="modal-header"
+                                    style="font-size: 30px; font-weight: bold"
+                                    >
+                                    My review
+                                </div>
+                                <!-- Modal body -->
+                                <div
+                                    class="modal-body pay-cf-msg"
+                                    style="font-size: 20px; font-weight: 500"
+                                    >
+                                    <p>Rate Your Experience</p>
+                                    <div class="rating">
+                                        <input id="rating1" type="radio" name="rating" value="1" />
+                                        <label for="rating1"></label>
+                                        <input id="rating2" type="radio" name="rating" value="2" />
+                                        <label for="rating2"></label>
+                                        <input id="rating3" type="radio" name="rating" value="3" />
+                                        <label for="rating3"></label>
+                                        <input id="rating4" type="radio" name="rating" value="4" />
+                                        <label for="rating4"></label>
+                                        <input id="rating5" type="radio" name="rating" value="5" />
+                                        <label for="rating5"></label>
+                                    </div>
+                                    <hr />
+                                    <p>Bus Type</p>
+                                    <div class="select-box">
+                                        <div class="options-container">
+                                            <div class="option">
+                                                <input
+                                                    type="radio"
+                                                    class="radio"
+                                                    id="normal-bus"
+                                                    name="category"
+                                                    />
+                                                <label for="normal-bus">29 Seats</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input
+                                                    type="radio"
+                                                    class="radio"
+                                                    id="sleeper-bus"
+                                                    name="category"
+                                                    />
+                                                <label for="sleeper-bus">Sleeper Bus</label>
+                                            </div>
+
+                                            <div class="option">
+                                                <input
+                                                    type="radio"
+                                                    class="radio"
+                                                    id="sleeper-room-bus"
+                                                    name="category"
+                                                    />
+                                                <label for="sleeper-room-bus">Sleeper Room Bus</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="selected" style="font-size: 15px">
+                                            Select Bus Type
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <p style="font-size: 20px; font-weight: 500">
+                                        Leave a review(required)
+                                    </p>
+                                    <!-- <input class="cm-txt" type="text" placeholder="Tell people about what your experience!"/> -->
+                                    <textarea
+                                        class="cm-txt"
+                                        id="myTextarea"
+                                        placeholder="Tell people about what your experience!..."
+                                        required
+                                        ></textarea>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <div class="pay-cf">
+                                        <input
+                                            type="submit"
+                                            value="SUBMIT"
+                                            class="pay-cf-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#myModalPaying"
+                                            />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </main>
+        <script src="<c:url value="/js/tc_info.js"/>"></script>
     </body>
 </html>

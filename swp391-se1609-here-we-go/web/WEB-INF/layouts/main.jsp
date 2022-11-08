@@ -104,7 +104,7 @@
                                         <div class="dropdown">
                                             <button class="button1">${sessionScope.LOGIN_COMPANY_NAME}</button>
                                             <div class="dropdown-content">
-                                                <a class="choose" href="<c:url value="/"/>">My Profile</a>
+                                                <a class="choose" href="<c:url value="/company/info.do"/>">My Profile</a>
                                                 <a class="choose" href="<c:url value="/company/logout.do"/>">Log Out</a>
                                             </div>
                                         </div>
@@ -146,7 +146,7 @@
 
                             <ul class="nav__ul">
                                 <li>
-                                    <a href="#">Contact Us</a>
+                                    <a href="<c:url value="/user/about.do"/>">Contact Us</a>
                                 </li>
 
                                 <li>
