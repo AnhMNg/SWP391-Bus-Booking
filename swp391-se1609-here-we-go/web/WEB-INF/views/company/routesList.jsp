@@ -10,340 +10,104 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="description">
-        <meta content="Author" name="MJ Maraz">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!----======== CSS ======== -->
+        <link rel="stylesheet" href="<c:url value="/css/route_list.css"/>" />
 
-        <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>">
-        <link rel="stylesheet" href="<c:url value="/css/datatables.min.css"/>">
-        <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!----===== Iconscout CSS ===== -->
+        <link
+            rel="stylesheet"
+            href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+            />
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"
+            rel="stylesheet"
+            />
+        <link
+            href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"
+            rel="stylesheet"
+            />
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
         <title>Routes List</title>
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="card-bus col-12">
-                    <div class="header-title">
-                        <h4 class="title-header text-left mt-3 ml-4">
-                            Thanh Buoi Bus
-                        </h4>
-                        <p class=" routes text-left mt-3 ml-4">Routes List</p>
-                    </div>
-                    <div class="data_table">
-                        <table id="example" class="display" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Depature</th>
-                                    <th>Destination</th>
-                                    <th>Bus Type</th>
-                                    <th>Departure Time</th>
-                                    <th>Request</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-                                            <button type="button" class="button-delete"
-                                                    onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
+        <div class="container" style="padding-top: 150px; min-height: 100vh;">
+            <div class="activity">
+                <table id="example" class="table table-hover table-responsive-md" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Departure</th>
+                            <th>Destination</th>
+                            <th>Bus Type</th>
+                            <th>Departure Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ho Chi Minh</td>
+                            <td>Da Lat, Lam Dong</td>
+                            <td>Sleeper Bus</td>
+                            <td>7:00 AM</td>
+                            <td>
+                                <button
+                                    class="btn btn-danger"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#myModal"
+                                    >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
 
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Departure</th>
+                            <th>Destination</th>
+                            <th>Bus Type</th>
+                            <th>Departure Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content pay-modal">
+                        <!-- Modal Header -->
 
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
+                        <!-- Modal body -->
+                        <div class="modal-body pay-cf-msg">
+                            Do you want to delete this route?
+                        </div>
 
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ho Chi Minh</td>
-                                    <td>Da Lat, Lam Dong</td>
-                                    <td>Sleeper Bus</td>
-                                    <td>7:00 AM</td>
-                                    <td>
-
-                                        <div class="button-del">
-
-                                            <button type="button" class="button-delete" onclick="document.getElementById('pop-up').style.display = 'inline-block'">
-                                                <div class="but-content">
-                                                    <span class="delete">
-                                                        Delete
-                                                    </span>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="pop-up" class="pop-up">
-                        <div class="pop-up-content">
-                            <div class="pop-up-container">
-                                <div class="ques">
-                                    <div class="form-field">
-                                        <input class="form-input" type="text" placeholder=" ">
-                                        <label class="form-label">
-                                            <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                                            What is the problem with this route?
-                                        </label>
-                                    </div>
-
-                                    <p class="notication">After deleting, your bus route will be no longer available on Here
-                                        We Go website,
-                                        Continue?</p>
-                                    <div class="click">
-                                        <button class="yes" type="submit">Yes</button>
-                                        <button class="no" type="submit"
-                                                onclick="document.getElementById('pop-up').style.display = 'none'">No</button>
-                                    </div>
-
-                                </div>
-
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <div class="pay-cf">
+                                <input
+                                    type="submit"
+                                    value="Yes"
+                                    class="pay-cf-btn"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#myModalPaying"
+                                    />
+                                <button
+                                    type="button"
+                                    class="pay-cf-btn"
+                                    data-bs-dismiss="modal"
+                                    >
+                                    NO
+                                </button>
                             </div>
                         </div>
                     </div>
