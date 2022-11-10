@@ -70,6 +70,7 @@
                     <div class="my-booking-info">
                         <div class="my-ava">
                             <img src="<c:url value="/uploads/${sessionScope.LOGIN_CUSTOMER_IMG}"/>" alt="">
+                            
                         </div>
                         <div class="my-info">
                             <p>${sessionScope.LOGIN_CUSTOMER_NAME}</p>

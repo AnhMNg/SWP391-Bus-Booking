@@ -250,15 +250,18 @@
                         <hr />
                         <div class="comment">
                             <div class="user-info">
-                                <img src="images/Untitled (2).png" alt="" />
-                                <p><%= UserManager.getUserById(fb.getUserId()).getName()%></p>
+                                <%
+                                    String s = "/uploads/" + UserManager.getUserById(fb.getUserId()).getAvtLink();
+                                %>
+                                <img src="<c:url value="<%= s %>"/>" alt="">
+                                <p><%= UserManager.getUserById(fb.getUserId()).getName()%></p>    
                                 <p class="date-cm" style="font-weight: 400"><%= fb.getDate()%></p>
                             </div>
                             <%
                                 switch (fb.getStar()) {
                                     case 0:
                             %>
-                            <span class="rate-cm">not rate</span>
+                            <span class="rate-cm">Not rate</span>
                             <%
                                     break;
                                 case 1:
@@ -421,7 +424,7 @@
                                             value="29 Seats"
                                             />
                                         <label for="normal-bus">29 Seats</label>
-
+                                        <br/>
                                         <input
                                             type="radio"
                                             class="radio"
@@ -430,7 +433,7 @@
                                             value="Sleeper Bus"
                                             />
                                         <label for="sleeper-bus">Sleeper Bus</label>
-
+                                        <br/>
                                         <input
                                             type="radio"
                                             class="radio"
