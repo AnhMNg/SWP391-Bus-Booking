@@ -111,7 +111,7 @@
                                         <input name="changeTicketId" value="<%= tku.getTicketId()%>" type="hidden"/>
                                         <input name="depart" value="<%= tku.getDepart() %>" type="hidden"/>
                                         <input name="destination" value="<%= tku.getDestination() %>" type="hidden" />
-                                    <div class="myb-btn mx-2 md-3">
+                                    <div class="myb-btn mx-2 md-3" style="padding-right: 12px;">
                                         <button type="submit" class="btn my-btn-ch text-uppercase">
                                             Change 
                                         </button>
@@ -196,9 +196,9 @@
                                 <div class="detail-null-img">
                                     <img src="<c:url value="/images/suitcase-trv.png"/>" alt="" />
                                 </div>                               
-                                <div class="detail-null-ctn">
-                                    <p>Looks empty, you've no upcoming bookings.</p>
-                                    <button class="plan-btn">Plan a trip</button>
+                                <div class="detail-null-ctn" style="padding-top: 75px">
+                                    <p>Looks empty, you've no completed bookings.</p>
+<!--                                    <button class="plan-btn">Plan a trip</button>-->
                                 </div>
                             </div>
                             <%
