@@ -3,6 +3,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
+    Created on : Nov 8, 2022, 7:45:51 PM
+    Author     : Hoang Anh
+*/
+
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
     Created on : Nov 7, 2022, 4:28:16 PM
     Author     : Hoang Anh
 */
@@ -167,7 +176,7 @@ form .page .btns button.next{
   bottom: 11px;
   right: -87px;
   height: 3px;
-  width: 88px;
+  width: 85px;
   background: #262626;
 }
 .field-btn{
