@@ -51,6 +51,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.Message.RecipientType;
 import javax.mail.Transport;
 import javax.swing.text.AbstractDocument.Content;
+import model.Company;
 /**
  *
  * @author Admin
@@ -595,8 +596,12 @@ public class CustomerController extends HttpServlet {
                     message.setContent(link, "text/html");
                     Transport.send(message);
                     request.setAttribute("verified", "true");
+
                       session.setAttribute("verified", "true");
                     session.setAttribute("LOGIN_EMAIL", email);
+
+                    request.setAttribute("email", email);
+
                 }catch(Exception e){
                     
                 }

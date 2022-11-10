@@ -18,6 +18,10 @@ import utils.DBUtils;
  */
 public class CompanyManager {
 
+    private static final String CHECK_DUPLICATE_ROUTE = "Select r.companyId, rd.busTypeId, r.departId, r.destinationId\n"
+            + "From Route r inner join RouteDetail rd on r.routeId = rd.routeId\n"
+            + "where r.companyId = ? AND rd.busTypeId = ? AND r.departId = ? AND r.destinationId = ?";
+
     public static Company getCompanyAccount(String phone, String password) {
         Connection cn = null;
         Company com = null;
@@ -184,10 +188,9 @@ public class CompanyManager {
 
         return list;
     }
-    
-    public static ArrayList<Company> searchCompanyByName(String name)
-    {
-     ArrayList<Company> list = new ArrayList<>();
+
+    public static ArrayList<Company> searchCompanyByName(String name) {
+        ArrayList<Company> list = new ArrayList<>();
         Connection cn = null;
         Company com = null;
         try {
@@ -195,7 +198,7 @@ public class CompanyManager {
             if (cn != null) {
                 String sql = "SELECT * FROM Company WHERE name like ?";
                 PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setNString(1, "%"+name+"%");
+                pst.setNString(1, "%" + name + "%");
 
                 ResultSet rs = pst.executeQuery();
                 while (rs != null && rs.next()) {
@@ -224,5 +227,21 @@ public class CompanyManager {
 
         return list;
     }
-    
+
+    public static boolean checkDuplicate(long companyId, String busType, int departId, int destinationId) throws SQLException {
+        Connection con = DBUtils.getConnection();
+        if (con != null) {
+            PreparedStatement ps = con.prepareStatement(CHECK_DUPLICATE_ROUTE);
+            ps.setLong(1, companyId);
+            ps.setString(2, busType);
+            ps.setInt(3, departId);
+            ps.setInt(4, destinationId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
