@@ -11,6 +11,7 @@ import manager.FeedbackManager;
 import manager.OrderManager;
 import manager.RouteDetailManager;
 import manager.TicketManager;
+import manager.UserManager;
 import model.Feedback;
 import model.RouteDetail;
 import model.Ticket;
@@ -25,7 +26,9 @@ import model.Ticket;
 public class test {
 
     public static void main(String[] args) throws SQLException, SQLException, Exception {
-        ArrayList<Feedback> listfb = null;
-                            listfb = FeedbackManager.getFeedbackbyComId(1);
+        
+                            
+        String s = UserManager.getUserById(1).getAvtLink();
+        System.out.println(s);
     }
 }
