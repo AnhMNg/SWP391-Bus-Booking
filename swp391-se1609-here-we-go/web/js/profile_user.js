@@ -42,14 +42,7 @@ let dropdown=document.querySelector('.dropdown-profile');
 dropdown.onclick=function(){
     dropdown.classList.toggle('active');
 }
-document.getElementById("no-number").addEventListener("click",function(){
-  document.getElementsByClassName("pop-up-number")[0].classList.remove("active");
-  document.getElementsByClassName("popup-number")[0].classList.remove("active");
-});
-document.getElementById("add-number-button").addEventListener("click",function(){
-  document.getElementsByClassName("pop-up-number")[0].classList.add("active");
-  document.getElementsByClassName("popup-number")[0].classList.add("active");
-});
+
 document.getElementById("add-button").addEventListener("click",function(){
   document.getElementsByClassName("pop-up-profile")[0].classList.add("active");
   document.getElementsByClassName("popup-ques")[0].classList.add("active");

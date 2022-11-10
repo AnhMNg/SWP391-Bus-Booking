@@ -48,59 +48,59 @@
             </div>
         </div>
         <div>
-   <form action="<c:url value="/admin/deleteCus.do"/>" method="post"> 
-        <div class="activity">
-            <table id="example" class="table table-hover table-responsive-md" style="width: 100%">
-              
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Account Creation Date</th>
-                        <th>Number Of Tickets Purchased</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-               
-                <tbody>
-               
-                    <%
-                        ArrayList<model.User> list = UserManager.getListCustomer();
-                        for (model.User user : list) {
-                    %>
+            <form action="<c:url value="/admin/deleteCus.do"/>" method="post"> 
+                <div class="activity">
+                    <table id="example" class="table table-hover table-responsive-md" style="width: 100%">
 
-                    <tr>
-                         
-                        <td>
-                            <%= user.getUserId()%>
-                            
-                        </td>
-                    
-                    <td><%= user.getName()%></td>
-                    <td><%= user.getDateCreate()%></td>
-                    <td><%= TicketManager.countTicketbyId(user.getUserId())%></td>
-                    <td>
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                        <input type="hidden" name="id" value="<%= user.getUserId()%>"/>
-                    </td>
-                    </tr>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Account Creation Date</th>
+                                <th>Number Of Tickets Purchased</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
 
-                    <%
-                        }
-                    %>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Account Creation Date</th>
-                        <th>Number Of Tickets Purchased</th>
-                        <th>Action</th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-   </form>
+                        <tbody>
+
+                            <%
+                                ArrayList<model.User> list = UserManager.getListCustomer();
+                                for (model.User user : list) {
+                            %>
+
+                            <tr>
+
+                                <td>
+                                    <%= user.getUserId()%>
+
+                                </td>
+
+                                <td><%= user.getName()%></td>
+                                <td><%= user.getDateCreate()%></td>
+                                <td><%= TicketManager.countTicketbyId(user.getUserId())%></td>
+                                <td>
+                                    <input type="submit" class="btn btn-danger" value="Delete">
+                                    <input type="hidden" name="id" value="<%= user.getUserId()%>"/>
+                                </td>
+                            </tr>
+
+                            <%
+                                }
+                            %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Account Creation Date</th>
+                                <th>Number Of Tickets Purchased</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </form>
         </div>
     </body>
 </html>
