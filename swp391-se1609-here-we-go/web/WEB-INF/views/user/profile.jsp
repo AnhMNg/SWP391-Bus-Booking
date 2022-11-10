@@ -151,21 +151,20 @@
               <li class="information-item">
                 <div class="information-content">
                   <span class="information-name">Email ID</span>
-                  <%  
-                   String email= (String) request.getAttribute("email");
-if (email!= null) {%>
-                  <span class=" mr-2 information-detail text-break d2"><%= email %></span>
-                   <% } else{ %>
+                  
+                  <span class=" mr-2 information-detail text-break d2">${sessionScope.LOGIN_EMAIL}</span>
+                  <% 
+                  if(session.getAttribute("LOGIN_EMAIL")==""){
+                  %>
                   <span class=" mr-2 add-button" id="add-button">+ Add</span>
-                                    <% } 
-                                    boolean verify= (boolean) request.getAttribute("verified");
-if(verify == true){
-                                    %>
+                     <% }
+String verify=(String)session.getAttribute("verified");
+                  if(verify != null){
+                     %>            
                   <span class="check-verified">
                     <span class="verified"></span>Verified
                   </span>
-                  <%  } %>
-
+                  <% } %>
                 </div>
               </li>
               <li class="information-item">
@@ -219,8 +218,8 @@ if(verify == true){
             <div class="mobile-input">
           <p class="input-name">Email ID</p>
           <div class="phone-add">
-            <span class="icon-password"><i class="fa-solid fa-phone"></i></span>
-              <input class="phone-input" type="text" name="newEmail" placeholder="Enter Email ID" required value="<%= email %>">
+            <span class="icon-password"><i class="fa-solid fa-envelope"></i></span>
+              <input class="phone-input" type="text" name="newEmail" placeholder="Enter Email ID" required value="">
           </div>
           <span class="error cPassword-error">
             <i class="fa-solid fa-circle-exclamation"></i>
@@ -248,6 +247,6 @@ if(verify == true){
     </div>
             </div>
         </main>
-        <script src="<c:url value="/js/profile_user.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/js/user_profile.js"/>" type="text/javascript"></script>
     </body>
 </html>

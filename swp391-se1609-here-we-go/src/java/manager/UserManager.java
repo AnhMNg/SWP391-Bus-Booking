@@ -45,7 +45,7 @@ public class UserManager {
 
                     //us = new User(id, sql, LOGIN, sql, LOGIN, 0, sql, REGISTER);
 
-                    us = new User(id, rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8));
+                    us = new User(id, rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),rs.getString(LOGIN));
                 }
                 if (rs != null) {
                     rs.close();
