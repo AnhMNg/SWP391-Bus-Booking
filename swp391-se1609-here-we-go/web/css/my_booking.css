@@ -79,7 +79,7 @@
   border: 1px solid #5695aa;
   border-radius: 15px;
   margin-left: 100px;
-  height: 183px;
+  height: 165px;
   transition: 0.5s;
 }
 
@@ -95,7 +95,7 @@
 
 .address {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 25px;
   color: #D80027;
 }
@@ -125,10 +125,11 @@
 
 .myb-btn {
   margin-top: 30px;
+  
 }
 
 .myb-btn:nth-child(1) {
-  margin-right: 0px;
+  margin-right: 20px;
 }
 
 .booking-detail {
@@ -169,6 +170,7 @@
 
 .myb-ct .content { 
   width: 100%;
+  min-height: 100vh;
 }
 
 .content {
@@ -185,6 +187,8 @@
 
 .myb-ct {
   position: relative;
+  height: 770px;
+  overflow: auto;
 }
 
 @keyframes fade {
