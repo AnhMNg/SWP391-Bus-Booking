@@ -10,17 +10,11 @@ package model;
  */
 public class Feedback {
     private long feedbackId;
-    private long ticketId;
-    private String desription;
-
-    public Feedback() {
-    }
-
-    public Feedback(long feedbackId, long ticketId, String desription) {
-        this.feedbackId = feedbackId;
-        this.ticketId = ticketId;
-        this.desription = desription;
-    }
+    private long companyId;
+    private long userId;
+    private String description;
+    private int star;
+    private String date;
 
     public long getFeedbackId() {
         return feedbackId;
@@ -30,20 +24,57 @@ public class Feedback {
         this.feedbackId = feedbackId;
     }
 
-    public long getTicketId() {
-        return ticketId;
+    public long getCompanyId() {
+        return companyId;
     }
 
-    public void setTicketId(long ticketId) {
-        this.ticketId = ticketId;
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 
-    public String getDesription() {
-        return desription;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setDesription(String desription) {
-        this.desription = desription;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getStar() {
+        return star;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Feedback(long feedbackId, long companyId, long userId, String description, int star, String date) {
+        this.feedbackId = feedbackId;
+        this.companyId = companyId;
+        this.userId = userId;
+        this.description = description;
+        this.star = star;
+        this.date = date;
+    }
+
+    public Feedback() {
+    }
+
     
 }

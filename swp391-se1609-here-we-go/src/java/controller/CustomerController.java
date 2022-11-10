@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.servlet.ServletContext;
 import manager.CompanyManager;
+import manager.FeedbackManager;
 import manager.NotificationManager;
 import manager.OrderManager;
 import manager.RouteDetailManager;
@@ -110,6 +111,9 @@ public class CustomerController extends HttpServlet {
             case "selectChangeTicket":
                 selectChangeTicket(request, response);
                 break;
+            case "feedback":
+                sendFeedback(request, response);
+                break;
             default:
                 break;
         }
@@ -117,6 +121,27 @@ public class CustomerController extends HttpServlet {
 
     }
 
+    private void sendFeedback(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException{
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        int star = 0;
+        String feedback;
+        String starString = request.getParameter("rating");
+        if (starString!= null)star = Integer.parseInt(starString) ;      
+        String des = request.getParameter("feedback");
+        if (des != null && !des.equals("")){
+        String busType = request.getParameter("category");
+        feedback = "Feedback about bus type " + busType + ": \n" + des;
+        }else feedback = "";
+        
+        Company com = (Company) request.getSession().getAttribute("COMPANY");
+        int comID = com.getCompanyId();
+        User us = (User) request.getSession().getAttribute("LOGIN_CUSTOMER");
+        long uID = us.getUserId();
+        FeedbackManager.sendFeedback(comID, uID, feedback, star);
+        request.setAttribute("controller", "company");
+            request.setAttribute("action", "info");
+        }
     private void selectChangeTicket(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
