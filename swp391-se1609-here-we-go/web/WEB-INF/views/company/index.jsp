@@ -48,18 +48,21 @@
                 <h1>Routes Management</h1>
                 <!-- Route Selection -->
                 <div class="container col-md-12 routes-mag">
-                    
+
                     <div class="col-md-6 routes-mag-dt">
                         <div class="bus-img">
                             <img src="<c:url value="/images/Bus3.png"/>" alt="bus"> 
                         </div>
-                        
+
                         <div class="mag-btn">
-                            <form action="<c:url value="/company/upload.do"/>" method="post">
+                            <form action="<c:url value="/company/linkUpload.do">
+
+                                </c:url>" method="post">
+                                <input type="hidden" name="comP" value="${sessionScope.LOGIN_COMPANY_ID}"/>
                                 <input type="submit" value="UPLOAD NEW ROUTE" class="mag-btn-dt">
-                            
+
                             </form>
-                            
+
                         </div>
                     </div>
                     <div class="col-md-6 routes-mag-dt">
