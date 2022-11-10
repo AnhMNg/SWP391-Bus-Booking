@@ -40,7 +40,7 @@ public class LoginGoogleHandler extends HttpServlet {
         User user = null;
         user = UserManager.checkLoginGoogle(googleInf.getId());
         if (user == null){ 
-            user = new User(0, googleInf.getName(), googleInf.getId(), null, googleInf.getPicture(), 2, "*****", "");
+            user = new User(0, googleInf.getName(), googleInf.getId(), null, googleInf.getPicture(), 2, "*****", "","");
             UserManager.register(user);           
         }
          HttpSession session = request.getSession();

@@ -3,11 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
- */
-
 
 const input = document.getElementById('inputUpload');
 const image = document.getElementById('user-photo');
@@ -42,6 +37,14 @@ let dropdown=document.querySelector('.dropdown-profile');
 dropdown.onclick=function(){
     dropdown.classList.toggle('active');
 }
+document.getElementById("change-pass").addEventListener("click",function(){
+    document.getElementsByClassName("pop-up-password")[0].classList.add("active");
+    document.getElementsByClassName("popup-password")[0].classList.add("active");
+});
+document.getElementById("cancel").addEventListener("click",function(){
+  document.getElementsByClassName("pop-up-password")[0].classList.remove("active");
+  document.getElementsByClassName("popup-password")[0].classList.remove("active");
+});
 document.getElementById("no-number").addEventListener("click",function(){
   document.getElementsByClassName("pop-up-number")[0].classList.remove("active");
   document.getElementsByClassName("popup-number")[0].classList.remove("active");

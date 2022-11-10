@@ -17,8 +17,9 @@ public class User {
     private int roleId;
     private String password;
     private String dateCreate;
+    private String Gender;
 
-    public User(long userId, String name, String googleId, String phone, String avtLink, int roleId, String password, String dateCreate) {
+    public User(long userId, String name, String googleId, String phone, String avtLink, int roleId, String password, String dateCreate, String Gender) {
         this.userId = userId;
         this.name = name;
         this.googleId = googleId;
@@ -27,7 +28,18 @@ public class User {
         this.roleId = roleId;
         this.password = password;
         this.dateCreate = dateCreate;
+        this.Gender = Gender;
     }
+
+    public String getGender() {
+        return Gender;
+    }
+
+    public void setGender(String Gender) {
+        this.Gender = Gender;
+    }
+
+
 
     public User() {
     }

@@ -21,7 +21,6 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import java.io.File;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,20 +29,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
 import javax.servlet.ServletContext;
+
 import manager.CompanyManager;
 import manager.FeedbackManager;
 import manager.NotificationManager;
 import manager.OrderManager;
 import manager.RouteDetailManager;
 import manager.TicketManager;
-import model.Company;
 import model.RouteDetail;
 import org.apache.tomcat.util.http.fileupload.FileItem;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
-
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.Message.RecipientType;
+import javax.mail.Transport;
+import javax.swing.text.AbstractDocument.Content;
 /**
  *
  * @author Admin
@@ -416,7 +423,7 @@ public class CustomerController extends HttpServlet {
         String otp6 = request.getParameter("otp6");
         String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
         if (otpCheck.equals(SUBMIT_OTP)) {
-            User user = new User(0, name, null, phone, null, 2, password, "");
+            User user = new User(0, name, null, phone, null, 2, password, "","");
             if (UserManager.register(user)) {
                 request.setAttribute("controller", "user");
                 User us = UserManager.getUserByPhone(user.getPhone());
@@ -553,9 +560,45 @@ public class CustomerController extends HttpServlet {
                 }
             }
             String newName = fields.get("newName");
+            String gender=fields.get("gender");
+            String email=fields.get("newEmail");
+            String newPhone=fields.get("newPhone");
+            String link="<a href='http://localhost:8080/swp391-se1609-here-we-go/user/profile.do'><img src='https://files.fm/u/e8kvdf37u#/view/book.png'></a>";
             User user = UserManager.getUserByPhone(phone);
-            if (newName != null && filename.equals("")) {
-                if (UserManager.updateUser(newName, user.getUserId(), img)) {
+            if(email != null){
+                final String fromEmail = "herewego.letstravel@gmail.com"; //requires valid gmail id
+		final String password = "nfwlzxjeumzhoize"; // correct password for gmail id
+                Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+		props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
+		props.put("mail.smtp.socketFactory.class",
+				"javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
+		props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
+		props.put("mail.smtp.port", "465"); //SMTP Port
+                Authenticator auth = new Authenticator() {
+			//override the getPasswordAuthentication method
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(fromEmail, password);
+			}
+		};
+                Session sessionEmail = Session.getDefaultInstance(props, auth);
+		System.out.println("Session created");
+                try{
+                    MimeMessage message=new MimeMessage(sessionEmail);
+                    message.setFrom(new InternetAddress(fromEmail));
+                    message.setRecipients(MimeMessage.RecipientType.TO,InternetAddress.parse(email)
+                    );
+                    message.setSubject("Welcome to HereWeGo");
+                    message.setContent(link, "text/html");
+                    Transport.send(message);
+                    request.setAttribute("verified", true);
+                    request.setAttribute("email", email);
+                }catch(Exception e){
+                    
+                }
+            }
+            if (newName != null && filename.equals("") && gender != null && newPhone !=null ) {
+                if (UserManager.updateUser(newName, user.getUserId(), img,gender, newPhone)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
@@ -564,8 +607,8 @@ public class CustomerController extends HttpServlet {
                     System.out.println("-------save-------");
                 }
             }
-            if (newName != null && filename != "") {
-                if (UserManager.updateUser(newName, user.getUserId(), filename)) {
+            if (newName != null && filename != "" && gender !=null && newPhone !=null ) {
+                if (UserManager.updateUser(newName, user.getUserId(), filename,gender, newPhone)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
@@ -673,6 +716,7 @@ public class CustomerController extends HttpServlet {
         }
     }
 
+
     private void about(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Config.ABOUT_US).forward(request, response);
     }
@@ -727,5 +771,7 @@ public class CustomerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
 
 }
