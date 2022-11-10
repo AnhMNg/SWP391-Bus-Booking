@@ -508,6 +508,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     transform: translate(-50%,-50%)scale(0.5);
     transition:opacity 300ms ease-in-out,top 1000ms ease-in-out,transform 1000ms ease-in;
     visibility: hidden;
+    display: none;
 }
 .popup.active, .popup-ques.active,.popup-password.active, .popup-number.active{
     opacity: 1;

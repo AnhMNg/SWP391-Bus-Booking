@@ -3,7 +3,6 @@
     Created on : Sep 28, 2022, 9:01:40 PM
     Author     : Admin
 --%>
-
 <%@page import="model.User"%>
 <%@page import="manager.UserManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,12 +11,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="<c:url value="/css/stye_profile_user.css"/>">
+        <link rel="stylesheet" href="<c:url value="/css/profile_user.css"/>">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,15 +35,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
         <title>User Profile Page</title>
     </head>
-    <body >
+    <body>
         <%
             String phone=(String) session.getAttribute("LOGIN_CUSTOMER_PHONE");
-      User user=UserManager.getUserByPhone(phone);
+            User user=UserManager.getUserByPhone(phone);
         %>
         <main class="profile-body" >
-             <div class="  profile ">
-       <form action="<c:url value="/user/edit.do"/>"  method="post" enctype="multipart/form-data">
-    <div class="content">
+            <div class="  profile">
+                <form action="<c:url value="/user/edit.do"/>"  method="post" enctype="multipart/form-data">
+              <div class="content">
       <div class="profile-detail">
         <div class="profile-col">
           <div class="profile-content">
@@ -70,7 +69,7 @@
                   Detail</a>
               </li>
               <li class="profile-attribute">
-                <a class="bar-nav-icon"><img src="<c:url value="/images/3580175.png"/>" class="logout">Logout</a>
+                <a class="bar-nav-icon" href="<c:url value="/user/logout.do"/>"><img src="<c:url value="/images/3580175.png"/>" class="logout">Logout</a>
               </li>
             </ul>
           </div>
@@ -113,14 +112,18 @@
                 <div class="information-content">
                   <span class="information-name">Gender</span>
                  
-                  <span class=" mr-2 information-value"></span>
+                  <span class=" mr-2 information-detail text-capitalize"><%= user.getGender() %></span>
+                  <%
+                  if(user.getGender()== null ){    
+                  %>
                   <span class=" mr-2 add-button" id="add-button">+ Add</span>
+                  <% }%>
                 </div>
               </li>
               <li class="information-item">
                 <div class="information-content">
                   <span class="information-name">Status</span>
-                  <span class=" mr-2 information-detail text-break d1"></span>
+                  <span class=" mr-2 information-detail text-break d1"><%= UserManager.getTypeOfUser(user.getUserId()) %></span>
                 </div>
               </li>
             </ul>
@@ -138,24 +141,38 @@
               <li class="information-item">
                 <div class="information-content-first">
                   <span class="information-name">Mobile Number</span>
-                  <span class=" mr-2 information-value"></span>
-                  <span class=" mr-2 add-button" id="add-number-button">+ Add</span>
+                  <%  if (user.getPhone()!= null) {%>
+                  <span class=" mr-2 information-value">${sessionScope.LOGIN_CUSTOMER_PHONE}</span>
+                  <% } else{ %>
+                  <span class=" mr-2 add-button" id="add-button">+ Add</span>
+                  <% } %>
                 </div>
               </li>
               <li class="information-item">
                 <div class="information-content">
                   <span class="information-name">Email ID</span>
-                  <span class=" mr-2 information-detail text-break d2">abc@gmail.com</span>
+                  <%  
+                   String email= (String) request.getAttribute("email");
+if (email!= null) {%>
+                  <span class=" mr-2 information-detail text-break d2"><%= email %></span>
+                   <% } else{ %>
+                  <span class=" mr-2 add-button" id="add-button">+ Add</span>
+                                    <% } 
+                                    boolean verify= (boolean) request.getAttribute("verified");
+if(verify == true){
+                                    %>
                   <span class="check-verified">
                     <span class="verified"></span>Verified
                   </span>
+                  <%  } %>
+
                 </div>
               </li>
               <li class="information-item">
                 <div class="information-content">
                   <span class="information-name">Password</span>
                   <span class=" mr-2 information-detail text-break d1">******</span>
-                  <span class="change-profile-password" id="change-pass">Change Password?</span>
+                  <a class="change-profile-password text-decoration-none" href="<c:url value="/user/changePass.do"/>">Change Password?</a>
                 </div>
               </li>
             </ul>
@@ -165,6 +182,7 @@
 
 
     </div>
+               
     <div id="pop-up" class="pop-up-profile">
       <div class="popup-ques center">
         <div class="title-check">Edit Profile </div>
@@ -180,12 +198,34 @@
         <div class="gender-select">
           <p class="input-name">Gender</p>
           <div class="dropdown-profile">
-            <input type="text" class="profile-textbox" placeholder="Gender" readonly>
+              <input type="text" class="profile-textbox text-capitalize " placeholder="Gender" readonly  name="gender" value="<%= user.getGender() %>">
             <div class="option">
-              <div class="profile-gender" onclick="show('Male')"><i class="fa-solid fa-mars"></i>Male</div>
-              <div class="profile-gender" onclick="show('Female')"><i class="fa-solid fa-venus"></i>Female</div>
+              <div class="profile-gender" onclick="show('Man')"><i class="fa-solid fa-mars"></i>Man</div>
+              <div class="profile-gender" onclick="show('Woman')"><i class="fa-solid fa-venus"></i>Woman</div>
             </div>
           </div>
+        </div>
+            <div class="mobile-input">
+          <p class="input-name">Mobile Number</p>
+          <div class="phone-add">
+            <span class="icon-password"><i class="fa-solid fa-phone"></i></span>
+              <input class="phone-input" type="text" name="newPhone" placeholder="Enter Mobile Number" required value="${ sessionScope.LOGIN_CUSTOMER_PHONE}">
+          </div>
+          <span class="error cPassword-error">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <p class="error-text">Mobile phone is invalid</p>
+          </span>
+        </div>
+            <div class="mobile-input">
+          <p class="input-name">Email ID</p>
+          <div class="phone-add">
+            <span class="icon-password"><i class="fa-solid fa-phone"></i></span>
+              <input class="phone-input" type="text" name="newEmail" placeholder="Enter Email ID" required value="<%= email %>">
+          </div>
+          <span class="error cPassword-error">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <p class="error-text"> Email ID is invalid</p>
+          </span>
         </div>
         <div class="dismiss-btn">
           <button id="yes" type="submit">Save</button>
@@ -193,100 +233,21 @@
         </div>
       </div>
     </div>
-    <div id="pop-up-password" class="pop-up-password">
-      <div class="popup-password center">
-        <div class="title-check">Change Password? </div>
-        <div class="profile-input">
-          <p class="input-name">Old Password</p>
-          <div class="password-input">
-            <span class="icon-password"><i class="fa-solid fa-key"></i></span>
-              <input class="input-password" type="password" name="" placeholder="Enter Old Password" required>
-          </div>
-        </div>
-        <div class="new-profile-input">
-          <p class="input-name">New Password</p>
-          <div class="new-password-input">
-            <span class="icon-password"><i class="fa-solid fa-key"></i></span>
-              <input class="new-input-password" type="password" name="" placeholder="Enter New Password" required>
-          </div>
-          <span class="error cPassword-error">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            <p class="error-text">Use 8 digit, one lower, upper, special digit</p>
-          </span>
-        </div>
-        <div class="confirm-password">
-          <p class="input-name">Confirm New Password</p>
-          <div class="input-password-field">
-            <span class="icon-password"><i class="fa-regular fa-circle-check"></i></span>
-            <input
-              type="password" class="confirm-input-password"
-              placeholder="Confirm New Password"
-              class="cPassword"
-            />
-          </div>
-          <span class="error cPassword-error">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            <p class="error-text">Password don't match</p>
-          </span>
-        </div>
-        <div class="dismiss-btn">
-          <button id="yes" type="submit">Save</button>
-          <button id="cancel">Cancel</button>
-        </div>
-      </div>
-    </div>
-    <div id="pop-up-number" class="pop-up-number">
-      <div class="popup-number center">
-        <div class="title-check">Add Mobile Number </div>
-        <div class="mobile-input">
-          <p class="input-name">Mobile Number</p>
-          <div class="phone-add">
-            <span class="icon-password"><i class="fa-solid fa-phone"></i></span>
-              <input class="phone-input" type="text" name="" placeholder="Enter Mobile Number" required>
-          </div>
-          <span class="error cPassword-error">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            <p class="error-text">Mobile phone is invalid</p>
-          </span>
-        </div>
-        <div class="dismiss-btn">
-          <button id="yes" type="submit">Save</button>
-          <button id="no-number">Cancel</button>
-        </div>
-      </div>
-    </div>
-    <div id="pop-up-number" class="pop-up-email">
-      <div class="popup-email center">
-        <div class="title-check">Add Email  </div>
-        <div class="mobile-input">
-          <p class="input-name">Email</p>
-          <div class="enmail-add">
-            <span class="icon-password"><i class="fa-solid fa-phone"></i></span>
-              <input class="phone-input" type="text" name="" placeholder="Enter Mobile Number" required>
-          </div>
-          <span class="error cPassword-error">
-            <i class="fa-solid fa-circle-exclamation"></i>
-            <p class="error-text">Mobile phone is invalid</p>
-          </span>
-        </div>
-        <div class="dismiss-btn">
-          <button id="yes" type="submit">Save</button>
-          <button id="no-number">Cancel</button>
-        </div>
-      </div>
-    </div>
+    
     <div class="profile-button">
-      <button class="save-button" type="submit">
+        <button class="save-button" type="submit">
         <span class="save"></span>
         <span class="save"></span>
         <span class="save"></span>
         <span class="save"></span>
         Update
       </button>
+    </div>         
+                </form>
+      </div>
     </div>
-       </form>
-             </div>
+            </div>
         </main>
-        <script src="<c:url value="/js/user_profile.js"/>" type="text/javascript"></script>
+        <script src="<c:url value="/js/profile_user.js"/>" type="text/javascript"></script>
     </body>
 </html>
