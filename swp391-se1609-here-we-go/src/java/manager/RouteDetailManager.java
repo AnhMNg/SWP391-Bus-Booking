@@ -44,7 +44,7 @@ public class RouteDetailManager {
             + "FROM Place p, Place p1, Company c\n"
             + "WHERE p.name = ? AND p1.name = ? AND c.companyId = ?";
     private static final String GET_BUSTYPE = "SELECT b.busTypeId FROM BusType b WHERE b.kind = ?";
-    private static final String ADD_ROUTEDETAIL = "INSERT INTO RouteDetail([routeId],[busTypeId],[startTime],[price],[timeArrival]) VALUES(?,?,?,?,?)";
+    private static final String ADD_ROUTEDETAIL = "INSERT INTO RouteDetail([routeId],[busTypeId],[startTime],[price],[timeArrival],[departDetail],[detinationDetail]) VALUES(?,?,?,?,?,?,?)";
     public static String FILTER_ROUTE = "SELECT tbl1.routeDetailId, bus.capacity, bus.kind, tbl1.startTime, tbl1.price, tbl1.timeArrival, tbl1.departDetail, tbl1.detinationDetail, tbl1.routeId, tbl1.name, tbl1.depart, tbl1.destination\n"
             + "	  FROM (SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination  \n"
             + "		FROM [RouteDetail] rd\n"
@@ -129,8 +129,7 @@ public class RouteDetailManager {
         }
         return route;
     }
-
-    public static boolean AddRouteDetail(String departure, String destination, long companyId, String bustype, String startTime, int price, String timeArrival) throws Exception {
+     public static boolean AddRouteDetail(String departure, String destination, int companyId, String bustype, String startTime, int price, String timeArrival, String departDetail,String detinationDetail) throws Exception {
         Connection cn = null;
         PreparedStatement pst = null, pst1 = null;
         ResultSet rs = null;
@@ -198,6 +197,8 @@ public class RouteDetailManager {
                     pst.setString(3, startTime);
                     pst.setInt(4, price);
                     pst.setString(5, timeArrival);
+                    pst.setString(6, departDetail);
+                    pst.setString(7, detinationDetail);
                     pst.executeUpdate();
                     rd = true;
                 }
@@ -293,7 +294,7 @@ public class RouteDetailManager {
                 rs = pst.executeQuery();
                 while (rs != null && rs.next()) {
                     listPosition = getListPosition(rs.getLong(1));
-                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), rs.getInt(2) - listPosition.length, rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
+                    rd = new RouteDetail(rs.getLong(1), rs.getInt(2), getNumberOfRemaningPosition(listPosition), rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
                             rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
                     list.add(rd);
                 }
@@ -550,15 +551,15 @@ public class RouteDetailManager {
                 int deNum = getNumberOfRemaningPosition(listPosition);
                 if (deNumSeat != 0 && deNumSeat <= deNum) {
                     rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
-                       rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                            rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
                     listRoute.add(rd);
                 }
                 if (deNumSeat == 0) {
                     rd = new RouteDetail(rs.getLong(1), rs.getInt(2), deNum, rs.getString(3), DateUtil.convertDateFormat(rs.getString(4)),
-                       rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                            rs.getInt(5), DateUtil.convertDateFormat(rs.getString(6)), rs.getString(7), rs.getString(8), listPosition, rs.getLong(9), rs.getString(10), rs.getString(11), rs.getString(12));
                     listRoute.add(rd);
                 }
-                
+
             }
 
         } catch (SQLException e) {
@@ -575,5 +576,5 @@ public class RouteDetailManager {
         }
         return listRoute;
     }
-
+    
 }
