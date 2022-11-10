@@ -592,7 +592,7 @@ public class CustomerController extends HttpServlet {
                     message.setSubject("Welcome to HereWeGo");
                     message.setContent(link, "text/html");
                     Transport.send(message);
-                    request.setAttribute("verified", true);
+                    request.setAttribute("verified", "true");
                     request.setAttribute("email", email);
                 }catch(Exception e){
                     
