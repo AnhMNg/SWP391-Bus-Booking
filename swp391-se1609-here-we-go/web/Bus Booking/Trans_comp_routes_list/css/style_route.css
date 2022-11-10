@@ -1,0 +1,254 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.container{
+    overflow: auto;
+}
+body {
+    background: #eee;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Rubik', sans-serif;
+    padding: 100px 0;
+}
+.dataTables_filter input:focus{
+    border: 2px solid #000000;
+}
+.dataTables_filter{
+    margin-bottom: 16px;
+}
+.data_table .btn{
+    padding: 5px 10px;
+    margin: 10px 3px 10px 0;
+}
+body{
+    height: 100vh;
+    background: #fff !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-body{
+    padding: 2rem;
+  }
+  .routes{
+    font-weight: 600;
+font-size: 24px;
+line-height: 30px;
+text-transform: capitalize;
+
+color: #EA4335;
+  }
+  .title{
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 50px;
+    text-transform: capitalize;
+    color: #000000;
+    border-bottom: 1px solid;
+
+  }
+  th{
+    color: #566a7f;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+font-size: 20px;
+line-height: 20px;
+text-align: center;
+text-transform: capitalize;
+  }
+  .button{
+    display: flex;
+    flex-shrink: 0;
+  }
+  .but-delete{
+    margin-right: 0px;
+    position: relative;
+    user-select: none;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #9DC5D1;
+    color: #000000;
+    background-color: #fff;
+    transition: all 0.15s ease-in-out 0s;
+  }
+  .but-content{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+  }
+.delete{
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+}
+.but-delete:hover{
+    background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
+    color: #FFFFFF;
+}
+.pop-up{
+    z-index: 3;
+    padding-top: 100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    animation: animatetop 0.4s;
+ 
+}
+.pop-up-content{
+    margin: auto;
+    border-radius: 20px;
+    background-color: #fff;
+    position: relative;
+    padding: 0;
+    outline: 0;
+    width: 600px;
+    position: relative;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 4px 20px 0 rgb(0 0 0 / 19%);
+}
+.pop-up-container{
+    padding: 0.01em 16px;
+ }
+ .ques{
+    font-weight: 500;
+font-size: 20px;
+line-height: 25px;
+text-align: center;
+
+color: #000000;
+ }
+ .notication{
+    padding-top: 32px;
+    padding-bottom: 32px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+    color: #000000;
+    margin: 0px;
+ }
+ .yes,.no{
+    margin: 16px ;
+    background-color: inherit;
+    white-space: nowrap;
+    border: 1px solid #000000;
+border-radius: 20px;
+font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    text-transform: uppercase;
+    width: 97px;
+    height: 33px;
+    text-align: center;
+ }
+ .click{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 32px;
+ }
+.form-input{
+    border: 1px solid #eee;
+    border-radius: 4px;
+    width: 100%;
+    height: 100px;
+    padding: 0 20px;
+    transition: 0.25s ease;
+    font-size: 16px;
+}
+.form-field{
+    position: relative;
+    margin-top: 32px;
+}
+.form-label{
+    position: absolute;
+    top: 20%;
+    transform: translateY(-50%);
+    left: 21px;
+    user-select: none;
+    color: #999;
+    pointer-events: none;
+    transition: 0.25s ease;
+    font-size: 16px;
+}
+.form-input:not(:placeholder-shown)+.form-label,
+.form-input:focus + .form-label{
+    top:0;
+    padding: 0 10px;
+    left: 11px;
+    display: inline-block;
+    background-color: #fff;
+    color: #000000;
+    
+}
+.dataTables_wrapper no-footer{
+    overflow: auto;
+}
+.form-input:focus{
+    border: 1px solid #000000;
+}
+.yes:hover, .no:hover{
+ background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
+ color: #fff;
+ border: none;
+}
+@media (max-width:625px) {
+    .pop-up-content{
+        max-width: 350px;
+    }
+    .form-input:not(:placeholder-shown)+.form-label,
+.form-input:focus + .form-label{
+    left: 7px; 
+}
+.form-label{
+    left: 15px;
+}
+}
+.dataTables_length{
+    margin-bottom: 16px;
+}
+.dataTables_info{
+    margin: 16px;
+}
+.dataTables_paginate {
+    margin: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
