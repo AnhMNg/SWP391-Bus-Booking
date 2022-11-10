@@ -1,4 +1,4 @@
-﻿use FastFoodStore
+﻿use PlantShop
 drop database HereWeGo
 GO
 Create database HereWeGo
@@ -77,7 +77,8 @@ create table Ticket(
 	passengerPhone nvarchar(13) not null,
 	purchaseDate datetime
 )
-
+select * from Feedback
+SELECT AVG(star) FROM Feedback WHERE companyId = 8
 create table Feedback(
 	feedback bigint primary key identity(1,1) not null,
 	companyId int foreign key references Company(companyId) not null,
@@ -86,6 +87,8 @@ create table Feedback(
 	star int,
 	dateComment datetime
 )
+SELECT * FROM Feedback WHERE companyId = 7
+INSERT INTO Feedback VALUES(1,1,N'hhihah hoos dd', 4, CURRENT_TIMESTAMP)
 create table [Notification](
 	NId bigint primary key identity(1,1) not null,
 	userId bigint foreign key references [User](userID) not null,
@@ -171,6 +174,17 @@ INSERT INTO RouteDetail VALUES(8,2,'2022-09-18 18:00:00',300000,'2022-10-18 22:0
 
 
 
+select * from Place
+select * from RouteDetail where 
+delete from RouteDetail where routeDetailId > 0
+
+use HereWeGo
+select * from [User] where userId = 7
 
 
+select * from Notification
 
+select  e.orderId from[dbo].[User] join [dbo].[Order] as e on [dbo].[User].userId=e.customerId and [dbo].[User].userId=1 join [dbo].[Ticket] as d on e.orderId=d.orderId
+
+DELETE FROM [dbo].[Feedback] WHERE [dbo].[Feedback].userId=1
+DELETE FROM [dbo].[User] WHERE [dbo].[User].userId=2

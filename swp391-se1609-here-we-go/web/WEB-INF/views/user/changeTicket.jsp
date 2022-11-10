@@ -2312,7 +2312,7 @@
                                 </form>
                                 <%--Sleeper Bus Form--%>
                             </c:if>
-                            <c:if test="${(rd.kindBus == 'Sleeper Bus') and (rd.cappacity == 20)}">
+                            <c:if test="${(rd.kindBus == 'Sleeper Room Bus') and (rd.cappacity == 20)}">
                                 <%--Sleeper Room--%>
                                 <form action="<c:url value="/user/selectChangeTicket.do"/>" class="container">
 

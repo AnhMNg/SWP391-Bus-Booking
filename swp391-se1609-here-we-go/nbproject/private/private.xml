@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-            <file>file:/C:/Users/Hoang%20Anh/Downloads/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/manager/UserManager.java</file>
-            <file>file:/C:/Users/Hoang%20Anh/Downloads/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/profile.jsp</file>
-            <file>file:/C:/Users/Hoang%20Anh/Downloads/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/CustomerController.java</file>
-            <file>file:/C:/Users/Hoang%20Anh/Downloads/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/js/user_profile.js</file>
-            <file>file:/C:/Users/Hoang%20Anh/Downloads/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/src/java/controller/FrontController.java</file>
-            <file>file:/C:/Users/Hoang%20Anh/Downloads/SWP391_Bus-Booking_HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/admin/userMgn.jsp</file>
-=======
+            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/manager/SendEmailWithHTML.java</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/company/routesList.jsp</file>
+            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/admin/transCompPartners.jsp</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/changeTicket.jsp</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/Bus%20Booking/test/css/style.css</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/receipt.jsp</file>
@@ -65,9 +60,9 @@
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/conf/MANIFEST.MF</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/model/OrderDetail.java</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/js/tc_info.js</file>
+            <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/admin/userMgn.jsp</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/web/WEB-INF/views/user/booking.jsp</file>
             <file>file:/D:/GitHub/HereWeGo/swp391-se1609-here-we-go/src/java/manager/OrderManager.java</file>
->>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
