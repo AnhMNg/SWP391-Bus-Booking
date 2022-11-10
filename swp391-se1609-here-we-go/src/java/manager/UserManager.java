@@ -42,7 +42,10 @@ public class UserManager {
                 pst.setLong(1, id);
                 ResultSet rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
+
                     //us = new User(id, sql, LOGIN, sql, LOGIN, 0, sql, REGISTER);
+
+                    us = new User(id, rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8));
                 }
                 if (rs != null) {
                     rs.close();
@@ -344,4 +347,5 @@ public class UserManager {
         
     }
 
+    
 }

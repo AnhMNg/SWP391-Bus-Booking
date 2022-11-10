@@ -93,7 +93,7 @@
 .pay-pr {
     box-sizing: border-box;
     width: 450px;
-    height: 230px;
+    min-height: 230px;
     background: #ddf5fd;
     border-radius: 20px;
     padding: 20px;
