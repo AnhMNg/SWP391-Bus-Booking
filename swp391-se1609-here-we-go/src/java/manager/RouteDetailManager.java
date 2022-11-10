@@ -44,7 +44,7 @@ public class RouteDetailManager {
             + "FROM Place p, Place p1, Company c\n"
             + "WHERE p.name = ? AND p1.name = ? AND c.companyId = ?";
     private static final String GET_BUSTYPE = "SELECT b.busTypeId FROM BusType b WHERE b.kind = ?";
-    private static final String ADD_ROUTEDETAIL = "INSERT INTO RouteDetail([routeId],[busTypeId],[startTime],[price],[timeArrival]) VALUES(?,?,?,?,?)";
+    private static final String ADD_ROUTEDETAIL = "INSERT INTO RouteDetail([routeId],[busTypeId],[startTime],[price],[timeArrival],[departDetail],[detinationDetail]) VALUES(?,?,?,?,?,?,?)";
     public static String FILTER_ROUTE = "SELECT tbl1.routeDetailId, bus.capacity, bus.kind, tbl1.startTime, tbl1.price, tbl1.timeArrival, tbl1.departDetail, tbl1.detinationDetail, tbl1.routeId, tbl1.name, tbl1.depart, tbl1.destination\n"
             + "	  FROM (SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination  \n"
             + "		FROM [RouteDetail] rd\n"
@@ -130,7 +130,7 @@ public class RouteDetailManager {
         return route;
     }
 
-    public static boolean AddRouteDetail(String departure, String destination, long companyId, String bustype, String startTime, int price, String timeArrival) throws Exception {
+    public static boolean AddRouteDetail(String departure, String destination, int companyId, String bustype, String startTime, int price, String timeArrival, String departDetail,String detinationDetail) throws Exception {
         Connection cn = null;
         PreparedStatement pst = null, pst1 = null;
         ResultSet rs = null;
@@ -198,6 +198,8 @@ public class RouteDetailManager {
                     pst.setString(3, startTime);
                     pst.setInt(4, price);
                     pst.setString(5, timeArrival);
+                    pst.setString(6, departDetail);
+                    pst.setString(7, detinationDetail);
                     pst.executeUpdate();
                     rd = true;
                 }

@@ -27,8 +27,7 @@ public class test {
 
     public static void main(String[] args) throws SQLException, SQLException, Exception {
         
-                            
-        String s = UserManager.getUserById(1).getAvtLink();
-        System.out.println(s);
+    boolean add = RouteDetailManager.AddRouteDetail("Tay Ninh", "TPHCM", 5, "Sleeper Bus", "2022-11-13 07:00:00.000", 100000, "2022-11-13 09:00:00.000","Phuoc Dong","An Suong");
+        System.out.println(add);
     }
 }

@@ -51,6 +51,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.Message.RecipientType;
 import javax.mail.Transport;
 import javax.swing.text.AbstractDocument.Content;
+import model.Company;
 /**
  *
  * @author Admin
