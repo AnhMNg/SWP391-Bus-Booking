@@ -4,6 +4,12 @@
     Author     : Admin
 --%>
 
+<%@page import="manager.UserManager"%>
+<%@page import="model.Company"%>
+<%@page import="manager.FeedbackManager"%>
+<%@page import="model.Feedback"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -55,6 +61,11 @@
         </style>
     </head>
     <body>
+        <%
+            Company com = (Company) request.getSession().getAttribute("COMPANY");
+            ArrayList<Feedback> listfb = null;
+            listfb = FeedbackManager.getFeedbackbyComId(com.getCompanyId());
+        %>
         <main>
             <div class="container">
                 <div class="container mt-5 px-5 py-5 header-comp">
@@ -214,7 +225,90 @@
                         <h2>Reviews</h2>
                         <hr />
                         <div class="rate-ov">
-                            <p>5.0</p>
+                            
+                            <%
+                                if(listfb!= null){
+                                int avg = FeedbackManager.getAVGRatebyComId(com.getCompanyId());
+                                %>
+                            <p>Average Rate: <%= avg %>/5</p>
+                            <br/>
+                            <span><%= listfb.size() %> review</span>
+                            <%
+                                } else{
+                                %>
+                            <span>0 review</span>
+                            <%
+}
+                            %>
+                            
+                        </div>
+                        <%
+                            
+                            if (listfb != null) {
+                                for (Feedback fb : listfb) {
+                        %>
+                        <hr />
+                        <div class="comment">
+                            <div class="user-info">
+                                <img src="images/Untitled (2).png" alt="" />
+                                <p><%= UserManager.getUserById(fb.getUserId()).getName()%></p>
+                                <p class="date-cm" style="font-weight: 400"><%= fb.getDate()%></p>
+                            </div>
+                            <%
+                                switch (fb.getStar()) {
+                                    case 0:
+                            %>
+                            <span class="rate-cm">not rate</span>
+                            <%
+                                    break;
+                                case 1:
+                            %>
+                            <div class="seat-row">
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                            </div>
+                            <span class="rate-cm">So bad</span>
+                            <%
+                                    break;
+                                case 2:
+                            %>
+                            <div class="seat-row">
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                
+                            </div>
+                            <span class="rate-cm">Bad</span>
+                            <%
+                                    break;
+                                case 3:
+                            %>
+                            <div class="seat-row">
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                                <label class="seat-ctn">
+                                    <input type="disable-checkbox" />
+                                    <span class="checkmark disable-checkmark"></span>
+                                </label>
+                            </div>
+                            <span class="rate-cm">Not bad</span>
+                            <%
+                                    break;
+                                case 4:
+                            %>
                             <div class="seat-row">
                                 <label class="seat-ctn">
                                     <input type="disable-checkbox" />
@@ -232,20 +326,12 @@
                                     <input type="disable-checkbox" />
                                     <span class="checkmark disable-checkmark"></span>
                                 </label>
-                                <label class="seat-ctn">
-                                    <input type="disable-checkbox" />
-                                    <span class="checkmark disable-checkmark"></span>
-                                </label>
                             </div>
-                            <span>1 review</span>
-                        </div>
-                        <hr />
-                        <div class="comment">
-                            <div class="user-info">
-                                <img src="images/Untitled (2).png" alt="" />
-                                <p>Do Hoang Huy Bu</p>
-                                <p class="date-cm" style="font-weight: 400">Oct 20, 2022</p>
-                            </div>
+                            <span class="rate-cm">Good</span>
+                            <%
+                                    break;
+                                case 5:
+                            %>
                             <div class="seat-row">
                                 <label class="seat-ctn">
                                     <input type="disable-checkbox" />
@@ -269,124 +355,127 @@
                                 </label>
                             </div>
                             <span class="rate-cm">Greate, nothing</span>
-                            <p
-                                style="
-                                font-weight: 500;
-                                font-size: 17px;
-                                margin-left: 5px;
-                                margin-top: 5px;
-                                "
-                                >
-                                Bus type: Sleeper Bus
-                            </p>
+                            <%
+                                        break;
+                                }
+                            %>           
 
                             <p class="re-cm">
-                                Price for their quality, their kindness, trustworthy, everything
-                                is just too great. I’ve tried many transfer services and they
-                                are The best so far.
+                                <%= fb.getDescription()%>
                             </p>
                             <hr />
                         </div>
+                        <%
+                                }
+                            }
+                        %> 
+
+
                     </div>
                     <!-- The Modal -->
-                    <div class="modal fade" id="myModal">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div
-                                class="modal-content pay-modal"
-                                style="border-radius: 20px; background: #e7f0f3"
-                                >
-                                <!-- Modal Header -->
+                    <%
+                        User us = null;
+                        us = (User) request.getSession().getAttribute("LOGIN_CUSTOMER");
+                        if (us != null) {
+                    %>
+                    <form action="<c:url value="/user/feedback.do"/>"  method="post">
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div
-                                    class="modal-header"
-                                    style="font-size: 30px; font-weight: bold"
+                                    class="modal-content pay-modal"
+                                    style="border-radius: 20px; background: #e7f0f3"
                                     >
-                                    My review
-                                </div>
-                                <!-- Modal body -->
-                                <div
-                                    class="modal-body pay-cf-msg"
-                                    style="font-size: 20px; font-weight: 500"
-                                    >
-                                    <p>Rate Your Experience</p>
-                                    <div class="rating">
-                                        <input id="rating1" type="radio" name="rating" value="1" />
-                                        <label for="rating1"></label>
-                                        <input id="rating2" type="radio" name="rating" value="2" />
-                                        <label for="rating2"></label>
-                                        <input id="rating3" type="radio" name="rating" value="3" />
-                                        <label for="rating3"></label>
-                                        <input id="rating4" type="radio" name="rating" value="4" />
-                                        <label for="rating4"></label>
-                                        <input id="rating5" type="radio" name="rating" value="5" />
-                                        <label for="rating5"></label>
+                                    <!-- Modal Header -->
+                                    <div
+                                        class="modal-header"
+                                        style="font-size: 30px; font-weight: bold"
+                                        >
+                                        My review
                                     </div>
-                                    <hr />
-                                    <p>Bus Type</p>
-                                    <div class="select-box">
-                                        <div class="options-container">
-                                            <div class="option">
-                                                <input
-                                                    type="radio"
-                                                    class="radio"
-                                                    id="normal-bus"
-                                                    name="category"
-                                                    />
-                                                <label for="normal-bus">29 Seats</label>
-                                            </div>
-
-                                            <div class="option">
-                                                <input
-                                                    type="radio"
-                                                    class="radio"
-                                                    id="sleeper-bus"
-                                                    name="category"
-                                                    />
-                                                <label for="sleeper-bus">Sleeper Bus</label>
-                                            </div>
-
-                                            <div class="option">
-                                                <input
-                                                    type="radio"
-                                                    class="radio"
-                                                    id="sleeper-room-bus"
-                                                    name="category"
-                                                    />
-                                                <label for="sleeper-room-bus">Sleeper Room Bus</label>
-                                            </div>
+                                    <!-- Modal body -->
+                                    <div
+                                        class="modal-body pay-cf-msg"
+                                        style="font-size: 20px; font-weight: 500"
+                                        >
+                                        <p>Rate Your Experience</p>
+                                        <div class="rating">
+                                            <input id="rating1" type="radio" name="rating" value="1" checked="checked"/>
+                                            <label for="rating1"></label>
+                                            <input id="rating2" type="radio" name="rating" value="2" />
+                                            <label for="rating2"></label>
+                                            <input id="rating3" type="radio" name="rating" value="3" />
+                                            <label for="rating3"></label>
+                                            <input id="rating4" type="radio" name="rating" value="4" />
+                                            <label for="rating4"></label>
+                                            <input id="rating5" type="radio" name="rating" value="5" />
+                                            <label for="rating5"></label>
                                         </div>
-
-                                        <div class="selected" style="font-size: 15px">
-                                            Select Bus Type
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <p style="font-size: 20px; font-weight: 500">
-                                        Leave a review(required)
-                                    </p>
-                                    <!-- <input class="cm-txt" type="text" placeholder="Tell people about what your experience!"/> -->
-                                    <textarea
-                                        class="cm-txt"
-                                        id="myTextarea"
-                                        placeholder="Tell people about what your experience!..."
-                                        required
-                                        ></textarea>
-                                </div>
-
-                                <!-- Modal footer -->
-                                <div class="modal-footer">
-                                    <div class="pay-cf">
+                                        <hr />
+                                        <p>Bus Type</p>
                                         <input
-                                            type="submit"
-                                            value="SUBMIT"
-                                            class="pay-cf-btn"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#myModalPaying"
+                                            checked="checked"
+                                            type="radio"
+                                            class="radio"
+                                            id="normal-bus"
+                                            name="category"
+                                            value="29 Seats"
                                             />
+                                        <label for="normal-bus">29 Seats</label>
+
+                                        <input
+                                            type="radio"
+                                            class="radio"
+                                            id="sleeper-bus"
+                                            name="category"
+                                            value="Sleeper Bus"
+                                            />
+                                        <label for="sleeper-bus">Sleeper Bus</label>
+
+                                        <input
+                                            type="radio"
+                                            class="radio"
+                                            id="sleeper-room-bus"
+                                            name="category"
+                                            value="Sleeper Room Bus"
+                                            />
+                                        <label for="sleeper-room-bus">Sleeper Room Bus</label>
+                                        <hr />
+                                        <p style="font-size: 20px; font-weight: 500">
+                                            Leave a review(required)
+                                        </p>
+                                        <!-- <input class="cm-txt" type="text" placeholder="Tell people about what your experience!"/> -->
+
+                                        <textarea
+                                            class="cm-txt"
+                                            id="myTextarea"
+                                            placeholder="Tell people about what your experience!..."
+                                            name="feedback"
+                                            ></textarea>
+
+
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <div class="pay-cf">
+                                            <button
+                                                type="submit"
+                                                value="SUBMIT"
+                                                class="pay-cf-btn"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#myModalPaying"> Submit </button>
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
+                    <%
+                        }
+                    %>
+
                 </section>
             </div>
         </main>
