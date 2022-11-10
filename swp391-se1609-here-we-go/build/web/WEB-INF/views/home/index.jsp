@@ -54,6 +54,7 @@
         <title>Here We Go</title>
     </head>
     <body>
+        <% request.getSession().setAttribute("ticketIdChange", null); %>
         <div class="ct">
             <section id="bn" class="banner" data-label="Banner">
                 <div class="text-box">
@@ -178,6 +179,7 @@
                                     <input class="form-control" type="date" placeholder="Departure Date" name="startDate">
                                 </div>
                             </div>
+                            <input type="hidden" value="true" name="book"/>
                             <div class="search-btn">
                                 <button class="btn btn-secondary route-search-btn">SEARCH</button>
                             </div>

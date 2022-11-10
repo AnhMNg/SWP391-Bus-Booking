@@ -59,11 +59,11 @@
             <div class="container">
                 <div class="container mt-5 px-5 py-5 header-comp">
                     <div class="tc-logo-img ml-3">
-                        <img src="images/thanhbuoilogo.png" />
+                        <img src="<c:url value="/images/${sessionScope.COMPANY_LOGO}"/>" />
                     </div>
                     <div class="tc-header">
                         <h1 style="text-transform: uppercase; font-weight: bold">
-                            Thanh Buoi Bus
+                            ${sessionScope.COMPANY_NAME}
                         </h1>
                     </div>
                 </div>
