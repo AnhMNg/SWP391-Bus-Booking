@@ -79,7 +79,7 @@
                 </form>
 
                 <div class="list-group">
-                    <form action="<c:url value="/company/info.do"/>" method="POST">
+                    <form action="<c:url value="/company/infoFind.do"/>" method="POST">
                         <%
                             ArrayList<Company> listSearch = (ArrayList<Company>) request.getAttribute("listSearch");
                             if (listSearch == null) {
