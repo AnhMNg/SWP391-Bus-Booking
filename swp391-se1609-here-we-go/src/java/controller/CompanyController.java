@@ -46,10 +46,12 @@ public class CompanyController extends HttpServlet {
             case "infoFind":
                 compInfo(request, response);
                 break;
+           
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
     }
-
+    
+    
     private void logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -92,6 +94,7 @@ public class CompanyController extends HttpServlet {
         Company com = comMag.getCompanyInfo(comId);
         if (com != null) {
             HttpSession session = request.getSession();
+            session.setAttribute("COMPANY", com);
             session.setAttribute("COMPANY_NAME", com.getName());
             session.setAttribute("COMPANY_DES", com.getDesription());
             session.setAttribute("COMPANY_LOGO", com.getImgLink());
