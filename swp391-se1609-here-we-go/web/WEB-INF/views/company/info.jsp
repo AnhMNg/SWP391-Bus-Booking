@@ -233,7 +233,7 @@
                                 if (listfb != null) {
                                     int avg = FeedbackManager.getAVGRatebyComId(com.getCompanyId());
                             %>
-                            <p>Average Rate: <%= avg%>/5</p>
+                            <p>Average Rate: <%= avg %>/5</p>
                             <br/>
                             <span><%= listfb.size()%> review</span>
                             <%
@@ -255,7 +255,7 @@
                                 <%
                                     String s = "/uploads/" + UserManager.getUserById(fb.getUserId()).getAvtLink();
                                 %>
-                                <img src="<c:url value="<%= s%>"/>" alt="">
+                                <img src="<c:url value="<%= s %>"/>" alt="">
                                 <p><%= UserManager.getUserById(fb.getUserId()).getName()%></p>    
                                 <p class="date-cm" style="font-weight: 400"><%= fb.getDate()%></p>
                             </div>

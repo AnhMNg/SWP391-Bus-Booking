@@ -101,7 +101,7 @@ private void Toupload(HttpServletRequest request, HttpServletResponse response){
         String pickpoint = request.getParameter("pickuppoint");
         String droppoint = request.getParameter("droppoint");
         
-        if (depart.equals(", ") || destination.equals(", ") || typeBus == null || priceString.equals("") || startTime.equals("") || pickpoint.equals("") || droppoint.equals("") ){
+        if (depart.equals(", ") || destination.equals(", ") || depart.equals(destination) || typeBus == null || priceString.equals("") || startTime.equals("") || pickpoint.equals("") || droppoint.equals("") ){
             request.setAttribute("controller", "company");
         request.setAttribute("action", "upload");
         request.setAttribute("mes", "Information is invalid! Can't upload. Please upload again!");

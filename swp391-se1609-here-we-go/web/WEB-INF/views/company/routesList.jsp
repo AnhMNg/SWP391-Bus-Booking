@@ -77,6 +77,8 @@
                                     if (rd.getRemaningPosition() == rd.getCappacity()) {
                                 %>
                                 
+                                    
+                                <form action="<c:url value="/company/delete.do"/>" method="post">
                                     <button
                                         
                                         class="btn btn-danger"
@@ -85,7 +87,6 @@
                                         >
                                         Delete
                                     </button>
-                                <form action="<c:url value="/company/delete.do"/>" method="post">
                                     <input type="hidden" name="routeId" value="<%= rd.getRouteDetailId()%>" />
                                     <div class="modal fade" id="myModal">
                                         <div class="modal-dialog modal-dialog-centered">

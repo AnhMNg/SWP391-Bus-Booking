@@ -44,10 +44,6 @@ public class UserManager {
                 if (rs != null && rs.next()) {
 
                     //us = new User(id, sql, LOGIN, sql, LOGIN, 0, sql, REGISTER);
-
-
-                    us = new User(id, rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),rs.getString(LOGIN));
-
                     us = new User(id, rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9));
 
                 }
@@ -215,6 +211,9 @@ public class UserManager {
                 PreparedStatement s = cn.prepareStatement("DELETE FROM [dbo].[Notification] WHERE [dbo].[Notification].userId=?");
                 s.setLong(1, id);
                 s.executeUpdate();
+                PreparedStatement f = cn.prepareStatement("DELETE FROM [dbo].[Feedback] WHERE [dbo].[Feedback].userId=?");
+                f.setLong(1, id);
+                f.executeUpdate();
                 PreparedStatement st = cn.prepareStatement("DELETE FROM [dbo].[User] WHERE [dbo].[User].userId=?");
                 st.setLong(1, id);
                 st.executeUpdate();

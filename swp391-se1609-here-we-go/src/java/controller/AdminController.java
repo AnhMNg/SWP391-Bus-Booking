@@ -43,10 +43,9 @@ public class AdminController extends HttpServlet {
             case "sortAZ":
                 SortAZ(request, response);
                 break;
-            case "deleteCus":{
+            case "deleteCus":
                     DeleteCustomer(request, response);
                 break;
-            }  
         }
 
         request.getRequestDispatcher(Config.ADMIN_LAYOUT).forward(request, response);
@@ -67,7 +66,7 @@ public class AdminController extends HttpServlet {
     private void DeleteCustomer(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String id = request.getParameter("id");
+            String id = request.getParameter("usId");
             long idCus = Long.parseLong(id);
             ArrayList<model.User> list = UserManager.getListCustomer();
             for (model.User user : list) {

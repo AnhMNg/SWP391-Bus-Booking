@@ -167,6 +167,7 @@ public class CustomerController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String changeTicketIdString = request.getParameter("changeTicketId");
+        
 
         if (changeTicketIdString != null) {
             String depart = request.getParameter("depart");
@@ -197,8 +198,11 @@ public class CustomerController extends HttpServlet {
     private void cancleTicket(HttpServletRequest request, HttpServletResponse response) throws ParseException, SQLException {
         long ticketId = Long.parseLong(request.getParameter("ticketIdCancle"));
         String timeStart = request.getParameter("ticketTimeStartCancle");
+         HttpSession session = request.getSession();
+         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
         if (TicketManager.checkValidCancle(timeStart)) {
             TicketManager.deleteTicket(ticketId);
+            NotificationManager.add(us.getUserId(), us.getName() + " Cancle ticket");
             request.setAttribute("controller", "user");
             request.setAttribute("action", "myBooking");
         } else {
