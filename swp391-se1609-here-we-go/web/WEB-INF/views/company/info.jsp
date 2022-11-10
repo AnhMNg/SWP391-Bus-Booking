@@ -106,9 +106,12 @@
                             <span class="read-more-btn" style="margin-bottom: 50px;">Read More...</span>
                             <br />
                             <!-- Only TC role can view and edit data from routes list -->
-                            <a href="" 
-                               >Routes List <i class="fa fa-bus"></i
-                                ></a>
+                            <c:if test="${sessionScope.LOGIN_COMPANY != null}">
+                                <a href="/swp391-se1609-here-we-go/company/routesList.do" 
+                                   >Routes List <i class="fa fa-bus"></i
+                                    ></a>
+                                </c:if>
+
                             <!--  -->
                         </div>
 
@@ -225,25 +228,24 @@
                         <h2>Reviews</h2>
                         <hr />
                         <div class="rate-ov">
-                            
+
                             <%
-                                if(listfb!= null){
-                                int avg = FeedbackManager.getAVGRatebyComId(com.getCompanyId());
-                                %>
-                            <p>Average Rate: <%= avg %>/5</p>
+                                if (listfb != null) {
+                                    int avg = FeedbackManager.getAVGRatebyComId(com.getCompanyId());
+                            %>
+                            <p>Average Rate: <%= avg%>/5</p>
                             <br/>
-                            <span><%= listfb.size() %> review</span>
+                            <span><%= listfb.size()%> review</span>
                             <%
-                                } else{
-                                %>
+                            } else {
+                            %>
                             <span>0 review</span>
                             <%
-}
+                                }
                             %>
-                            
+
                         </div>
                         <%
-                            
                             if (listfb != null) {
                                 for (Feedback fb : listfb) {
                         %>
@@ -253,7 +255,7 @@
                                 <%
                                     String s = "/uploads/" + UserManager.getUserById(fb.getUserId()).getAvtLink();
                                 %>
-                                <img src="<c:url value="<%= s %>"/>" alt="">
+                                <img src="<c:url value="<%= s%>"/>" alt="">
                                 <p><%= UserManager.getUserById(fb.getUserId()).getName()%></p>    
                                 <p class="date-cm" style="font-weight: 400"><%= fb.getDate()%></p>
                             </div>
@@ -286,7 +288,7 @@
                                     <input type="disable-checkbox" />
                                     <span class="checkmark disable-checkmark"></span>
                                 </label>
-                                
+
                             </div>
                             <span class="rate-cm">Bad</span>
                             <%
