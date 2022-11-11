@@ -88,38 +88,7 @@
                                         Delete
                                     </button>
                                     <input type="hidden" name="routeId" value="<%= rd.getRouteDetailId()%>" />
-                                    <div class="modal fade" id="myModal">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content pay-modal">
-                                                <!-- Modal Header -->
-
-                                                <!-- Modal body -->
-                                                <div class="modal-body pay-cf-msg">
-                                                    Do you want to delete this route?
-                                                </div>
-
-                                                <!-- Modal footer -->
-                                                <div class="modal-footer">
-                                                    <div class="pay-cf">
-                                                        <input
-                                                            type="submit"
-                                                            value="Yes"
-                                                            class="pay-cf-btn"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#myModalPaying"
-                                                            />
-                                                        <button
-                                                            type="button"
-                                                            class="pay-cf-btn"
-                                                            data-bs-dismiss="modal"
-                                                            >
-                                                            NO
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </form>
                                 <%
                                     }
