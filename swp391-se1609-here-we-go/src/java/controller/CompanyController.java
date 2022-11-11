@@ -6,7 +6,9 @@ package controller;
 
 import config.Config;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import manager.CompanyManager;
+import manager.RouteDetailManager;
 import model.Company;
 
 /**
@@ -33,7 +36,7 @@ public class CompanyController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         String action = (String) request.getAttribute("action");
         String controller = (String) request.getAttribute("controller");
         switch (action) {
@@ -46,12 +49,72 @@ public class CompanyController extends HttpServlet {
             case "infoFind":
                 compInfo(request, response);
                 break;
-           
+            case "toupload":
+                Toupload(request, response);
+                break;
+            case "upload":
+                upload(request, response);
+                break;
+            case "todelete":
+                toDelete(request, response);
+                break;
+            case "delete":
+                delete(request, response);
+                break;
+
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
     }
-    
-    
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        String ridString = request.getParameter("routeId");
+        long rid = Long.parseLong(ridString);
+        RouteDetailManager.delete(rid);
+        request.setAttribute("controller", "company");
+        request.setAttribute("action", "routesList");
+    }
+    private void toDelete(HttpServletRequest request, HttpServletResponse response){
+        request.setAttribute("controller", "company");
+        request.setAttribute("action", "routesList");
+    }
+private void Toupload(HttpServletRequest request, HttpServletResponse response){
+        request.setAttribute("controller", "company");
+        request.setAttribute("action", "upload");
+    }
+    private void upload(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, Exception{
+         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        Company com = (Company) request.getSession().getAttribute("LOGIN_COMPANY");
+        String cityFrom = request.getParameter("cityfrom");
+        String cityTo = request.getParameter("cityto");
+        String districtFrom = request.getParameter("districtfrom");
+        String districtTo = request.getParameter("districtto");
+        String depart = districtFrom + ", " + cityFrom;
+        String destination = districtTo + ", " + cityTo;
+        String typeBus = request.getParameter("type-bus");
+        String priceString = request.getParameter("currency-field");
+        if (!priceString.equals("")){
+        int price = Integer.parseInt(priceString);
+        }
+        
+        String startTime = request.getParameter("startTime");
+        startTime = startTime.replace('T', ' ');
+        String pickpoint = request.getParameter("pickuppoint");
+        String droppoint = request.getParameter("droppoint");
+        
+        if (depart.equals(", ") || destination.equals(", ") || depart.equals(destination) || typeBus == null || priceString.equals("") || startTime.equals("") || pickpoint.equals("") || droppoint.equals("") ){
+            request.setAttribute("controller", "company");
+        request.setAttribute("action", "upload");
+        request.setAttribute("mes", "Information is invalid! Can't upload. Please upload again!");
+        } else {
+        RouteDetailManager.AddRouteDetail(depart, destination, com.getCompanyId(), typeBus, startTime, 0, "", pickpoint, droppoint);
+        
+        request.setAttribute("controller", "company");
+        request.setAttribute("action", "upload");
+        request.setAttribute("mes", "Upload successfully!  You can continue upload a new route!");
+        }
+        
+        
+    }
     private void logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -117,7 +180,11 @@ public class CompanyController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(CompanyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -131,7 +198,11 @@ public class CompanyController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(CompanyController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

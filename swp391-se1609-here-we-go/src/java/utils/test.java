@@ -15,6 +15,7 @@ import manager.UserManager;
 import model.Feedback;
 import model.RouteDetail;
 import model.Ticket;
+import model.User;
 
 
 
@@ -28,7 +29,9 @@ public class test {
     public static void main(String[] args) throws SQLException, SQLException, Exception {
         
                             
-        String s = UserManager.getUserById(1).getAvtLink();
-        System.out.println(s);
+          ArrayList<model.User> list = UserManager.getListCustomer();
+          for (User user : list) {
+              System.out.println(user.getUserId());
+        }
     }
 }

@@ -8,12 +8,16 @@ import com.paypal.base.rest.PayPalRESTException;
 import config.Config;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import manager.NotificationManager;
 import manager.OrderManager;
 import manager.PaymentServices;
 import manager.TicketManager;
@@ -114,10 +118,16 @@ public class OrderController extends HttpServlet {
             String[] listPasName = request.getParameterValues("pasName");
             String[] listPasPhone = request.getParameterValues("pasPhone");
             HttpSession session = request.getSession();
+            User us = (User) session.getAttribute("LOGIN_CUSTOMER");
             session.setAttribute("listPasNameForTicket", listPasName);
             session.setAttribute("listPasPhoneForTicket", listPasPhone);
 
             OrderDetail orderDetail = new OrderDetail(productName, numberOfTickets, subTotal, totalPrice);
+            try {
+                NotificationManager.add(us.getUserId(), us.getName() + " Change ticket");
+            } catch (SQLException ex) {
+                Logger.getLogger(OrderController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             try {
                 PaymentServices paymentServices = new PaymentServices();
@@ -142,6 +152,7 @@ public class OrderController extends HttpServlet {
                 long id = OrderManager.getOrderIdLatest(us.getUserId());
                 long idChange = (long) request.getSession().getAttribute("ticketIdChange");
                 TicketManager.changeTicket(idChange, id, rd.getRouteDetailId(), pos, listName[0], listPhone[0]);
+                NotificationManager.add(us.getUserId(), us.getName() + " Change ticket");
                 session.removeAttribute("ticketIdChange");
             } catch (Exception e) {
                 System.out.println(e);

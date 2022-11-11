@@ -167,6 +167,7 @@ public class CustomerController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String changeTicketIdString = request.getParameter("changeTicketId");
+        
 
         if (changeTicketIdString != null) {
             String depart = request.getParameter("depart");
@@ -197,8 +198,11 @@ public class CustomerController extends HttpServlet {
     private void cancleTicket(HttpServletRequest request, HttpServletResponse response) throws ParseException, SQLException {
         long ticketId = Long.parseLong(request.getParameter("ticketIdCancle"));
         String timeStart = request.getParameter("ticketTimeStartCancle");
+         HttpSession session = request.getSession();
+         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
         if (TicketManager.checkValidCancle(timeStart)) {
             TicketManager.deleteTicket(ticketId);
+            NotificationManager.add(us.getUserId(), us.getName() + " Cancle ticket");
             request.setAttribute("controller", "user");
             request.setAttribute("action", "myBooking");
         } else {
@@ -302,6 +306,7 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
                 session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
+                session.setAttribute("LOGIN_EMAIL", "");
                 session.setAttribute("LOGIN_ROLE", roleID);
 
                 if (roleID == 1) {
@@ -563,9 +568,11 @@ public class CustomerController extends HttpServlet {
             String newName = fields.get("newName");
             String gender=fields.get("gender");
             String email=fields.get("newEmail");
+            String paatern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
             String newPhone=fields.get("newPhone");
             String link="<a href='http://localhost:8080/swp391-se1609-here-we-go/user/profile.do'><img src='https://files.fm/u/e8kvdf37u#/view/book.png'></a>";
             User user = UserManager.getUserByPhone(phone);
+             if(email.matches(paatern)){
             if(email != null){
                 final String fromEmail = "herewego.letstravel@gmail.com"; //requires valid gmail id
 		final String password = "nfwlzxjeumzhoize"; // correct password for gmail id
@@ -593,10 +600,19 @@ public class CustomerController extends HttpServlet {
                     message.setContent(link, "text/html");
                     Transport.send(message);
                     request.setAttribute("verified", "true");
+
+                      session.setAttribute("verified", "true");
+                    session.setAttribute("LOGIN_EMAIL", email);
+
                     request.setAttribute("email", email);
+
                 }catch(Exception e){
                     
                 }
+            }
+            }
+            else {
+                request.setAttribute("ERROR", true);
             }
             if (newName != null && filename.equals("") && gender != null && newPhone !=null ) {
                 if (UserManager.updateUser(newName, user.getUserId(), img,gender, newPhone)) {

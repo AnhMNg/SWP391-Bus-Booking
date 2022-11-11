@@ -48,7 +48,7 @@
             </div>
         </div>
         <div>
-            <form action="<c:url value="/admin/deleteCus.do"/>" method="post"> 
+            
                 <div class="activity">
                     <table id="example" class="table table-hover table-responsive-md" style="width: 100%">
 
@@ -80,8 +80,50 @@
                                 <td><%= user.getDateCreate()%></td>
                                 <td><%= TicketManager.countTicketbyId(user.getUserId())%></td>
                                 <td>
-                                    <input type="submit" class="btn btn-danger" value="Delete">
-                                    <input type="hidden" name="id" value="<%= user.getUserId()%>"/>
+                                    
+                                <form action="<c:url value="/admin/deleteCus.do"/>" method="post">
+                                    <button
+                                        
+                                        class="btn btn-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#myModal"
+                                        >
+                                        Delete
+                                    </button>
+                                    <input type="hidden" name="usId" value="<%= user.getUserId() %>" />
+                                    <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content pay-modal">
+                                                <!-- Modal Header -->
+
+                                                <!-- Modal body -->
+                                                <div class="modal-body pay-cf-msg">
+                                                    Do you want to delete this customer?
+                                                </div>
+
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                    <div class="pay-cf">
+                                                        <input
+                                                            type="submit"
+                                                            value="Yes"
+                                                            class="pay-cf-btn"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#myModalPaying"
+                                                            />
+                                                        <button
+                                                            type="button"
+                                                            class="pay-cf-btn"
+                                                            data-bs-dismiss="modal"
+                                                            >
+                                                            NO
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                                 </td>
                             </tr>
 
@@ -100,7 +142,7 @@
                         </tfoot>
                     </table>
                 </div>
-            </form>
+            
         </div>
     </body>
 </html>

@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="mag-btn">
-                            <form action="<c:url value="/company/linkUpload.do">
+                            <form action="<c:url value="/company/toupload.do">
 
                                 </c:url>" method="post">
                                 <input type="hidden" name="comP" value="${sessionScope.LOGIN_COMPANY_ID}"/>
@@ -69,9 +69,13 @@
                         <div class="bus-img">
                             <img src="<c:url value="/images/dl5.png"/>" alt="bus">
                         </div>
+                         <form action="<c:url value="/company/todelete.do">
+
+                                </c:url>" method="post">
                         <div class="mag-btn">
                             <input type="submit" value="DELETE ROUTE" class="mag-btn-dt">
                         </div>
+                             </form>
                     </div>
                 </div>
             </section>
