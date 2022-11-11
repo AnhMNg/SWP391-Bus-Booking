@@ -92,8 +92,9 @@ private void Toupload(HttpServletRequest request, HttpServletResponse response){
         String destination = districtTo + ", " + cityTo;
         String typeBus = request.getParameter("type-bus");
         String priceString = request.getParameter("currency-field");
+        int price = 0;
         if (!priceString.equals("")){
-        int price = Integer.parseInt(priceString);
+        price = Integer.parseInt(priceString);
         }
         
         String startTime = request.getParameter("startTime");
@@ -106,7 +107,7 @@ private void Toupload(HttpServletRequest request, HttpServletResponse response){
         request.setAttribute("action", "upload");
         request.setAttribute("mes", "Information is invalid! Can't upload. Please upload again!");
         } else {
-        RouteDetailManager.AddRouteDetail(depart, destination, com.getCompanyId(), typeBus, startTime, 0, "", pickpoint, droppoint);
+        RouteDetailManager.AddRouteDetail(depart, destination, com.getCompanyId(), typeBus, startTime, price, "", pickpoint, droppoint);
         
         request.setAttribute("controller", "company");
         request.setAttribute("action", "upload");
