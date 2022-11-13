@@ -207,8 +207,10 @@
                                     </div>                        
                                     <div class="card-body">
                                         <a href="<c:url value="/user/search.do">
-                                               <c:param name="cityfrom" value="Hồ Chí Minh"></c:param>
-                                               <c:param name="cityto" value="Đà Lạt"></c:param>
+                                               <c:param name="cityfrom" value="Thành phố Hồ Chí Minh"></c:param>
+                                               <c:param name="cityto" value="Tỉnh Lâm Đồng"></c:param>
+                                               <c:param name="districtfrom" value=""></c:param>
+                                               <c:param name="districtto" value=""></c:param>
                                                <c:param name="startDate" value=""></c:param>
                                            </c:url>"><h4 class="card-title">Thành Phố Hồ Chí Minh - Đà Lạt</h4></a>                   
                                     </div>   
@@ -222,10 +224,12 @@
                                     </div>                               
                                     <div class="card-body">
                                         <a href="<c:url value="/user/search.do">
-                                               <c:param name="cityfrom" value="Đà Nẵng"></c:param>
-                                               <c:param name="ciytto" value="Huế"></c:param>
+                                               <c:param name="cityfrom" value="Tỉnh Thừa Thiên Huế"></c:param>
+                                               <c:param name="cityto" value="Thành phố Đà Nẵng"></c:param>
+                                               <c:param name="districtfrom" value=""></c:param>
+                                               <c:param name="districtto" value=""></c:param>
                                                <c:param name="startDate" value=""></c:param>
-                                           </c:url>"><h4 class="card-title">Đà Nẵng - Huế</h4></a>  
+                                           </c:url>"><h4 class="card-title">Huế - Đà Nẵng</h4></a>  
                                     </div>   
                                 </div>
                             </div>
@@ -239,8 +243,10 @@
                                     </div>                                
                                     <div class="card-body">
                                         <a href="<c:url value="/user/search.do">
-                                               <c:param name="cityfrom" value="Hà Nội"></c:param>
-                                               <c:param name="cityto" value="Sa Pa"></c:param>
+                                               <c:param name="cityfrom" value="Thành phố Hà Nội"></c:param>
+                                               <c:param name="cityto" value="Tỉnh Lào Cai"></c:param>
+                                               <c:param name="districtfrom" value=""></c:param>
+                                               <c:param name="districtto" value=""></c:param>
                                                <c:param name="startDate" value=""></c:param>
                                            </c:url>"><h4 class="card-title">Hà Nội - Sa Pa</h4></a>                         
                                     </div>   
@@ -254,8 +260,10 @@
                                     </div>                              
                                     <div class="card-body">
                                         <a href="<c:url value="/user/search.do">
-                                               <c:param name="cityfrom" value="Hồ Chí Minh"></c:param>
-                                               <c:param name="cityto" value="Cần Thơ"></c:param>
+                                               <c:param name="cityfrom" value="Thành phố Hồ Chí Minh"></c:param>
+                                               <c:param name="cityto" value="Thành phố Cần Thơ"></c:param>
+                                               <c:param name="districtfrom" value=""></c:param>
+                                               <c:param name="districtto" value=""></c:param>
                                                <c:param name="startDate" value=""></c:param>
                                            </c:url>"><h4 class="card-title">Thành Phố Hồ Chí Minh - Cần Thơ</h4></a>
                                     </div>   

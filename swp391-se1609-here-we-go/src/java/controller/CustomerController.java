@@ -121,7 +121,7 @@ public class CustomerController extends HttpServlet {
                 break;
             case "feedback":
                 sendFeedback(request, response);
-                break;
+                break;           
             default:
                 break;
         }
@@ -463,7 +463,7 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("action", "booking");
         }
     }
-
+    
     private void filter(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnsupportedEncodingException, ParseException {
         try {
             response.setContentType("text/html;charset=UTF-8");
