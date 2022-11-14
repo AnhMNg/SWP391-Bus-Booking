@@ -7,6 +7,14 @@ package utils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import manager.FeedbackManager;
 import manager.OrderManager;
 import manager.RouteDetailManager;
@@ -17,9 +25,6 @@ import model.RouteDetail;
 import model.Ticket;
 import model.User;
 
-
-
-
 /**
  *
  * @author Admin
@@ -28,10 +33,6 @@ public class test {
 
     public static void main(String[] args) throws SQLException, SQLException, Exception {
         
-                            
-          ArrayList<model.User> list = UserManager.getListCustomer();
-          for (User user : list) {
-              System.out.println(user.getUserId());
-        }
+
     }
 }

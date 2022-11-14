@@ -472,7 +472,7 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("action", "booking");
         }
     }
-
+    
     private void filter(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnsupportedEncodingException, ParseException {
         try {
             response.setContentType("text/html;charset=UTF-8");
@@ -615,7 +615,7 @@ public class CustomerController extends HttpServlet {
 		}
                 }
                     if (newName != null && filename.equals("") && gender != null && newPhone != null) {
-                if (UserManager.updateUser(newName, user.getUserId(), img, gender, newPhone)) {
+                if (UserManager.updateUser(newName, user.getUserId(), img, gender.toLowerCase(), newPhone)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
@@ -625,7 +625,7 @@ public class CustomerController extends HttpServlet {
                 }
             }
             if (newName != null && filename != "" && gender != null && newPhone != null) {
-                if (UserManager.updateUser(newName, user.getUserId(), filename, gender, newPhone)) {
+                if (UserManager.updateUser(newName, user.getUserId(), filename, gender.toLowerCase(), newPhone)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
