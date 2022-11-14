@@ -298,8 +298,9 @@
 }
 
 .review {
-  min-height: 120vh;
+  min-height: 150vh;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .contribute {

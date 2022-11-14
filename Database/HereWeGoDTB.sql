@@ -1,4 +1,4 @@
-﻿use FoodManagement
+﻿use master
 drop database HereWeGo
 GO
 Create database HereWeGo
@@ -86,7 +86,7 @@ create table Feedback(
 	star int,
 	dateComment datetime
 )
-SELECT * FROM Feedback WHERE companyId = 7
+
 create table [Notification](
 	NId bigint primary key identity(1,1) not null,
 	userId bigint foreign key references [User](userID) not null,
@@ -111,13 +111,13 @@ INSERT INTO [Role] VALUES('ADMIN')
 INSERT INTO [Role] VALUES('CUSTOMER')
 
 
-INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170','',2,'hoanghuy123', CURRENT_TIMESTAMP,'man')
-INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546','',2,'anhminh123',CURRENT_TIMESTAMP,'man')
-INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625','',2,'baotram123',CURRENT_TIMESTAMP,'woman')
-INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365','',2,'hoanganh123',CURRENT_TIMESTAMP,'woman')
-INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345','',2,'baolong123',CURRENT_TIMESTAMP,'man')
-INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276','',2,'hoailinh123',CURRENT_TIMESTAMP,'man')
-INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725','',1,'vinhhung123',CURRENT_TIMESTAMP,'man')
+INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170',NULL,2,'hoanghuy123', CURRENT_TIMESTAMP,'man',NULL)
+INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546',NULL,2,'anhminh123',CURRENT_TIMESTAMP,'man',NULL)
+INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625',NULL,2,'baotram123',CURRENT_TIMESTAMP,'woman',NULL)
+INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365',NULL,2,'hoanganh123',CURRENT_TIMESTAMP,'woman',NULL)
+INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345',NULL,2,'baolong123',CURRENT_TIMESTAMP,'man',NULL)
+INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276',NULL,2,'hoailinh123',CURRENT_TIMESTAMP,'man',NULL)
+INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725',NULL,1,'vinhhung123',CURRENT_TIMESTAMP,'man',NULL)
 
 INSERT INTO Place VALUES(N'Huyện Cai Lậy, Tỉnh Tiền Giang')
 INSERT INTO Place VALUES(N'Quận Hoàn Kiếm, Thành phố Hà Nội')
@@ -185,36 +185,3 @@ INSERT INTO RouteDetail VALUES(8,2,'2022-09-18 18:00:00',300000,'2022-10-18 22:0
 INSERT INTO Feedback VALUES(1,1,N'hhihah hoos dd', 4, CURRENT_TIMESTAMP)
 
 
-select * from Place
-select * from RouteDetail where 
-delete from RouteDetail where routeDetailId > 0
-
-use HereWeGo
-select * from [User] where userId = 7
-
-
-select * from Notification
-
-select  e.orderId from[dbo].[User] join [dbo].[Order] as e on [dbo].[User].userId=e.customerId and [dbo].[User].userId=1 join [dbo].[Ticket] as d on e.orderId=d.orderId
-
-DELETE FROM [dbo].[Feedback] WHERE [dbo].[Feedback].userId=1
-DELETE FROM [dbo].[User] WHERE [dbo].[User].userId=2
-
-
-SELECT tbl1.routeDetailId, bus.capacity, bus.kind, tbl1.startTime, tbl1.price, tbl1.timeArrival, tbl1.departDetail, tbl1.detinationDetail, tbl1.routeId, tbl1.name, tbl1.depart, tbl1.destination
-                    FROM (SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination
-                    FROM [RouteDetail] rd
-                    inner join
-                    (SELECT Route.companyId, Route.departId, Route.destinationId, Route.routeId, com.name, PlaceName.depart, PlaceName.destination FROM [Route], [Company] com,
-                    (SELECT dep.routeId,dep.name depart,des.name destination 
-                     FROM
-                    (SELECT * 
-                    FROM Route,Place 
-                    WHERE Route.departId = Place.placeId) dep,
-                   (SELECT * 
-                    FROM Route,Place 
-                    WHERE Route.destinationId = Place.placeId) des
-                    WHERE des.routeId = dep.routeId) PlaceName
-                    WHERE PlaceName.depart like N'%, %' and PlaceName.destination like N'%, %' and com.companyId = Route.companyId and PlaceName.routeId = Route.routeId) r
-                    ON rd.routeId = r.routeId) tbl1, BusType bus
-                    WHERE tbl1.busTypeId = bus.busTypeId and tbl1.startTime > '' and tbl1.startTime > CURRENT_TIMESTAMP

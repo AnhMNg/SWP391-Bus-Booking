@@ -25,9 +25,9 @@ public class UserManager {
 
     private static final String LOGIN = "SELECT * FROM [User] WHERE phone = ? AND password = ?";
     private static final String LOGIN_GOOGLE = "SELECT * FROM [User] WHERE googleId = ?";
-    private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,?,?,?,?, CURRENT_TIMESTAMP,'')";
+    private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,null,null)";
     private static final String CHECK_DUPLICATE = "SELECT * FROM [User] WHERE phone = ?";
-    private static final String UPDATE_USER_INFORMATION = "update [dbo].[User] set [name]=?, [avatarLink]=?,[gender]=?, [phone]=? where [userId]=?";
+    private static final String UPDATE_USER_INFORMATION = "update [dbo].[User] set [name]=?, [avatarLink]=?, [gender]=?, [phone]=? where [userId]=?";
     private static final String CREATED_DATE = "SELECT [User].dateCreate FROM [User] WHERE [User].userId = ?";
     private static final String CHANGE_PASSWORD = "UPDATE [User] SET [password] = ? WHERE userId = ?";
 
@@ -78,7 +78,7 @@ public class UserManager {
                 pst.setString(2, password);
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6), "***", rs.getString(8),rs.getString(9),(rs.getString(10)));
+                    user = new User(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6), "***", rs.getString(8), rs.getString(9), rs.getString(10));
                 }
             }
         } catch (Exception e) {
@@ -138,6 +138,8 @@ public class UserManager {
             ps.setString(4, user.getAvtLink());
             ps.setInt(5, 2);
             ps.setString(6, user.getPassword());
+            ps.setString(7, user.getGender());
+            ps.setString(8, user.getEmail());
             if (ps.executeUpdate() > 0) {
                 return true;
             }
@@ -283,8 +285,8 @@ public class UserManager {
             PreparedStatement pst = cn.prepareStatement(UPDATE_USER_INFORMATION);
             pst.setNString(1, newFullname);
             pst.setString(2, avatarLink);
-             pst.setString(3, gender);
-              pst.setString(4, phone);
+            pst.setString(3, gender);
+            pst.setString(4, phone);
             pst.setLong(5, id);
             pst.executeUpdate();
             cn.close();
@@ -292,13 +294,13 @@ public class UserManager {
         return true;
     }
 
-public static boolean updateUserEmail( long id,String email) throws SQLException {
+    public static boolean updateUserEmail( long id,String email) throws SQLException {
         Connection cn = DBUtils.getConnection();
         if (cn != null) {
             PreparedStatement pst = cn.prepareStatement("update [dbo].[User] set [email]=? where [userId]=?");
             pst.setNString(1, email);
             pst.setLong(2, id);
-            pst.executeUpdate();
+                pst.executeUpdate();
             cn.close();
         }
         return true;

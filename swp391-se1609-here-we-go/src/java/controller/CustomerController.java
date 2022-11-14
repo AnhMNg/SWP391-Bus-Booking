@@ -62,8 +62,8 @@ import model.Company;
 
 public class CustomerController extends HttpServlet {
 
-    private static final String ACCOUNT_SID = "AC7531d18ea7e24011554d500770a01c58";
-    private static final String AUTH_TOKEN = "0f9f4431546a3dd7ee404768256b8671";
+    private static final String ACCOUNT_SID = "AC7b6a82f57ffbe30b90e8bf77c5feac8f";
+    private static final String AUTH_TOKEN = "019bdb909954885740f32d987b2087b3";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, Exception {
@@ -261,7 +261,7 @@ public class CustomerController extends HttpServlet {
             String newPhone = "+84" + us.getPhone().substring(1);
             Message message = Message.creator(
                     new PhoneNumber(newPhone),
-                    new PhoneNumber("+19785033345"),
+                    new PhoneNumber("+18158578891"),
                     code
             ).create();
 
@@ -355,20 +355,24 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER", user);
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
-                if (user.getAvtLink() == null) {
-                    
-                    if (user.getGender().equals("man")) {
-                        session.setAttribute("LOGIN_CUSTOMER_IMG", "man.png");
-                    } else {
+                if (user.getAvtLink() == null) { 
+                    if (user.getGender() == null) {
                         session.setAttribute("LOGIN_CUSTOMER_IMG", "people.png");
                     }
-                    if (user.getGender().equals("woman")) {
-                        session.setAttribute("LOGIN_CUSTOMER_IMG", "girl.png");
+                    else switch (user.getGender()) {
+                        case "man":
+                            session.setAttribute("LOGIN_CUSTOMER_IMG", "man.png");
+                            break;
+                        case "woman":
+                            session.setAttribute("LOGIN_CUSTOMER_IMG", "girl.png");
+                            break;
+                        default:
+                            break;
                     }
                 } else {
                     session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
                 }              
-                session.setAttribute("LOGIN_EMAIL", "");
+                session.setAttribute("LOGIN_EMAIL", user.getEmail());
                 session.setAttribute("LOGIN_ROLE", roleID);
                 if (roleID == 1) {
                     request.setAttribute("controller", "admin");
@@ -440,7 +444,7 @@ public class CustomerController extends HttpServlet {
                         String newPhone = "+84" + phone.substring(1);
                         Message message = Message.creator(
                                 new PhoneNumber(newPhone),
-                                new PhoneNumber("+19785033345"),
+                                new PhoneNumber("+18158578891"),
                                 otp
                         ).create();
                     }
@@ -490,7 +494,7 @@ public class CustomerController extends HttpServlet {
         String otp6 = request.getParameter("otp6");
         String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
         if (otpCheck.equals(SUBMIT_OTP)) {
-            User user = new User(0, name, null, phone, null, 2, password, "", "","");
+            User user = new User(0, name, null, phone, null, 2, password, "", null, null);
             if (UserManager.register(user)) {
                 request.setAttribute("controller", "user");
                 User us = UserManager.getUserByPhone(user.getPhone());
@@ -627,7 +631,7 @@ public class CustomerController extends HttpServlet {
                 }
             }
             String newName = fields.get("newName");
-            String gender = fields.get("gender");
+            String gender = fields.get("gender").toLowerCase();
             String email = fields.get("newEmail");
             String newPhone = fields.get("newPhone");
             String link = "<a href='http://localhost:8080/swp391-se1609-here-we-go/user/profile.do'><img src='https://scontent.fsgn5-10.fna.fbcdn.net/v/t39.30808-6/315514627_3272981566295938_7366370551689330929_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=N3mfCHcxcfQAX8OK7ZI&_nc_ht=scontent.fsgn5-10.fna&oh=00_AfC2lgUw6QexVUnhtFyK86LxPTedLjZxHxlTVvjEyz3bxA&oe=637693D1'></a>";
@@ -727,7 +731,7 @@ public class CustomerController extends HttpServlet {
                          message.setContent(link, "text/html");
 			Transport.send(message);
 			System.out.println("Done");
-                         NotificationManager.add("HereWeGo has new contact.");
+                        NotificationManager.add("HereWeGo has new contact.");
                         request.getRequestDispatcher(Config.ABOUT_US).forward(request, response);
                         
 		} catch (MessagingException e) {
