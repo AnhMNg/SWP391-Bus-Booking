@@ -40,7 +40,7 @@
                 <div class="box box1">
                     <i class="uil uil-user"></i>
                     <span class="text">Customers</span>
-                    <span class="number"><%= UserManager.countCustomer() %></span>
+                    <span class="number"><%= UserManager.countCustomer()%></span>
                 </div>
                 <div class="box box2">
                     <i class="uil uil-ticket"></i>
@@ -73,21 +73,20 @@
                 </thead>
                 <tbody>
                     <%
-                        ArrayList<model.User> list  = UserManager.getListCustomer();
-        for (model.User user : list) {
-            %>
-                    
-                      <tr>
-                        <td><%= user.getUserId() %></td>
-                        <td><%= user.getName() %></td>
-                        <td><%= user.getPhone() %></td>
-                        <td><%= user.getDateCreate() %></td>
-                        <td><%=UserManager.getTypeOfUser(user.getUserId()) %></td>
+                        ArrayList<model.User> list = UserManager.getListCustomer();
+                        for (model.User user : list) {
+                    %>
+                    <tr>
+                        <td><%= user.getUserId()%></td>
+                        <td><%= user.getName()%></td>
+                        <td><%= user.getPhone()%></td>
+                        <td><%= user.getDateCreate()%></td>
+                        <td><%=UserManager.getTypeOfUser(user.getUserId())%></td>
                     </tr>
                     <%
-        }
+                        }
                     %>
-                    
+
                 </tbody>
             </table>
         </div>
