@@ -18,8 +18,9 @@ public class User {
     private String password;
     private String dateCreate;
     private String Gender;
+    private String email;
 
-    public User(long userId, String name, String googleId, String phone, String avtLink, int roleId, String password, String dateCreate, String Gender) {
+    public User(long userId, String name, String googleId, String phone, String avtLink, int roleId, String password, String dateCreate, String Gender,String email) {
         this.userId = userId;
         this.name = name;
         this.googleId = googleId;
@@ -29,6 +30,15 @@ public class User {
         this.password = password;
         this.dateCreate = dateCreate;
         this.Gender = Gender;
+        this.email=email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getGender() {
