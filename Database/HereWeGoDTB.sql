@@ -58,7 +58,8 @@ create table [User](
 	roleId int foreign key references Role(roleId) not null,
 	password nvarchar(20) not null,
 	dateCreate datetime,
-	gender varchar(10)
+	gender varchar(10),
+	email varchar(100)
 )
 
 
@@ -85,7 +86,7 @@ create table Feedback(
 	star int,
 	dateComment datetime
 )
-
+SELECT * FROM Feedback WHERE companyId = 7
 create table [Notification](
 	NId bigint primary key identity(1,1) not null,
 	userId bigint foreign key references [User](userID) not null,

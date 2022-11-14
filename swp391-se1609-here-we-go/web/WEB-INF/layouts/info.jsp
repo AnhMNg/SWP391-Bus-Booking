@@ -83,7 +83,7 @@
                         <p class="home__description">
                             No matter you're going from we take you there
                         </p>
-                        <a href="#about" class="button-book button--flex">
+                        <a href="<c:url value="/home/index.do"/>" class="button-book button--flex">
                             Book Now<i class="ri-arrow-right-down-line button__icon"></i>
                         </a>
 
@@ -386,26 +386,26 @@
                                 <h3 class="contact__subtitle">Our Email</h3>
                                 <span class="contact__description">
                                     <i class="ri-mail-line contact__icon"></i>
-                                    herewego@email.com
+                                    herewego.letstravel@gmail.com
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <form action="" class="contact__form">
+                    <form action="<c:url value="/user/send.do"/>"  class="contact__form">
                         <div class="contact__inputs">
                             <div class="contact__content">
-                                <input type="email" placeholder=" " class="contact__input">
+                                <input type="email" placeholder=" " class="contact__input" name="email">
                                 <label for="" class="contact__label">Email</label>
                             </div>
 
                             <div class="contact__content">
-                                <input type="text" placeholder=" " class="contact__input">
+                                <input type="text" placeholder=" " class="contact__input" name="name">
                                 <label for="" class="contact__label">Name</label>
                             </div>
 
                             <div class="contact__content contact__area">
-                                <textarea name="message" placeholder=" " class="contact__input"></textarea>
+                                <textarea name="message" placeholder=" " class="contact__input" name="message"></textarea>
                                 <label for="" class="contact__label">Message</label>
                             </div>
                         </div>

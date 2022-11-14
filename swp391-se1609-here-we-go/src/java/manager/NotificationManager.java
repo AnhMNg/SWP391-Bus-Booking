@@ -46,7 +46,35 @@ public class NotificationManager {
             }
         }
     }
-
+ public static void add( String message) throws SQLException {
+        Connection cn = null;
+        PreparedStatement pst = null;
+         PreparedStatement ps = null;
+         ResultSet rs = null;
+        //boolean add = false;
+        try {
+            cn = DBUtils.getConnection();
+            if (cn != null) {
+                pst = cn.prepareStatement("select* from [dbo].[User] where [roleId]=1");
+                 rs = pst.executeQuery();
+                while (rs != null && rs.next()) {
+                    ps = cn.prepareStatement(ADD);
+                      ps.setLong(1, rs.getLong(1));
+                ps.setString(2, message);
+                ps.executeUpdate();
+                //add = true;
+                }
+            }
+        } catch (Exception e) {
+        } finally {
+            if (pst != null) {
+                pst.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+    }
     public static ArrayList<Notification> getList() throws SQLException {
         ArrayList<Notification> list = new ArrayList<>();
         Notification no = null;
