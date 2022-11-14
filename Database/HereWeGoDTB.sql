@@ -1,4 +1,4 @@
-﻿use PlantShop
+﻿use FoodManagement
 drop database HereWeGo
 GO
 Create database HereWeGo
@@ -78,7 +78,6 @@ create table Ticket(
 	passengerPhone nvarchar(13) not null,
 	purchaseDate datetime
 )
-
 create table Feedback(
 	feedback bigint primary key identity(1,1) not null,
 	companyId int foreign key references Company(companyId) not null,
@@ -88,7 +87,6 @@ create table Feedback(
 	dateComment datetime
 )
 SELECT * FROM Feedback WHERE companyId = 7
-
 create table [Notification](
 	NId bigint primary key identity(1,1) not null,
 	userId bigint foreign key references [User](userID) not null,
@@ -129,6 +127,11 @@ INSERT INTO Place VALUES(N'Quận Thủ Đức, Thành phố Hồ Chí Minh')
 INSERT INTO Place VALUES(N'Quận Ninh Kiều, Thành phố Cần Thơ')
 INSERT INTO Place VALUES(N'Huyện Châu Thành, Tỉnh Vĩnh Long')
 INSERT INTO Place VALUES(N'Tỉnh Khánh Hòa')
+INSERT INTO Place VALUES(N'Thành phố Huế, Tỉnh Thừa Thiên Huế')
+INSERT INTO Place VALUES(N'Quận Ngũ Hành Sơn, Thành phố Đà Nẵng')
+INSERT INTO Place VALUES(N'Quận Ba Đình, Thành phố Hà Nội')
+INSERT INTO Place VALUES(N'Thị xã Sapa, Tỉnh Lào Cai')
+INSERT INTO Place VALUES(N'Quận Ninh Kiều, Thành phố Cần Thơ')
 
 INSERT INTO Route VALUES(1,2,3)
 INSERT INTO Route VALUES(1,1,2)
@@ -142,6 +145,10 @@ INSERT INTO Route VALUES(4,2,1)
 INSERT INTO Route VALUES(3,2,1)
 INSERT INTO Route VALUES(4,2,3)
 INSERT INTO Route VALUES(5,2,1)
+INSERT INTO Route VALUES(1,5,4)
+INSERT INTO Route VALUES(2,9,10)
+INSERT INTO Route VALUES(3,11,12)
+INSERT INTO Route VALUES(4,5,13)
 
 INSERT INTO BusType VALUES(29, 'Normal Bus')
 INSERT INTO BusType VALUES(52, 'Sleeper Bus')
@@ -155,6 +162,10 @@ INSERT INTO RouteDetail VALUES(4,2,'2022-11-18 14:00:00',600000,'2022-10-18 19:0
 INSERT INTO RouteDetail VALUES(6,3,'2022-11-19 16:00:00',700000,'2022-10-18 23:00:00', N'123 Đốc Binh Kiều', N'564 Nguyễn Thị Minh Khai')
 INSERT INTO RouteDetail VALUES(7,2,'2022-11-12 18:00:00',800000,'2022-10-18 21:00:00', N'80 Trần Bình Trọng', N'21 Ngô Gia Tự')
 INSERT INTO RouteDetail VALUES(8,2,'2022-10-28 23:00:00',900000,'2022-10-18 22:00:00', N'28 Nguyễn Đình Chiểu', N'87 Độc Lập')
+INSERT INTO RouteDetail VALUES(13,1,'2022-11-28 23:00:00',100000,'2022-10-18 22:00:00', N'6213/123 Nguyễn Duy Dương', N'đường Nguyễn Thị Minh Khai, phường 1')
+INSERT INTO RouteDetail VALUES(14,1,'2022-11-28 23:00:00',300000,'2022-10-18 22:00:00', N'Đường Tôn Đức Thắng, Hòa Minh', N'97 An Dương Vương')
+INSERT INTO RouteDetail VALUES(15,1,'2022-11-28 23:00:00',500000,'2022-10-18 22:00:00', N'Số 1 Tràng Tiền', N'Bến xe Sapa, Quốc lộ 4D')
+INSERT INTO RouteDetail VALUES(16,1,'2022-11-28 23:00:00',400000,'2022-10-18 22:00:00', N'395 Kinh Dương Vương', N'Quốc Lộ 91')
 
 INSERT INTO [Order] VALUES('2022-09-28 19:23:11',1,600000)
 INSERT INTO [Order] VALUES('2022-09-25 20:23:11',2,300000)
@@ -174,3 +185,36 @@ INSERT INTO RouteDetail VALUES(8,2,'2022-09-18 18:00:00',300000,'2022-10-18 22:0
 INSERT INTO Feedback VALUES(1,1,N'hhihah hoos dd', 4, CURRENT_TIMESTAMP)
 
 
+select * from Place
+select * from RouteDetail where 
+delete from RouteDetail where routeDetailId > 0
+
+use HereWeGo
+select * from [User] where userId = 7
+
+
+select * from Notification
+
+select  e.orderId from[dbo].[User] join [dbo].[Order] as e on [dbo].[User].userId=e.customerId and [dbo].[User].userId=1 join [dbo].[Ticket] as d on e.orderId=d.orderId
+
+DELETE FROM [dbo].[Feedback] WHERE [dbo].[Feedback].userId=1
+DELETE FROM [dbo].[User] WHERE [dbo].[User].userId=2
+
+
+SELECT tbl1.routeDetailId, bus.capacity, bus.kind, tbl1.startTime, tbl1.price, tbl1.timeArrival, tbl1.departDetail, tbl1.detinationDetail, tbl1.routeId, tbl1.name, tbl1.depart, tbl1.destination
+                    FROM (SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination
+                    FROM [RouteDetail] rd
+                    inner join
+                    (SELECT Route.companyId, Route.departId, Route.destinationId, Route.routeId, com.name, PlaceName.depart, PlaceName.destination FROM [Route], [Company] com,
+                    (SELECT dep.routeId,dep.name depart,des.name destination 
+                     FROM
+                    (SELECT * 
+                    FROM Route,Place 
+                    WHERE Route.departId = Place.placeId) dep,
+                   (SELECT * 
+                    FROM Route,Place 
+                    WHERE Route.destinationId = Place.placeId) des
+                    WHERE des.routeId = dep.routeId) PlaceName
+                    WHERE PlaceName.depart like N'%, %' and PlaceName.destination like N'%, %' and com.companyId = Route.companyId and PlaceName.routeId = Route.routeId) r
+                    ON rd.routeId = r.routeId) tbl1, BusType bus
+                    WHERE tbl1.busTypeId = bus.busTypeId and tbl1.startTime > '' and tbl1.startTime > CURRENT_TIMESTAMP
