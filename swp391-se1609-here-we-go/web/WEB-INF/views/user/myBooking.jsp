@@ -69,7 +69,7 @@
                 <div class="col-md-9 my-booking-content">
                     <div class="my-booking-info">
                         <div class="my-ava">
-                            <img src="<c:url value="/uploads/${sessionScope.LOGIN_CUSTOMER_IMG}"/>" alt="">
+                            <img src="<c:url value="/uploads/${sessionScope.LOGIN_CUSTOMER_IMG}"/>" " alt="">
                             
                         </div>
                         <div class="my-info">

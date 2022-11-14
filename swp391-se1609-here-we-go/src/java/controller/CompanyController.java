@@ -92,7 +92,7 @@ private void Toupload(HttpServletRequest request, HttpServletResponse response){
         String destination = districtTo + ", " + cityTo;
         String typeBus = request.getParameter("type-bus");
         String priceString = request.getParameter("currency-field");
-        int price =0;
+        int price = 0;
         if (!priceString.equals("")){
         price = Integer.parseInt(priceString);
         }

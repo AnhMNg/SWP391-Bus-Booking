@@ -154,12 +154,11 @@
 
                                                 <span class=" mr-2 information-detail text-break d2">${sessionScope.LOGIN_EMAIL}</span>
                                                 <%
-                                                    if (session.getAttribute("LOGIN_EMAIL") == "") {
+                                                    String email = (String) request.getSession().getAttribute("LOGIN_EMAIL");
+                                                    if (email == "" || email == null || email.equals("")) {
                                                 %>
                                                 <span class=" mr-2 add-button" id="add-button">+ Add</span>
-                                                <% }
-                                                    String verify = (String) session.getAttribute("verified");
-                                                    if (verify != null) {
+                                                <% } else {
                                                 %>            
                                                 <span class="check-verified">
                                                     <span class="verified"></span>Verified
@@ -210,21 +209,13 @@
                                     <span class="icon-password"><i class="fa-solid fa-phone"></i></span>
                                     <input class="phone-input" type="text" name="newPhone" placeholder="Enter Mobile Number" required value="${ sessionScope.LOGIN_CUSTOMER_PHONE}">
                                 </div>
-                                <span class="error cPassword-error">
-                                    <i class="fa-solid fa-circle-exclamation"></i>
-                                    <p class="error-text">Mobile phone is invalid</p>
-                                </span>
                             </div>
                             <div class="mobile-input">
                                 <p class="input-name">Email ID</p>
                                 <div class="phone-add">
                                     <span class="icon-password"><i class="fa-solid fa-envelope"></i></span>
-                                    <input class="phone-input" type="text" name="newEmail" placeholder="Enter Email ID" required value="">
+                                    <input class="phone-input" type="email" name="newEmail" placeholder="Enter Email ID"  value="">
                                 </div>
-                                <span class="error cPassword-error">
-                                    <i class="fa-solid fa-circle-exclamation"></i>
-                                    <p class="error-text"> Email ID is invalid</p>
-                                </span>
                             </div>
                             <div class="dismiss-btn">
                                 <button id="yes" type="submit">Save</button>
@@ -232,6 +223,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <div class="profile-button">
                         <button class="save-button" type="submit">
@@ -245,9 +237,8 @@
                 </form>
             </div>
         </div>
-    </div>
-</main>
-<script src="<c:url value="/js/user_profile.js"/>" type="text/javascript"></script>
+    </main>
+    <script src="<c:url value="/js/user_profile.js"/>" type="text/javascript"></script>
 </body>
 </html>
 

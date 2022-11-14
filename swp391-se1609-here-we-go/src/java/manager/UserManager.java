@@ -44,7 +44,7 @@ public class UserManager {
                 if (rs != null && rs.next()) {
 
                     //us = new User(id, sql, LOGIN, sql, LOGIN, 0, sql, REGISTER);
-                    us = new User(id, rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9));
+                    us = new User(id, rs.getNString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8), rs.getString(9),(rs.getString(10)));
 
                 }
                 if (rs != null) {
@@ -78,7 +78,7 @@ public class UserManager {
                 pst.setString(2, password);
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6), "***", rs.getString(8),rs.getString(9));
+                    user = new User(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6), "***", rs.getString(8),rs.getString(9),(rs.getString(10)));
                 }
             }
         } catch (Exception e) {
@@ -109,7 +109,7 @@ public class UserManager {
                 pst.setString(1, googleId);
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6), "***", rs.getString(8),rs.getString(9));
+                    user = new User(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6), "***", rs.getString(8),rs.getString(9),(rs.getString(10)));
                 }
             }
         } catch (Exception e) {
@@ -180,7 +180,7 @@ public class UserManager {
             PreparedStatement pst = cn.prepareStatement("SELECT * FROM [User] WHERE roleId = 2");
             ResultSet rs = pst.executeQuery();
             while (rs != null && rs.next()) {
-                us = new User(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),rs.getString(9));
+                us = new User(rs.getInt(1), rs.getNString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getString(8),rs.getString(9),(rs.getString(10)));
                 list.add(us);
             }
             cn.close();
@@ -292,6 +292,17 @@ public class UserManager {
         return true;
     }
 
+public static boolean updateUserEmail( long id,String email) throws SQLException {
+        Connection cn = DBUtils.getConnection();
+        if (cn != null) {
+            PreparedStatement pst = cn.prepareStatement("update [dbo].[User] set [email]=? where [userId]=?");
+            pst.setNString(1, email);
+            pst.setLong(2, id);
+            pst.executeUpdate();
+            cn.close();
+        }
+        return true;
+    }
     public static User getUserByPhone(String phone) throws SQLException {
         Connection cn = null;
         User us = null;
@@ -304,7 +315,7 @@ public class UserManager {
                 ResultSet rs = pst.executeQuery();
                 if (rs != null && rs.next()) {
                     us = new User(rs.getLong(1), rs.getString(2), rs.getString(3), phone, rs.getString(5),
-                            rs.getInt(6), rs.getString(7), rs.getString(8),rs.getString(9));
+                            rs.getInt(6), rs.getString(7), rs.getString(8),rs.getString(9),(rs.getString(10)));
                 }
                 if (rs != null) {
                     rs.close();
