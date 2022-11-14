@@ -233,7 +233,7 @@
                                 if (listfb != null) {
                                     int avg = FeedbackManager.getAVGRatebyComId(com.getCompanyId());
                             %>
-                            <p>Average Rate: <%= avg %>/5</p>
+                            <p>Average Rate: <%= avg%>/5</p>
                             <br/>
                             <span><%= listfb.size()%> review</span>
                             <%
@@ -250,12 +250,37 @@
                                 for (Feedback fb : listfb) {
                         %>
                         <hr />
-                        <div class="comment">
+                        <div class="comment" style="border-radius: 20px; box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%); padding: 20px;">
                             <div class="user-info">
                                 <%
-                                    String s = "/uploads/" + UserManager.getUserById(fb.getUserId()).getAvtLink();
+                                    String s = null;
+                                    if (UserManager.getUserById(fb.getUserId()).getAvtLink() != null) {
+                                        s = "/uploads/" + UserManager.getUserById(fb.getUserId()).getAvtLink();
+
                                 %>
-                                <img src="<c:url value="<%= s %>"/>" alt="">
+                                <img src="<c:url value="<%= s%>"/>" alt="">
+                                <%
+                                } else {
+                                    if (UserManager.getUserById(fb.getUserId()).getGender().equals("man")) {
+                                        s = "/uploads/man.png";
+
+                                %>
+                                <img src="<c:url value="<%= s%>"/>" alt="">
+                                <%
+                                } else {
+                                    s = "/uploads/people.png";
+                                %>
+                                <img src="<c:url value="<%= s%>"/>" alt="">    
+                                <%
+                                    }
+                                    if (UserManager.getUserById(fb.getUserId()).getGender().equals("woman")) {
+                                        s = "/uploads/girl.png";
+                                %>
+                                <img src="<c:url value="<%= s%>"/>" alt="">
+                                <%
+                                        }
+                                    }
+                                %>
                                 <p><%= UserManager.getUserById(fb.getUserId()).getName()%></p>    
                                 <p class="date-cm" style="font-weight: 400"><%= fb.getDate()%></p>
                             </div>
@@ -368,7 +393,6 @@
                             <p class="re-cm">
                                 <%= fb.getDescription()%>
                             </p>
-                            <hr />
                         </div>
                         <%
                                 }
@@ -469,17 +493,46 @@
                                                 class="pay-cf-btn"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#myModalPaying"> Submit </button>
-
-
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
                     <%
-                        }
+                    } else {
                     %>
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div
+                                class="modal-content pay-modal"
+                                style="border-radius: 20px; background: #e7f0f3"
+                                >
+                                <div
+                                    class="modal-body pay-cf-msg"
+                                    style="font-size: 20px; font-weight: 500; text-align: center;"
+                                    >
+                                    Please login before writing a review!
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="pay-cf">
+                                        <button
+                                            type="button"
+                                            class="pay-cf-btn"
+                                            data-bs-dismiss="modal"
+                                            >
+                                            OKE
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <%
+                            }
+                        %>
 
                 </section>
             </div>

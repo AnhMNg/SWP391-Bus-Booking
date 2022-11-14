@@ -52,6 +52,7 @@ import javax.mail.Message.RecipientType;
 import javax.mail.Transport;
 import javax.swing.text.AbstractDocument.Content;
 import model.Company;
+
 /**
  *
  * @author Admin
@@ -129,27 +130,32 @@ public class CustomerController extends HttpServlet {
 
     }
 
-    private void sendFeedback(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException{
+    private void sendFeedback(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         int star = 0;
         String feedback;
         String starString = request.getParameter("rating");
-        if (starString!= null)star = Integer.parseInt(starString) ;      
+        if (starString != null) {
+            star = Integer.parseInt(starString);
+        }
         String des = request.getParameter("feedback");
-        if (des != null && !des.equals("")){
-        String busType = request.getParameter("category");
-        feedback = "Feedback about bus type " + busType + ": \n" + des;
-        }else feedback = "";
-        
+        if (des != null && !des.equals("")) {
+            String busType = request.getParameter("category");
+            feedback = busType + ": \n" + des;
+        } else {
+            feedback = "";
+        }
+
         Company com = (Company) request.getSession().getAttribute("COMPANY");
         int comID = com.getCompanyId();
         User us = (User) request.getSession().getAttribute("LOGIN_CUSTOMER");
         long uID = us.getUserId();
         FeedbackManager.sendFeedback(comID, uID, feedback, star);
         request.setAttribute("controller", "company");
-            request.setAttribute("action", "info");
-        }
+        request.setAttribute("action", "info");
+    }
+
     private void selectChangeTicket(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
@@ -167,7 +173,6 @@ public class CustomerController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         String changeTicketIdString = request.getParameter("changeTicketId");
-        
 
         if (changeTicketIdString != null) {
             String depart = request.getParameter("depart");
@@ -198,8 +203,8 @@ public class CustomerController extends HttpServlet {
     private void cancleTicket(HttpServletRequest request, HttpServletResponse response) throws ParseException, SQLException {
         long ticketId = Long.parseLong(request.getParameter("ticketIdCancle"));
         String timeStart = request.getParameter("ticketTimeStartCancle");
-         HttpSession session = request.getSession();
-         User us = (User) session.getAttribute("LOGIN_CUSTOMER");
+        HttpSession session = request.getSession();
+        User us = (User) session.getAttribute("LOGIN_CUSTOMER");
         if (TicketManager.checkValidCancle(timeStart)) {
             TicketManager.deleteTicket(ticketId);
             NotificationManager.add(us.getUserId(), us.getName() + " Cancle ticket");
@@ -240,9 +245,50 @@ public class CustomerController extends HttpServlet {
         session.removeAttribute("listPasPhoneForTicket");
         session.removeAttribute("RouteDetailForTicket");
 
+        //Generate OTP
+        //int ramdonNum = (int) (Math.random() * 9000) + 100000;
+        String code = "Here We Go's ticket code:" + getAlphaNumericString(15);
+        //session = request.getSession();
+        //session.setAttribute("SUBMIT_OTP", otp);
+        if (session != null) {
+            //Send OTP
+            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+            //process phone to +84
+            String newPhone = "+84" + us.getPhone().substring(1);
+            Message message = Message.creator(
+                    new PhoneNumber(newPhone),
+                    new PhoneNumber("+19785033345"),
+                    code
+            ).create();
+
+        }
         request.setAttribute("controller", "user");
         request.setAttribute("action", "myBooking");
 
+    }
+
+    private static String getAlphaNumericString(int n) {
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+        // create StringBuffer size of AlphaNumericString
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index
+                    = (int) (AlphaNumericString.length()
+                    * Math.random());
+
+            // add Character one by one in end of sb
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+
+        return sb.toString();
     }
 
     private void booking(HttpServletRequest request, HttpServletResponse response) throws SQLException, ParseException, UnsupportedEncodingException {
@@ -305,7 +351,19 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER", user);
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
-                session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
+                if (user.getAvtLink() == null) {
+                    
+                    if (user.getGender().equals("man")) {
+                        session.setAttribute("LOGIN_CUSTOMER_IMG", "man.png");
+                    } else {
+                        session.setAttribute("LOGIN_CUSTOMER_IMG", "people.png");
+                    }
+                    if (user.getGender().equals("woman")) {
+                        session.setAttribute("LOGIN_CUSTOMER_IMG", "girl.png");
+                    }
+                } else {
+                    session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
+                }              
                 session.setAttribute("LOGIN_EMAIL", "");
                 session.setAttribute("LOGIN_ROLE", roleID);
 
@@ -429,7 +487,7 @@ public class CustomerController extends HttpServlet {
         String otp6 = request.getParameter("otp6");
         String otpCheck = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
         if (otpCheck.equals(SUBMIT_OTP)) {
-            User user = new User(0, name, null, phone, null, 2, password, "","");
+            User user = new User(0, name, null, phone, null, 2, password, "", "");
             if (UserManager.register(user)) {
                 request.setAttribute("controller", "user");
                 User us = UserManager.getUserByPhone(user.getPhone());
@@ -566,56 +624,55 @@ public class CustomerController extends HttpServlet {
                 }
             }
             String newName = fields.get("newName");
-            String gender=fields.get("gender");
-            String email=fields.get("newEmail");
-            String paatern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-            String newPhone=fields.get("newPhone");
-            String link="<a href='http://localhost:8080/swp391-se1609-here-we-go/user/profile.do'><img src='https://files.fm/u/e8kvdf37u#/view/book.png'></a>";
+            String gender = fields.get("gender");
+            String email = fields.get("newEmail");
+            String paatern = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+            String newPhone = fields.get("newPhone");
+            String link = "<a href='http://localhost:17470/swp391-se1609-here-we-go/user/profile.do'><img src='https://files.fm/u/e8kvdf37u#/view/book.png'></a>";
             User user = UserManager.getUserByPhone(phone);
-             if(email.matches(paatern)){
-            if(email != null){
-                final String fromEmail = "herewego.letstravel@gmail.com"; //requires valid gmail id
-		final String password = "nfwlzxjeumzhoize"; // correct password for gmail id
-                Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-		props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
-		props.put("mail.smtp.socketFactory.class",
-				"javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
-		props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
-		props.put("mail.smtp.port", "465"); //SMTP Port
-                Authenticator auth = new Authenticator() {
-			//override the getPasswordAuthentication method
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(fromEmail, password);
-			}
-		};
-                Session sessionEmail = Session.getDefaultInstance(props, auth);
-		System.out.println("Session created");
-                try{
-                    MimeMessage message=new MimeMessage(sessionEmail);
-                    message.setFrom(new InternetAddress(fromEmail));
-                    message.setRecipients(MimeMessage.RecipientType.TO,InternetAddress.parse(email)
-                    );
-                    message.setSubject("Welcome to HereWeGo");
-                    message.setContent(link, "text/html");
-                    Transport.send(message);
-                    request.setAttribute("verified", "true");
+            if (email.matches(paatern)) {
+                if (email != null) {
+                    final String fromEmail = "herewego.letstravel@gmail.com"; //requires valid gmail id
+                    final String password = "nfwlzxjeumzhoize"; // correct password for gmail id
+                    Properties props = new Properties();
+                    props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+                    props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
+                    props.put("mail.smtp.socketFactory.class",
+                            "javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
+                    props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
+                    props.put("mail.smtp.port", "465"); //SMTP Port
+                    Authenticator auth = new Authenticator() {
+                        //override the getPasswordAuthentication method
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(fromEmail, password);
+                        }
+                    };
+                    Session sessionEmail = Session.getDefaultInstance(props, auth);
+                    System.out.println("Session created");
+                    try {
+                        MimeMessage message = new MimeMessage(sessionEmail);
+                        message.setFrom(new InternetAddress(fromEmail));
+                        message.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(email)
+                        );
+                        message.setSubject("Welcome to HereWeGo");
+                        message.setContent(link, "text/html");
+                        Transport.send(message);
+                        request.setAttribute("verified", "true");
 
-                      session.setAttribute("verified", "true");
-                    session.setAttribute("LOGIN_EMAIL", email);
+                        session.setAttribute("verified", "true");
+                        session.setAttribute("LOGIN_EMAIL", email);
 
-                    request.setAttribute("email", email);
+                        request.setAttribute("email", email);
 
-                }catch(Exception e){
-                    
+                    } catch (Exception e) {
+
+                    }
                 }
-            }
-            }
-            else {
+            } else {
                 request.setAttribute("ERROR", true);
             }
-            if (newName != null && filename.equals("") && gender != null && newPhone !=null ) {
-                if (UserManager.updateUser(newName, user.getUserId(), img,gender, newPhone)) {
+            if (newName != null && filename.equals("") && gender != null && newPhone != null) {
+                if (UserManager.updateUser(newName, user.getUserId(), img, gender, newPhone)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
@@ -624,8 +681,8 @@ public class CustomerController extends HttpServlet {
                     System.out.println("-------save-------");
                 }
             }
-            if (newName != null && filename != "" && gender !=null && newPhone !=null ) {
-                if (UserManager.updateUser(newName, user.getUserId(), filename,gender, newPhone)) {
+            if (newName != null && filename != "" && gender != null && newPhone != null) {
+                if (UserManager.updateUser(newName, user.getUserId(), filename, gender, newPhone)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
@@ -733,7 +790,6 @@ public class CustomerController extends HttpServlet {
         }
     }
 
-
     private void about(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Config.ABOUT_US).forward(request, response);
     }
@@ -788,7 +844,5 @@ public class CustomerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }
