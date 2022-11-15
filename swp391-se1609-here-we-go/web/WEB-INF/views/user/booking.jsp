@@ -411,7 +411,7 @@
                                             <h2>${rd.companyName}</h2>
                                             <div class="type-amt">
                                                 <p class="col-md-6 type">${rd.kindBus}</p>
-                                                <p class="col-md-6 amt">${rd.remaningPosition} Seats Left</p>
+                                                <p class="col-md-6 amt" style="width: 300px;">${rd.remaningPosition} Seats Left</p>
                                             </div>
                                         </div>
                                         <div class="col-md-6 seat-booking-form-dt-pc">

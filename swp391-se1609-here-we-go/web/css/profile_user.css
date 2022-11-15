@@ -25,6 +25,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : Hoang Anh
 */
 
+.main-nav {
+    animation: changeBackgroundColor 5s ease-in-out infinite;
+}
+
+@keyframes changeBackgroundColor {
+    0% {
+        background-color: #c3e1eb;
+    }
+
+    50% {
+        background-color: #d1d8ee;
+    }
+
+    75% {
+        background-color: #c3e4df;
+    }
+
+    100% {
+        background-color: #c3e1eb;
+    }
+
+}
+
 .profile-body{
     background: #fff !important;
     display: flex;

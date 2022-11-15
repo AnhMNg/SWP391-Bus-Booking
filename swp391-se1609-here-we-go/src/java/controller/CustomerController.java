@@ -789,7 +789,7 @@ public class CustomerController extends HttpServlet {
                     String newPhone = "+84" + forgotPhone.substring(1);
                     Message message = Message.creator(
                             new PhoneNumber(newPhone),
-                            new PhoneNumber("+19785033345"),
+                            new PhoneNumber("+18158578891"),
                             otp
                     ).create();
 
