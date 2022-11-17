@@ -213,7 +213,7 @@
                                         </div>
                                         <div class="field-type">
                                             <div class="label">
-                                                <input class="form-control" type="number" name="currency-field" id="currency-field" step="100000"
+                                                <input class="form-control" type="number" name="currency-field" id="currency-field" step="10000"
                                                        value="100000" placeholder="100.000 VND" >
                                             </div>
                                         </div>

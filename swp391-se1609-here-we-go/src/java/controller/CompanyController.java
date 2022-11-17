@@ -61,27 +61,36 @@ public class CompanyController extends HttpServlet {
             case "delete":
                 delete(request, response);
                 break;
-
+            case "routesList":
+                routesList(request, response);
+                break;
+//            case "info":
+//                info(request, response);
+//                break;
         }
         request.getRequestDispatcher(Config.LAYOUT).forward(request, response);
     }
-    private void delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String ridString = request.getParameter("routeId");
         long rid = Long.parseLong(ridString);
         RouteDetailManager.delete(rid);
         request.setAttribute("controller", "company");
         request.setAttribute("action", "routesList");
     }
-    private void toDelete(HttpServletRequest request, HttpServletResponse response){
+
+    private void toDelete(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("controller", "company");
         request.setAttribute("action", "routesList");
     }
-private void Toupload(HttpServletRequest request, HttpServletResponse response){
+
+    private void Toupload(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("controller", "company");
         request.setAttribute("action", "upload");
     }
-    private void upload(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, Exception{
-         response.setContentType("text/html;charset=UTF-8");
+
+    private void upload(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, Exception {
+        response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         Company com = (Company) request.getSession().getAttribute("LOGIN_COMPANY");
         String cityFrom = request.getParameter("cityfrom");
@@ -93,29 +102,29 @@ private void Toupload(HttpServletRequest request, HttpServletResponse response){
         String typeBus = request.getParameter("type-bus");
         String priceString = request.getParameter("currency-field");
         int price = 0;
-        if (!priceString.equals("")){
-        price = Integer.parseInt(priceString);
+        if (!priceString.equals("")) {
+            price = Integer.parseInt(priceString);
         }
-        
+
         String startTime = request.getParameter("startTime");
         startTime = startTime.replace('T', ' ');
         String pickpoint = request.getParameter("pickuppoint");
         String droppoint = request.getParameter("droppoint");
-        
-        if (depart.equals(", ") || destination.equals(", ") || depart.equals(destination) || typeBus == null || priceString.equals("") || startTime.equals("") || pickpoint.equals("") || droppoint.equals("") ){
+
+        if (depart.equals(", ") || destination.equals(", ") || depart.equals(destination) || typeBus == null || priceString.equals("") || startTime.equals("") || pickpoint.equals("") || droppoint.equals("")) {
             request.setAttribute("controller", "company");
-        request.setAttribute("action", "upload");
-        request.setAttribute("mes", "Information is invalid! Can't upload. Please upload again!");
+            request.setAttribute("action", "upload");
+            request.setAttribute("mes", "Information is invalid! Can't upload. Please upload again!");
         } else {
-        RouteDetailManager.AddRouteDetail(depart, destination, com.getCompanyId(), typeBus, startTime, price, "", pickpoint, droppoint);
-        
-        request.setAttribute("controller", "company");
-        request.setAttribute("action", "upload");
-        request.setAttribute("mes", "Upload successfully!  You can continue upload a new route!");
+            RouteDetailManager.AddRouteDetail(depart, destination, com.getCompanyId(), typeBus, startTime, price, "", pickpoint, droppoint);
+
+            request.setAttribute("controller", "company");
+            request.setAttribute("action", "upload");
+            request.setAttribute("mes", "Upload successfully!  You can continue upload a new route!");
         }
-        
-        
+
     }
+
     private void logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -133,6 +142,7 @@ private void Toupload(HttpServletRequest request, HttpServletResponse response){
             if (com != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("LOGIN_COMPANY", com);
+                session.setAttribute("LOGIN_COMPANY_ID", com.getCompanyId());
                 session.setAttribute("LOGIN_COMPANY_NAME", com.getName());
                 session.setAttribute("LOGIN_COMPANY_NAME_DES", com.getDesription());
                 session.setAttribute("LOGIN_COMPANY_NAME_LOGO", com.getImgLink());
@@ -168,6 +178,16 @@ private void Toupload(HttpServletRequest request, HttpServletResponse response){
             request.setAttribute("message", "username or password is incorrect!");
         }
     }
+
+    private void routesList(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("controller", "company");
+        request.setAttribute("action", "routesList");
+    }
+
+//    private void info(HttpServletRequest request, HttpServletResponse response) {
+//        request.setAttribute("controller", "company");
+//        request.setAttribute("action", "info");
+//    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

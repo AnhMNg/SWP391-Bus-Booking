@@ -44,7 +44,7 @@ public class AdminController extends HttpServlet {
                 SortAZ(request, response);
                 break;
             case "deleteCus":
-                    DeleteCustomer(request, response);
+                DeleteCustomer(request, response);
                 break;
         }
 

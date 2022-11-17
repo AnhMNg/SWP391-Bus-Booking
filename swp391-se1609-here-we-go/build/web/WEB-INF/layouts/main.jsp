@@ -68,12 +68,14 @@
                             <ul>
                                 <c:if test="${sessionScope.LOGIN_CUSTOMER != null && sessionScope.LOGIN_ROLE == 2}">
                                     <li class="mb">
-                                        <a class="mb-text" href="<c:url value="/user/myBooking.do"/>" style="font-size: 15px; color: #394a75;">MY BOOKING</a>
+                                        <a class="mb-text" href="<c:url value="/user/myBooking.do"/>" style="font-size: 15px;
+                                           color: #394a75;">MY BOOKING</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.LOGIN_COMPANY != null}">
                                     <li class="mb">
-                                        <a class="mb-text" href="/" style="font-size: 15px; color: #394a75;">MY ROUTES</a>
+                                        <a class="mb-text" href="<c:url value="/company/routesList.do"/>" style="font-size: 15px;
+                                           color: #394a75;">MY ROUTES</a>
                                     </li>
                                 </c:if>
                                 <c:if test="${sessionScope.LOGIN_CUSTOMER == null && sessionScope.LOGIN_COMPANY == null}">
@@ -104,7 +106,11 @@
                                         <div class="dropdown">
                                             <button class="button1">${sessionScope.LOGIN_COMPANY_NAME}</button>
                                             <div class="dropdown-content">
-                                                <a class="choose" href="<c:url value="/company/info.do"/>">My Profile</a>
+                                                <!--<a class="choose" href="/swp391-se1609-here-we-go/company/info.do">My Profile</a>-->
+                                                <form action="<c:url value="/company/infoFind.do"/>" method="POST">
+                                                    <label for="${sessionScope.LOGIN_COMPANY_ID}" class="choose">My Profile</label>
+                                                    <input id="${sessionScope.LOGIN_COMPANY_ID}" type="submit" hidden  name="comP" value="${sessionScope.LOGIN_COMPANY_ID}"/>
+                                                </form>
                                                 <a class="choose" href="<c:url value="/company/logout.do"/>">Log Out</a>
                                             </div>
                                         </div>

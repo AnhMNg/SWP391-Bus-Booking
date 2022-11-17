@@ -156,14 +156,14 @@
                             <div class="steps__card-number">04</div>
                             <h3 class="steps__card-title">Payment</h3>
                             <p class="steps__card-description">
-                                There are many payment methods available. Please choose the method you want.
+                                We use PayPal to process our payments.
                             </p>
                         </div>
                         <div class="steps__card">
                             <div class="steps__card-number">05</div>
                             <h3 class="steps__card-title">Get e-tickets</h3>
                             <p class="steps__card-description">
-                                We will send the e-ticket to your email within 60 minutes after receiving the payment
+                                We will send the e-ticket code to your SMS within 60 minutes after receiving the payment
                                 amount.
                             </p>
                         </div>
@@ -240,15 +240,14 @@
                             <header class="questions__header">
                                 <i class="ri-add-line questions__icon"></i>
                                 <h3 class="questions__item-title">
-                                    When will I have the confirmation email?
+                                    When will I have the e-ticket?
                                 </h3>
                             </header>
 
                             <div class="questions__content">
                                 <p class="questions__description">
-                                    In most cases, you will receive an email within 60 minutes of booking. If you still have
-                                    not received it after that time, please check your spam and/or spam filter. You can also
-                                    download tickets
+                                    In most cases, you will receive an e-ticket code within 60 minutes of booking by SMS. If you still have
+                                    not received it after that time, please contact with us by email or phone number. 
                                 </p>
                             </div>
 
@@ -265,8 +264,7 @@
                             <div class="questions__content">
                                 <p class="questions__description">
                                     You can always view your bus ticket details online by logging in and selecting "My
-                                    bookings" from the account menu command. If you don't know your login details, you can
-                                    follow the "My bookings" link in your confirmation email.
+                                    bookings" from the account menu command.
                                 </p>
                             </div>
 
@@ -282,12 +280,8 @@
 
                             <div class="questions__content">
                                 <p class="questions__description">
-                                    In most cases, you will receive your booking confirmation by email within 30 minutes of
-                                    completing your booking. If you still have not received it after that time, please check
-                                    your spam and/or spam folder. You can also view your ticket details online by logging in
-                                    and selecting "My Bookings" from the account menu command. If you are still unable to
-                                    locate your booking and have not received your booking confirmation after 24 hours,
-                                    please contact us.
+                                    In most cases, you will receive an e-ticket code within 60 minutes of booking by SMS. If you still have
+                                    not received it after that time, please contact with us by email or phone number. 
                                 </p>
                             </div>
 
@@ -306,7 +300,8 @@
                             <div class="questions__content">
                                 <p class="questions__description">
                                     You can cancel your reservation online on the website by logging in and selecting "My
-                                    booking" from the account menu and pressing cancel.
+                                    booking" from the account menu and pressing cancel. We only allow you to cancel your trip 
+                                    for trips departing 3 days before the current time.
                                 </p>
                             </div>
 
@@ -322,8 +317,7 @@
 
                             <div class="questions__content">
                                 <p class="questions__description">
-                                    After you cancel your reservation with us, you will receive an email confirming the
-                                    cancellation. Please check your inbox and junk folder.
+                                    After you cancel your reservation with us, you will receive OTP code from Here We Go. Please check your SMS within 60 minutes.
                                 </p>
                             </div>
 
@@ -340,8 +334,9 @@
                             <div class="questions__content">
                                 <p class="questions__description">
                                     The refund amount, if any, will be immediately deposited to our bank. From the date of
-                                    submission/refund, it may take up to 30 days for banks to refund this amount, or until
-                                    your next billing cycle. The refund will be returned to you by the credit card company.
+                                    submission/refund, cancel code will be valid within 30 days from the date of ticket cancellation. 
+                                    Please bring the cancel code to the nearest respective transportation company facility, 
+                                    you will only get back the corresponding amount of the discount of Here We Go and the transportation company.
                                 </p>
                             </div>
 
@@ -357,7 +352,7 @@
                             <div class="questions__content">
                                 <p class="questions__description">
                                     You can cancel your reservation online on the website by logging in and selecting "My
-                                    booking" from the account menu and pressing cancel.
+                                    booking" from the account menu and pressing change. 
                                 </p>
                             </div>
 
