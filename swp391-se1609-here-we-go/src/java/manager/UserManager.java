@@ -25,11 +25,11 @@ public class UserManager {
 
     private static final String LOGIN = "SELECT * FROM [User] WHERE phone = ? AND password = ?";
     private static final String LOGIN_GOOGLE = "SELECT * FROM [User] WHERE googleId = ?";
-    private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,null,null)";
+    private static final String REGISTER = "INSERT INTO [User] VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,?,?)";
     private static final String CHECK_DUPLICATE = "SELECT * FROM [User] WHERE phone = ?";
     private static final String UPDATE_USER_INFORMATION = "update [dbo].[User] set [name]=?, [avatarLink]=?, [gender]=?, [phone]=? where [userId]=?";
     private static final String CREATED_DATE = "SELECT [User].dateCreate FROM [User] WHERE [User].userId = ?";
-    private static final String CHANGE_PASSWORD = "UPDATE [User] SET [password] = ? WHERE userId = ?";
+    private static final String CHANGE_PASSWORD = "UPDATE [User] SET [password] = ? WHERE [User].userId = ?";
 
     public static User getUserById(long id) throws SQLException {
         Connection cn = null;

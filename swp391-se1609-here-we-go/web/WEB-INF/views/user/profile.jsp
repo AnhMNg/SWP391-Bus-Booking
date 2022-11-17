@@ -111,13 +111,14 @@
                                         <li class="information-item">
                                             <div class="information-content">
                                                 <span class="information-name">Gender</span>
-
-                                                <span class=" mr-2 information-detail text-capitalize"><%= user.getGender()%></span>
                                                 <%
                                                     if (user.getGender() == null) {
                                                 %>
                                                 <span class=" mr-2 add-button" id="add-button">+ Add</span>
+                                                <% } else {%>
+                                                <span class=" mr-2 information-detail text-capitalize"><%= user.getGender()%></span>
                                                 <% }%>
+                                                
                                             </div>
                                         </li>
                                         <li class="information-item">
@@ -170,7 +171,7 @@
                                             <div class="information-content">
                                                 <span class="information-name">Password</span>
                                                 <span class=" mr-2 information-detail text-break d1">******</span>
-                                                <a class="change-profile-password text-decoration-none" href="<c:url value="/user/changePass.do"/>">Change Password?</a>
+                                                <a class="change-profile-password text-decoration-none" href="<c:url value="/user/changePassProfile.do"/>">Change Password?</a>
                                             </div>
                                         </li>
                                     </ul>

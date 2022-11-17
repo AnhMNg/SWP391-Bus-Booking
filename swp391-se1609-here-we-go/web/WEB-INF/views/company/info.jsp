@@ -107,7 +107,7 @@
                             <br />
                             <!-- Only TC role can view and edit data from routes list -->
                             <c:if test="${sessionScope.LOGIN_COMPANY != null}">
-                                <a href="/swp391-se1609-here-we-go/company/routesList.do" 
+                                <a href="<c:url value="/company/routesList.do"/>" 
                                    >Routes List <i class="fa fa-bus"></i
                                     ></a>
                                 </c:if>

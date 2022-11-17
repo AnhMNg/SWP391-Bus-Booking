@@ -80,6 +80,13 @@ html {
     font-weight: bold;
 }
 
+.main-nav-links ul li label {
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+
 .button1 {
     border: 0;
     background: linear-gradient(90deg, #617FCD 42.42%, #BE6EBF 100%);
@@ -117,8 +124,14 @@ html {
     font-size: 13px;
 }
 
+
 .main-nav-links ul li .dropdown .dropdown-content a:hover {
     background-color: #5695aa;
+}
+
+.main-nav-links ul li .dropdown .dropdown-content label:hover {
+    background-color: #5695aa;
+    cursor: pointer;
 }
 
 .main-nav-links ul li .dropdown:hover .dropdown-content {
@@ -382,6 +395,7 @@ nav .fa {
 
 .content-pr-bd .card-right {
     margin-left: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .card-text {

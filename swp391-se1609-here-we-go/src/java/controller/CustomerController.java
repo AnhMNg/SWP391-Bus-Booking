@@ -125,7 +125,10 @@ public class CustomerController extends HttpServlet {
                 sendFeedback(request, response);
                 break;
             case "send":
-                send(request,response);
+                send(request, response);
+                break;
+            case "resetPassProfile":
+                resetPassProfile(request, response);
                 break;
             default:
                 break;
@@ -212,6 +215,23 @@ public class CustomerController extends HttpServlet {
         if (TicketManager.checkValidCancle(timeStart)) {
             TicketManager.deleteTicket(ticketId);
             NotificationManager.add(us.getUserId(), us.getName() + " Cancle ticket");
+            //Generate OTP
+            //int ramdonNum = (int) (Math.random() * 9000) + 100000;
+            String code = "Here We Go's Cancel code: " + getAlphaNumericString(15);
+            //session = request.getSession();
+            //session.setAttribute("SUBMIT_OTP", otp);
+            if (session != null) {
+                //Send OTP
+                Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+                //process phone to +84
+                String newPhone = "+84" + us.getPhone().substring(1);
+                Message message = Message.creator(
+                        new PhoneNumber(newPhone),
+                        new PhoneNumber("+18158578891"),
+                        code
+                ).create();
+
+            }
             request.setAttribute("controller", "user");
             request.setAttribute("action", "myBooking");
         } else {
@@ -251,7 +271,7 @@ public class CustomerController extends HttpServlet {
 
         //Generate OTP
         //int ramdonNum = (int) (Math.random() * 9000) + 100000;
-        String code = "Here We Go's ticket code:" + getAlphaNumericString(15);
+        String code = "Here We Go's ticket code: " + getAlphaNumericString(15);
         //session = request.getSession();
         //session.setAttribute("SUBMIT_OTP", otp);
         if (session != null) {
@@ -355,23 +375,19 @@ public class CustomerController extends HttpServlet {
                 session.setAttribute("LOGIN_CUSTOMER", user);
                 session.setAttribute("LOGIN_CUSTOMER_NAME", user.getName());
                 session.setAttribute("LOGIN_CUSTOMER_PHONE", user.getPhone());
-                if (user.getAvtLink() == null) { 
+                if (user.getAvtLink() == null) {
                     if (user.getGender() == null) {
                         session.setAttribute("LOGIN_CUSTOMER_IMG", "people.png");
-                    }
-                    else switch (user.getGender()) {
-                        case "man":
+                    } else if (user.getGender() != null) {
+                        if (user.getGender().equals("man")) {
                             session.setAttribute("LOGIN_CUSTOMER_IMG", "man.png");
-                            break;
-                        case "woman":
+                        } else if (user.getGender().equals("woman")) {
                             session.setAttribute("LOGIN_CUSTOMER_IMG", "girl.png");
-                            break;
-                        default:
-                            break;
+                        }
                     }
                 } else {
                     session.setAttribute("LOGIN_CUSTOMER_IMG", user.getAvtLink());
-                }              
+                }
                 session.setAttribute("LOGIN_EMAIL", user.getEmail());
                 session.setAttribute("LOGIN_ROLE", roleID);
                 if (roleID == 1) {
@@ -528,7 +544,7 @@ public class CustomerController extends HttpServlet {
             request.setAttribute("action", "booking");
         }
     }
-    
+
     private void filter(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, UnsupportedEncodingException, ParseException {
         try {
             response.setContentType("text/html;charset=UTF-8");
@@ -636,45 +652,46 @@ public class CustomerController extends HttpServlet {
             String newPhone = fields.get("newPhone");
             String link = "<a href='http://localhost:8080/swp391-se1609-here-we-go/user/profile.do'><img src='https://scontent.fsgn5-10.fna.fbcdn.net/v/t39.30808-6/315514627_3272981566295938_7366370551689330929_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=N3mfCHcxcfQAX8OK7ZI&_nc_ht=scontent.fsgn5-10.fna&oh=00_AfC2lgUw6QexVUnhtFyK86LxPTedLjZxHxlTVvjEyz3bxA&oe=637693D1'></a>";
             User user = UserManager.getUserByPhone(phone);
-                if (!email.equals("")) {
-                     final String fromEmail = "herewego.letstravel@gmail.com"; //requires valid gmail id
-                    final String password = "sdoyrmgixklbgzle"; // correct password for gmail id
-            // your host email smtp server details
-          Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-		Session session1 = Session.getInstance(props,
-		  new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-			return new PasswordAuthentication(fromEmail, password);
-			}
-		  });
-		try {
-			javax.mail.Message message = new MimeMessage(session1);
-			message.setFrom(new InternetAddress(fromEmail));
-			message.setRecipients(javax.mail.Message.RecipientType.TO,
-			InternetAddress.parse(email));
-			message.setSubject("Welcome to HereWeGo");
-                        message.setContent(link, "text/html");
-			Transport.send(message);
-                        if(UserManager.updateUserEmail(user.getUserId(), email)){
-                             NotificationManager.add(user.getUserId(), user.getName() + " has verify email");
-                        }
-                        session.setAttribute("LOGIN_EMAIL", email);
+            if (!email.equals("")) {
+                final String fromEmail = "herewego.letstravel@gmail.com"; //requires valid gmail id
+                final String password = "sdoyrmgixklbgzle"; // correct password for gmail id
+                // your host email smtp server details
+                Properties props = new Properties();
+                props.put("mail.smtp.auth", "true");
+                props.put("mail.smtp.starttls.enable", "true");
+                props.put("mail.smtp.host", "smtp.gmail.com");
+                props.put("mail.smtp.port", "587");
+                Session session1 = Session.getInstance(props,
+                        new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(fromEmail, password);
+                    }
+                });
+                try {
+                    javax.mail.Message message = new MimeMessage(session1);
+                    message.setFrom(new InternetAddress(fromEmail));
+                    message.setRecipients(javax.mail.Message.RecipientType.TO,
+                            InternetAddress.parse(email));
+                    message.setSubject("Welcome to HereWeGo");
+                    message.setContent(link, "text/html");
+                    Transport.send(message);
+                    if (UserManager.updateUserEmail(user.getUserId(), email)) {
+                        NotificationManager.add(user.getUserId(), user.getName() + " has verify email");
+                    }
+                    session.setAttribute("LOGIN_EMAIL", email);
 
-                        request.setAttribute("email", email);
-			System.out.println("Done");
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
+                    request.setAttribute("email", email);
+                    System.out.println("Done");
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
                 }
-                    if (newName != null && filename.equals("") && gender != null && newPhone != null) {
+            }
+            if (newName != null && filename.equals("") && gender != null && newPhone != null) {
                 if (UserManager.updateUser(newName, user.getUserId(), img, gender.toLowerCase(), newPhone)) {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
+                    session.setAttribute("LOGIN_CUSTOMER_PHONE", newPhone);
                     session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
                     session.setAttribute("LOGIN_CUSTOMER_IMG", img);
                     System.out.println("-------save-------");
@@ -685,6 +702,7 @@ public class CustomerController extends HttpServlet {
                     NotificationManager.add(user.getUserId(), user.getName() + " has edit profile imformation");
                     request.setAttribute("controller", "user");
                     request.setAttribute("action", "profile");
+                    session.setAttribute("LOGIN_CUSTOMER_PHONE", newPhone);
                     session.setAttribute("LOGIN_CUSTOMER_NAME", newName);
                     session.setAttribute("LOGIN_CUSTOMER_IMG", filename);
                     System.out.println("-------save-------");
@@ -697,54 +715,55 @@ public class CustomerController extends HttpServlet {
             log("Error at MainController: " + ex.toString());
         }
     }
- private void send(HttpServletRequest request, HttpServletResponse response)
+
+    private void send(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         try {
-            String email=request.getParameter("email");
-            String name=request.getParameter("name");
-            String mess=request.getParameter("message");
-              final String fromEmail = "herewego.letstravel@gmail.com"; //requires valid gmail id
-                    final String password = "sdoyrmgixklbgzle"; // correct password for gmail id
+            String email = request.getParameter("email");
+            String name = request.getParameter("name");
+            String mess = request.getParameter("message");
+            final String fromEmail = "herewego.letstravel@gmail.com"; //requires valid gmail id
+            final String password = "sdoyrmgixklbgzle"; // correct password for gmail id
             // your host email smtp server details
-          Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-		Session session = Session.getInstance(props,
-		  new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-			return new PasswordAuthentication(fromEmail, password);
-			}
-		  });
-		try {
-			javax.mail.Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(fromEmail));
-			message.setRecipients(javax.mail.Message.RecipientType.TO,
-			InternetAddress.parse(fromEmail));
-                        String link="<p> Email: "+ email+" </p>"
-                                + "<p>Name: " +name+"</p>"
-                                + "<p> Message: "+mess+"</p>";
-			message.setSubject("Contact HereWeGo");
-                         message.setContent(link, "text/html");
-			Transport.send(message);
-			System.out.println("Done");
-                        NotificationManager.add("HereWeGo has new contact.");
-                        request.getRequestDispatcher(Config.ABOUT_US).forward(request, response);
-                        
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
-        }
-         catch (Exception ex) {
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+            Session session = Session.getInstance(props,
+                    new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(fromEmail, password);
+                }
+            });
+            try {
+                javax.mail.Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(fromEmail));
+                message.setRecipients(javax.mail.Message.RecipientType.TO,
+                        InternetAddress.parse(fromEmail));
+                String link = "<p> Email: " + email + " </p>"
+                        + "<p>Name: " + name + "</p>"
+                        + "<p> Message: " + mess + "</p>";
+                message.setSubject("Contact HereWeGo");
+                message.setContent(link, "text/html");
+                Transport.send(message);
+                System.out.println("Done");
+                NotificationManager.add("HereWeGo has new contact.");
+                request.getRequestDispatcher(Config.ABOUT_US).forward(request, response);
+
+            } catch (MessagingException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (Exception ex) {
             request.setAttribute("controller", "error");
             request.setAttribute("action", "index");
             request.setAttribute("message", ex.getMessage());
             log("Error at MainController: " + ex.toString());
         }
- }
+    }
+
     private void checkPass(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -838,6 +857,32 @@ public class CustomerController extends HttpServlet {
 
     private void about(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(Config.ABOUT_US).forward(request, response);
+    }
+
+    private void resetPassProfile(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, Exception {
+        try {
+            HttpSession session = request.getSession();
+            User userReset = (User) session.getAttribute("LOGIN_CUSTOMER");
+            String resetPass = request.getParameter("resetPass");
+            String confirmRPass = request.getParameter("confirmRPass");
+            if (resetPass.equals(confirmRPass)) {
+                if (UserManager.changePasword(userReset.getUserId(), resetPass)) {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "profile");
+                    request.setAttribute("message", "Successfully changed!");
+                } else {
+                    request.setAttribute("controller", "user");
+                    request.setAttribute("action", "changePassProfile");
+                    request.setAttribute("message", "Confirm password doesn't match!");
+                }
+            }
+        } catch (SQLException ex) {
+            request.setAttribute("controller", "error");
+            request.setAttribute("action", "index");
+            request.setAttribute("message", ex.getMessage());
+            log("Error at MainController: " + ex.toString());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
