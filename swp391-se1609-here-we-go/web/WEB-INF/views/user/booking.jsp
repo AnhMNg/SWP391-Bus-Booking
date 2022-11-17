@@ -403,7 +403,6 @@
                         <c:if test="${(rd.kindBus == 'Normal Bus') and (rd.cappacity == 29)}">
                             <%--29 Seats--%>
                             <form action="<c:url value="/user/booking.do"/>" class="container">
-
                                 <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
                                 <div class="seat-booking-form-dt">
                                     <div class="seat-booking-form-dt-header">
@@ -1109,1748 +1108,1748 @@
                                         </div>
                                     </div>
                                 </div>
-                                </from>  
-                                <%--29 Seats--%>
-                            </c:if>
-                            <c:if test="${(rd.kindBus == 'Sleeper Bus') and (rd.cappacity == 52)}">
-                                <%--Sleeper Bus Form--%>
-                                <form action="<c:url value="/user/booking.do"/>" class="container">
+                            </form>
 
-                                    <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
-                                    <div class="seat-booking-form-dt">
-                                        <div class="seat-booking-form-dt-header">
-                                            <div class="col-md-6 seat-booking-form-dt-tt">
-                                                <h2>${rd.companyName}</h2>
-                                                <div class="type-amt">
-                                                    <p class="col-md-6 type">${rd.kindBus}</p>
-                                                    <p class="col-md-6 amt">${rd.remaningPosition} Seats Left</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 seat-booking-form-dt-pc">
-                                                <h3 class="price">${rd.price}VND</h3>
+
+
+                            <%--29 Seats--%>
+                        </c:if>
+                        <c:if test="${(rd.kindBus == 'Sleeper Bus') and (rd.cappacity == 52)}">
+                            <%--Sleeper Bus Form--%>
+                            <form action="<c:url value="/user/booking.do"/>" class="container">
+
+                                <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
+                                <div class="seat-booking-form-dt">
+                                    <div class="seat-booking-form-dt-header">
+                                        <div class="col-md-6 seat-booking-form-dt-tt">
+                                            <h2>${rd.companyName}</h2>
+                                            <div class="type-amt">
+                                                <p class="col-md-6 type">${rd.kindBus}</p>
+                                                <p class="col-md-6 amt">${rd.remaningPosition} Seats Left</p>
                                             </div>
                                         </div>
-                                        <div class="seat-booking-form-dt-ct">
-                                            <div class="col-md-5 seat-booking-form-dt-ct-t-pt">
-                                                <div class="route-name" style="display: flex;">
-                                                    <h6 style="padding-right: 5px;">${rd.depart}</h6><i class="fa fa-long-arrow-right" style="padding-top: 4px;"></i><h6 style="padding-left: 5px;">${rd.destination}</h6>
-                                                </div>   
-                                                <p>${rd.startTime}</p>
-                                                <hr style="width: 200px" />
-                                                <div class="seat-point">
-                                                    <span>Select Pickup Point</span>
-                                                    <select class="form-select seat-point-select">
-                                                        <option>${rd.departDetail}</option>
-                                                        <option>#</option>
-                                                    </select>
+                                        <div class="col-md-6 seat-booking-form-dt-pc">
+                                            <h3 class="price">${rd.price}VND</h3>
+                                        </div>
+                                    </div>
+                                    <div class="seat-booking-form-dt-ct">
+                                        <div class="col-md-5 seat-booking-form-dt-ct-t-pt">
+                                            <div class="route-name" style="display: flex;">
+                                                <h6 style="padding-right: 5px;">${rd.depart}</h6><i class="fa fa-long-arrow-right" style="padding-top: 4px;"></i><h6 style="padding-left: 5px;">${rd.destination}</h6>
+                                            </div>   
+                                            <p>${rd.startTime}</p>
+                                            <hr style="width: 200px" />
+                                            <div class="seat-point">
+                                                <span>Select Pickup Point</span>
+                                                <select class="form-select seat-point-select">
+                                                    <option>${rd.departDetail}</option>
+                                                    <option>#</option>
+                                                </select>
+                                            </div>
+                                            <div class="seat-point">
+                                                <span>Select Drop Point</span>
+                                                <select class="form-select seat-point-select">
+                                                    <option>${rd.destinationDetail}</option>
+                                                    <option>#</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 seat-pick">
+                                            <p class="seat-pick-tt">Select Seats</p>
+                                            <div class="seat-rule">
+                                                <ul class="seat-rule-ins">
+                                                    <li>
+                                                        <div class="seat"></div>
+                                                        <small>N/A</small>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="selected"></div>
+                                                        <small>Selected</small>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="seat occupied"></div>
+                                                        <small>Occupied</small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="seat-map">
+                                                <div class="col-md-6">
+                                                    <div class="seat-pos">
+                                                        <div class="">
+                                                            <p>Lower Berth</p>
+                                                        </div>
+                                                        <div class="seat-pos-map">
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 1}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox"  name="seat" value="1"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 2}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="2"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 3}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="3"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 4}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="4"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 5}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="5"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 6}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="6"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 7}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="7"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 8}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="8"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 9}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="9"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 10}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="10"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 11}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="11"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 12}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="12"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 13}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="13"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 14}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="14"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 15}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="15"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 16}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="16"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 17}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="17"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 18}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="18"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 19}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="19"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 20}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="20"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 21}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="21"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 22}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="22"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 23}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="23"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 24}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="24"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 25}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="25"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 26}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="26"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="seat-point">
-                                                    <span>Select Drop Point</span>
-                                                    <select class="form-select seat-point-select">
-                                                        <option>${rd.destinationDetail}</option>
-                                                        <option>#</option>
-                                                    </select>
+                                                <div class="col-md-6">
+                                                    <div class="seat-pos">
+                                                        <div class="">
+                                                            <p>Upper Berth</p>
+                                                        </div>
+                                                        <div class="seat-pos-map">
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 27}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="27"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 28}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="28"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 29}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="29"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 30}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="30"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 31}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="31"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 32}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="32"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 33}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="33"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 34}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="34"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 35}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="35"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 36}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="36"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 37}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="37"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 38}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="38"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 39}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="39"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 40}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="40"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 41}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="41"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 42}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="42"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 43}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="43"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 44}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="44"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 45}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="45"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 46}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="46"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 47}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="47"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 48}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="48"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 49}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="49"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 50}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="50"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 51}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="51"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 52}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="52"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-7 seat-pick">
-                                                <p class="seat-pick-tt">Select Seats</p>
-                                                <div class="seat-rule">
-                                                    <ul class="seat-rule-ins">
-                                                        <li>
-                                                            <div class="seat"></div>
-                                                            <small>N/A</small>
-                                                        </li>
-
-                                                        <li>
-                                                            <div class="selected"></div>
-                                                            <small>Selected</small>
-                                                        </li>
-
-                                                        <li>
-                                                            <div class="seat occupied"></div>
-                                                            <small>Occupied</small>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="seat-map">
-                                                    <div class="col-md-6">
-                                                        <div class="seat-pos">
-                                                            <div class="">
-                                                                <p>Lower Berth</p>
-                                                            </div>
-                                                            <div class="seat-pos-map">
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 1}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox"  name="seat" value="1"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 2}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="2"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 3}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="3"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 4}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="4"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 5}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="5"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 6}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="6"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 7}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="7"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 8}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="8"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 9}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="9"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 10}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="10"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 11}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="11"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 12}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="12"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 13}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="13"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 14}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="14"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 15}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="15"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 16}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="16"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 17}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="17"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 18}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="18"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 19}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="19"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 20}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="20"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 21}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="21"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 22}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="22"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 23}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="23"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 24}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="24"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 25}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="25"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 26}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="26"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="seat-pos">
-                                                            <div class="">
-                                                                <p>Upper Berth</p>
-                                                            </div>
-                                                            <div class="seat-pos-map">
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 27}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="27"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 28}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="28"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 29}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="29"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 30}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="30"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 31}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="31"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 32}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="32"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 33}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="33"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 34}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="34"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 35}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="35"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 36}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="36"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 37}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="37"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 38}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="38"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 39}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="39"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 40}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="40"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 41}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="41"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 42}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="42"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 43}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="43"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 44}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="44"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 45}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="45"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 46}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="46"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 47}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="47"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 48}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="48"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 49}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="49"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 50}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="50"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 51}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="51"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 52}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="52"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="seat-pick-btn">
-                                                    <input id="spt" type="submit" class="seat-pick-btn-b" value="book">
-                                                </div>
+                                            <div class="seat-pick-btn">
+                                                <input id="spt" type="submit" class="seat-pick-btn-b" value="book">
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                                <%--Sleeper Bus Form--%>
-                            </c:if>
-                            <c:if test="${(rd.kindBus == 'Sleeper Room Bus') and (rd.cappacity == 20)}">
-                                <%--Sleeper Room--%>
-                                <form action="<c:url value="/user/booking.do"/>" class="container">
-
-                                    <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
-                                    <div class="seat-booking-form-dt">
-                                        <div class="seat-booking-form-dt-header">
-                                            <div class="col-md-6 seat-booking-form-dt-tt">
-                                                <h2>${rd.companyName}</h2>
-                                                <div class="type-amt">
-                                                    <p class="col-md-6 type">${rd.kindBus}</p>
-                                                    <p class="col-md-6 amt">${rd.remaningPosition} Seats Left</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 seat-booking-form-dt-pc">
-                                                <h3 class="price">${rd.price}VND</h3>
+                                </div>
+                            </form>
+                            <%--Sleeper Bus Form--%>
+                        </c:if>
+                        <c:if test="${(rd.kindBus == 'Sleeper Room Bus') and (rd.cappacity == 20)}">
+                            <%--Sleeper Room--%>
+                            <form action="<c:url value="/user/booking.do"/>" class="container">
+                                <input type="hidden" name="routeDe" value="${rd.routeDetailId}"/>
+                                <div class="seat-booking-form-dt">
+                                    <div class="seat-booking-form-dt-header">
+                                        <div class="col-md-6 seat-booking-form-dt-tt">
+                                            <h2>${rd.companyName}</h2>
+                                            <div class="type-amt">
+                                                <p class="col-md-6 type">${rd.kindBus}</p>
+                                                <p class="col-md-6 amt">${rd.remaningPosition} Seats Left</p>
                                             </div>
                                         </div>
-                                        <div class="seat-booking-form-dt-ct">
-                                            <div class="col-md-5 seat-booking-form-dt-ct-t-pt">
-                                                <div class="route-name" style="display: flex">
-                                                    <h6 style="padding-right: 5px">${rd.depart}</h6>
-                                                    <i
-                                                        class="fa fa-long-arrow-right"
-                                                        style="padding-top: 5px"
-                                                        ></i>
-                                                    <h6 style="padding-left: 5px">${rd.destination}</h6>
+                                        <div class="col-md-6 seat-booking-form-dt-pc">
+                                            <h3 class="price">${rd.price}VND</h3>
+                                        </div>
+                                    </div>
+                                    <div class="seat-booking-form-dt-ct">
+                                        <div class="col-md-5 seat-booking-form-dt-ct-t-pt">
+                                            <div class="route-name" style="display: flex">
+                                                <h6 style="padding-right: 5px">${rd.depart}</h6>
+                                                <i
+                                                    class="fa fa-long-arrow-right"
+                                                    style="padding-top: 5px"
+                                                    ></i>
+                                                <h6 style="padding-left: 5px">${rd.destination}</h6>
+                                            </div>
+                                            <p>${rd.startTime}</p>
+                                            <hr style="width: 200px" />
+                                            <div class="seat-point">
+                                                <span>Select Pickup Point</span>
+                                                <select class="form-select seat-point-select">
+                                                    <option>${rd.departDetail}</option>
+                                                    <option>#</option>
+                                                </select>
+                                            </div>
+                                            <div class="seat-point">
+                                                <span>Select Drop Point</span>
+                                                <select class="form-select seat-point-select">
+                                                    <option>${rd.destinationDetail}</option>
+                                                    <option>#</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 seat-pick">
+                                            <p class="seat-pick-tt">Select Seats</p>
+                                            <div class="seat-rule">
+                                                <ul class="seat-rule-ins">
+                                                    <li>
+                                                        <div class="seat"></div>
+                                                        <small>N/A</small>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="selected"></div>
+                                                        <small>Selected</small>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="seat occupied"></div>
+                                                        <small>Occupied</small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="seat-map">
+                                                <div class="col-md-6">
+                                                    <div class="seat-pos">
+                                                        <div class="">
+                                                            <p>Lower Berth</p>
+                                                        </div>
+                                                        <div class="seat-pos-map-room">
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 1}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="1"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 2}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="2"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 3}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="3"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 4}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="4"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 5}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="5"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 6}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="6"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 7}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="7"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 8}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="8"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 9}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="9"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 10}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="10"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <p>${rd.startTime}</p>
-                                                <hr style="width: 200px" />
-                                                <div class="seat-point">
-                                                    <span>Select Pickup Point</span>
-                                                    <select class="form-select seat-point-select">
-                                                        <option>${rd.departDetail}</option>
-                                                        <option>#</option>
-                                                    </select>
-                                                </div>
-                                                <div class="seat-point">
-                                                    <span>Select Drop Point</span>
-                                                    <select class="form-select seat-point-select">
-                                                        <option>${rd.destinationDetail}</option>
-                                                        <option>#</option>
-                                                    </select>
+                                                <div class="col-md-6">
+                                                    <div class="seat-pos">
+                                                        <div class="">
+                                                            <p>Upper Berth</p>
+                                                        </div>
+                                                        <div class="seat-pos-map-room">
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 11}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="11"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 12}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="12"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 13}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="13"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 14}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="14"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 15}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="15"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                            <div class="seat-row">
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 16}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="16"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 17}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="17"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 18}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="18"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 19}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="19"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                                <c:set var="contains" value="false" />
+                                                                <c:forEach var="pos" items="${rd.listPosition}">
+                                                                    <c:if test="${pos == 20}">
+                                                                        <c:set var="contains" value="true" />
+
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                                <c:choose>
+                                                                    <c:when test="${contains == true}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="disable-checkbox" />
+                                                                            <span class="checkmark disable-checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                    <c:when test="${contains == false}">
+                                                                        <label class="seat-ctn">
+                                                                            <input type="checkbox" name="seat" value="20"/>
+                                                                            <span class="checkmark"></span>
+                                                                        </label>
+                                                                    </c:when>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-7 seat-pick">
-                                                <p class="seat-pick-tt">Select Seats</p>
-                                                <div class="seat-rule">
-                                                    <ul class="seat-rule-ins">
-                                                        <li>
-                                                            <div class="seat"></div>
-                                                            <small>N/A</small>
-                                                        </li>
-
-                                                        <li>
-                                                            <div class="selected"></div>
-                                                            <small>Selected</small>
-                                                        </li>
-
-                                                        <li>
-                                                            <div class="seat occupied"></div>
-                                                            <small>Occupied</small>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="seat-map">
-                                                    <div class="col-md-6">
-                                                        <div class="seat-pos">
-                                                            <div class="">
-                                                                <p>Lower Berth</p>
-                                                            </div>
-                                                            <div class="seat-pos-map-room">
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 1}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="1"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 2}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="2"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 3}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="3"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 4}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="4"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 5}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="5"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 6}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="6"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 7}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="7"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 8}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="8"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 9}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="9"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 10}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="10"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="seat-pos">
-                                                            <div class="">
-                                                                <p>Upper Berth</p>
-                                                            </div>
-                                                            <div class="seat-pos-map-room">
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 11}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="11"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 12}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="12"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 13}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="13"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 14}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="14"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 15}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="15"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                                <div class="seat-row">
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 16}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="16"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 17}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="17"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 18}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="18"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 19}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="19"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                    <c:set var="contains" value="false" />
-                                                                    <c:forEach var="pos" items="${rd.listPosition}">
-                                                                        <c:if test="${pos == 20}">
-                                                                            <c:set var="contains" value="true" />
-
-                                                                        </c:if>
-                                                                    </c:forEach>
-                                                                    <c:choose>
-                                                                        <c:when test="${contains == true}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="disable-checkbox" />
-                                                                                <span class="checkmark disable-checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                        <c:when test="${contains == false}">
-                                                                            <label class="seat-ctn">
-                                                                                <input type="checkbox" name="seat" value="20"/>
-                                                                                <span class="checkmark"></span>
-                                                                            </label>
-                                                                        </c:when>
-                                                                    </c:choose>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="seat-pick-btn">
-                                                    <input
-                                                        id="spt"
-                                                        type="submit"
-                                                        class="seat-pick-btn-b"
-                                                        value="book"
-                                                        />
-                                                </div>
+                                            <div class="seat-pick-btn">
+                                                <input
+                                                    id="spt"
+                                                    type="submit"
+                                                    class="seat-pick-btn-b"
+                                                    value="book"
+                                                    />
                                             </div>
                                         </div>
                                     </div>
-                                    <%--Sleeper Room--%>
-                                    </from>
-                                </c:if>
+                                </div>
+                            </form>
+                            <%--Sleeper Room--%>
+
+                        </c:if>
 
 
+                    </c:forEach>
+                </div>
 
 
-
-                            </c:forEach>
-                            </div>
-
-
-                            </div>
-                            </section>
-                            <script src="<c:url value="/js/script.js"/>"></script>
-                            </body>
-                            </html>
+            </div>
+        </section>
+        <script src="<c:url value="/js/script.js"/>"></script>
+    </body>
+</html>
