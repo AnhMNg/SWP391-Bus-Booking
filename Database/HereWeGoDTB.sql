@@ -1,4 +1,3 @@
-﻿use FoodManagement
 drop database HereWeGo
 GO
 Create database HereWeGo
@@ -89,9 +88,6 @@ create table Feedback(
 	dateComment datetime
 )
 
-SELECT * FROM Feedback WHERE companyId = 7
-
-
 create table [Notification](
 	NId bigint primary key identity(1,1) not null,
 	userId bigint foreign key references [User](userID) not null,
@@ -116,13 +112,13 @@ INSERT INTO [Role] VALUES('ADMIN')
 INSERT INTO [Role] VALUES('CUSTOMER')
 
 
-INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170','',2,'hoanghuy123', CURRENT_TIMESTAMP,'man')
-INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546','',2,'anhminh123',CURRENT_TIMESTAMP,'man')
-INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625','',2,'baotram123',CURRENT_TIMESTAMP,'woman')
-INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365','',2,'hoanganh123',CURRENT_TIMESTAMP,'woman')
-INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345','',2,'baolong123',CURRENT_TIMESTAMP,'man')
-INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276','',2,'hoailinh123',CURRENT_TIMESTAMP,'man')
-INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725','',1,'vinhhung123',CURRENT_TIMESTAMP,'man')
+INSERT INTO [User] VALUES(N'Đỗ Hoàng Huy Bu',null,'01272825170','',2,'hoanghuy123', CURRENT_TIMESTAMP,'man',null)
+INSERT INTO [User] VALUES(N'Nguyễn Anh Minh',null,'0987826546','',2,'anhminh123',CURRENT_TIMESTAMP,'man',null)
+INSERT INTO [User] VALUES(N'Hồ Ngọc Bảo Trâm',null,'0909887625','',2,'baotram123',CURRENT_TIMESTAMP,'woman',null)
+INSERT INTO [User] VALUES(N'Trần Thị Hoàng Anh',null,'0987527365','',2,'hoanganh123',CURRENT_TIMESTAMP,'woman',null)
+INSERT INTO [User] VALUES(N'Nguyễn Hồng Bảo Long',null,'09826716345','',2,'baolong123',CURRENT_TIMESTAMP,'man',null)
+INSERT INTO [User] VALUES(N'Võ Hoài Linh',null,'0928618276','',2,'hoailinh123',CURRENT_TIMESTAMP,'man',null)
+INSERT INTO [User] VALUES(N'Đàm Vĩnh Hưng',null,'0928717725','',1,'vinhhung123',CURRENT_TIMESTAMP,'man',null)
 
 INSERT INTO Place VALUES(N'Huyện Cai Lậy, Tỉnh Tiền Giang')
 INSERT INTO Place VALUES(N'Quận Hoàn Kiếm, Thành phố Hà Nội')
@@ -167,7 +163,7 @@ INSERT INTO RouteDetail VALUES(4,2,'2022-11-18 14:00:00',600000,'2022-10-18 19:0
 INSERT INTO RouteDetail VALUES(6,3,'2022-11-19 16:00:00',700000,'2022-10-18 23:00:00', N'123 Đốc Binh Kiều', N'564 Nguyễn Thị Minh Khai')
 INSERT INTO RouteDetail VALUES(7,2,'2022-11-12 18:00:00',800000,'2022-10-18 21:00:00', N'80 Trần Bình Trọng', N'21 Ngô Gia Tự')
 INSERT INTO RouteDetail VALUES(8,2,'2022-10-28 23:00:00',900000,'2022-10-18 22:00:00', N'28 Nguyễn Đình Chiểu', N'87 Độc Lập')
-INSERT INTO RouteDetail VALUES(13,1,'2022-11-28 23:00:00',100000,'2022-10-18 22:00:00', N'6213/123 Nguyễn Duy Dương', N'đường Nguyễn Thị Minh Khai, phường 1')
+INSERT INTO RouteDetail VALUES(13,1,'2022-11-28 23:00:00',100000,'2022-10-18 22:00:00', N'6213/123 Nguyễn Duy Dương', N'564 Nguyễn Thị Minh Khai')
 INSERT INTO RouteDetail VALUES(14,1,'2022-11-28 23:00:00',300000,'2022-10-18 22:00:00', N'Đường Tôn Đức Thắng, Hòa Minh', N'97 An Dương Vương')
 INSERT INTO RouteDetail VALUES(15,1,'2022-11-28 23:00:00',500000,'2022-10-18 22:00:00', N'Số 1 Tràng Tiền', N'Bến xe Sapa, Quốc lộ 4D')
 INSERT INTO RouteDetail VALUES(16,1,'2022-11-28 23:00:00',400000,'2022-10-18 22:00:00', N'395 Kinh Dương Vương', N'Quốc Lộ 91')
