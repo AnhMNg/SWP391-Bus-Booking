@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="detail-null-ctn">
                                     <p>Looks empty, you've no upcoming bookings.</p>
-                                    <button class="plan-btn">Plan a trip</button>
+                                    <button class="plan-btn"><a href="" style="text-decoration: none; font-size: 17px; font-weight: bold; color: #fff;">Plan a trip</a></button>
                                 </div>
                             </div>
                             <%
