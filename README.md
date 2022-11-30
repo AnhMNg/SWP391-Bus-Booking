@@ -21,6 +21,21 @@ But there are many passenger transport companies in Vietnam, and each of these c
 <br>
 <i style:"color: red;">Note: Library</i>
 <p>/swp391-se1609-here-we-go/web/WEB-INF/lib</p>
+
+###Screen-shots
+
+![Homepage](https://github.com/relax-not-relax/SWP391_Bus-Booking_HereWeGo/blob/main/screenshots/HWG1.png)
+
+![Booking](https://github.com/relax-not-relax/SWP391_Bus-Booking_HereWeGo/blob/main/screenshots/HWG2.png) 
+
+![Popular Routes](https://github.com/relax-not-relax/SWP391_Bus-Booking_HereWeGo/blob/main/screenshots/HWG3.png)
+
+![Transportation Company](https://github.com/relax-not-relax/SWP391_Bus-Booking_HereWeGo/blob/main/screenshots/HWG4.png)
+
+![Why book with Here We Go?](https://github.com/relax-not-relax/SWP391_Bus-Booking_HereWeGo/blob/main/screenshots/HWG5.png)
+
+
+
 <h3>Contact</h3>
 Minh Nguyen - aminhng3012@gmail.com <br>
 or Connect with me: <a href="https://www.linkedin.com/in/anh-minh-nguy%C3%AA%CC%83n-a2339b225/">Anh Minh Nguyễn - Linkedin</a>
