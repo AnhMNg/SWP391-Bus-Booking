@@ -26,8 +26,8 @@ import model.OrderDetail;
  * @author Admin
  */
 public class PaymentServices {
-    private static final String CLIENT_ID = "AXvH6FD6auqt_7HeMy9ZYlV_THCxaYai3TJia4_IQBNTrXDZH3IexML4d-JoHxbrR_tvX2fRUfXTm1Zn";
-    private static final String CLIENT_SECRET = "ECjz70PY8cPaBjb562DKd0-PF2uJAOlEBjVynEce_uqeo0ODGvRWDTT3SMoQsD1Ft8g-4KDawwoqZVsU";
+    private static final String CLIENT_ID = "AX7mY7-rvnTyxQGC90mFr3tV6zWRfbwoYw1mVlRxBG-6xsIxNs2U3KF5iDNNOyOiOt7Z_8BQ8KhdMxrw";
+    private static final String CLIENT_SECRET = "EICe5gQjzZ3dk9gmpLb1DP--0X5XMR0cm2qOMZj45ANBhb6rfaijZXq47tsICdE3WZzSeUCVqkD3WaM8";
     private static final String MODE = "sandbox";
     
     private Payer getPayerInformation() {
