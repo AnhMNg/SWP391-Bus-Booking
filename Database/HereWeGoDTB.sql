@@ -187,37 +187,5 @@ INSERT INTO Feedback VALUES(1,1,N'hhihah hoos dd', 4, CURRENT_TIMESTAMP)
 
 
 
-select * from Place
-select * from RouteDetail where 
-delete from RouteDetail where routeDetailId > 0
 
-use HereWeGo
-select * from [User] where userId = 7
-
-
-select * from Notification
-
-select  e.orderId from[dbo].[User] join [dbo].[Order] as e on [dbo].[User].userId=e.customerId and [dbo].[User].userId=1 join [dbo].[Ticket] as d on e.orderId=d.orderId
-
-DELETE FROM [dbo].[Feedback] WHERE [dbo].[Feedback].userId=1
-DELETE FROM [dbo].[User] WHERE [dbo].[User].userId=2
-
-
-SELECT tbl1.routeDetailId, bus.capacity, bus.kind, tbl1.startTime, tbl1.price, tbl1.timeArrival, tbl1.departDetail, tbl1.detinationDetail, tbl1.routeId, tbl1.name, tbl1.depart, tbl1.destination
-                    FROM (SELECT rd.routeDetailId,rd.busTypeId, rd.startTime, rd.price, rd.timeArrival,rd.departDetail,rd.detinationDetail, rd.routeId, r.name,r.depart, r.destination
-                    FROM [RouteDetail] rd
-                    inner join
-                    (SELECT Route.companyId, Route.departId, Route.destinationId, Route.routeId, com.name, PlaceName.depart, PlaceName.destination FROM [Route], [Company] com,
-                    (SELECT dep.routeId,dep.name depart,des.name destination 
-                     FROM
-                    (SELECT * 
-                    FROM Route,Place 
-                    WHERE Route.departId = Place.placeId) dep,
-                   (SELECT * 
-                    FROM Route,Place 
-                    WHERE Route.destinationId = Place.placeId) des
-                    WHERE des.routeId = dep.routeId) PlaceName
-                    WHERE PlaceName.depart like N'%, %' and PlaceName.destination like N'%, %' and com.companyId = Route.companyId and PlaceName.routeId = Route.routeId) r
-                    ON rd.routeId = r.routeId) tbl1, BusType bus
-                    WHERE tbl1.busTypeId = bus.busTypeId and tbl1.startTime > '' and tbl1.startTime > CURRENT_TIMESTAMP
 
